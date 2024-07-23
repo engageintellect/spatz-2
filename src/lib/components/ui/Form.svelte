@@ -112,11 +112,11 @@
 					class="contact-title-icon text-5xl md:text-7xl"
 				/>
 			</div>
-			<div class="text-2xl font-thin">
+			<!-- <div class="text-2xl font-thin">
 				Have a question, or would like to schedule a consultation or appointment? Fill out the form,
 				we'll get back to you shortly.
-			</div>
-
+			</div> -->
+			<!-- 
 			<div class="mt-5 flex items-center text-xl">
 				<div>Or, send us a</div>
 				<a href="sms:9499935222" class="ml-2">
@@ -124,7 +124,7 @@
 						<div>text message</div>
 					</Button>
 				</a>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>

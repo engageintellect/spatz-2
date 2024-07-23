@@ -2,6 +2,14 @@
 	import { onDestroy, onMount, tick } from 'svelte';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 
+	let quote: string;
+
+	const fetchQuote = async () => {
+		const response = await fetch('/api/fortune');
+		const data = await response.json();
+		quote = data;
+	};
+
 	let gsapInstance: any;
 	let ScrollTriggerInstance: any;
 
@@ -49,6 +57,8 @@
 				});
 			});
 		}
+
+		fetchQuote();
 	});
 
 	onDestroy(() => {
@@ -61,11 +71,19 @@
 <div class="quote-animation mx-auto my-40 flex w-full justify-center p-5">
 	<div class="w-full max-w-lg text-3xl md:text-5xl">
 		<div class="font-thin italic leading-normal">
-			<div class="">
-				“I believe in everyone’s unique beauty and approach each patient with an individual plan to
-				achieve a look that suits their natural features best!”
+			<div>
+				{#if quote}
+					{#each quote.split('\n') as line, index (line)}
+						<span
+							class={`block ${line.trim().startsWith('--') && index === quote.split('\n').length - 1 ? 'mt-10 text-right' : ''}`}
+							>{line.trim()}</span
+						>
+					{/each}
+				{:else}
+					Loading...
+				{/if}
 			</div>
-			<div class="mt-10 text-right">— Jitka Zavadilova</div>
+			<!-- <div class="mt-10 text-right">— Jitka Zavadilova</div> -->
 		</div>
 	</div>
 </div>

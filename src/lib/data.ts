@@ -1,15 +1,5 @@
 
-import botoxImage from "$lib/assets/images/services/botox.png"
-import dysportImage from "$lib/assets/images/services/dysport.png"
-import juvedermImage from "$lib/assets/images/services/juvederm-vollure-xc.png"
-import restylaneContourImage from "$lib/assets/images/services/restylane-contour.png"
-import restylaneLyftImage from "$lib/assets/images/services/restylane-lyft.png"
-import restylaneRefyneImage from "$lib/assets/images/services/restylane-refyne.png"
-import restylaneDefyneImage from "$lib/assets/images/services/restylane-defyne.png"
 import stemCellImage from "$lib/assets/images/services/stemcell.png"
-import prpImage from "$lib/assets/images/services/blood.png"
-import juvedermVollureImage from "$lib/assets/images/services/juvederm-vollure.png"
-
 
 
 export const companyInfo = {
@@ -43,9 +33,9 @@ export const companyInfo = {
 
 export const services = [
 	{
-		name: "Botox",
-		description: "Botox is a drug made from a toxin produced by the bacterium Clostridium botulinum. It's the same toxin that causes a life-threatening type of food poisoning called botulism. Doctors use it in small doses to treat health problems, including",	
-		img: botoxImage,
+		name: "SvelteKit",
+		description: "SvelteKit is a framework for building web applications of all sizes, with a beautiful development experience and flexible filesystem-based routing.",	
+		img: "https://svelte.dev/svelte-logo-horizontal.svg",
 		coming_soon: false,
 		use_cases: [
 			"Temporary smoothing of facial wrinkles and improving your appearance",
@@ -57,10 +47,10 @@ export const services = [
 		]	
 	},
 	{
-		name: "Dysport",
-		img: dysportImage,
+		name: "PocketBase",
+		img: "https://logowik.com/content/uploads/images/pocketbase-backend7491.logowik.com.webp",
 		coming_soon: false,
-		description: "Dysport is a prescription injection for temporary improvement in the look of moderate to severe frown lines between the eyebrows (glabellar lines) in adults less than 65 years of age.",	
+		description: "PocketBase is a cloud-hosted database service that provides a simple, secure, and scalable way to store and retrieve data for your applications.",	
 		use_cases: [
 			"Temporary smoothing of facial wrinkles and improving your appearance",
 			"Severe underarm sweating",
@@ -72,10 +62,10 @@ export const services = [
 	},
 
 	{
-		name: "Juvederm",
-		img: juvedermImage,
+		name: "Open AI",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/512px-ChatGPT_logo.svg.png",
 		coming_soon: false,
-		description: "Juvederm is a family of injectable hyaluronic acid dermal fillers used to provide 9 months to one year of correction for moderate to severe facial wrinkles and folds, such as nasolabial folds (lines from the nose to the corners of the mouth).",	
+		description: "OpenAI is an artificial intelligence research lab consisting of the for-profit OpenAI LP and the non-profit OpenAI Inc. that aims to ensure that artificial general intelligence benefits all of humanity.",	
 		use_cases: [
 			"Temporary smoothing of facial wrinkles and improving your appearance",
 			"Severe underarm sweating",
@@ -88,10 +78,10 @@ export const services = [
 
 
 	{
-		name: "Juvederm Vollure XC",
-		img: juvedermVollureImage,
+		name: "Tailwind CSS",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/1024px-Tailwind_CSS_Logo.svg.png?20230715030042",
 		coming_soon: false,
-		description: "A long-lasting dermal filler that smooths moderate to severe facial wrinkles and folds for a natural, youthful appearance.",	
+		description: "Tailwind CSS is a utility-first CSS framework for rapidly building custom designs.",	
 		use_cases: [
 			"Temporary smoothing of facial wrinkles and improving your appearance",
 			"Severe underarm sweating",
@@ -106,10 +96,10 @@ export const services = [
 
 
 	{
-		name: "Restylane Contour",
-		img: restylaneContourImage,
+		name: "Zod",
+		img: "https://avatars.githubusercontent.com/u/67027975?s=200&v=4",
 		coming_soon: false,
-		description: "A hyaluronic acid filler specifically designed to enhance cheek definition and restore midface volume with natural-looking results.",
+		description: "A TypeScript-first schema declaration and validation library.",
 		use_cases: [
 			"Temporary smoothing of facial wrinkles and improving your appearance",
 			"Severe underarm sweating",
@@ -121,10 +111,10 @@ export const services = [
 	},
 
 	{
-		name: "Restylane Lyft",
-		img: restylaneLyftImage,
+		name: "shadcn-svelte",
+		img: "https://preview.redd.it/introducing-shadcn-svelte-vscode-extension-v0-q2or7qp9gp6c1.png?width=3360&format=png&auto=webp&s=d993bbdfbe521f137fd2cd0a979b0c89cba3b220",
 		coming_soon: false,
-		description: "A versatile filler that provides lift and volume to the cheeks and corrects moderate to severe facial wrinkles and folds.",	
+		description: "A SvelteKit wrapper for shadcn-ui, a Tailwind component library.",	
 		use_cases: [
 			"Temporary smoothing of facial wrinkles and improving your appearance",
 			"Severe underarm sweating",
@@ -134,53 +124,6 @@ export const services = [
 			"Overactive bladder"
 		]	
 	},
-
-	{
-		name: "Restylane Refyne",
-		img: restylaneRefyneImage,
-		coming_soon: false,
-		description: "A dermal filler that softens mild to moderate laugh lines, allowing for natural movement and expressions.",
-		use_cases: [
-			"Temporary smoothing of facial wrinkles and improving your appearance",
-			"Severe underarm sweating",
-			"Cervical dystonia",
-			"Eye twitching",
-			"Chronic migraines",
-			"Overactive bladder"
-		]	
-	},
-
-	{
-		name: "Restylane Defyne",
-		img: restylaneDefyneImage,
-		coming_soon: false,
-		description: "A flexible filler that smooths out deep laugh lines and enhances facial contours while maintaining natural expressions.",	
-		use_cases: [
-			"Temporary smoothing of facial wrinkles and improving your appearance",
-			"Severe underarm sweating",
-			"Cervical dystonia",
-			"Eye twitching",
-			"Chronic migraines",
-			"Overactive bladder"
-		]	
-		},
-
-
-	{
-		name: "PRP (Platelet-Rich Plasma)",
-		img: prpImage,
-		coming_soon: true,
-		description: "Platelet-Rich Plasma therapy uses your own blood's growth factors to rejuvenate skin, promote healing, and enhance overall complexion.",	
-		use_cases: [
-			"Temporary smoothing of facial wrinkles and improving your appearance",
-			"Severe underarm sweating",
-			"Cervical dystonia",
-			"Eye twitching",
-			"Chronic migraines",
-			"Overactive bladder"
-		]	
-		},
-
 
 	{
 		name: "Stem Cells",

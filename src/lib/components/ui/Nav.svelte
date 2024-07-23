@@ -31,10 +31,12 @@
 	}
 </script>
 
-<nav class="nav sticky top-0 -z-[-1] border-b bg-background p-2">
-	<div class="mx-auto flex w-full max-w-3xl items-center justify-between">
-		<a href="/" class="nav-logo text-2xl font-bold" aria-label="Home">
-			<div class="text-xl font-bold">spatz</div>
+<nav class="sticky top-0 -z-[-1] border-b bg-background p-2">
+	<div class="mx-auto flex w-full max-w-5xl items-center justify-between">
+		<a href="/" class="" aria-label="Home">
+			<!-- <Button variant="ghost" class="" size="lg"> -->
+			<div class="px-2 text-2xl font-bold">spatz</div>
+			<!-- </Button> -->
 			<!-- <Icon
 				icon="material-symbols:code-rounded"
 				class="h-10 w-10 rounded-full border border-foreground p-2"
@@ -83,10 +85,10 @@
 			{:else}
 				<div class="flex items-center gap-2">
 					<a href="/auth/login">
-						<Button>login</Button>
+						<Button variant="ghost">login</Button>
 					</a>
 					<a href="/auth/register">
-						<Button>register</Button>
+						<Button variant="ghost">register</Button>
 					</a>
 				</div>
 			{/if}

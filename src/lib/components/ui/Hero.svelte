@@ -1,5 +1,5 @@
 <script lang="ts">
-	import heroImage from '$lib/assets/images/sveltekit.png?enhanced';
+	import heroImage from '$lib/assets/images/svelteHero.png?enhanced';
 	import { Button } from './button/index.js';
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
@@ -135,11 +135,14 @@
 			<div
 				class="pointer-events-none absolute bottom-0 left-0 h-1/3 w-full bg-fade-down opacity-100 md:opacity-0"
 			></div>
-			<enhanced:img
-				src={heroImage}
-				alt="logo"
-				class="rounded-lg object-cover md:h-full md:rounded-none md:rounded-r-lg md:border-l"
-			></enhanced:img>
+
+			<div class="">
+				<enhanced:img
+					src={heroImage}
+					alt="logo"
+					class="rounded-lg bg-orange-500 object-cover dark:bg-orange-700 md:h-full md:rounded-none md:rounded-r-lg"
+				></enhanced:img>
+			</div>
 		</div>
 	</div>
 	<div id="anchorLink" class="group/scrollDownButton mt-5 hidden w-full justify-center md:flex">

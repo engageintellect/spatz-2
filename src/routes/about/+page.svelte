@@ -154,7 +154,7 @@
 
 		<div class="my-5">
 			<div class="flex items-center gap-2">
-				<a href="/services" class="w-full sm:w-fit">
+				<a href="/technologies" class="w-full sm:w-fit">
 					<Button
 						size="sm"
 						variant="outline"

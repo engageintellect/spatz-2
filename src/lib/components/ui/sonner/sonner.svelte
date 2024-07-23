@@ -12,7 +12,7 @@
 		classes: {
 			toast:
 				'group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg text-lg',
-			description: 'group-[.toast]:text-muted-foreground text-base',
+			description: 'group-[.toast]:text-muted-foreground text-sm',
 			actionButton: 'group-[.toast]:bg-primary group-[.toast]:text-primary-foreground',
 			cancelButton: 'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground'
 		}

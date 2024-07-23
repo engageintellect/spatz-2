@@ -1,4 +1,5 @@
 <script lang="ts">
+	import StackOrbit from '$lib/components/ui/StackOrbit.svelte';
 	import girlImage from '$lib/assets/images/girl1.png?enhanced';
 	import girl2Image from '$lib/assets/images/girl2.png?enhanced';
 	import girl3Image from '$lib/assets/images/girl3.png?enhanced';
@@ -10,6 +11,8 @@
 	import { onDestroy, onMount, tick } from 'svelte';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import LazyImage from './LazyImage.svelte';
+	import OrbitingCircles from '../magic-ui/OrbitingCircles.svelte';
+	import MeteorCard from './MeteorCard.svelte';
 
 	let gsapInstance: any;
 	let ScrollTriggerInstance: any;
@@ -166,44 +169,50 @@
 >
 	<!-- CARD 1 -->
 	<div
-		class="card1 relative order-1 flex h-full min-h-[500px] w-full rounded-lg bg-rose-300 text-white shadow-lg dark:bg-rose-500"
+		class="card1 relative order-1 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-orange-500 text-white shadow-lg"
 	>
-		<enhanced:img
+		<!-- <OrbitingCircles /> -->
+
+		<StackOrbit />
+		<!-- <enhanced:img
 			src={girl4Image}
 			alt="Jitka"
 			class="absolute bottom-0 left-0 h-[550px] rounded-lg object-cover"
-		></enhanced:img>
-		<div class="z-20 flex w-1/2 flex-col gap-5 p-5">
-			<div class="w-full text-5xl font-bold uppercase drop-shadow">Revitalize Refresh Renew</div>
-		</div>
+		></enhanced:img> -->
+		<!-- <div class="z-20 flex w-1/2 flex-col gap-5 p-5">
+			<div class="w-full text-5xl font-bold uppercase drop-shadow">
+				Sveltekit Pocketbase AI Tailwind Zod
+			</div>
+		</div> -->
 	</div>
 
 	<!-- CARD 2 -->
 	<div class="card2 relative order-2 flex h-full w-full">
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
-			<div class="w-full text-3xl font-bold uppercase">services</div>
-			<div class="text-2xl font-thin">
+			<div class="w-full text-3xl font-bold uppercase">Technology Stack</div>
+			<!-- <div class="text-2xl font-thin">
 				Offering a range of cosmetic injections to address your unique beauty goals.
-			</div>
-			<ul class="flex flex-col gap-2 text-xl font-thin">
+			</div> -->
+			<ul class="flex flex-col gap-2 text-3xl font-thin">
 				<li>
-					<strong>Botox:</strong> Smooth out fine lines and wrinkles for a youthful appearance.
+					<strong>Sveltekit</strong>
 				</li>
-				<li><strong>Dermal Fillers:</strong> Add volume and definition to your facial features.</li>
-				<li><strong>Lip Enhancements:</strong> Achieve fuller, more defined lips.</li>
-				<li><strong>Skin Rejuvenation:</strong> Revitalize your skin for a fresh, radiant glow.</li>
+				<li><strong>Pocketbase</strong></li>
+				<li><strong>AI</strong></li>
+				<li><strong>TailwindCSS</strong></li>
+				<li><strong>Zod</strong></li>
 			</ul>
 			<div class="flex items-center gap-2">
-				<a href="/services">
+				<a href="/technologies">
 					<Button
 						size="lg"
 						variant="default"
-						class="bg-rose-300 uppercase transition-all duration-300 hover:bg-rose-500 dark:bg-rose-500 dark:hover:bg-rose-300"
-						>service menu</Button
+						class="bg-orange-300 uppercase transition-all duration-300 hover:bg-orange-500 dark:bg-orange-500 dark:hover:bg-orange-300"
+						>Technologies</Button
 					>
 				</a>
 				<a href="/contact">
-					<Button size="lg" variant="outline" class="w-fit uppercase">book consultation</Button>
+					<Button size="lg" variant="outline" class="w-fit uppercase">Feedback</Button>
 				</a>
 			</div>
 		</div>
@@ -219,10 +228,6 @@
 				of your treatment with peace of mind. Our commitment to excellence in safety and care is
 				what sets us apart.
 			</div>
-			<div class="text-2xl font-thin">
-				We follow industry best practices and use only the highest quality products. Our team of
-				professionals is dedicated to providing you with the best possible experience.
-			</div>
 		</div>
 	</div>
 
@@ -230,19 +235,20 @@
 	<div
 		class="card4 relative order-3 flex h-full min-h-[500px] w-full rounded-lg bg-neutral-300 text-white shadow-lg dark:bg-neutral-500 md:order-4"
 	>
-		<enhanced:img
+		<MeteorCard />
+		<!-- <enhanced:img
 			src={womanBotoxImage}
 			alt="Jitka"
 			class="absolute bottom-0 right-0 h-full rounded-lg object-cover"
-		></enhanced:img>
-		<div class="absolute bottom-0 right-0 z-20 flex w-full flex-col gap-5 p-5">
+		></enhanced:img> -->
+		<!-- <div class="absolute bottom-0 right-0 z-20 flex w-full flex-col gap-5 p-5">
 			<div class="w-full text-5xl font-bold drop-shadow">SAFE & EFFECTIVE</div>
-		</div>
+		</div> -->
 	</div>
 
 	<!-- CARD 5 -->
 	<div
-		class="card5 relative order-5 flex h-full min-h-[500px] w-full rounded-lg bg-sky-300 text-white shadow-lg dark:bg-sky-500"
+		class="card5 relative order-5 flex h-full min-h-[500px] w-full rounded-lg bg-yellow-300 text-white shadow-lg dark:bg-yellow-500"
 	>
 		<enhanced:img
 			src={girl2Image}
@@ -268,7 +274,7 @@
 					<Button
 						size="lg"
 						variant="default"
-						class="bg-sky-300 uppercase hover:bg-sky-500 dark:bg-sky-500 dark:hover:bg-sky-300"
+						class="bg-yellow-300 uppercase hover:bg-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-300"
 						>View Before & After Gallery</Button
 					>
 				</a>

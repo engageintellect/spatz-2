@@ -33,11 +33,11 @@
 
 <DropdownMenu.Root>
 	<DropdownMenu.Trigger asChild let:builder>
-		<Button builders={[builder]} class="rounded-full px-0">
+		<Button builders={[builder]} class="rounded-full p-0">
 			<Avatar />
 		</Button>
 	</DropdownMenu.Trigger>
-	<DropdownMenu.Content class="w-56">
+	<DropdownMenu.Content class="mt-3 w-56" align="start">
 		<DropdownMenu.Label>My Account</DropdownMenu.Label>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Group>
@@ -49,19 +49,21 @@
 				<DropdownMenu.Shortcut>⇧⌘P</DropdownMenu.Shortcut>
 			</DropdownMenu.Item>
 			<DropdownMenu.Item>
-				<a href="/my/settings/security" class="flex items-center">
-					<CreditCard class="mr-2 h-4 w-4" />
-					<span>Security</span>
-				</a>
-				<DropdownMenu.Shortcut>⌘B</DropdownMenu.Shortcut>
-			</DropdownMenu.Item>
-			<DropdownMenu.Item>
 				<a href="/my/settings/account" class="flex items-center">
 					<Settings class="mr-2 h-4 w-4" />
 					<span>Account</span>
 				</a>
 				<DropdownMenu.Shortcut>⌘S</DropdownMenu.Shortcut>
 			</DropdownMenu.Item>
+
+			<DropdownMenu.Item>
+				<a href="/my/settings/security" class="flex items-center">
+					<CreditCard class="mr-2 h-4 w-4" />
+					<span>Security</span>
+				</a>
+				<DropdownMenu.Shortcut>⌘B</DropdownMenu.Shortcut>
+			</DropdownMenu.Item>
+
 			<!-- <DropdownMenu.Item>
 				<Keyboard class="mr-2 h-4 w-4" />
 				<span>Keyboard shortcuts</span>

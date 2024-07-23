@@ -113,11 +113,11 @@
 				return async ({ result, update }) => {
 					console.log('result', result);
 					if (result.type === 'redirect' && result.location === '/') {
-						toast.success('Form Submitted Successfully!', {
-							description: "We'll get back to you as soon as possible, typically within 24 hours."
+						toast('Login Successful', {
+							description: "Successfully logged in. You're now redirected to the homepage."
 						});
 					} else {
-						toast.error('Failed to Submit Form', {
+						toast('Failed to Login', {
 							description: 'Please check your input and try again.'
 						});
 					}

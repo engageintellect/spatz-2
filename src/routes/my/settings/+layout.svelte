@@ -24,11 +24,11 @@
 	<ul class="flex w-40 flex-col gap-1">
 		{#each navigation as navItem}
 			<li>
-				<a
-					href={navItem.href}
-					class="text-lg {$page.url.pathname === navItem.href ? 'active hover:bg-neutral' : ''}"
-				>
-					<Button class="w-full">
+				<a href={navItem.href} class="text-lg">
+					<Button
+						class="w-full"
+						variant={`${$page.url.pathname === navItem.href ? 'default' : 'outline'}`}
+					>
 						{navItem.title}
 					</Button>
 				</a>
