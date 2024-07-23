@@ -1,6 +1,7 @@
 <script lang="ts">
 	// import { PageData } from './$types.js';
 	import * as Form from '$lib/components/ui/form';
+	import { fade } from 'svelte/transition';
 	export let data;
 	import { Input } from '$lib/components/ui/input';
 	import { registerUserSchema, type RegisterUserSchema } from '$lib/schema';
@@ -88,20 +89,20 @@
 	/>
 </svelte:head>
 <div
-	class="flex h-full w-full flex-col justify-center gap-5 rounded-lg p-5 sm:min-h-full md:flex-row md:justify-center md:border md:shadow-lg"
+	class="flex h-full w-full flex-col justify-center gap-5 rounded-lg p-5 sm:min-h-full md:flex-col md:justify-center md:border-none md:shadow-none"
 >
 	<div class="flex w-full items-center justify-center">
-		<div class="w-full max-w-sm">
+		<div class="w-full max-w-xs">
 			<div class="contact-header flex flex-col items-start gap-2">
-				<div class="flex items-center gap-5">
-					<div class="text-5xl font-bold uppercase md:text-7xl">Register</div>
-					<Icon icon="material-symbols:login" class="contact-title-icon text-5xl md:text-7xl" />
+				<div class="flex w-full items-center justify-center gap-5">
+					<div class="text-5xl font-bold lowercase">Register</div>
+					<Icon icon="material-symbols:login" class="contact-title-icon text-5xl" />
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="mx-auto w-full max-w-sm">
+	<div class="mx-auto w-full max-w-xs">
 		<form
 			method="POST"
 			action="/auth/register?"
@@ -145,16 +146,28 @@
 
 			<Form.Field {form} name="passwordConfirm">
 				<Form.Control let:attrs>
-					<Form.Label>Password</Form.Label>
+					<Form.Label>Confirm Password</Form.Label>
 					<Input {...attrs} type="password" bind:value={$formData.passwordConfirm} />
 				</Form.Control>
 				<Form.FieldErrors />
 			</Form.Field>
 
 			<div class="mt-5">
+				{#if $formData.password}
+					<div
+						in:fade={{ duration: 500 }}
+						class="alert mb-2 flex rounded border border-primary p-2 text-sm"
+					>
+						<Icon icon="material-symbols:encrypted" class="h-10 w-10 text-primary" />
+						<div class="text-left">
+							Your password will be encrypted for your safety, it will not be readable by anyone.
+						</div>
+					</div>
+				{/if}
+
 				<Form.Button disabled={isSubmitting} size="lg" class="group/sendButton w-full">
 					<div class="flex items-center gap-2 text-xl">
-						<div class="uppercase">register</div>
+						<div class="lowercase">register</div>
 						<Icon
 							icon={`${isSubmitting ? 'mingcute:loading-fill' : 'material-symbols:login'}`}
 							class={`${isSubmitting ? 'animate-spin' : ''} h-7 w-7 transition-transform duration-300 lg:group-hover/sendButton:translate-x-1`}
@@ -164,15 +177,10 @@
 			</div>
 
 			<p class="mt-2 text-center text-sm text-muted-foreground">
-				By clicking continue, you agree to our
-				<a href="/terms" class="underline underline-offset-4 hover:text-primary">
-					Terms of Service
-				</a>
-				and
-				<a href="/privacy" class="underline underline-offset-4 hover:text-primary">
-					Privacy Policy
-				</a>
-				.
+				Already have an account? <a
+					href="/auth/login"
+					class="underline underline-offset-4 hover:text-primary">Login</a
+				>
 			</p>
 		</form>
 	</div>

@@ -74,7 +74,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
   }
 
   /* html {

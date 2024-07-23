@@ -88,20 +88,20 @@
 	/>
 </svelte:head>
 <div
-	class="flex h-full w-full flex-col justify-center gap-5 rounded-lg p-5 sm:min-h-full md:flex-row md:justify-center md:border md:shadow-lg"
+	class="flex h-full w-full flex-col justify-center gap-5 rounded-lg p-5 sm:min-h-full md:flex-col md:justify-center md:border-none md:shadow-none"
 >
 	<div class="flex w-full items-center justify-center">
-		<div class="w-full max-w-sm">
+		<div class="w-full max-w-xs">
 			<div class="contact-header flex flex-col items-start gap-2">
-				<div class="flex items-center gap-5">
-					<div class="text-5xl font-bold uppercase md:text-7xl">Login</div>
-					<Icon icon="material-symbols:login" class="contact-title-icon text-5xl md:text-7xl" />
+				<div class="flex w-full items-center justify-center gap-5">
+					<div class="text-5xl font-bold lowercase">Login</div>
+					<Icon icon="material-symbols:login" class="contact-title-icon text-5xl" />
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="mx-auto w-full max-w-sm">
+	<div class="mx-auto w-full max-w-xs">
 		<form
 			method="POST"
 			action="/auth/login?"
@@ -148,7 +148,7 @@
 
 				<Form.Button disabled={isSubmitting} size="lg" class="group/sendButton w-full">
 					<div class="flex items-center gap-2 text-xl">
-						<div class="uppercase">login</div>
+						<div class="lowercase">login</div>
 						<Icon
 							icon={`${isSubmitting ? 'mingcute:loading-fill' : 'material-symbols:login'}`}
 							class={`${isSubmitting ? 'animate-spin' : ''} h-7 w-7 transition-transform duration-300 lg:group-hover/sendButton:translate-x-1`}
@@ -158,15 +158,10 @@
 			</div>
 
 			<p class="mt-2 text-center text-sm text-muted-foreground">
-				By clicking continue, you agree to our
-				<a href="/terms" class="underline underline-offset-4 hover:text-primary">
-					Terms of Service
-				</a>
-				and
-				<a href="/privacy" class="underline underline-offset-4 hover:text-primary">
-					Privacy Policy
-				</a>
-				.
+				Don't have an account? <a
+					href="/auth/register"
+					class="underline underline-offset-4 hover:text-primary">Register</a
+				>
 			</p>
 		</form>
 	</div>

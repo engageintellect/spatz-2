@@ -78,7 +78,7 @@
 
 <div class="mb-10 md:my-5 md:mb-20">
 	<div
-		class="flex w-full flex-col gap-2 rounded-lg transition-all duration-300 md:flex-row md:gap-5 md:border md:shadow-xl"
+		class="flex w-full flex-col gap-2 rounded-lg transition-all duration-300 md:flex-row md:gap-5"
 	>
 		<div class="flex w-full flex-col rounded-l-lg p-5 md:max-w-lg md:p-10">
 			<div class="mx-auto flex w-full flex-col items-center gap-5">
@@ -89,7 +89,7 @@
 					/>
 				</div> -->
 				<div
-					class="animate-title w-full text-5xl font-bold uppercase tracking-tight transition-transform lg:text-[3.75rem]"
+					class="animate-title w-full text-7xl font-bold lowercase tracking-tight transition-transform lg:text-7xl"
 				>
 					{companyInfo.name}
 				</div>
@@ -100,8 +100,8 @@
 					Transform Your Look with Confidence and Precision.
 				</div> -->
 
-				<div class="animate-hero-text text-2xl">
-					Back for round 2, this time with shadcn-svelte, and magic-ui.
+				<div class="animate-hero-text mt-2 text-2xl">
+					Back for round two, this time with superforms, shadcn, and magic-ui.
 				</div>
 			</div>
 
@@ -111,7 +111,7 @@
 						<div class="uppercase">get started</div>
 						<Icon
 							icon="material-symbols:rocket-launch"
-							class="h-7 w-7 transition-transform duration-300 lg:group-hover/bookingsButton:translate-x-1"
+							class="h-5 w-5 transition-transform duration-300 lg:group-hover/bookingsButton:translate-x-1"
 						/>
 					</Button>
 				</a>
@@ -121,7 +121,7 @@
 						<div class="uppercase">login</div>
 						<Icon
 							icon="akar-icons:arrow-right"
-							class="h-7 w-7 transition-transform duration-300 lg:group-hover/bookingsButton:translate-x-1"
+							class="h-5 w-5 transition-transform duration-300 lg:group-hover/bookingsButton:translate-x-1"
 						/>
 					</Button>
 				</a>
