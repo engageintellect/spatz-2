@@ -79,6 +79,12 @@ const config: Config = {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' }, // Adjust height here
         },
+
+        slowBounce: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-40px)' }, // Adjust height here
+        },
+
 				orbit: {
           "0%": {
             transform:
@@ -92,6 +98,7 @@ const config: Config = {
       },
       animation: {
         customBounce: 'customBounce 10s ease-in-out infinite', // Adjust duration here
+        slowBounce: 'customBounce 5s ease-in-out infinite', // Adjust duration here
 				orbit: "orbit calc(var(--duration)*1s) linear infinite",
 				meteor: "meteor 5s linear infinite",
 

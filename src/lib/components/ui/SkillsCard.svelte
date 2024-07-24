@@ -204,16 +204,18 @@
 			</div> -->
 
 			<div>
-				Combining SvelteKit, PocketBase, AI, TailwindCSS, and Zod creates an ultimate tech stack by
-				leveraging each technology's strengths to build modern, efficient, and scalable web
-				applications. SvelteKit offers a streamlined and reactive framework that enhances developer
-				productivity and performance. PocketBase provides a robust and lightweight backend solution
-				with real-time capabilities and easy data management. Integrating AI enables advanced
-				features such as personalized user experiences and intelligent automation. TailwindCSS
-				ensures a cohesive and visually appealing design system with utility-first CSS, while Zod
-				brings powerful and type-safe schema validation, ensuring data integrity and security.
-				Together, these technologies enable developers to build sophisticated, responsive, and
-				high-performance applications with ease.
+				<strong>
+					Combine SvelteKit, PocketBase, Open AI, TailwindCSS, and Zod and you got one hell of a
+					tech stack.
+				</strong>
+				A minimal setup that leverages each technology's strengths to build modern, efficient, and scalable
+				web applications. SvelteKit offers a streamlined and reactive framework that enhances developer
+				productivity and performance. PocketBase provides a robust and lightweight backend solution with
+				real-time capabilities and easy data management. AI integration enables advanced features such
+				as personalized user experiences and intelligent automation. TailwindCSS ensures a cohesive and
+				visually appealing design system with utility-first CSS, and Zod brings powerful and type-safe
+				schema validation, ensuring data integrity and security. Together, these technologies enable
+				developers to build sophisticated, responsive, and high-performance applications with ease.
 			</div>
 			<!-- <ul class="flex flex-col gap-2 text-3xl font-thin">
 				<li>
@@ -271,24 +273,33 @@
 	<div
 		class="card5 relative order-5 flex h-full min-h-[500px] w-full rounded-lg bg-yellow-300 text-white shadow-lg dark:bg-yellow-500"
 	>
-		<enhanced:img
+		<Icon
+			icon="material-symbols:rocket-launch"
+			class="animate-slowBounce absolute bottom-0 right-0 m-5 h-72 w-72 text-white drop-shadow-lg"
+		/>
+		<!-- <enhanced:img
 			src={girl2Image}
 			alt="Jitka"
 			class="absolute bottom-0 right-0 h-[550px] rounded-lg object-cover"
-		></enhanced:img>
+		></enhanced:img> -->
 		<div class="z-20 flex w-2/3 flex-col gap-5 p-5">
-			<div class="w-full text-5xl font-bold uppercase drop-shadow">Where Science Meets Beauty</div>
+			<div class="flex w-full flex-col text-5xl font-bold uppercase drop-shadow">
+				<div>build</div>
+				<div>at</div>
+				<div>warp</div>
+				<div>speed</div>
+			</div>
 		</div>
 	</div>
 
 	<!-- CARD 6 -->
 	<div class="card6 relative order-6 flex h-full w-full">
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
-			<div class="w-full text-3xl font-bold uppercase">results backed by research</div>
+			<div class="w-full text-5xl font-bold uppercase">spatz let's you move fast</div>
 			<div class="text-2xl font-thin">
-				We believe that the best aesthetic results are achieved through the power of science. Our
-				treatments are not only designed to enhance your natural beauty but are also grounded in
-				rigorous scientific research and proven methodologies.
+				spatz is a complete, minimal toolkit for building modern web applications. It's designed to
+				be a flexible and efficient solution for developers who want to create high-quality,
+				performant applications with ease.
 			</div>
 			<div class="flex items-center gap-2">
 				<a href="/results">

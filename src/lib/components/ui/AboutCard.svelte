@@ -98,7 +98,7 @@
 		<div class="flex w-full max-w-md flex-col gap-5 text-center lg:p-5">
 			<div class="w-full text-4xl font-bold">@engageintellect</div>
 			<div class="text-xl font-thin md:text-2xl">
-				I invite you to use and improve this project. Feedback and pull requests are welcomed, and
+				I invite you to use and improve this project. Feedback and pull requests are welcome, and
 				appreciated.
 			</div>
 			<div class="flex items-center justify-center gap-5">

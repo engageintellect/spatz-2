@@ -1,45 +1,51 @@
 <script lang="ts">
-  import { page } from '$app/stores'
-  const navigation = [
-    {
-      title: 'chat',
-      href: '/ai/chat',
-    },
-    {
-      title: 'a',
-      href: '/ai/a',
-    },
-    {
-      title: 'b',
-      href: '/ai/b',
-    },
-    {
-      title: 'c',
-      href: '/ai/c',
-    },
-  ]
+	import { page } from '$app/stores';
+	import { Button } from '$lib/components/ui/button/index.js';
+	const navigation = [
+		{
+			title: 'chat',
+			href: '/ai/chat'
+		},
+		{
+			title: 'a',
+			href: '/ai/a'
+		},
+		{
+			title: 'b',
+			href: '/ai/b'
+		},
+		{
+			title: 'c',
+			href: '/ai/c'
+		}
+	];
 </script>
 
-<div class="w-full h-full bg-base-100">
-  <a href="/ai" class="text-7xl">ai</a>
+<div class="bg-base-100 mx-auto h-full w-full max-w-2xl">
+	<a href="/ai" class="text-7xl">ai</a>
 </div>
-<div class="divider bg-base-100" />
-<div class="flex flex-col md:flex-row w-full h-full">
-  <ul
-    class="sticky md:top-16 menu w-full menu-horizontal z-10 gap-2 overflow-auto flex flex-nowrap md:menu-vertical bg-base-100 h-full md:w-40 md:rounded-box"
-  >
-    {#each navigation as navItem}
-      <li>
-        <a
-          href={navItem.href}
-          class="text-lg bg-base-200 {$page.url.pathname === navItem.href
-            ? 'active hover:bg-neutral'
-            : ''}">{navItem.title}</a
-        >
-      </li>
-    {/each}
-  </ul>
-  <div class="w-full px-2">
-    <slot />
-  </div>
+<div
+	class="mx-auto flex h-full w-full max-w-2xl flex-col gap-5 rounded-lg md:flex-row md:gap-10 md:border md:p-5 md:shadow-lg"
+>
+	<ul
+		class="md:rounded-box sticky flex h-full w-full flex-nowrap gap-2 overflow-auto bg-background md:top-16 md:w-40"
+	>
+		<div class="flex w-full flex-row gap-1 md:flex-col">
+			{#each navigation as navItem}
+				<li>
+					<a href={navItem.href} class="text-lg">
+						<Button
+							class="w-full"
+							variant={`${$page.url.pathname === navItem.href ? 'default' : 'outline'}`}
+						>
+							{navItem.title}
+						</Button>
+					</a>
+				</li>
+			{/each}
+		</div>
+	</ul>
+	<div class="w-full px-2">
+		<slot />
+	</div>
 </div>

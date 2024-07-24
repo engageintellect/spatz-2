@@ -32,6 +32,17 @@
 				ease: 'power4.out'
 			}
 		);
+
+		gsap.fromTo(
+			'.spatz-stack-2',
+			{ opacity: 0, x: -75 },
+			{
+				opacity: 1,
+				x: 0,
+				duration: 2,
+				ease: 'power4.out'
+			}
+		);
 	});
 </script>
 
@@ -41,7 +52,8 @@
 			<h1 class="text-7xl">
 				<div class="flex items-center font-extrabold tracking-tight text-primary">
 					<div>spatz</div>
-					<div class="spatz-stack font-thin tracking-tighter text-primary/[50%]">stack2</div>
+					<div class="spatz-stack font-thin tracking-tighter text-primary/[50%]">stack</div>
+					<div class="spatz-stack-2 font-thin tracking-tighter">2</div>
 				</div>
 			</h1>
 			<p class="mt-2">

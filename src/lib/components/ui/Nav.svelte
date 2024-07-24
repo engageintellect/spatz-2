@@ -27,9 +27,9 @@
 	}
 </script>
 
-<nav class="sticky top-0 -z-[-1] border-b bg-background p-2">
+<nav class="nav sticky top-0 -z-[-1] border-b bg-background p-2">
 	<div class="mx-auto flex w-full max-w-5xl items-center justify-between">
-		<a href="/" class="" aria-label="Home">
+		<a href="/" class="nav-logo" aria-label="Home">
 			<div class="px-2 text-2xl font-bold">spatz</div>
 		</a>
 

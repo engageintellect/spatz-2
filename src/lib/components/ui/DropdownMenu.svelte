@@ -44,14 +44,14 @@
 		<DropdownMenu.Separator />
 		<DropdownMenu.Group>
 			<DropdownMenu.Item>
-				<a href="/my/settings/profile" class="flex items-center">
+				<a href="/my/settings/profile" class="flex w-full items-center">
 					<User class="mr-2 h-4 w-4" />
 					<span>Profile</span>
 				</a>
 				<DropdownMenu.Shortcut>⇧⌘P</DropdownMenu.Shortcut>
 			</DropdownMenu.Item>
 			<DropdownMenu.Item>
-				<a href="/my/settings/account" class="flex items-center">
+				<a href="/my/settings/account" class="flex w-full items-center">
 					<Settings class="mr-2 h-4 w-4" />
 					<span>Account</span>
 				</a>
@@ -59,7 +59,7 @@
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item>
-				<a href="/my/settings/security" class="flex items-center">
+				<a href="/my/settings/security" class="flex w-full items-center">
 					<CreditCard class="mr-2 h-4 w-4" />
 					<span>Security</span>
 				</a>
@@ -76,15 +76,15 @@
 		<DropdownMenu.Group>
 			<DropdownMenu.Item>
 				<!-- <Users class="mr-2 h-4 w-4" /> -->
-				<a href="/guestbook" class="flex items-center">
+				<a href="/guestbook" class="flex w-full w-full items-center">
 					<Icon icon="material-symbols:dynamic-feed" class="mr-2 h-4 w-4" />
 					<span>Guestbook Feed</span>
 				</a>
 			</DropdownMenu.Item>
 
-			<DropdownMenu.Item on:click={() => alert('hello world')}>
-				<a href="/ai/chat" class="flex items-center">
-					<Icon icon="material-symbols:dynamic-feed" class="mr-2 h-4 w-4" />
+			<DropdownMenu.Item>
+				<a href="/ai/chat" class="flex w-full w-full items-center">
+					<Icon icon="tabler:brain" class="mr-2 h-4 w-4" />
 					<span>ai</span>
 				</a>
 			</DropdownMenu.Item>
@@ -116,7 +116,11 @@
 		</DropdownMenu.Group>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item>
-			<a href="https://github.com/engageintellect/spatz-2" class="flex items-center">
+			<a
+				href="https://github.com/engageintellect/spatz-2"
+				target="_blank"
+				class="flex w-full items-center"
+			>
 				<Github class="mr-2 h-4 w-4" />
 				<span>GitHub</span>
 			</a>
@@ -124,16 +128,23 @@
 		<DropdownMenu.Item>
 			<a
 				href="https://github.com/engageintellect/spatz-2/issues/new/choose"
-				class="flex items-center"
+				target="_blank"
+				class="flex w-full items-center"
 			>
 				<LifeBuoy class="mr-2 h-4 w-4" />
 				<span>Support</span>
 			</a>
 		</DropdownMenu.Item>
 		<DropdownMenu.Item>
-			<Book class="mr-2 h-4 w-4" />
-			<!-- <Icon icon="material-symbols:docs-outline" class="mr-2 h-5 w-5" /> -->
-			<span>Docs</span>
+			<a
+				href="https://github.com/engageintellect/spatz-2/blob/main/README.md"
+				target="_blank"
+				class="flex w-full items-center"
+			>
+				<Book class="mr-2 h-4 w-4" />
+				<!-- <Icon icon="material-symbols:docs-outline" class="mr-2 h-5 w-5" /> -->
+				<span>Docs</span>
+			</a>
 		</DropdownMenu.Item>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item>
@@ -146,7 +157,7 @@
 			>
 				<button type="submit" class="flex items-center">
 					<LogOut class="mr-2 h-4 w-4" />
-					<span>Log out</span>
+					<span>Logout</span>
 				</button>
 			</form>
 
