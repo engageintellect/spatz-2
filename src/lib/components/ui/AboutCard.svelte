@@ -1,6 +1,5 @@
 <script lang="ts">
 	import jitkaImage from '$lib/assets/images/jitka.png?enhanced';
-	import bbjLogo from '$lib/assets/images/bbj-logo.png?enhanced';
 	import { Button } from './button/index.js';
 	import Icon from '@iconify/svelte';
 
@@ -109,9 +108,9 @@
 						class="group/readMoreButton flex w-full items-center gap-2 text-xl uppercase md:w-fit"
 						variant="ghost"
 					>
-						<div>Repository</div>
+						<div>Homepage</div>
 						<Icon
-							icon="mdi:github"
+							icon="mdi:arrow-right"
 							class="h-5 w-5 transition-transform duration-300 lg:group-hover/readMoreButton:translate-x-1"
 						/>
 					</Button>

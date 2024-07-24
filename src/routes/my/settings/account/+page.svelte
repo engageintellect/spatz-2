@@ -81,8 +81,9 @@
 
 <div class="flex h-full w-full flex-col space-y-12">
 	<div class="w-full">
+		<div class="mb-5 text-3xl font-bold lowercase md:text-5xl">account settings</div>
 		<div class="text-2xl">Change Email</div>
-		<div class="divider mt-2" />
+		<div class="mt-2" />
 
 		<Input id="email" value={data?.user?.email} disabled={true} errors={form?.errors?.email} />
 

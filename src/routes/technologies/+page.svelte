@@ -56,7 +56,7 @@
 			</Button>
 		</a>
 
-		<Input bind:value={searchFiler} placeholder="Filter Services" class="w-full max-w-lg" />
+		<Input bind:value={searchFiler} placeholder="Filter Technologies" class="w-full max-w-lg" />
 
 		<!-- <a href={'javascript:history.back()'}>
 			<Button size="lg" variant="outline" class="flex items-center gap-2">

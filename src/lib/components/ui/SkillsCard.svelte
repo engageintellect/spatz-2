@@ -13,6 +13,7 @@
 	import LazyImage from './LazyImage.svelte';
 	import OrbitingCircles from '../magic-ui/OrbitingCircles.svelte';
 	import MeteorCard from './MeteorCard.svelte';
+	import pocketbaseImage from '$lib/assets/images/pocketbase.png?enhanced';
 
 	let gsapInstance: any;
 	let ScrollTriggerInstance: any;
@@ -174,6 +175,14 @@
 		<!-- <OrbitingCircles /> -->
 
 		<StackOrbit />
+
+		<div class="absolute left-0 top-0 p-5 text-5xl font-bold uppercase drop-shadow">
+			<div>Sveltekit</div>
+			<div>PocketBase</div>
+			<div>AI</div>
+			<div>Tailwind</div>
+			<div>Zod</div>
+		</div>
 		<!-- <enhanced:img
 			src={girl4Image}
 			alt="Jitka"
@@ -189,11 +198,24 @@
 	<!-- CARD 2 -->
 	<div class="card2 relative order-2 flex h-full w-full">
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
-			<div class="w-full text-3xl font-bold uppercase">Technology Stack</div>
+			<div class="w-full text-3xl font-bold uppercase">Why spatz?</div>
 			<!-- <div class="text-2xl font-thin">
 				Offering a range of cosmetic injections to address your unique beauty goals.
 			</div> -->
-			<ul class="flex flex-col gap-2 text-3xl font-thin">
+
+			<div>
+				Combining SvelteKit, PocketBase, AI, TailwindCSS, and Zod creates an ultimate tech stack by
+				leveraging each technology's strengths to build modern, efficient, and scalable web
+				applications. SvelteKit offers a streamlined and reactive framework that enhances developer
+				productivity and performance. PocketBase provides a robust and lightweight backend solution
+				with real-time capabilities and easy data management. Integrating AI enables advanced
+				features such as personalized user experiences and intelligent automation. TailwindCSS
+				ensures a cohesive and visually appealing design system with utility-first CSS, while Zod
+				brings powerful and type-safe schema validation, ensuring data integrity and security.
+				Together, these technologies enable developers to build sophisticated, responsive, and
+				high-performance applications with ease.
+			</div>
+			<!-- <ul class="flex flex-col gap-2 text-3xl font-thin">
 				<li>
 					<strong>Sveltekit</strong>
 				</li>
@@ -201,13 +223,13 @@
 				<li><strong>AI</strong></li>
 				<li><strong>TailwindCSS</strong></li>
 				<li><strong>Zod</strong></li>
-			</ul>
+			</ul> -->
 			<div class="flex items-center gap-2">
 				<a href="/technologies">
 					<Button
 						size="lg"
 						variant="default"
-						class="bg-orange-300 uppercase transition-all duration-300 hover:bg-orange-500 dark:bg-orange-500 dark:hover:bg-orange-300"
+						class="bg-orange-500 uppercase transition-all duration-300 hover:bg-orange-600"
 						>Technologies</Button
 					>
 				</a>
@@ -221,12 +243,11 @@
 	<!-- CARD 3 -->
 	<div class="card3 relative order-4 flex h-full w-full md:order-3">
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
-			<div class="w-full text-3xl font-bold">OUR COMMITMENT TO SAFETY</div>
+			<div class="w-full text-3xl font-bold">DATABASE, AUTH, ADMIN PANEL</div>
 			<div class="text-2xl font-thin">
-				Your safety is our priority. We understand that cosmetic treatments can be a significant
-				decision. By prioritizing your safety and comfort, we ensure that you can enjoy the benefits
-				of your treatment with peace of mind. Our commitment to excellence in safety and care is
-				what sets us apart.
+				PocketBase provides an all-in-one solution for your database, authentication, and admin
+				panel. Self-documenting REST and Client APIs will have you up and running in a few minutes.
+				All in a single file.
 			</div>
 		</div>
 	</div>
@@ -235,12 +256,12 @@
 	<div
 		class="card4 relative order-3 flex h-full min-h-[500px] w-full rounded-lg bg-neutral-300 text-white shadow-lg dark:bg-neutral-500 md:order-4"
 	>
-		<MeteorCard />
-		<!-- <enhanced:img
-			src={womanBotoxImage}
+		<!-- <MeteorCard /> -->
+		<enhanced:img
+			src={pocketbaseImage}
 			alt="Jitka"
 			class="absolute bottom-0 right-0 h-full rounded-lg object-cover"
-		></enhanced:img> -->
+		></enhanced:img>
 		<!-- <div class="absolute bottom-0 right-0 z-20 flex w-full flex-col gap-5 p-5">
 			<div class="w-full text-5xl font-bold drop-shadow">SAFE & EFFECTIVE</div>
 		</div> -->

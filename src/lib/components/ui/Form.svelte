@@ -9,10 +9,9 @@
 	import Icon from '@iconify/svelte';
 	import { enhance, applyAction } from '$app/forms';
 	import { toast } from 'svelte-sonner';
-	import Logo from '$lib/assets/images/bbj-logo.png';
 	import { onDestroy, onMount, tick } from 'svelte';
 	import * as Select from '$lib/components/ui/select';
-	import Button from './button/button.svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
 
 	export let data: SuperValidated<Infer<FormSchema>>;
 	let isSubmitting = false;

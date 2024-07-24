@@ -1,6 +1,7 @@
 <script lang="ts">
 	import CirclePlus from 'lucide-svelte/icons/circle-plus';
 	import Cloud from 'lucide-svelte/icons/cloud';
+	import Book from 'lucide-svelte/icons/book';
 	import CreditCard from 'lucide-svelte/icons/credit-card';
 	import Github from 'lucide-svelte/icons/github';
 	import Keyboard from 'lucide-svelte/icons/keyboard';
@@ -15,6 +16,7 @@
 	import Users from 'lucide-svelte/icons/users';
 	import { pb } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
+	import Icon from '@iconify/svelte';
 
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
@@ -73,8 +75,18 @@
 		<DropdownMenu.Separator />
 		<DropdownMenu.Group>
 			<DropdownMenu.Item>
-				<Users class="mr-2 h-4 w-4" />
-				<span>Team</span>
+				<!-- <Users class="mr-2 h-4 w-4" /> -->
+				<a href="/guestbook" class="flex items-center">
+					<Icon icon="material-symbols:dynamic-feed" class="mr-2 h-4 w-4" />
+					<span>Guestbook Feed</span>
+				</a>
+			</DropdownMenu.Item>
+
+			<DropdownMenu.Item on:click={() => alert('hello world')}>
+				<a href="/ai/chat" class="flex items-center">
+					<Icon icon="material-symbols:dynamic-feed" class="mr-2 h-4 w-4" />
+					<span>ai</span>
+				</a>
 			</DropdownMenu.Item>
 			<DropdownMenu.Sub>
 				<DropdownMenu.SubTrigger>
@@ -104,18 +116,24 @@
 		</DropdownMenu.Group>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item>
-			<a href="https://github.com/engageintellect" class="flex items-center">
+			<a href="https://github.com/engageintellect/spatz-2" class="flex items-center">
 				<Github class="mr-2 h-4 w-4" />
 				<span>GitHub</span>
 			</a>
 		</DropdownMenu.Item>
 		<DropdownMenu.Item>
-			<LifeBuoy class="mr-2 h-4 w-4" />
-			<span>Support</span>
+			<a
+				href="https://github.com/engageintellect/spatz-2/issues/new/choose"
+				class="flex items-center"
+			>
+				<LifeBuoy class="mr-2 h-4 w-4" />
+				<span>Support</span>
+			</a>
 		</DropdownMenu.Item>
 		<DropdownMenu.Item>
-			<Cloud class="mr-2 h-4 w-4" />
-			<span>API</span>
+			<Book class="mr-2 h-4 w-4" />
+			<!-- <Icon icon="material-symbols:docs-outline" class="mr-2 h-5 w-5" /> -->
+			<span>Docs</span>
 		</DropdownMenu.Item>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item>

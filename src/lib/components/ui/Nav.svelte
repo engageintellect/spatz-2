@@ -12,10 +12,6 @@
 	import DropdownMenuItem from '$lib/components/ui/DropdownMenu.svelte';
 	import DropdownMenu from '$lib/components/ui/DropdownMenu.svelte';
 
-	// export let data;
-
-	// $: currentUser.set(data.user);
-
 	onMount(() => {
 		gsap.from('.nav-logo', { delay: 0.5, opacity: 0, duration: 1 });
 		gsap.from('.buttons', { delay: 0.5, opacity: 0, duration: 2 });
@@ -34,53 +30,12 @@
 <nav class="sticky top-0 -z-[-1] border-b bg-background p-2">
 	<div class="mx-auto flex w-full max-w-5xl items-center justify-between">
 		<a href="/" class="" aria-label="Home">
-			<!-- <Button variant="ghost" class="" size="lg"> -->
 			<div class="px-2 text-2xl font-bold">spatz</div>
-			<!-- </Button> -->
-			<!-- <Icon
-				icon="material-symbols:code-rounded"
-				class="h-10 w-10 rounded-full border border-foreground p-2"
-			/> -->
-			<!-- <img
-					src={bbjLogo}
-					alt="Jitka"
-					class="h-10 w-10 rounded-full border transition-all duration-300 hover:shadow md:h-12 md:w-12"
-			/> -->
 		</a>
 
 		<div class="buttons flex items-center gap-2">
-			<!-- <a href={`tel:${companyInfo.phone}`} class="hidden md:flex">
-				<Button class="uppercase" variant="outline">call</Button>
-			</a> -->
-			<!-- <a href={`sms:${companyInfo.phone}`} class=""> -->
-			<!-- <Button class="uppercase" variant="outline">text</Button> -->
-			<!-- </a> -->
-
 			{#if $currentUser}
 				<ThemeToggle />
-				<!-- <a href="/contact" class="">
-					<Button class="uppercase" variant="default">Contact</Button>
-				</a> -->
-				<!-- 
-				<form
-					class="flex w-full"
-					method="POST"
-					action="/auth/logout"
-					on:submit={handleLogout}
-					aria-label="Logout"
-				>
-					<Button type="submit" class="group/logoutButton w-full" aria-label="Logout">
-						<div class="flex w-full items-center justify-between">
-							<div class="font-bold uppercase">Logout</div>
-							<Icon
-								icon="mdi-logout"
-								class="h-5 w-5 transition-all duration-300 md:group-hover/logoutButton:translate-x-1"
-							/>
-						</div>
-					</Button>
-				</form> -->
-
-				<!-- <Avatar /> -->
 				<DropdownMenu />
 			{:else}
 				<div class="flex items-center gap-2">

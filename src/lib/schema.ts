@@ -186,3 +186,17 @@ export const registerUserSchema = z
 	});
 
 export type RegisterUserSchema = typeof registerUserSchema;
+
+
+export const createGuestBookPostSchema = z.object({
+	author: z.string(),
+	content: z
+		.string({ required_error: 'Message is required' })
+		.min(1, { message: 'Message must be at least 1 character' })
+		.max(250, { message: 'Message must be 2500 characters or less' })
+});	
+
+export const likeGuestBookPostSchema = z.object({
+	postId: z.string(),
+	currentUserId: z.string()
+});	

@@ -17,10 +17,10 @@
 	];
 </script>
 
-<div class="h-full w-full">
+<div class="mx-auto h-full w-full max-w-2xl bg-red-500">
 	<!-- <div class="text-7xl">settings</div> -->
 </div>
-<div class="flex h-full w-full gap-5">
+<div class="mx-auto flex h-full w-full max-w-2xl gap-5">
 	<ul class="flex w-40 flex-col gap-1">
 		{#each navigation as navItem}
 			<li>

@@ -13,6 +13,9 @@
 	import { currentUser } from '$lib/stores/user.js';
 	import Command from '$lib/components/ui/Command.svelte';
 	import SkillsCard from '$lib/components/ui/SkillsCard.svelte';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import Stats from '$lib/components/ui/Stats.svelte';
+	import SpatzMarketing from '$lib/components/ui/SpatzMarketing.svelte';
 </script>
 
 <svelte:head>
@@ -25,14 +28,21 @@
 
 <div class="flex flex-col gap-10 md:gap-20">
 	{#if $currentUser}
-		<div class="flex flex-col gap-5 p-5">
+		<!-- <div class="mx-auto flex max-w-2xl flex-col gap-5 rounded-lg p-5 md:border md:shadow-lg">
 			<h1 class="text-3xl font-bold">Welcome, @{$currentUser.username}</h1>
 			<p class="text-lg">
 				We are glad to have you back. You can now access all our services and products.
 			</p>
 			<Command />
-		</div>
-		<SkillsCard />
+
+			<a href="/guestbook" class="w-fit">
+				<Button>sign the guestbook</Button>
+			</a>
+		</div> -->
+
+		<SpatzMarketing />
+
+		<!-- <SkillsCard /> -->
 	{:else}
 		<Hero />
 		<AboutCard />
