@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { onMount, afterUpdate, onDestroy } from 'svelte';
+	import { onMount, onDestroy, tick } from 'svelte';
 	import { page } from '$app/stores';
+	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
 	import { enhance } from '$app/forms';
 	import { currentUser } from '$lib/stores/user.js';
 	import { getImageURL } from '$lib/utils';
@@ -51,11 +52,8 @@
 		}
 	};
 
-	const scrollToTop = () => {
-		window.scrollTo({ top: 0, behavior: 'smooth' });
-	};
-
 	onMount(() => {
+		tick();
 		window.addEventListener('scroll', handleScroll);
 
 		if (typeof window !== 'undefined') {
@@ -109,14 +107,6 @@
 		}
 	});
 
-	afterUpdate(() => {
-		if (typeof window !== 'undefined') {
-			import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-				ScrollTrigger.refresh();
-			});
-		}
-	});
-
 	onDestroy(() => {
 		if (typeof window !== 'undefined') {
 			import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
@@ -127,7 +117,7 @@
 	});
 </script>
 
-<div>
+<div class="p-2">
 	<div class="mx-auto w-full max-w-lg transition-all duration-300">
 		<div class="">
 			<h1 class="text-7xl font-bold text-primary">
@@ -148,7 +138,7 @@
 						placeholder={''}
 					/>
 
-					<Button class="group/submitButton text-lg">
+					<Button type="submit" class="group/submitButton">
 						{#if loading}
 							<span class="loading loading-spinner loading-md"></span>
 						{:else}
@@ -192,20 +182,11 @@
 		</div>
 	</div>
 
-	<!-- TODO: This could be cleaner -->
-	<div
-		class="fixed bottom-4 flex w-full max-w-2xl items-center justify-center transition-opacity duration-700"
-	>
-		<div class="flex w-full justify-end">
-			<button
-				class="btn btn-primary scroll-to-top-btn mx-6 shadow sm:mx-3"
-				style="opacity: 0; transform: translateY(20px);"
-				on:click={scrollToTop}
-			>
-				<Icon icon="mdi-arrow-up" class="h-6 w-6" />
-			</button>
+	{#if showScrollToTop === true}
+		<div class="flex justify-center">
+			<ScrollToTopButton />
 		</div>
-	</div>
+	{/if}
 </div>
 
 <style>

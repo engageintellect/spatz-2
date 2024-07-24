@@ -23,6 +23,7 @@
 	import Avatar from '$lib/components/ui/Avatar.svelte';
 
 	import ThemeToggle from '$lib/components/ui/ThemeToggle.svelte';
+	import { PUBLIC_POCKETBASE_URL, PUBLIC_POCKETBASE_ADMIN } from '$env/static/public';
 
 	function handleLogout() {
 		pb.authStore.clear();
@@ -39,8 +40,10 @@
 			<Avatar />
 		</Button>
 	</DropdownMenu.Trigger>
-	<DropdownMenu.Content class="mt-3 w-56" align="start">
-		<DropdownMenu.Label>My Account</DropdownMenu.Label>
+	<DropdownMenu.Content class="mt-3 w-56" align="end">
+		<DropdownMenu.Label>
+			<div class="flex w-full items-center gap-2">My Account</div></DropdownMenu.Label
+		>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Group>
 			<DropdownMenu.Item>
@@ -85,9 +88,16 @@
 			<DropdownMenu.Item>
 				<a href="/ai/chat" class="flex w-full w-full items-center">
 					<Icon icon="tabler:brain" class="mr-2 h-4 w-4" />
-					<span>ai</span>
+					<span>AI</span>
 				</a>
 			</DropdownMenu.Item>
+			<DropdownMenu.Item>
+				<a href={PUBLIC_POCKETBASE_ADMIN} class="flex w-full w-full items-center">
+					<Icon icon="simple-icons:pocketbase" class="mr-2 h-4 w-4" />
+					<span>PocketBase</span>
+				</a>
+			</DropdownMenu.Item>
+			<!-- 
 			<DropdownMenu.Sub>
 				<DropdownMenu.SubTrigger>
 					<UserPlus class="mr-2 h-4 w-4" />
@@ -112,7 +122,7 @@
 				<Plus class="mr-2 h-4 w-4" />
 				<span>New Team</span>
 				<DropdownMenu.Shortcut>⌘+T</DropdownMenu.Shortcut>
-			</DropdownMenu.Item>
+			</DropdownMenu.Item> -->
 		</DropdownMenu.Group>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item>
@@ -155,7 +165,7 @@
 				on:submit={handleLogout}
 				aria-label="Logout"
 			>
-				<button type="submit" class="flex items-center">
+				<button type="submit" class="flex w-full items-center">
 					<LogOut class="mr-2 h-4 w-4" />
 					<span>Logout</span>
 				</button>

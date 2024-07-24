@@ -1,5 +1,4 @@
 <script lang="ts">
-	import jitkaImage from '$lib/assets/images/jitka.png?enhanced';
 	import { Button } from './button/index.js';
 	import Icon from '@iconify/svelte';
 

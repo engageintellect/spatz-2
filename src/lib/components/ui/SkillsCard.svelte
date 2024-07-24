@@ -1,11 +1,5 @@
 <script lang="ts">
 	import StackOrbit from '$lib/components/ui/StackOrbit.svelte';
-	import girlImage from '$lib/assets/images/girl1.png?enhanced';
-	import girl2Image from '$lib/assets/images/girl2.png?enhanced';
-	import girl3Image from '$lib/assets/images/girl3.png?enhanced';
-	import girl4Image from '$lib/assets/images/girl4.png?enhanced';
-	import girl5Image from '$lib/assets/images/girl5.png?enhanced';
-	import womanBotoxImage from '$lib/assets/images/womanBotox.png?enhanced';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 	import { onDestroy, onMount, tick } from 'svelte';
@@ -231,7 +225,7 @@
 					<Button
 						size="lg"
 						variant="default"
-						class="bg-orange-500 uppercase transition-all duration-300 hover:bg-orange-600"
+						class="bg-orange-500 uppercase transition-all duration-300 hover:bg-orange-600 dark:hover:bg-orange-400"
 						>Technologies</Button
 					>
 				</a>
@@ -271,11 +265,11 @@
 
 	<!-- CARD 5 -->
 	<div
-		class="card5 relative order-5 flex h-full min-h-[500px] w-full rounded-lg bg-yellow-300 text-white shadow-lg dark:bg-yellow-500"
+		class="card5 relative order-5 flex h-full min-h-[500px] w-full rounded-lg bg-yellow-500 text-white shadow-lg dark:bg-yellow-300"
 	>
 		<Icon
 			icon="material-symbols:rocket-launch"
-			class="animate-slowBounce absolute bottom-0 right-0 m-5 h-72 w-72 text-white drop-shadow-lg"
+			class="absolute bottom-0 right-0 m-5 h-72 w-72 animate-slowBounce text-white drop-shadow-lg"
 		/>
 		<!-- <enhanced:img
 			src={girl2Image}
@@ -306,7 +300,7 @@
 					<Button
 						size="lg"
 						variant="default"
-						class="bg-yellow-300 uppercase hover:bg-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-300"
+						class="bg-yellow-500 uppercase hover:bg-yellow-400 dark:bg-yellow-300 dark:hover:bg-yellow-200"
 						>View Before & After Gallery</Button
 					>
 				</a>

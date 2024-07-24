@@ -16,22 +16,22 @@
 </script>
 
 <div
-	class="card border-base-300 cursor-pointer rounded-lg border-[0.5px] shadow-lg transition-all duration-300 hover:border-primary md:hover:scale-[101%]"
+	class="cursor-pointer rounded-lg border-[0.5px] shadow-lg transition-all duration-300 hover:border-primary md:hover:scale-[101%]"
 >
 	<div class="card-body p-5 transition-none">
 		<div class="flex items-center">
 			<div
-				class={`text-xs ${timeSince(formatFriendlyDate(postDate)) === 'just now' ? 'text-primary' : 'text-base-content/50'}`}
+				class={`text-xs ${timeSince(formatFriendlyDate(postDate)) === 'just now' ? 'text-primary' : 'text-foreground/70'}`}
 			>
 				{timeSince(formatFriendlyDate(postDate))}
 			</div>
 			<Icon icon="ph:dot" class="h-5 w-5" />
-			<div class="text-base-content/50 text-xs">
+			<div class="text-xs text-foreground/70">
 				{formatFriendlyDate(postDate)}
 			</div>
 		</div>
 
-		<div class="flex items-start gap-2">
+		<div class="mt-2 flex items-start gap-2">
 			<div class="">
 				<div class="h-12 w-12">
 					<img src={avatar} class="h-full w-full rounded-full object-cover" alt="user-avatar" />
@@ -39,7 +39,7 @@
 			</div>
 			<div class="w-full">
 				<div class="font-thin text-primary">@{postAuthor}</div>
-				<div class="font-thin">{@html postContent}</div>
+				<div class="border-b pb-2 font-thin">{@html postContent}</div>
 
 				<div class="mt-2 flex items-center gap-5">
 					<div class="flex items-center gap-1">

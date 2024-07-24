@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
 	const navigation = [
 		{
 			title: 'chat',
@@ -48,4 +49,8 @@
 	<div class="w-full px-2">
 		<slot />
 	</div>
+</div>
+
+<div class="mx-auto flex max-w-2xl justify-end">
+	<ScrollToTopButton />
 </div>

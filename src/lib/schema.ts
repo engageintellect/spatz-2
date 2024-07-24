@@ -197,7 +197,7 @@ export const formSchema = z.object({
   type: z.string()
     .min(2, { message: "Message type must be selected" })
     .max(50, { message: "Message type must be selected" }),
-  location: z.string()
+  priority: z.string()
     .min(2, { message: "Location must be selected" })
     .max(50, { message: "Location must be selected" }),
   message: z.string()

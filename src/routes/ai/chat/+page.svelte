@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { useChat } from 'ai/svelte';
 	import { fade } from 'svelte/transition';
-	import { onMount, afterUpdate } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import { currentUser } from '$lib/stores/user';
 	import { getImageURL } from '$lib/utils';
 	import { chatMessages } from '$lib/stores/chatMessages';
@@ -21,6 +21,7 @@
 	let initialLoadComplete = false;
 
 	onMount(() => {
+		tick();
 		const savedMessages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
 		setMessages(savedMessages);
 		initialLoadComplete = true;
@@ -30,10 +31,6 @@
 		if (window.matchMedia('(min-width: 768px)').matches) {
 			inputElement.focus();
 		}
-	});
-
-	afterUpdate(() => {
-		animateNewMessages();
 	});
 
 	async function handleSubmit(event: any) {
@@ -188,9 +185,5 @@
 		<div bind:this={messagesEnd}></div>
 	</div>
 </section>
-
-<div class="flex justify-end">
-	<ScrollToTopButton />
-</div>
 
 <Toast type={$toast.type} message={$toast.message} show={$toast.show} />

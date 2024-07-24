@@ -23,10 +23,10 @@
 			}
 		: undefined;
 
-	$: selectedLocation = $formData.location
+	$: selectedPriority = $formData.priority
 		? {
-				label: $formData.location,
-				value: $formData.location
+				label: $formData.priority,
+				value: $formData.priority
 			}
 		: undefined;
 
@@ -209,12 +209,8 @@
 							<Select.Value class="text-lg" placeholder="Select Type" />
 						</Select.Trigger>
 						<Select.Content>
-							<Select.Item class="text-lg" label="Consultation" value="Consultation"
-								>Consultation</Select.Item
-							>
-							<Select.Item class="text-lg" label="Appointment" value="Appointment"
-								>Appointment</Select.Item
-							>
+							<Select.Item class="text-lg" label="Issue" value="Issue">Issue</Select.Item>
+							<Select.Item class="text-lg" label="Feedback" value="Feedback">Feedback</Select.Item>
 							<Select.Item class="text-lg" label="General Question" value="General Question"
 								>General Question</Select.Item
 							>
@@ -224,29 +220,27 @@
 				</Form.Control>
 			</Form.Field>
 
-			<Form.Field {form} name="location" class="w-full">
+			<Form.Field {form} name="priority" class="w-full">
 				<Form.Control let:attrs>
-					<Form.Label>Best Location</Form.Label>
+					<Form.Label>Priority</Form.Label>
 					<Select.Root
-						name="location"
-						selected={selectedLocation}
+						name="priority"
+						selected={selectedPriority}
 						onSelectedChange={(v) => {
-							v && ($formData.location = v.value);
+							v && ($formData.priority = v.value);
 						}}
 					>
 						<Select.Trigger {...attrs} class="w-full">
-							<Select.Value class="text-lg" placeholder="Select Location" />
+							<Select.Value class="text-lg" placeholder="Priority" />
 						</Select.Trigger>
 						<Select.Content>
-							<Select.Item class="text-lg" label="Corona Del Mar" value="Corona Del Mar"
-								>Corona Del Mar</Select.Item
-							>
-							<Select.Item class="text-lg" label="Long Beach" value="Long Beach"
-								>Long Beach</Select.Item
-							>
+							<Select.Item class="text-lg" label={'0'} value={'0'}>0 - critical</Select.Item>
+							<Select.Item class="text-lg" label={'1'} value={'1'}>1 - high</Select.Item>
+							<Select.Item class="text-lg" label={'2'} value={'2'}>2 - med</Select.Item>
+							<Select.Item class="text-lg" label={'3'} value={'3'}>3 - low</Select.Item>
 						</Select.Content>
 					</Select.Root>
-					<input hidden bind:value={$formData.location} name={attrs.name} />
+					<input hidden bind:value={$formData.priority} name={attrs.name} />
 				</Form.Control>
 			</Form.Field>
 		</div>
@@ -255,7 +249,7 @@
 			<Form.Field {form} name="type" class="w-full">
 				<Form.FieldErrors />
 			</Form.Field>
-			<Form.Field {form} name="location" class="w-full">
+			<Form.Field {form} name="priority" class="w-full">
 				<Form.FieldErrors />
 			</Form.Field>
 		</div>

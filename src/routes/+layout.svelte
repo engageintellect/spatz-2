@@ -33,7 +33,7 @@
 	{JSON.stringify($currentUser)}
 </div> -->
 
-<ModeWatcher />
+<ModeWatcher defaultMode={'dark'} />
 <Toaster position="bottom-right" richColors={true} />
 
 <div class="flex min-h-screen flex-col">

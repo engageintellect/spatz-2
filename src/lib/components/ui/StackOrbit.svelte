@@ -16,18 +16,18 @@
 
 	<!--  Inner Circles  -->
 	<OrbitingCircles
-		class="animate-customBounce h-[50px] w-[50px] border-none bg-none"
+		class="h-[50px] w-[50px] animate-customBounce border-none bg-none"
 		duration={20}
 		radius={80}
 		delay={40}
 	>
 		<!-- Open AI -->
-		<Icon icon="devicon:svelte" class="animate-customBounce h-full w-full" />
+		<Icon icon="devicon:svelte" class="h-full w-full animate-customBounce" />
 	</OrbitingCircles>
 
 	<OrbitingCircles class="h-[50px] w-[50px] border-none bg-transparent" duration={20} radius={80}>
 		<!-- Open AI -->
-		<Icon icon="logos:pocket-base" class="animate-customBounce h-full w-full" />
+		<Icon icon="logos:pocket-base" class="h-full w-full animate-customBounce" />
 	</OrbitingCircles>
 	<OrbitingCircles
 		class="h-[50px] w-[50px] border-none bg-transparent"
@@ -57,6 +57,6 @@
 		reverse
 	>
 		<!-- Github -->
-		<Icon icon="mdi:github" class="h-full w-full" />
+		<Icon icon="simple-icons:zod" class="h-full w-full" />
 	</OrbitingCircles>
 </div>
