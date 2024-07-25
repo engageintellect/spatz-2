@@ -9,7 +9,7 @@
 
 <div class="form-control mb-2 w-full">
 	<textarea
-		class="w-full resize-none rounded-lg border p-2 text-lg focus-within:outline-none focus:shadow-inner"
+		class="w-full resize-none rounded-lg border bg-background p-2 text-lg focus-within:outline-none focus:shadow-inner"
 		{placeholder}
 		{required}
 		{disabled}

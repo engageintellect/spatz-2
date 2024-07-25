@@ -103,16 +103,16 @@
 		</div>
 	{/if}
 
-	<div class="sticky top-[57px] z-10 w-full backdrop-blur-sm">
+	<div class="sticky top-[56px] z-10 w-full backdrop-blur-sm">
 		<form class="w-full bg-background py-2" on:submit={handleSubmit}>
 			<div class="flex w-full gap-2">
 				<input
 					placeholder="Enter your query"
 					bind:value={$input}
-					class="w-full rounded-lg border p-2 focus-within:outline-none focus:outline-none"
+					class="w-full rounded-lg border bg-background p-2 focus-within:outline-none focus:outline-none"
 					bind:this={inputElement}
 				/>
-				<Button type="submit" variant="outline" class="">
+				<Button type="submit" variant="default" class="">
 					<div class="flex items-center gap-2">
 						<Icon icon="mdi-send" class="h-7 w-7" />
 					</div>

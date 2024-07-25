@@ -183,7 +183,7 @@
 	</div>
 
 	{#if showScrollToTop === true}
-		<div class="flex justify-center bg-red-400">
+		<div class="flex justify-center">
 			<ScrollToTopButton />
 		</div>
 	{/if}
