@@ -29,10 +29,6 @@
 	// END VIEW TRANSITIONS API
 </script>
 
-<!-- <div class="bg-red-300">
-	{JSON.stringify($currentUser)}
-</div> -->
-
 <ModeWatcher defaultMode={'dark'} />
 <Toaster position="bottom-right" richColors={true} />
 

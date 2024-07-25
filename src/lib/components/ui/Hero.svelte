@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import Icon from '@iconify/svelte';
-	import { companyInfo } from '$lib/data';
+	import { siteInfo } from '$lib/data';
 
 	function scrollToAnchor() {
 		const element = document.getElementById('anchorLink');
@@ -91,7 +91,7 @@
 				<div
 					class="animate-title w-full text-7xl font-bold lowercase tracking-tight transition-transform lg:text-7xl"
 				>
-					{companyInfo.name}
+					{siteInfo.name}
 				</div>
 			</div>
 

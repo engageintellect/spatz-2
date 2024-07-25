@@ -11,7 +11,7 @@
 	import { enhance, applyAction } from '$app/forms';
 	import { toast } from 'svelte-sonner';
 	import { onDestroy, onMount, tick } from 'svelte';
-	import { companyInfo } from '$lib/data.js';
+	import { siteInfo } from '$lib/data.js';
 
 	let isSubmitting = false;
 
@@ -82,7 +82,7 @@
 </script>
 
 <svelte:head>
-	<title>Contact : {companyInfo.name}</title>
+	<title>Contact : {siteInfo.name}</title>
 	<meta
 		name="description"
 		content={`Contact us for more information about our services. We are dedicated to providing top-notch services to our clients.`}

@@ -3,7 +3,7 @@
 	import { fade } from 'svelte/transition';
 
 	const currentYear = new Date().getFullYear();
-	import { companyInfo } from '$lib/data';
+	import { siteInfo } from '$lib/data';
 
 	let showFooter = false;
 
@@ -19,7 +19,7 @@
 		<div class="mx-auto flex w-full max-w-5xl items-center justify-center">
 			<a href="https://github.com/engageintellect" class="text-sm">
 				&copy; {currentYear}
-				{companyInfo.name}. All rights reserved.
+				{siteInfo.name}. All rights reserved.
 			</a>
 		</div>
 	</footer>

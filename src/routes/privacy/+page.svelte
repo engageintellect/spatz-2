@@ -1,6 +1,6 @@
 <script>
 	export let data;
-	import { companyInfo } from '$lib/data';
+	import { siteInfo } from '$lib/data';
 </script>
 
 <svelte:head>
@@ -16,7 +16,7 @@
 	<section class="space-y-4">
 		<h2 class="mb-2 text-2xl font-semibold">1. Introduction</h2>
 		<p>
-			Welcome to {companyInfo.name}! This Privacy Policy explains how we collect, use, disclose, and
+			Welcome to {siteInfo.name}! This Privacy Policy explains how we collect, use, disclose, and
 			safeguard your information when you visit our website.
 		</p>
 	</section>
@@ -115,8 +115,8 @@
 		<h2 class="mb-2 text-2xl font-semibold">8. Contact Us</h2>
 		<p>
 			If you have questions or comments about this Privacy Policy, please contact us at <a
-				href={`mailto:${companyInfo.email}`}
-				class="underline">{companyInfo.email}</a
+				href={`mailto:${siteInfo.email}`}
+				class="underline">{siteInfo.email}</a
 			>.
 		</p>
 	</section>

@@ -6,7 +6,7 @@
 	import Modal from '$lib/components/ui/Modal.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import LazyImage from '$lib/components/ui/LazyImage.svelte';
-	import { companyInfo } from '$lib/data';
+	import { siteInfo } from '$lib/data';
 
 	let showModal = false;
 	let modalImageSrc = '';
@@ -40,10 +40,10 @@
 </script>
 
 <svelte:head>
-	<title>Before & Afters : {companyInfo.name}</title>
+	<title>Before & Afters : {siteInfo.name}</title>
 	<meta
 		name="description"
-		content={`${companyInfo.name} "Before & After" results from our clients.`}
+		content={`${siteInfo.name} "Before & After" results from our clients.`}
 	/>
 </svelte:head>
 

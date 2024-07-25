@@ -10,7 +10,7 @@
 	import { enhance, applyAction } from '$app/forms';
 	import { toast } from 'svelte-sonner';
 	import { onDestroy, onMount, tick } from 'svelte';
-	import { companyInfo } from '$lib/data.js';
+	import { siteInfo } from '$lib/data.js';
 
 	let isSubmitting = false;
 
@@ -81,7 +81,7 @@
 </script>
 
 <svelte:head>
-	<title>Contact : {companyInfo.name}</title>
+	<title>Contact : {siteInfo.name}</title>
 	<meta
 		name="description"
 		content={`Contact us for more information about our services. We are dedicated to providing top-notch services to our clients.`}
@@ -146,7 +146,7 @@
 			<div class="mt-5">
 				<a href="/auth/reset-password">forgot password?</a>
 
-				<Form.Button disabled={isSubmitting} size="lg" class="group/sendButton w-full">
+				<Form.Button disabled={isSubmitting} size="lg" class="group/sendButton mt-2 w-full">
 					<div class="flex items-center gap-2 text-xl">
 						<div class="lowercase">login</div>
 						<Icon

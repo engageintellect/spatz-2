@@ -117,7 +117,7 @@
 	});
 </script>
 
-<div class="p-2">
+<div class="px-2">
 	<div class="mx-auto w-full max-w-lg transition-all duration-300">
 		<div class="">
 			<h1 class="text-7xl font-bold text-primary">
@@ -125,17 +125,17 @@
 			</h1>
 		</div>
 
-		<div class="my-2 flex flex-col gap-5">
+		<div class="my-2 mt-5 flex flex-col gap-5">
 			<form action="?/createPost" method="POST" class="w-full" use:enhance>
 				<div class="form-control gap-0">
-					<div>sign the guestbook</div>
+					<!-- <div>sign the guestbook</div> -->
 					<input type="hidden" name="author" value={data?.user?.id} />
 					<TextArea
 						id="content"
 						value={form?.data?.content ?? ''}
 						errors={form?.errors?.content}
 						disabled={loading}
-						placeholder={''}
+						placeholder={'type your post here...'}
 					/>
 
 					<Button type="submit" class="group/submitButton">
@@ -154,7 +154,7 @@
 			<div class="w-full">
 				<div class="">
 					<div class="mb-2 text-3xl font-thin">posts</div>
-					<div class="flex flex-col gap-2">
+					<div class="flex flex-col">
 						{#if data.posts.length > 0}
 							{#each data.posts as post}
 								<div class="post-wrapper hidden">
@@ -183,7 +183,7 @@
 	</div>
 
 	{#if showScrollToTop === true}
-		<div class="flex justify-center">
+		<div class="flex justify-center bg-red-400">
 			<ScrollToTopButton />
 		</div>
 	{/if}

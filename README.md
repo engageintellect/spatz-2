@@ -89,7 +89,7 @@ pnpm i && pnpm run dev --host
 │   │   ├── /b
 │   │   └── /c
 │   ├── /api
-│   │   ├── /repoData (fetch github repository stars)
+│   │   ├── /repo-data (fetch github repository stars)
 │   │   ├── /chat (OpenAI streaming API)
 │   │__ /auth (Pocketbase auth)
 │   │   ├── /login

@@ -3,7 +3,7 @@
 	import ThemeToggle from '$lib/components/ui/ThemeToggle.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
-	import { companyInfo } from '$lib/data';
+	import { siteInfo } from '$lib/data';
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { currentUser } from '$lib/stores/user';

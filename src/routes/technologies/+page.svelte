@@ -4,10 +4,10 @@
 	import { onMount } from 'svelte';
 	import Modal from '$lib/components/ui/Modal.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import ServiceCard from '$lib/components/ui/ServiceCard.svelte';
+	import TechnologyCard from '$lib/components/ui/TechnologyCard.svelte';
 	import { services } from '$lib/data';
 	import Input from '$lib/components/ui/input/input.svelte';
-	import { companyInfo } from '$lib/data';
+	import { siteInfo } from '$lib/data';
 
 	let showModal = false;
 	let modalImageSrc = '';
@@ -43,8 +43,8 @@
 </script>
 
 <svelte:head>
-	<title>Services : {companyInfo.name}</title>
-	<meta name="description" content={`${companyInfo.name} services menu.`} />
+	<title>Services : {siteInfo.name}</title>
+	<meta name="description" content={`${siteInfo.name} services menu.`} />
 </svelte:head>
 
 <div>
@@ -70,7 +70,7 @@
 		{#if searchFiler === ''}
 			{#each services as service}
 				<a href="/contact">
-					<ServiceCard
+					<TechnologyCard
 						name={service.name}
 						description={service.description}
 						img={service.img}
@@ -82,7 +82,7 @@
 			{#each services as service}
 				{#if service.name.toLowerCase().includes(searchFiler.toLowerCase())}
 					<a href="/contact">
-						<ServiceCard
+						<TechnologyCard
 							name={service.name}
 							description={service.description}
 							img={service.img}

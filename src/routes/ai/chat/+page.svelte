@@ -64,7 +64,7 @@
 				toast.set({
 					show: true,
 					message: 'Message copied to clipboard',
-					type: 'success'
+					type: 'bg-emerald-300 text-emerald-900'
 				});
 				setTimeout(() => toast.set({ show: false, message: '', type: '' }), 2000);
 			},

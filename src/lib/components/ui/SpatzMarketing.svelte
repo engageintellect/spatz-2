@@ -11,7 +11,7 @@
 		forks = 0;
 
 	const getStars = async () => {
-		const res = await fetch(`${PUBLIC_BASE_URL}/api/repoData`);
+		const res = await fetch(`${PUBLIC_BASE_URL}/api/repo-data`);
 		const { stars: fetchedStars, issues: fetchedIssues, forks: fetchedForks } = await res.json();
 		stars = fetchedStars;
 		issues = fetchedIssues;
@@ -83,6 +83,11 @@
 					</Button>
 				</a>
 			</div>
+		</div>
+
+		<div>
+			<h1 class="mb-2 text-4xl font-bold text-primary">github stats</h1>
+			<Stats {stars} {issues} {forks} />
 		</div>
 
 		<div>
@@ -233,11 +238,6 @@
 					>docs</a
 				>.
 			</div>
-		</div>
-
-		<div>
-			<h1 class="mb-2 text-4xl font-bold text-primary">github stats</h1>
-			<Stats {stars} {issues} {forks} />
 		</div>
 
 		<div class="mb-10">

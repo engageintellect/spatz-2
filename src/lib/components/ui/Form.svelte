@@ -13,6 +13,8 @@
 	import * as Select from '$lib/components/ui/select';
 	import Button from '$lib/components/ui/button/button.svelte';
 
+	export let action: string = '';
+
 	export let data: SuperValidated<Infer<FormSchema>>;
 	let isSubmitting = false;
 
@@ -131,7 +133,7 @@
 <div class="mx-auto w-full max-w-md">
 	<form
 		method="POST"
-		action="/contact?"
+		{action}
 		class="contact-form"
 		use:enhance={({ cancel }) => {
 			if (isSubmitting) return cancel(); // Prevent multiple submissions
@@ -148,7 +150,8 @@
 					});
 				}
 
-				await update();
+				// await update();
+				applyAction(result);
 				isSubmitting = false;
 			};
 		}}
@@ -186,13 +189,13 @@
 			<Form.FieldErrors />
 		</Form.Field>
 
-		<Form.Field {form} name="phone">
+		<!-- <Form.Field {form} name="phone">
 			<Form.Control let:attrs>
 				<Form.Label>Phone</Form.Label>
 				<Input {...attrs} bind:value={$formData.phone} />
 			</Form.Control>
 			<Form.FieldErrors />
-		</Form.Field>
+		</Form.Field> -->
 
 		<div class="mb-2 flex items-center gap-2 md:gap-5">
 			<Form.Field {form} name="type" class="w-full">
@@ -245,7 +248,7 @@
 			</Form.Field>
 		</div>
 
-		<div class="flex items-center gap-2 md:gap-5">
+		<div class="flex items-start gap-2 md:gap-5">
 			<Form.Field {form} name="type" class="w-full">
 				<Form.FieldErrors />
 			</Form.Field>

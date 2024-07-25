@@ -4,8 +4,6 @@
 	import Icon from '@iconify/svelte';
 	import { onDestroy, onMount, tick } from 'svelte';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
-	import LazyImage from './LazyImage.svelte';
-	import OrbitingCircles from '../magic-ui/OrbitingCircles.svelte';
 	import MeteorCard from './MeteorCard.svelte';
 	import pocketbaseImage from '$lib/assets/images/pocketbase.png?enhanced';
 
@@ -170,13 +168,14 @@
 
 		<StackOrbit />
 
-		<div class="absolute left-0 top-0 p-5 text-5xl font-bold uppercase drop-shadow">
+		<!-- <div class="absolute left-0 top-0 p-5 text-3xl font-bold uppercase drop-shadow">
 			<div>Sveltekit</div>
 			<div>PocketBase</div>
 			<div>AI</div>
 			<div>Tailwind</div>
 			<div>Zod</div>
-		</div>
+		</div> -->
+
 		<!-- <enhanced:img
 			src={girl4Image}
 			alt="Jitka"
@@ -198,18 +197,14 @@
 			</div> -->
 
 			<div>
-				<strong>
-					Combine SvelteKit, PocketBase, Open AI, TailwindCSS, and Zod and you got one hell of a
-					tech stack.
-				</strong>
-				A minimal setup that leverages each technology's strengths to build modern, efficient, and scalable
-				web applications. SvelteKit offers a streamlined and reactive framework that enhances developer
-				productivity and performance. PocketBase provides a robust and lightweight backend solution with
-				real-time capabilities and easy data management. AI integration enables advanced features such
-				as personalized user experiences and intelligent automation. TailwindCSS ensures a cohesive and
-				visually appealing design system with utility-first CSS, and Zod brings powerful and type-safe
-				schema validation, ensuring data integrity and security. Together, these technologies enable
-				developers to build sophisticated, responsive, and high-performance applications with ease.
+				Combine SvelteKit, PocketBase, OpenAI, TailwindCSS, and Zod for a powerful tech stack. This
+				minimal setup leverages each technology's strengths for modern, efficient, and scalable web
+				applications. SvelteKit provides a reactive framework for enhanced productivity and
+				performance. PocketBase offers a lightweight backend with real-time capabilities. AI
+				integration enables personalized user experiences and intelligent automation. TailwindCSS
+				ensures a cohesive design system with utility-first CSS, and Zod brings type-safe schema
+				validation for data integrity. Together, these tools enable developers to build
+				sophisticated, responsive, and high-performance applications with ease.
 			</div>
 			<!-- <ul class="flex flex-col gap-2 text-3xl font-thin">
 				<li>
@@ -296,12 +291,12 @@
 				performant applications with ease.
 			</div>
 			<div class="flex items-center gap-2">
-				<a href="/results">
+				<a href="https://bento.engage-dev.com/tags/svelte">
 					<Button
 						size="lg"
 						variant="default"
 						class="bg-yellow-500 uppercase hover:bg-yellow-400 dark:bg-yellow-300 dark:hover:bg-yellow-200"
-						>View Before & After Gallery</Button
+						>View Examples</Button
 					>
 				</a>
 			</div>

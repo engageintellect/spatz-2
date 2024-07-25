@@ -2,33 +2,9 @@
 import stemCellImage from "$lib/assets/images/services/stemcell.png"
 
 
-export const companyInfo = {
+export const siteInfo = {
 	name: "spatz2",
-	phone: "2222222222",
 	email: "engage_intellect@protonmail.com",
-	
-	socials: {
-		tiktok: {
-			username: "@engageintellect",
-			url: "https://www.tiktok.com/@engageintellect?lang=en"
-		},
-		instagram: {
-			username: "@engageintellect",
-			url: "https://instagram.com/engageintellect"
-		}
-	},
-
-	locations: {
-		"coronaDelMar": {
-			address: "2711 East Coast Hwy, Suite #1 Corona Del Mar, CA 92625",
-			phone: "+1234567890"
-		},
-
-		"longBeach": {
-			address: "5865 E. Naples Plaza Long Beach, CA 90803",
-			phone: "+1234567890"
-		}	
-	}
 }
 
 export const services = [

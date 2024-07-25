@@ -1,19 +1,11 @@
 <script lang="ts">
-	import CirclePlus from 'lucide-svelte/icons/circle-plus';
-	import Cloud from 'lucide-svelte/icons/cloud';
 	import Book from 'lucide-svelte/icons/book';
 	import CreditCard from 'lucide-svelte/icons/credit-card';
 	import Github from 'lucide-svelte/icons/github';
-	import Keyboard from 'lucide-svelte/icons/keyboard';
 	import LifeBuoy from 'lucide-svelte/icons/life-buoy';
 	import LogOut from 'lucide-svelte/icons/log-out';
-	import Mail from 'lucide-svelte/icons/mail';
-	import MessageSquare from 'lucide-svelte/icons/message-square';
-	import Plus from 'lucide-svelte/icons/plus';
 	import Settings from 'lucide-svelte/icons/settings';
 	import User from 'lucide-svelte/icons/user';
-	import UserPlus from 'lucide-svelte/icons/user-plus';
-	import Users from 'lucide-svelte/icons/users';
 	import { pb } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
 	import Icon from '@iconify/svelte';
@@ -22,8 +14,9 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import Avatar from '$lib/components/ui/Avatar.svelte';
 
-	import ThemeToggle from '$lib/components/ui/ThemeToggle.svelte';
-	import { PUBLIC_POCKETBASE_URL, PUBLIC_POCKETBASE_ADMIN } from '$env/static/public';
+	import { PUBLIC_POCKETBASE_ADMIN } from '$env/static/public';
+
+	import { currentUser } from '$lib/stores/user';
 
 	function handleLogout() {
 		pb.authStore.clear();
@@ -40,10 +33,18 @@
 			<Avatar />
 		</Button>
 	</DropdownMenu.Trigger>
-	<DropdownMenu.Content class="mt-3 w-56" align="end">
-		<DropdownMenu.Label>
-			<div class="flex w-full items-center gap-2">My Account</div></DropdownMenu.Label
-		>
+	<DropdownMenu.Content class="mt-3 w-56 bg-background" align="end">
+		<DropdownMenu.Label class=" p-0">
+			<DropdownMenu.Item class="">
+				<a href="/my/settings/profile" class="flex w-full items-center gap-2">
+					<Avatar />
+					<div>
+						<h3 class="text-base">@{$currentUser.username}</h3>
+						<p class="text-sm font-thin text-foreground/70">{$currentUser.email}</p>
+					</div>
+				</a>
+			</DropdownMenu.Item>
+		</DropdownMenu.Label>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Group>
 			<DropdownMenu.Item>
@@ -51,14 +52,14 @@
 					<User class="mr-2 h-4 w-4" />
 					<span>Profile</span>
 				</a>
-				<DropdownMenu.Shortcut>⇧⌘P</DropdownMenu.Shortcut>
+				<!-- <DropdownMenu.Shortcut>⇧⌘P</DropdownMenu.Shortcut> -->
 			</DropdownMenu.Item>
 			<DropdownMenu.Item>
 				<a href="/my/settings/account" class="flex w-full items-center">
 					<Settings class="mr-2 h-4 w-4" />
 					<span>Account</span>
 				</a>
-				<DropdownMenu.Shortcut>⌘S</DropdownMenu.Shortcut>
+				<!-- <DropdownMenu.Shortcut>⌘S</DropdownMenu.Shortcut> -->
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item>
@@ -66,7 +67,7 @@
 					<CreditCard class="mr-2 h-4 w-4" />
 					<span>Security</span>
 				</a>
-				<DropdownMenu.Shortcut>⌘B</DropdownMenu.Shortcut>
+				<!-- <DropdownMenu.Shortcut>⌘B</DropdownMenu.Shortcut> -->
 			</DropdownMenu.Item>
 
 			<!-- <DropdownMenu.Item>
@@ -171,7 +172,7 @@
 				</button>
 			</form>
 
-			<DropdownMenu.Shortcut>⇧⌘Q</DropdownMenu.Shortcut>
+			<!-- <DropdownMenu.Shortcut>⇧⌘Q</DropdownMenu.Shortcut> -->
 		</DropdownMenu.Item>
 	</DropdownMenu.Content>
 </DropdownMenu.Root>

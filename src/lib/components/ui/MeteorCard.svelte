@@ -1,6 +1,13 @@
 <script>
 	import Meteors from '$lib/components/magic-ui/Meteors.svelte';
-	import robot from '$lib/assets/images/robot14-nobg.png';
+	import robotImage from '$lib/assets/images/robot14-nobg.png';
 </script>
 
-<img src={robot} alt="robot" class=" bg-background" />
+<div>
+	<!-- <Meteors number={30} /> -->
+	<img
+		src={robotImage}
+		alt="meteor"
+		class="max-h-[500px] w-full rounded-lg border object-cover shadow-inner"
+	/>
+</div>

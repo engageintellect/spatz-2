@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let data;
-	import { companyInfo } from '$lib/data';
+	import { siteInfo } from '$lib/data';
 </script>
 
 <svelte:head>
@@ -16,8 +16,8 @@
 	<section class="mt-8">
 		<h2 class="mb-2 text-2xl font-semibold">1. Introduction</h2>
 		<p>
-			Welcome to {companyInfo.name}! These terms of service govern your use of our site. By
-			accessing or using our site, you agree to comply with these terms.
+			Welcome to {siteInfo.name}! These terms of service govern your use of our site. By accessing
+			or using our site, you agree to comply with these terms.
 		</p>
 	</section>
 
@@ -66,8 +66,8 @@
 		<h2 class="mb-2 text-2xl font-semibold">7. Contact Us</h2>
 		<p>
 			If you have any questions about these terms, please contact us at <a
-				href={`mailto:${companyInfo.email}`}
-				class="underline">{companyInfo.email}</a
+				href={`mailto:${siteInfo.email}`}
+				class="underline">{siteInfo.email}</a
 			>.
 		</p>
 	</section>

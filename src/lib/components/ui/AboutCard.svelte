@@ -10,8 +10,7 @@
 	let imageContainer: HTMLDivElement;
 	let section1Container: HTMLDivElement;
 
-	import TikTokStats from './TikTokStats.svelte';
-	import { companyInfo } from '$lib/data.js';
+	import { siteInfo } from '$lib/data.js';
 
 	const initializeAnimations = () => {
 		tick();

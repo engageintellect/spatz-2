@@ -7,11 +7,14 @@
 	import Icon from '@iconify/svelte';
 </script>
 
-<div class="flex w-full flex-col rounded-lg border shadow-lg md:flex-row">
-	<a href={`${PUBLIC_REPOSITORY_URL}`} class="group w-full border-b p-5 md:border-b-0 md:border-r">
+<div class="flex w-full flex-col rounded-lg border shadow-lg sm:flex-row">
+	<a
+		href={`${PUBLIC_REPOSITORY_URL}`}
+		class="group w-full border-b p-2 px-5 sm:p-5 md:border-b-0 md:border-r"
+	>
 		<div class="stat-title">Stars</div>
 		<div class="flex items-center justify-between">
-			<div class="text-5xl">{stars || 0}</div>
+			<div class="text-5xl font-bold">{stars || 0}</div>
 			<div>
 				<Icon
 					icon="mdi:star"
@@ -24,11 +27,11 @@
 
 	<a
 		href={`${PUBLIC_REPOSITORY_URL}/issues`}
-		class="group w-full border-b p-5 md:border-b-0 md:border-r"
+		class="group w-full border-b p-2 px-5 sm:p-5 md:border-b-0 md:border-r"
 	>
 		<div class="stat-title">Issues</div>
 		<div class="flex items-center justify-between">
-			<div class="text-5xl">{issues || 0}</div>
+			<div class="text-5xl font-bold">{issues || 0}</div>
 			<div>
 				<Icon
 					icon="octicon:issue-opened-24"
@@ -39,10 +42,10 @@
 		<div class="stat-desc">open issues</div>
 	</a>
 
-	<a href={`${PUBLIC_REPOSITORY_URL}`} class="group w-full p-5">
+	<a href={`${PUBLIC_REPOSITORY_URL}`} class="group w-full p-2 px-5 sm:p-5">
 		<div class="stat-title">Forks</div>
 		<div class="flex items-center justify-between">
-			<div class="text-5xl">{forks || 0}</div>
+			<div class="text-5xl font-bold">{forks || 0}</div>
 
 			<div>
 				<Icon
