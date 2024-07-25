@@ -147,11 +147,11 @@
 				<a href="/auth/reset-password">forgot password?</a>
 
 				<Form.Button disabled={isSubmitting} size="lg" class="group/sendButton mt-2 w-full">
-					<div class="flex items-center gap-2 text-xl">
+					<div class="flex items-center gap-2">
 						<div class="lowercase">login</div>
 						<Icon
 							icon={`${isSubmitting ? 'mingcute:loading-fill' : 'material-symbols:login'}`}
-							class={`${isSubmitting ? 'animate-spin' : ''} h-7 w-7 transition-transform duration-300 lg:group-hover/sendButton:translate-x-1`}
+							class={`${isSubmitting ? 'animate-spin' : ''} h-5 w-5 transition-transform duration-300 lg:group-hover/sendButton:translate-x-1`}
 						/>
 					</div>
 				</Form.Button>

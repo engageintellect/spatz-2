@@ -89,7 +89,7 @@
 					/>
 				</div> -->
 				<div
-					class="animate-title w-full text-7xl font-bold lowercase tracking-tight transition-transform lg:text-7xl"
+					class="animate-title w-full text-7xl font-bold lowercase tracking-tight transition-transform duration-300 lg:text-9xl"
 				>
 					{siteInfo.name}
 				</div>
@@ -108,7 +108,7 @@
 			<div class="animate-buttons mx-auto mt-10 flex w-full items-center gap-2 md:max-w-lg">
 				<a href="/auth/register" class="group/bookingsButton w-full">
 					<Button size="lg" class="flex w-full items-center gap-2">
-						<div class="uppercase">get started</div>
+						<div class="text-xl lowercase">get started</div>
 						<Icon
 							icon="material-symbols:rocket-launch"
 							class="h-5 w-5 transition-transform duration-300 lg:group-hover/bookingsButton:translate-x-1"
@@ -118,9 +118,9 @@
 
 				<a href="/auth/login" class="group/bookingsButton w-full">
 					<Button size="lg" variant="outline" class="flex w-full items-center gap-2">
-						<div class="uppercase">login</div>
+						<div class="text-xl lowercase">login</div>
 						<Icon
-							icon="akar-icons:arrow-right"
+							icon="mdi:arrow-right"
 							class="h-5 w-5 transition-transform duration-300 lg:group-hover/bookingsButton:translate-x-1"
 						/>
 					</Button>

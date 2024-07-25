@@ -51,8 +51,8 @@
 	<div class="flex items-center justify-between gap-5">
 		<a href={'javascript:history.back()'}>
 			<Button variant="outline" class="flex items-center gap-2">
-				<Icon icon="akar-icons:arrow-left" class="" />
-				<div class="uppercase">Back</div>
+				<Icon icon="mdi:arrow-left" class="" />
+				<div class="lowercase">Back</div>
 			</Button>
 		</a>
 

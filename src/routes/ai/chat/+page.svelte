@@ -109,19 +109,19 @@
 				<input
 					placeholder="Enter your query"
 					bind:value={$input}
-					class="w-full rounded-lg border bg-background p-2 focus-within:outline-none focus:outline-none"
+					class="w-full rounded-lg border bg-card p-2 focus-within:outline-none focus:outline-none"
 					bind:this={inputElement}
 				/>
 				<Button type="submit" variant="default" class="">
 					<div class="flex items-center gap-2">
-						<Icon icon="mdi-send" class="h-7 w-7" />
+						<Icon icon="mdi:send" class="h-5 w-5" />
 					</div>
 				</Button>
 				{#if $messages.length > 0}
 					<div in:fade={{ duration: 300 }}>
 						<Button type="button" variant="destructive" class="" on:click={clearChat}>
 							<div class="flex items-center gap-2">
-								<Icon icon="mdi-delete" class="h-7 w-7" />
+								<Icon icon="mdi:delete" class="h-5 w-5" />
 							</div>
 						</Button>
 					</div>

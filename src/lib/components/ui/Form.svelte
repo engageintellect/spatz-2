@@ -107,7 +107,7 @@
 				class="mb-5 hidden h-16 w-16 rounded-full border shadow-lg md:mx-auto md:flex"
 			/> -->
 			<div class="flex items-center gap-5">
-				<div class="text-5xl font-bold uppercase md:text-7xl">Contact</div>
+				<div class="text-5xl font-bold lowercase md:text-7xl">Contact</div>
 				<Icon
 					icon="material-symbols:android-chat"
 					class="contact-title-icon text-5xl md:text-7xl"
@@ -209,12 +209,12 @@
 						}}
 					>
 						<Select.Trigger {...attrs} class="w-full">
-							<Select.Value class="text-lg" placeholder="Select Type" />
+							<Select.Value class="" placeholder="Select Type" />
 						</Select.Trigger>
 						<Select.Content>
-							<Select.Item class="text-lg" label="Issue" value="Issue">Issue</Select.Item>
-							<Select.Item class="text-lg" label="Feedback" value="Feedback">Feedback</Select.Item>
-							<Select.Item class="text-lg" label="General Question" value="General Question"
+							<Select.Item class="" label="Issue" value="Issue">Issue</Select.Item>
+							<Select.Item class="" label="Feedback" value="Feedback">Feedback</Select.Item>
+							<Select.Item class="" label="General Question" value="General Question"
 								>General Question</Select.Item
 							>
 						</Select.Content>
@@ -234,13 +234,13 @@
 						}}
 					>
 						<Select.Trigger {...attrs} class="w-full">
-							<Select.Value class="text-lg" placeholder="Priority" />
+							<Select.Value class="" placeholder="Priority" />
 						</Select.Trigger>
 						<Select.Content>
-							<Select.Item class="text-lg" label={'0'} value={'0'}>0 - critical</Select.Item>
-							<Select.Item class="text-lg" label={'1'} value={'1'}>1 - high</Select.Item>
-							<Select.Item class="text-lg" label={'2'} value={'2'}>2 - med</Select.Item>
-							<Select.Item class="text-lg" label={'3'} value={'3'}>3 - low</Select.Item>
+							<Select.Item class="" label={'0'} value={'0'}>0 - critical</Select.Item>
+							<Select.Item class="" label={'1'} value={'1'}>1 - high</Select.Item>
+							<Select.Item class="" label={'2'} value={'2'}>2 - med</Select.Item>
+							<Select.Item class="" label={'3'} value={'3'}>3 - low</Select.Item>
 						</Select.Content>
 					</Select.Root>
 					<input hidden bind:value={$formData.priority} name={attrs.name} />
@@ -267,10 +267,10 @@
 
 		<Form.Button disabled={isSubmitting} size="lg" class="group/sendButton mt-5 w-full">
 			<div class="flex items-center gap-2 text-xl">
-				<div class="uppercase">Send</div>
+				<div class="lowercase">Send</div>
 				<Icon
-					icon={`${isSubmitting ? 'mingcute:loading-fill' : 'bi:arrow-right'}`}
-					class={`${isSubmitting ? 'animate-spin' : ''} h-7 w-7 transition-transform duration-300 lg:group-hover/sendButton:translate-x-1`}
+					icon={`${isSubmitting ? 'mingcute:loading-fill' : 'mdi:arrow-right'}`}
+					class={`${isSubmitting ? 'animate-spin' : ''} h-5 w-5 transition-transform duration-300 lg:group-hover/sendButton:translate-x-1`}
 				/>
 			</div>
 		</Form.Button>

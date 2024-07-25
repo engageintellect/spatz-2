@@ -140,7 +140,7 @@
 		/>
 
 		<div class="w-full max-w-lg pt-3">
-			<Button class="" type="submit" disabled={loading}>Update Profile</Button>
+			<Button class="lowercase" type="submit" disabled={loading}>Update Profile</Button>
 		</div>
 	</form>
 </div>

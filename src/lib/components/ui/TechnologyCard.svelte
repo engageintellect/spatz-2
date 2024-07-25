@@ -8,7 +8,7 @@
 	export let comingSoon: boolean;
 </script>
 
-<Card.Root class="group/serviceItem flex h-full w-full flex-col justify-between">
+<Card.Root class="group/serviceItem flex h-full w-full flex-col justify-between bg-card">
 	<Card.Header>
 		<Card.Title>{name}</Card.Title>
 		<Card.Description>{description}</Card.Description>

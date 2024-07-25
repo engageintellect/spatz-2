@@ -37,7 +37,7 @@
 				I forgot my password</a
 			>
 			<div class="w-full max-w-lg pt-2">
-				<Button type="submit" class="w-full max-w-lg">Update Password</Button>
+				<Button type="submit" class="w-full max-w-lg lowercase">Update Password</Button>
 			</div>
 		</form>
 	</div>

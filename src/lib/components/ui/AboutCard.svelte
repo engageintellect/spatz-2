@@ -106,7 +106,7 @@
 						class="group/readMoreButton flex w-full items-center gap-2 text-xl uppercase md:w-fit"
 						variant="ghost"
 					>
-						<div>Homepage</div>
+						<div class="lowercase">Homepage</div>
 						<Icon
 							icon="mdi:arrow-right"
 							class="h-5 w-5 transition-transform duration-300 lg:group-hover/readMoreButton:translate-x-1"

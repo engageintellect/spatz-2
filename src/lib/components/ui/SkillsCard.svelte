@@ -220,12 +220,12 @@
 					<Button
 						size="lg"
 						variant="default"
-						class="bg-orange-500 uppercase transition-all duration-300 hover:bg-orange-600 dark:hover:bg-orange-400"
+						class="bg-orange-500 lowercase transition-all duration-300 hover:bg-orange-600 dark:hover:bg-orange-400"
 						>Technologies</Button
 					>
 				</a>
 				<a href="/contact">
-					<Button size="lg" variant="outline" class="w-fit uppercase">Feedback</Button>
+					<Button size="lg" variant="outline" class="w-fit lowercase">Feedback</Button>
 				</a>
 			</div>
 		</div>
@@ -295,7 +295,7 @@
 					<Button
 						size="lg"
 						variant="default"
-						class="bg-yellow-500 uppercase hover:bg-yellow-400 dark:bg-yellow-300 dark:hover:bg-yellow-200"
+						class="bg-yellow-500 lowercase hover:bg-yellow-400 dark:bg-yellow-300 dark:hover:bg-yellow-200"
 						>View Examples</Button
 					>
 				</a>

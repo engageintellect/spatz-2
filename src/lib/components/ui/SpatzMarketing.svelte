@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
+	import * as Table from '$lib/components/ui/table';
+
 	import { PUBLIC_DOCS_URL, PUBLIC_REPOSITORY_URL, PUBLIC_BASE_URL } from '$env/static/public';
 	import Icon from '@iconify/svelte';
 	import { onMount } from 'svelte';
@@ -67,7 +69,7 @@
 					<Button variant="default" class="w-full bg-teal-500 hover:bg-teal-400">
 						<div class="flex items-center gap-2">
 							use template
-							<Icon icon="mdi-download" class="h-7 w-7" />
+							<Icon icon="mdi-download" class="h-5 w-5" />
 						</div>
 					</Button>
 				</a>
@@ -77,7 +79,7 @@
 							star on github
 							<Icon
 								icon="mdi-star"
-								class="transition-color h-7 w-7 duration-500 md:group-hover/githubButton:text-yellow-500"
+								class="transition-color h-5 w-5 duration-500 md:group-hover/githubButton:text-yellow-500"
 							/>
 						</div>
 					</Button>
@@ -113,58 +115,34 @@
 		<div>
 			<h1 class="mb-2 text-4xl font-bold">technologies</h1>
 			<div class="card overflow-x-auto rounded-lg border p-2 shadow-xl">
-				<table class="card-body table">
-					<tbody>
-						<tr>
-							<td
-								><a class="text-lg font-bold md:hover:underline" href="https://kit.svelte.dev"
-									>Sveltekit</a
-								></td
-							>
-							<td>A modern web framework for building blazing fast web apps.</td>
-						</tr>
-						<tr>
-							<td
-								><a class="text-lg font-bold md:hover:underline" href="https://pocketbase.io"
-									>Pocketbase</a
-								></td
-							>
-							<td>Self-contained SQLite Database and User Auth.</td>
-						</tr>
-						<tr>
-							<td
-								><a class="text-lg font-bold md:hover:underline" href="https://openai.com">AI</a
-								></td
-							>
-							<td
-								><a
-									href="https://sdk.vercel.ai/docs/guides/frameworks/sveltekit"
-									class="text-primary underline">Vercel AI SDK</a
-								>
-								with streaming
-								<a href="https://openai.com" class="underline">OpenAI</a> API.</td
-							>
-						</tr>
-						<tr>
-							<td
-								><a class="text-lg font-bold md:hover:underline" href="https://tailwindcss.com"
-									>TailwindCSS</a
-								></td
-							>
-							<td
-								>Utility-first CSS styling with <a
-									href="https://daisyui.com"
-									class="text-primary underline">DaisyUI</a
-								>.</td
-							>
-						</tr>
-						<tr>
-							<td><a class="text-lg font-bold md:hover:underline" href="https://zod.dev">Zod</a></td
-							>
-							<td>TypeScript-first schema validation with static type inference</td>
-						</tr>
-					</tbody>
-				</table>
+				<Table.Root>
+					<Table.Body>
+						<Table.Row>
+							<Table.Cell class="text-xl font-bold">Sveltekit</Table.Cell>
+							<Table.Cell>A modern web framework for building blazing fast web apps.</Table.Cell>
+						</Table.Row>
+
+						<Table.Row>
+							<Table.Cell class="text-xl font-bold">PocketBase</Table.Cell>
+							<Table.Cell>Self-contained SQLite Database and User Auth.</Table.Cell>
+						</Table.Row>
+
+						<Table.Row>
+							<Table.Cell class="text-xl font-bold">AI</Table.Cell>
+							<Table.Cell>Vercel AI SDK with streaming OpenAI API.</Table.Cell>
+						</Table.Row>
+
+						<Table.Row>
+							<Table.Cell class="text-xl font-bold">TailwindCSS</Table.Cell>
+							<Table.Cell>Self-contained SQLite Database and User Auth.</Table.Cell>
+						</Table.Row>
+
+						<Table.Row>
+							<Table.Cell class="text-xl font-bold">Zod</Table.Cell>
+							<Table.Cell>TypeScript-first schema validation with static type inference</Table.Cell>
+						</Table.Row>
+					</Table.Body>
+				</Table.Root>
 			</div>
 		</div>
 
@@ -175,7 +153,7 @@
 				<Button class="mt-2">
 					<div class="flex items-center gap-2">
 						<div>spatz docs</div>
-						<Icon icon="mdi-github" class="h-7 w-7" />
+						<Icon icon="mdi:github" class="h-5 w-5" />
 					</div>
 				</Button>
 			</a>
@@ -183,18 +161,19 @@
 				<h1 class="mt-10 text-2xl font-bold">Sveltekit Config</h1>
 				<p class="mt-2">Run the below commands to get started.</p>
 				<div class="overflow-x-auto text-wrap rounded-lg bg-secondary p-2">
-					<pre data-prefix=">" class="text-info"><code>clone repo and navigate to directory</code
+					<pre data-prefix=">" class="text-info"><code># clone repo and navigate to directory</code
 						></pre>
 					<pre data-prefix="$"><code>git clone https://github.com/engageintellect/spatz</code></pre>
 					<pre data-prefix=">" class="text-info"><code
-							>copy .env.example and replace values with your own</code
+							># copy .env.example and replace values with your own</code
 						></pre>
 					<pre data-prefix="$"><code>cp .env.example .env.local</code></pre>
-					<pre data-prefix=">" class="text-info"><code>install dependencies and run dev server</code
+					<pre data-prefix=">" class="text-info"><code
+							># install dependencies and run dev server</code
 						></pre>
 					<pre data-prefix="$"><code>pnpm i && pnpm run dev --host</code></pre>
-					<pre data-prefix=">" class="text-warning"><code>installing...</code></pre>
-					<pre data-prefix="" class="text-success"><code
+					<pre data-prefix=">" class="text-yellow-500"><code>installing...</code></pre>
+					<pre data-prefix="" class="text-emerald-500"><code
 							>server running on: http://localhost:5173</code
 						></pre>
 				</div>
@@ -257,7 +236,7 @@
 								<Button>
 									<div class="flex items-center gap-2">
 										go to repo
-										<Icon icon="mdi-github" class="h-7 w-7" />
+										<Icon icon="mdi-github" class="h-5 w-5" />
 									</div>
 								</Button>
 							</a>
@@ -265,7 +244,7 @@
 								<Button>
 									<div class="flex items-center gap-2">
 										create fork
-										<Icon icon="carbon:fork" class="h-7 w-7" />
+										<Icon icon="carbon:fork" class="h-5 w-5" />
 									</div>
 								</Button>
 							</a>
