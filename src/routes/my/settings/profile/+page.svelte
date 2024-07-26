@@ -71,21 +71,15 @@
 		use:enhance={submitUpdateProfile}
 	>
 		<div class="text-3xl font-bold lowercase md:text-5xl">Update Profile</div>
-		<div class="form-control w-full max-w-lg">
+		<div class="w-full max-w-lg">
 			<!-- <label for="avatar" class="label  pb-1"> -->
 			<!-- <span class="label-text">Profile Picture</span> -->
 			<!-- </label> -->
-			<label for="avatar" class="avatar mb-5 w-32 rounded-full hover:cursor-pointer">
-				<label for="avatar" class="absolute -bottom-0.5 -right-0.5 z-20 hover:cursor-pointer">
-					<span class="btn btn-circle btn-sm btn-secondary">
-						{#if data.user?.avatar}
-							<Icon icon="mdi-pencil" class="h-6 w-6" />
-						{:else}
-							<Icon icon="mdi-plus" class="h-6 w-6" />
-						{/if}
-					</span>
-				</label>
-				<div class="w-32 rounded-full">
+			<label
+				for="avatar"
+				class="avatar group mb-5 w-32 rounded-full transition-shadow duration-300 hover:cursor-pointer md:hover:shadow-lg"
+			>
+				<div class="relative mb-5 w-32 rounded-full">
 					{#if data.user?.avatar}
 						<img
 							class="rounded-full"
@@ -95,6 +89,18 @@
 							alt="User avatar"
 							id="avatar-preview"
 						/>
+
+						<label for="avatar" class=" absolute -bottom-0.5 -right-0.5 z-20 hover:cursor-pointer">
+							<div
+								class="flex h-10 w-10 items-center justify-center rounded-full border bg-secondary transition-transform duration-300 md:group-hover:scale-105"
+							>
+								{#if data.user?.avatar}
+									<Icon icon="mdi:pencil" class="h-5 w-5" />
+								{:else}
+									<Icon icon="mdi:plus" class="h-5 w-5" />
+								{/if}
+							</div>
+						</label>
 					{:else}
 						<Icon
 							icon="mdi-account-circle"

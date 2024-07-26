@@ -8,7 +8,7 @@
 	<div class="w-full">
 		<form action="?/updatePassword" method="POST" class="flex w-full flex-col space-y-2">
 			<div class="text-3xl font-bold lowercase md:text-5xl">Change Password</div>
-			<div class="divider" />
+			<div class="divider"></div>
 			<Input
 				id="oldPassword"
 				type="password"
@@ -30,14 +30,12 @@
 				errors={form?.errors?.passwordConfirm}
 				placeholder="Confirm Password"
 			/>
-			<a
-				href="/auth/reset-password"
-				class="hover:cursor-point text-sm text-primary hover:underline"
-			>
-				I forgot my password</a
-			>
-			<div class="w-full max-w-lg pt-2">
-				<Button type="submit" class="w-full max-w-lg lowercase">Update Password</Button>
+
+			<div class="">
+				<a href="/auth/reset-password">forgot password?</a>
+				<div class="mt-2 w-full max-w-lg">
+					<Button type="submit" class="w-full max-w-lg lowercase">Update Password</Button>
+				</div>
 			</div>
 		</form>
 	</div>

@@ -28,9 +28,13 @@
     --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;
  
-    --destructive: 0 72.2% 50.6%;
+    --destructive: 0 73.7% 41.8%;
     --destructive-foreground: 0 0% 98%;
  
+
+    --success: 142.4 71.8% 29.2%;
+    --success-foreground: 0 0% 98%;
+
     --ring: 0 0% 3.9%;
  
     --radius: 0.5rem;
@@ -60,8 +64,11 @@
  
     --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
+
+    --success: 160.1 84.1% 39.4%
+    --success-foreground: 0 0% 98%;
  
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 90.6% 70.8%;
     --destructive-foreground: 0 0% 98%;
  
     --ring: 0 0% 83.1%;

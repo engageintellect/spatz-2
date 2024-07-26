@@ -33,14 +33,16 @@
 			<Avatar />
 		</Button>
 	</DropdownMenu.Trigger>
-	<DropdownMenu.Content class="mt-3 w-56 bg-background" align="end">
+	<DropdownMenu.Content class="mt-3 w-fit max-w-64 bg-background" align="end">
 		<DropdownMenu.Label class=" p-0">
 			<DropdownMenu.Item class="">
 				<a href="/my/settings/profile" class="flex w-full items-center gap-2">
 					<Avatar />
-					<div>
-						<h3 class="text-base">@{$currentUser.username}</h3>
-						<p class="text-sm font-thin text-foreground/70">{$currentUser.email}</p>
+					<div class="truncate">
+						<h3 class="overflow-hidden text-ellipsis text-base">@{$currentUser.username}</h3>
+						<p class="overflow-hidden text-ellipsis text-xs font-thin text-foreground/70">
+							{$currentUser.email}
+						</p>
 					</div>
 				</a>
 			</DropdownMenu.Item>
@@ -82,7 +84,7 @@
 				<!-- <Users class="mr-2 h-4 w-4" /> -->
 				<a href="/guestbook" class="flex w-full w-full items-center">
 					<Icon icon="material-symbols:dynamic-feed" class="mr-2 h-4 w-4" />
-					<span>Guestbook Feed</span>
+					<span>Guestbook</span>
 				</a>
 			</DropdownMenu.Item>
 

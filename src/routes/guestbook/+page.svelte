@@ -117,7 +117,7 @@
 	});
 </script>
 
-<div class="px-2">
+<div class="">
 	<div class="mx-auto w-full max-w-lg transition-all duration-300">
 		<div class="">
 			<h1 class="text-7xl font-bold text-primary">

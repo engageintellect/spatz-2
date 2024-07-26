@@ -2,23 +2,18 @@
 	import { enhance, applyAction } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import Input from '$lib/components/ui/Input.svelte';
-	// import Modal from '$lib/components/Modal.svelte'
 	import { toast } from '$lib/stores/toast';
-	// import Toast from '$lib/components/Toast.svelte'
+	import Toast from '$lib/components/ui/Toast.svelte';
+	import { Button } from '$lib/components/ui/button/index.js';
 
 	export let form;
 	export let data;
-	let emailModalOpen: any;
-	let usernameModalOpen: any;
 	let loading: any;
 
-	$: emailModalOpen = false;
-	$: usernameModalOpen = false;
 	$: loading = false;
 
 	const submitUpdateEmail = () => {
 		loading = true;
-		emailModalOpen = true;
 		return async ({ result }: any) => {
 			switch (result.type) {
 				case 'success':
@@ -26,7 +21,7 @@
 					toast.set({
 						show: true,
 						message: 'Email updated successfully',
-						type: 'success'
+						type: 'bg-success'
 					});
 					setTimeout(() => toast.set({ show: false, message: '', type: '' }), 2000);
 					break;
@@ -42,14 +37,12 @@
 				default:
 					await applyAction(result);
 			}
-			emailModalOpen = false;
 			loading = false;
 		};
 	};
 
 	const submitUpdateUsername = () => {
 		loading = true;
-		usernameModalOpen = true;
 		return async ({ result }: any) => {
 			switch (result.type) {
 				case 'success':
@@ -57,7 +50,7 @@
 					toast.set({
 						show: true,
 						message: 'Profile updated successfully',
-						type: 'success'
+						type: 'bg-emerald-500 text-emerald-900'
 					});
 					setTimeout(() => toast.set({ show: false, message: '', type: '' }), 2000);
 					await invalidateAll();
@@ -66,7 +59,7 @@
 					toast.set({
 						show: true,
 						message: 'Profile update failed',
-						type: 'error'
+						type: 'bg-red-500 text-red-900'
 					});
 					setTimeout(() => toast.set({ show: false, message: '', type: '' }), 2000);
 					break;
@@ -74,7 +67,6 @@
 					await applyAction(result);
 			}
 			loading = false;
-			usernameModalOpen = false;
 		};
 	};
 </script>
@@ -83,65 +75,51 @@
 	<div class="w-full">
 		<div class="mb-5 text-3xl font-bold lowercase md:text-5xl">account settings</div>
 		<div class="text-2xl">Change Email</div>
-		<div class="mt-2" />
 
-		<Input id="email" value={data?.user?.email} disabled={true} errors={form?.errors?.email} />
-
-		<!-- <Modal label="change-email" checked={emailModalOpen}>
-      <span slot="trigger" class="btn btn-primary">Change Email</span>
-      <div slot="heading">Change Your Email</div>
-      <form
-        action="?/updateEmail"
-        method="POST"
-        class="space-y-2"
-        use:enhance={submitUpdateEmail}
-      >
-        <Input
-          id="email"
-          type="email"
-          required={true}
-          value={form?.data?.email}
-         disabled={loading}
-          errors={form?.errors?.email}
-        />
-        <button type="submit" class="btn btn-primary w-full" disabled={loading}
-          >Save</button
-        >
-      </form>
-    </Modal> -->
+		<!-- <Modal label="change-email" checked={emailModalOpen}> -->
+		<form
+			action="?/updateEmail"
+			method="POST"
+			class="mt-2 space-y-2"
+			use:enhance={submitUpdateEmail}
+		>
+			<Input
+				id="email"
+				type="email"
+				required={true}
+				placeholder={data?.user?.email}
+				value={form?.data?.email}
+				disabled={loading}
+				errors={form?.errors?.email}
+			/>
+			<Button type="submit" variant="default" class="lowercase" disabled={loading}
+				>update email</Button
+			>
+		</form>
 	</div>
+
 	<div class="w-full">
 		<div class="text-2xl">Change Username</div>
-		<div class="divider mt-2" />
-		<Input
-			id="username"
-			value={data?.user?.username}
-			disabled={true}
-			errors={form?.errors?.username}
-		/>
-		<!-- <Modal label="change-username" checked={usernameModalOpen}>
-      <span slot="trigger" class="btn btn-primary">Change Username</span>
-      <div slot="heading">Change Your Username</div>
-      <form
-        action="?/updateUsername"
-        method="POST"
-        class="space-y-2"
-        use:enhance={submitUpdateUsername}
-      >
-        <Input
-          id="username"
-          type="text"
-          required={true}
-          value={form?.data?.username}
-          errors={form?.errors?.username}
-          disabled={loading}
-        />
-        <button type="submit" class="btn btn-primary w-full" disabled={loading}
-          >Save</button
-        >
-      </form>
-    </Modal> -->
+		<form
+			action="?/updateUsername"
+			method="POST"
+			class="mt-2 space-y-2"
+			use:enhance={submitUpdateUsername}
+		>
+			<Input
+				id="username"
+				type="text"
+				placeholder={data?.user?.username}
+				required={true}
+				value={form?.data?.username}
+				errors={form?.errors?.username}
+				disabled={loading}
+			/>
+			<Button type="submit" variant="default" class="lowercase" disabled={loading}
+				>Save username</Button
+			>
+		</form>
 	</div>
 </div>
 
-<!-- <Toast type={$toast.type} message={$toast.message} show={$toast.show} /> -->
+<Toast type={$toast.type} message={$toast.message} show={$toast.show} />

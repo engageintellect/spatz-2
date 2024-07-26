@@ -126,6 +126,7 @@ export const updateEmailSchema = z.object({
 		.string({ required_error: 'Email is required' })
 		.email({ message: 'Email must be a valid email' })
 });
+export type UpdateEmailSchema = typeof updateEmailSchema;
 
 // ------------------------------
 // UPDATE USERNAME
@@ -137,8 +138,7 @@ export const updateUsernameSchema = z.object({
 		.max(24, { message: 'Username must be 24 characters or less' })
 		.regex(/^[a-zA-Z0-9]*$/, { message: 'Username can only contain letters or numbers.' })
 });
-
-export type ResetPasswordSchema = typeof resetPasswordSchema;
+export type UpdateUsernameSchema = typeof updateUsernameSchema;
 
 // ------------------------------
 // UPDATE PROFILE

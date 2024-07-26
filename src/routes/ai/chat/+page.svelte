@@ -103,7 +103,7 @@
 		</div>
 	{/if}
 
-	<div class="sticky top-[56px] z-10 w-full backdrop-blur-sm">
+	<div class="sticky top-[57px] z-10 w-full backdrop-blur-sm">
 		<form class="w-full bg-background py-2" on:submit={handleSubmit}>
 			<div class="flex w-full gap-2">
 				<input

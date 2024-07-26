@@ -134,7 +134,9 @@
 
 						<Table.Row>
 							<Table.Cell class="text-xl font-bold">TailwindCSS</Table.Cell>
-							<Table.Cell>Self-contained SQLite Database and User Auth.</Table.Cell>
+							<Table.Cell
+								>Utility-first CSS, leveraging shadcn-svelte, magic-ui, and GSAP.
+							</Table.Cell>
 						</Table.Row>
 
 						<Table.Row>

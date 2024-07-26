@@ -34,9 +34,10 @@
 				out:fade={{ duration: 200 }}
 				class="mx-auto flex max-w-2xl flex-col gap-5 rounded-lg border p-5 shadow-lg"
 			>
-				<h1 class="text-3xl font-bold">Welcome, @{$currentUser.username}</h1>
+				<h1 class="text-3xl font-bold">Welcome, @{$currentUser.username}!</h1>
 				<p class="text-lg">
-					We are glad to have you back. You can now access all our services and products.
+					You have Successfully logged in. You can now access the rest of the site. our services and
+					products.
 				</p>
 				<!-- <Command /> -->
 
