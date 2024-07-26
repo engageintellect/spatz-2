@@ -22,7 +22,7 @@
 			gsapInstance.from('.quote-animation', {
 				duration: 3,
 				opacity: 0,
-				// x: -20,
+				scale: 0.95,
 				ease: 'power2.out',
 				scrollTrigger: {
 					trigger: '.quote-animation',
@@ -75,7 +75,7 @@
 				{#if quote}
 					{#each quote.split('\n') as line, index (line)}
 						<span
-							class={`block ${line.trim().startsWith('--') && index === quote.split('\n').length - 1 ? 'mt-10 text-right' : ''}`}
+							class={`block ${line.trim().startsWith('-') && index === quote.split('\n').length - 1 ? 'mt-10 text-right' : ''}`}
 							>{line.trim()}</span
 						>
 					{/each}

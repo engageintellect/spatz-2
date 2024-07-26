@@ -162,29 +162,26 @@
 			<div class="mb-10">
 				<h1 class="mt-10 text-2xl font-bold">Sveltekit Config</h1>
 				<p class="mt-2">Run the below commands to get started.</p>
-				<div class="overflow-x-auto text-wrap rounded-lg bg-secondary p-2">
-					<pre data-prefix=">" class="text-info"><code># clone repo and navigate to directory</code
-						></pre>
-					<pre data-prefix="$"><code>git clone https://github.com/engageintellect/spatz</code></pre>
-					<pre data-prefix=">" class="text-info"><code
-							># copy .env.example and replace values with your own</code
-						></pre>
-					<pre data-prefix="$"><code>cp .env.example .env.local</code></pre>
-					<pre data-prefix=">" class="text-info"><code
-							># install dependencies and run dev server</code
-						></pre>
-					<pre data-prefix="$"><code>pnpm i && pnpm run dev --host</code></pre>
-					<pre data-prefix=">" class="text-yellow-500"><code>installing...</code></pre>
-					<pre data-prefix="" class="text-emerald-500"><code
-							>server running on: http://localhost:5173</code
-						></pre>
+				<div
+					class="flex flex-col gap-2 overflow-x-auto text-wrap rounded-lg bg-neutral-800 p-5 text-white"
+				>
+					<div># clone repo and navigate to directory</div>
+					<div>git clone https://github.com/engageintellect/spatz</div>
+					<div># copy .env.example and replace values with your own</div>
+					<div>cp .env.example .env.local</div>
+					<div># install dependencies and run dev server</div>
+					<div>pnpm i && pnpm run dev --host</div>
+					<div data-prefix=">" class="text-yellow-500">installing...</div>
+					<div data-prefix="" class="text-emerald-500">
+						server running on: http://localhost:5173
+					</div>
 				</div>
 			</div>
 
 			<div>
 				<h1 class="text-xl font-bold">Pocketbase Config</h1>
 				<p class="mt-2">1. Run the below commands to get started.</p>
-				<div class="my-2 overflow-x-auto text-wrap rounded-lg bg-secondary p-2">
+				<div class="my-2 overflow-x-auto text-wrap rounded-lg bg-neutral-800 p-5 text-white">
 					<pre data-prefix="$"><code
 							>wget https://github.com/pocketbase/pocketbase/releases/download/v0.22.9/pocketbase_0.22.9_linux_amd64.zip</code
 						></pre>
@@ -194,7 +191,7 @@
 
 			<div>
 				<p class="mt-2">2. Run the below commands to get started.</p>
-				<div class="my-2 overflow-x-auto text-wrap rounded-lg bg-secondary p-2">
+				<div class="my-2 overflow-x-auto text-wrap rounded-lg bg-neutral-800 p-5 text-white">
 					<pre data-prefix="$"><code>./pocketbase serve --http="0.0.0.0:8090"</code></pre>
 				</div>
 			</div>

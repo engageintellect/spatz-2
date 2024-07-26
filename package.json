@@ -53,6 +53,7 @@
     "playwright": "^1.27.1",
     "pocketbase": "^0.21.3",
     "svelte-maplibre": "^0.9.9",
+    "svelte-motion": "^0.12.2",
     "svelte-sonner": "^0.3.26",
     "sveltekit-superforms": "^2.16.0",
     "tailwind-merge": "^2.4.0",

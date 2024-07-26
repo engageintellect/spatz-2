@@ -5,6 +5,7 @@
 	import { gsap } from 'gsap';
 	import Icon from '@iconify/svelte';
 	import { siteInfo } from '$lib/data';
+	import WordsPullUp from '$lib/components/magic-ui/WordsPullUp.svelte';
 
 	function scrollToAnchor() {
 		const element = document.getElementById('anchorLink');
@@ -91,7 +92,8 @@
 				<div
 					class="animate-title w-full text-7xl font-bold lowercase tracking-tight transition-transform duration-300 lg:text-9xl"
 				>
-					{siteInfo.name}
+					<!-- {siteInfo.name} -->
+					<WordsPullUp class="text-7xl lg:text-8xl" words="spatz 2" />
 				</div>
 			</div>
 
