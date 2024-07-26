@@ -2,9 +2,14 @@
 
 ## Description
 
-A complete, fullstack template for Svelte.
+A complete, fullstack template for Svelte, based on the original [spatz](https://github.com/engageintellect).
 
 [Demo App](https://spatz2.engage-dev.com)
+
+## What's the difference between spatz and spatz-2?
+
+spatz uses default forms in svelte and daisyUI.
+spatz-2 uses svelte-superforms, shadcn-svelte, and magic-ui.
 
 ## Features
 
