@@ -1,4 +1,4 @@
-# spatz-2 (under development)
+# spatz-2 (under construction)
 
 ## Description
 
