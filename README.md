@@ -91,12 +91,15 @@ pnpm i && pnpm run dev --host
 ├── /stores (global state)
 ├── /routes
 │   ├── /guestbook
+│   ├── /technologies
 │   ├── /ai (nested routes)
+│   │   ├── /chat
 │   │   ├── /a
 │   │   ├── /b
 │   │   └── /c
 │   ├── /api
 │   │   ├── /repo-data (fetch github repository stars)
+│   │   ├── /fortune (fetch random tech founder quote)
 │   │   ├── /chat (OpenAI streaming API)
 │   │__ /auth (Pocketbase auth)
 │   │   ├── /login
@@ -104,8 +107,8 @@ pnpm i && pnpm run dev --host
 │   │   ├── /logout
 │   │   └── /reset-password
 │   └── /my (user-specific routes)
-│       ├── /account
 │       ├── /profile
+│       ├── /account
 │       └── /settings
 /pocketbase
 ├── pb_schema.json
