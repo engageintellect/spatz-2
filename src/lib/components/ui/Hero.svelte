@@ -51,13 +51,13 @@
 					ease: 'power4.out',
 					delay: 0
 				},
-				'-=3'
+				'-=2.75'
 			)
 
 			.from(
-				'.animate-photo',
+				'.animate-photo-background',
 				{
-					duration: 5,
+					duration: 3,
 					opacity: 0,
 					ease: 'power4.out',
 					delay: 0
@@ -65,6 +65,17 @@
 				'-=3'
 			)
 
+			.from(
+				'.animate-photo',
+				{
+					duration: 1.5,
+					opacity: 0,
+					scale: 0.9,
+					ease: 'power4.out',
+					delay: 0
+				},
+				'-=3'
+			)
 			.from(
 				'.animate-down-button',
 				{
@@ -101,7 +112,8 @@
 
 			<div class="">
 				<div class="animate-subtitle mt-2 text-2xl">
-					Back for round two, this time with superforms, shadcn, and magic-ui.
+					<span class="text-orange-500">Back for round two</span>. This time with superforms,
+					shadcn, and magic-ui.
 				</div>
 			</div>
 
@@ -128,7 +140,7 @@
 			</div>
 		</div>
 
-		<div class="animate-photo relative w-full">
+		<div class="animate-photo-background relative w-full">
 			<div
 				class="pointer-events-none absolute left-0 h-full w-1/3 opacity-0 md:bg-fade-left md:opacity-100"
 			></div>
@@ -136,12 +148,16 @@
 				class="pointer-events-none absolute bottom-0 left-0 h-1/3 w-full bg-fade-down opacity-100 md:opacity-0"
 			></div>
 
-			<div class="">
-				<enhanced:img
-					src={heroImage}
-					alt="logo"
-					class="w-full rounded-lg bg-orange-500 object-cover dark:bg-orange-700 md:h-full md:rounded-none md:rounded-r-lg"
-				></enhanced:img>
+			<div
+				class="rounded-lg bg-gradient-to-b from-orange-500 to-yellow-500 md:rounded-none md:rounded-r-lg"
+			>
+				<div class="animate-photo">
+					<enhanced:img
+						src={heroImage}
+						alt="logo"
+						class="w-full animate-customBounce rounded-lg object-cover drop-shadow-lg md:h-full md:rounded-none md:rounded-r-lg"
+					></enhanced:img>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -8,6 +8,7 @@
 	import { services } from '$lib/data';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import { siteInfo } from '$lib/data';
+	import { goBack } from '$lib/utils';
 
 	let showModal = false;
 	let modalImageSrc = '';
@@ -49,12 +50,10 @@
 
 <div>
 	<div class="flex items-center justify-between gap-5">
-		<a href={'javascript:history.back()'}>
-			<Button variant="outline" class="flex items-center gap-2">
-				<Icon icon="mdi:arrow-left" class="" />
-				<div class="lowercase">Back</div>
-			</Button>
-		</a>
+		<Button on:click={goBack} variant="outline" class="flex items-center gap-2">
+			<Icon icon="mdi:arrow-left" class="" />
+			<div class="lowercase">Back</div>
+		</Button>
 
 		<Input bind:value={searchFiler} placeholder="Filter Technologies" class="w-full max-w-lg" />
 
