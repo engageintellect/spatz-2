@@ -15,80 +15,82 @@
 		}
 	}
 
+	let heroHidden = true;
+
 	onMount(() => {
-		gsap.from('.animate-logo', {
-			duration: 2,
-			// x: '100%',
-			scale: 0.5,
-			opacity: 0,
-			ease: 'power4.out',
-			delay: 0
-		});
+		gsap
+			.timeline({
+				onStart: () => {
+					heroHidden = false;
+				}
+			})
+			.from('.animate-title', {
+				duration: 2,
+				opacity: 0,
+				ease: 'power4.out',
+				delay: 0
+			})
 
-		gsap.from('.animate-title', {
-			duration: 2,
-			opacity: 0,
-			ease: 'power4.out',
-			delay: 0
-		});
-		gsap.from('.animate-photo', {
-			duration: 7,
-			opacity: 0,
-			ease: 'power4.out',
-			delay: 0
-		});
+			.from(
+				'.animate-subtitle',
+				{
+					duration: 3,
+					opacity: 0,
+					ease: 'power4.out',
+					delay: 0
+				},
+				'-=1.75'
+			)
 
-		// gsap.from('.animate-subtitle', {
-		// 	duration: 3.0,
-		// 	opacity: 0,
-		// 	ease: 'power4.out',
-		// 	delay: 0
-		// });
+			.from(
+				'.animate-buttons',
+				{
+					duration: 1,
+					y: -10,
+					opacity: 0,
+					ease: 'power4.out',
+					delay: 0
+				},
+				'-=3'
+			)
 
-		gsap.from('.animate-hero-text', {
-			duration: 7,
-			opacity: 0,
-			ease: 'power4.out',
-			delay: 0
-		});
+			.from(
+				'.animate-photo',
+				{
+					duration: 5,
+					opacity: 0,
+					ease: 'power4.out',
+					delay: 0
+				},
+				'-=3'
+			)
 
-		gsap.from('.animate-buttons', {
-			duration: 0.5,
-			y: -10,
-			opacity: 0,
-			ease: 'power4.out',
-			delay: 0
-		});
-
-		gsap.from('.animate-down-button', {
-			duration: 3,
-			opacity: 0,
-			y: -10,
-			scale: 0.0,
-			ease: 'power4.out',
-			delay: 0
-		});
+			.from(
+				'.animate-down-button',
+				{
+					duration: 3,
+					opacity: 0,
+					y: -10,
+					scale: 0.0,
+					ease: 'power4.out',
+					delay: 0
+				},
+				'-=5'
+			);
 	});
 </script>
 
 <!-- TODO: Debug as to why this works, but throws an error -->
-
 <!-- <svelte:head>
 	<link rel="preload" as="image" href={heroImage} />
 </svelte:head> -->
 
-<div class="mb-10 md:my-5 md:mb-20">
+<div class={`mb-10 md:my-5 md:mb-20 ${heroHidden ? 'opacity-0' : ''}`}>
 	<div
 		class="flex w-full flex-col gap-2 rounded-lg transition-all duration-300 md:flex-row md:gap-5"
 	>
 		<div class="flex w-full flex-col rounded-l-lg p-5 md:max-w-lg md:p-10">
 			<div class="mx-auto flex w-full flex-col items-center gap-5">
-				<!-- <div class="animate-logo h-16 w-16">
-					<Icon
-						icon="material-symbols:code-rounded"
-						class="h-full w-full rounded-full border border-foreground p-2"
-					/>
-				</div> -->
 				<div
 					class="animate-title w-full text-7xl font-bold lowercase tracking-tight transition-transform duration-300 lg:text-9xl"
 				>
@@ -98,11 +100,7 @@
 			</div>
 
 			<div class="">
-				<!-- <div class="animate-subtitle text-3xl text-foreground/80 md:text-4xl">
-					Transform Your Look with Confidence and Precision.
-				</div> -->
-
-				<div class="animate-hero-text mt-2 text-2xl">
+				<div class="animate-subtitle mt-2 text-2xl">
 					Back for round two, this time with superforms, shadcn, and magic-ui.
 				</div>
 			</div>
