@@ -112,10 +112,10 @@
 				isSubmitting = true;
 
 				return async ({ result, update }) => {
-					console.log('result', result);
-					if (result.type === 'redirect' && result.location === '/') {
-						toast.success('Form Submitted Successfully!', {
-							description: "We'll get back to you as soon as possible, typically within 24 hours."
+					// console.log('Registration result:', result);
+					if (result.type === 'redirect' && result.location === '/auth/login') {
+						toast.success('Registration Successful!', {
+							description: 'You can now log in with your new account.'
 						});
 					} else {
 						toast.error('Failed to Submit Form', {

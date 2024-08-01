@@ -112,7 +112,7 @@
 				isSubmitting = true;
 
 				return async ({ result, update }) => {
-					console.log('result', result);
+					// console.log('Login result:', result);
 					if (result.type === 'redirect' && result.location === '/') {
 						toast('Login Successful', {
 							description: "Successfully logged in. You're now redirected to the homepage."

@@ -104,7 +104,7 @@
 			isSubmitting = true;
 
 			return async ({ result, update }) => {
-				console.log('result', result);
+				// console.log('Login result:', result);
 				if (result.type === 'redirect' && result.location === '/') {
 					toast.success('Form Submitted Successfully!', {
 						description: "We'll get back to you as soon as possible, typically within 24 hours."

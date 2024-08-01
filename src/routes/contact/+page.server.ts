@@ -15,7 +15,7 @@ import { GOOGLE_FORM_URL, FORM_PAYLOAD_FIRST_NAME, FORM_PAYLOAD_LAST_NAME, FORM_
 export const actions: Actions = {
   default: (async (event) => {
     const form = await superValidate(event, zod(formSchema));
-    console.log('here is form', form);
+    // console.log('Form result:', form);
     if (!form.valid) {
       return fail(400, {
         form,
