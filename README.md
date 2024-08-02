@@ -18,7 +18,7 @@ spatz-2 uses svelte-superforms, shadcn-svelte, and magic-ui.
 - [OpenAI](https://openai.com): chatGPT 3.5-turbo & 4.0-turbo for contextually aware chatbots.
 - [Vercel AI SDK](https://vercel.com/ai): AI/ML models for image, text, and audio processing.
 - [TailwindCSS](https://tailwindcss.com): A utility-first CSS framework for rapid UI development.
-- [DaisyUI](https://daisyui.com): A tailwind-based component library.
+- [Magic UI](https://magicui.design): A tailwind-based component library.
 - [Zod](https://zod.dev): TypeScript-first schema declaration and validation.
 
 ## Screenshots
