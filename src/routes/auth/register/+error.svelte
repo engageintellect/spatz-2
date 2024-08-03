@@ -11,11 +11,10 @@
 	<Alert.Root variant="destructive">
 		<CircleAlert class="h-4 w-4" />
 		<Alert.Title>Error</Alert.Title>
-		<Alert.Description>{$page?.error?.message}</Alert.Description>
+		<Alert.Description>{$page?.error?.message.split('.')}</Alert.Description>
 	</Alert.Root>
 
 	<div class="mt-5 flex items-center gap-2">
-		<Button variant="default" href="/auth/login" class="lowercase">Back to login</Button>
-		<Button variant="outline" href="/auth/register" class="lowercase">create account</Button>
+		<Button variant="default" href="/auth/login" class="lowercase">Back to registration</Button>
 	</div>
 </div>

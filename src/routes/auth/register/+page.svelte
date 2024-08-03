@@ -1,5 +1,4 @@
 <script lang="ts">
-	// import { PageData } from './$types.js';
 	import * as Form from '$lib/components/ui/form';
 	import { fade } from 'svelte/transition';
 	export let data;
@@ -117,11 +116,13 @@
 						toast.success('Registration Successful!', {
 							description: 'You can now log in with your new account.'
 						});
-					} else {
-						toast.error('Failed to Submit Form', {
-							description: 'Please check your input and try again.'
-						});
 					}
+
+					// else {
+					// 	toast.error('Failed to Submit Form', {
+					// 		description: 'Please check your input and try again.'
+					// 	});
+					// }
 
 					await update();
 					isSubmitting = false;
