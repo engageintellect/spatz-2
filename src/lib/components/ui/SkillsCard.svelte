@@ -4,6 +4,8 @@
 	import Icon from '@iconify/svelte';
 	import { onDestroy, onMount, tick } from 'svelte';
 	import pocketbaseImage from '$lib/assets/images/pocketbase.png?enhanced';
+	import { M } from 'svelte-motion';
+	import MeteorCard from '$lib/components/ui/MeteorCard.svelte';
 
 	let gsapInstance: any;
 	let ScrollTriggerInstance: any;
@@ -239,8 +241,11 @@
 
 	<!-- CARD 5 -->
 	<div
-		class="card5 relative order-5 flex h-full min-h-[500px] w-full rounded-lg bg-yellow-500 text-white shadow-lg dark:bg-yellow-300"
+		class="card5 relative order-5 flex h-full min-h-[500px] w-full rounded-lg bg-gradient-to-bl from-orange-500 to-yellow-500 text-white shadow-lg dark:bg-yellow-300"
 	>
+		<div class="absolute bottom-0 right-0 h-full w-full overflow-hidden text-white drop-shadow-lg">
+			<MeteorCard />
+		</div>
 		<Icon
 			icon="material-symbols:rocket-launch"
 			class="absolute bottom-0 right-0 m-5 h-72 w-72 animate-slowBounce text-white drop-shadow-lg"

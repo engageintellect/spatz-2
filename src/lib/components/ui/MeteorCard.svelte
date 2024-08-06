@@ -4,10 +4,5 @@
 </script>
 
 <div>
-	<!-- <Meteors number={30} /> -->
-	<img
-		src={robotImage}
-		alt="meteor"
-		class="max-h-[500px] w-full rounded-lg border object-cover shadow-inner"
-	/>
+	<Meteors number={20} />
 </div>

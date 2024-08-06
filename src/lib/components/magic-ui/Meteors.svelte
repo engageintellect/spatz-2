@@ -24,13 +24,13 @@
 	<span
 		id="meteor-{idx + 1}"
 		class={cn(
-			'animate-meteor pointer-events-none absolute left-1/2 top-1/2 size-[2.4px] rotate-[215deg] rounded-full bg-slate-500 shadow-[0_0_0_1px_#ffffff10]'
+			'pointer-events-none absolute left-1/2 top-1/2 size-[7px] rotate-[215deg] animate-meteor rounded-full  shadow-[0_0_0_1px_#ffffff10]'
 		)}
 		style="top: {style.top}px; left: {style.left}; animation-delay: {style.animationDelay}; animation-duration: {style.animationDuration};"
 	>
 		<!-- Meteor Tail  -->
 		<div
-			class="pointer-events-none absolute top-1/2 -z-10 h-px w-[50px] -translate-y-1/2 bg-gradient-to-r from-slate-500 via-blue-600/30 to-transparent"
+			class="pointer-events-none absolute top-1/2 -z-10 h-px w-[300px] -translate-y-1/2 bg-gradient-to-r from-white via-white/30 to-transparent"
 		></div>
 	</span>
 {/each}

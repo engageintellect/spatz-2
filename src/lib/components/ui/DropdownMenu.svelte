@@ -36,7 +36,11 @@
 	<DropdownMenu.Content class="mt-3 w-fit max-w-64 bg-background" align="end">
 		<DropdownMenu.Label class=" p-0">
 			<DropdownMenu.Item class="">
-				<a href="/my/settings/profile" class="flex w-full items-center gap-2">
+				<a
+					href="/my/settings/profile"
+					data-sveltekit-preload-data="hover"
+					class="flex w-full items-center gap-2"
+				>
 					<Avatar />
 					<div class="truncate">
 						<h3 class="overflow-hidden text-ellipsis text-base">@{$currentUser.username}</h3>
@@ -50,14 +54,22 @@
 		<DropdownMenu.Separator />
 		<DropdownMenu.Group>
 			<DropdownMenu.Item>
-				<a href="/my/settings/profile" class="flex w-full items-center">
+				<a
+					href="/my/settings/profile"
+					data-sveltekit-preload-data="hover"
+					class="flex w-full items-center"
+				>
 					<User class="mr-2 h-4 w-4" />
 					<span>Profile</span>
 				</a>
 				<!-- <DropdownMenu.Shortcut>⇧⌘P</DropdownMenu.Shortcut> -->
 			</DropdownMenu.Item>
 			<DropdownMenu.Item>
-				<a href="/my/settings/account" class="flex w-full items-center">
+				<a
+					href="/my/settings/account"
+					data-sveltekit-preload-data="hover"
+					class="flex w-full items-center"
+				>
 					<Settings class="mr-2 h-4 w-4" />
 					<span>Account</span>
 				</a>
@@ -65,7 +77,11 @@
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item>
-				<a href="/my/settings/security" class="flex w-full items-center">
+				<a
+					href="/my/settings/security"
+					data-sveltekit-preload-data="hover"
+					class="flex w-full items-center"
+				>
 					<CreditCard class="mr-2 h-4 w-4" />
 					<span>Security</span>
 				</a>
@@ -82,14 +98,22 @@
 		<DropdownMenu.Group>
 			<DropdownMenu.Item>
 				<!-- <Users class="mr-2 h-4 w-4" /> -->
-				<a href="/guestbook" class="flex w-full w-full items-center">
+				<a
+					href="/guestbook"
+					data-sveltekit-preload-data="hover"
+					class="flex w-full w-full items-center"
+				>
 					<Icon icon="material-symbols:dynamic-feed" class="mr-2 h-4 w-4" />
 					<span>Guestbook</span>
 				</a>
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item>
-				<a href="/ai/chat" class="flex w-full w-full items-center">
+				<a
+					href="/ai/chat"
+					data-sveltekit-preload-data="hover"
+					class="flex w-full w-full items-center"
+				>
 					<Icon icon="tabler:brain" class="mr-2 h-4 w-4" />
 					<span>AI</span>
 				</a>

@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let value = '';
-	export let placeholder = '';
+	export let value: string = '';
+	export let placeholder: string = '';
 	export let id: any;
 	export let type = 'text';
 	export let disabled = false;

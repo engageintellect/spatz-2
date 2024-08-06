@@ -68,10 +68,10 @@ const config: Config = {
 
 			keyframes: {
 				meteor: {
-          "0%": { transform: "rotate(240deg) translateX(0)", opacity: '1' },
+          "0%": { transform: "rotate(318deg) translateX(0)", opacity: '1' },
           "70%": { opacity: '1' },
           "100%": {
-            transform: "rotate(240deg) translateX(-1000px)",
+            transform: "rotate(300deg) translateX(-10000px)",
             opacity: '0',
           },
         },
@@ -110,7 +110,7 @@ const config: Config = {
         customBounce: 'customBounce 10s ease-in-out infinite', // Adjust duration here
         slowBounce: 'customBounce 5s ease-in-out infinite', // Adjust duration here
 				orbit: "orbit calc(var(--duration)*1s) linear infinite",
-				meteor: "meteor 5s linear infinite",
+				meteor: "meteor 2s linear infinite",
        marquee: "marquee var(--duration) linear infinite",
         "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
 
