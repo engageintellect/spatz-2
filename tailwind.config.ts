@@ -108,7 +108,7 @@ const config: Config = {
       },
       animation: {
         customBounce: 'customBounce 10s ease-in-out infinite', // Adjust duration here
-        slowBounce: 'customBounce 5s ease-in-out infinite', // Adjust duration here
+        slowBounce: 'customBounce 3s ease-in-out infinite', // Adjust duration here
 				orbit: "orbit calc(var(--duration)*1s) linear infinite",
 				meteor: "meteor 2s linear infinite",
        marquee: "marquee var(--duration) linear infinite",

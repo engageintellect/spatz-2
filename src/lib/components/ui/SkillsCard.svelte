@@ -248,7 +248,7 @@
 		</div>
 		<Icon
 			icon="material-symbols:rocket-launch"
-			class="absolute bottom-0 right-0 m-5 h-72 w-72 animate-slowBounce text-white drop-shadow-lg"
+			class="absolute bottom-5 right-5 m-5 h-72 w-72 animate-slowBounce text-white drop-shadow-lg"
 		/>
 		<div class="z-20 flex w-2/3 flex-col gap-5 p-5">
 			<div class="flex w-full flex-col text-5xl font-bold uppercase drop-shadow">
