@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { invalidateAll } from '$app/navigation';
 	import * as Form from '$lib/components/ui/form';
 	import { Input } from '$lib/components/ui/input';
 	import { Textarea } from '$lib/components/ui/textarea';
@@ -11,7 +10,6 @@
 	import { toast } from 'svelte-sonner';
 	import { onDestroy, onMount, tick } from 'svelte';
 	import * as Select from '$lib/components/ui/select';
-	import Button from '$lib/components/ui/button/button.svelte';
 
 	export let action: string = '';
 
@@ -101,11 +99,6 @@
 <div class="flex w-full items-center justify-center">
 	<div class="w-full max-w-md">
 		<div class="contact-header flex flex-col items-start gap-2">
-			<!-- <img
-				src={Logo}
-				alt="Jitka"
-				class="mb-5 hidden h-16 w-16 rounded-full border shadow-lg md:mx-auto md:flex"
-			/> -->
 			<div class="flex items-center gap-5">
 				<div class="text-5xl font-bold lowercase md:text-7xl">Contact</div>
 				<Icon
@@ -113,19 +106,6 @@
 					class="contact-title-icon text-5xl md:text-7xl"
 				/>
 			</div>
-			<!-- <div class="text-2xl font-thin">
-				Have a question, or would like to schedule a consultation or appointment? Fill out the form,
-				we'll get back to you shortly.
-			</div> -->
-			<!-- 
-			<div class="mt-5 flex items-center text-xl">
-				<div>Or, send us a</div>
-				<a href="sms:9499935222" class="ml-2">
-					<Button variant="outline" class="flex items-center gap-2 uppercase">
-						<div>text message</div>
-					</Button>
-				</a>
-			</div> -->
 		</div>
 	</div>
 </div>
@@ -188,14 +168,6 @@
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>
-
-		<!-- <Form.Field {form} name="phone">
-			<Form.Control let:attrs>
-				<Form.Label>Phone</Form.Label>
-				<Input {...attrs} bind:value={$formData.phone} />
-			</Form.Control>
-			<Form.FieldErrors />
-		</Form.Field> -->
 
 		<div class="mb-2 flex items-center gap-2 md:gap-5">
 			<Form.Field {form} name="type" class="w-full">

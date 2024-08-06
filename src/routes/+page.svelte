@@ -2,7 +2,7 @@
 	import type { PageData } from './$types.js';
 	export let data: PageData;
 	import Form from '$lib/components/ui/Form.svelte';
-	import { fade, slide } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import AboutCard from '$lib/components/ui/AboutCard.svelte';
 	import Hero from '$lib/components/ui/Hero.svelte';
 	import Quote from '$lib/components/ui/Quote.svelte';

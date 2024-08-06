@@ -3,8 +3,6 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 	import { onDestroy, onMount, tick } from 'svelte';
-	import * as Avatar from '$lib/components/ui/avatar/index.js';
-	import MeteorCard from './MeteorCard.svelte';
 	import pocketbaseImage from '$lib/assets/images/pocketbase.png?enhanced';
 
 	let gsapInstance: any;
@@ -164,8 +162,6 @@
 	<div
 		class="card1 relative order-1 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-orange-500 text-white shadow-lg"
 	>
-		<!-- <OrbitingCircles /> -->
-
 		<StackOrbit />
 
 		<!-- <div class="absolute left-0 top-0 p-5 text-3xl font-bold uppercase drop-shadow">
@@ -174,17 +170,6 @@
 			<div>AI</div>
 			<div>Tailwind</div>
 			<div>Zod</div>
-		</div> -->
-
-		<!-- <enhanced:img
-			src={girl4Image}
-			alt="Jitka"
-			class="absolute bottom-0 left-0 h-[550px] rounded-lg object-cover"
-		></enhanced:img> -->
-		<!-- <div class="z-20 flex w-1/2 flex-col gap-5 p-5">
-			<div class="w-full text-5xl font-bold uppercase drop-shadow">
-				Sveltekit Pocketbase AI Tailwind Zod
-			</div>
 		</div> -->
 	</div>
 
@@ -206,15 +191,6 @@
 				validation for data integrity. Together, these tools enable developers to build
 				sophisticated, responsive, and high-performance applications with ease.
 			</div>
-			<!-- <ul class="flex flex-col gap-2 text-3xl font-thin">
-				<li>
-					<strong>Sveltekit</strong>
-				</li>
-				<li><strong>Pocketbase</strong></li>
-				<li><strong>AI</strong></li>
-				<li><strong>TailwindCSS</strong></li>
-				<li><strong>Zod</strong></li>
-			</ul> -->
 			<div class="flex items-center gap-2">
 				<a href="/technologies">
 					<Button
@@ -259,9 +235,6 @@
 			alt="PocketBase"
 			class="absolute bottom-0 right-0 h-full rounded-lg object-cover object-right"
 		></enhanced:img>
-		<!-- <div class="absolute bottom-0 right-0 z-20 flex w-full flex-col gap-5 p-5">
-			<div class="w-full text-5xl font-bold drop-shadow">SAFE & EFFECTIVE</div>
-		</div> -->
 	</div>
 
 	<!-- CARD 5 -->
@@ -272,11 +245,6 @@
 			icon="material-symbols:rocket-launch"
 			class="absolute bottom-0 right-0 m-5 h-72 w-72 animate-slowBounce text-white drop-shadow-lg"
 		/>
-		<!-- <enhanced:img
-			src={girl2Image}
-			alt="Jitka"
-			class="absolute bottom-0 right-0 h-[550px] rounded-lg object-cover"
-		></enhanced:img> -->
 		<div class="z-20 flex w-2/3 flex-col gap-5 p-5">
 			<div class="flex w-full flex-col text-5xl font-bold uppercase drop-shadow">
 				<div>build</div>

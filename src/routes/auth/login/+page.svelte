@@ -114,7 +114,7 @@
 				return async ({ result, update }) => {
 					// console.log('Login result:', result);
 					if (result.type === 'redirect' && result.location === '/') {
-						toast('Login Successful', {
+						toast.success('Login Successful', {
 							description: "Successfully logged in. You're now redirected to the homepage."
 						});
 					} else {
