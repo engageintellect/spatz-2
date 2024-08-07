@@ -37,6 +37,19 @@
 			}
 		});
 
+		gsapInstance.from('.rocketAnimation', {
+			duration: 2,
+			opacity: 1,
+			x: 200,
+			scale: 0.5,
+			ease: 'power2.out',
+			scrollTrigger: {
+				trigger: '.rocketAnimation',
+				start: 'top 90%',
+				toggleActions: 'play none none none'
+			}
+		});
+
 		const isLargeScreen = window.matchMedia('(min-width: 768px)').matches;
 
 		if (isLargeScreen) {
@@ -162,7 +175,7 @@
 >
 	<!-- CARD 1 -->
 	<div
-		class="card1 relative order-1 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-orange-500 text-white shadow-lg"
+		class="card1 relative order-1 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-gradient-to-br from-orange-500 to-orange-700 text-white shadow-lg"
 	>
 		<StackOrbit />
 
@@ -198,7 +211,7 @@
 					<Button
 						size="lg"
 						variant="default"
-						class="bg-orange-500 lowercase transition-all duration-300 hover:bg-orange-600 dark:hover:bg-orange-400"
+						class="bg-gradient-to-br from-orange-500 to-orange-700 lowercase transition-shadow duration-200 hover:shadow"
 						>Technologies</Button
 					>
 				</a>
@@ -241,15 +254,18 @@
 
 	<!-- CARD 5 -->
 	<div
-		class="card5 relative order-5 flex h-full min-h-[500px] w-full rounded-lg bg-gradient-to-bl from-orange-500 to-yellow-500 text-white shadow-lg dark:bg-yellow-300"
+		class="card5 relative order-5 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-gradient-to-bl from-orange-500 to-yellow-500 text-white shadow-lg"
 	>
 		<div class="absolute bottom-0 right-0 h-full w-full overflow-hidden text-white drop-shadow-lg">
 			<MeteorCard />
 		</div>
-		<Icon
-			icon="material-symbols:rocket-launch"
-			class="absolute bottom-5 right-5 m-5 h-72 w-72 animate-slowBounce text-white drop-shadow-lg"
-		/>
+
+		<div class="rocketAnimation absolute bottom-0 right-0 h-72 w-72">
+			<Icon
+				icon="material-symbols:rocket-launch"
+				class=" absolute bottom-5 right-5 m-5 h-72 w-72 animate-slowBounce text-white drop-shadow-lg"
+			/>
+		</div>
 		<div class="z-20 flex w-2/3 flex-col gap-5 p-5">
 			<div class="flex w-full flex-col text-5xl font-bold uppercase drop-shadow">
 				<div>build</div>
@@ -263,7 +279,7 @@
 	<!-- CARD 6 -->
 	<div class="card6 relative order-6 flex h-full w-full">
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
-			<div class="w-full text-5xl font-bold uppercase">spatz let's you move fast</div>
+			<div class="w-full text-3xl font-bold uppercase">spatz let's you move fast</div>
 			<div class="text-2xl font-thin">
 				spatz is a complete, minimal toolkit for building modern web applications. It's designed to
 				be a flexible and efficient solution for developers who want to create high-quality,
@@ -274,7 +290,7 @@
 					<Button
 						size="lg"
 						variant="default"
-						class="bg-yellow-500 lowercase hover:bg-yellow-400 dark:bg-yellow-300 dark:hover:bg-yellow-200"
+						class="bg-gradient-to-br from-orange-500 to-yellow-700 lowercase transition-shadow duration-200  hover:shadow"
 						>View Examples</Button
 					>
 				</a>

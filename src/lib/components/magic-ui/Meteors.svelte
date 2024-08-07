@@ -8,8 +8,8 @@
 		meteorStyles = [];
 		const styles = [...new Array(num)].map(() => ({
 			top: -20,
-			left: Math.floor(Math.random() * 700) + 'px',
-			animationDelay: Math.random() * 1 + 0.2 + 's',
+			left: Math.floor(Math.random() * 963) + 'px',
+			animationDelay: Math.random() * 1 + 0.1 + 's',
 			animationDuration: Math.floor(Math.random() * 8 + 2.9) + 's'
 		}));
 		meteorStyles = styles;

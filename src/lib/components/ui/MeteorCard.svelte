@@ -4,5 +4,5 @@
 </script>
 
 <div>
-	<Meteors number={20} />
+	<Meteors number={50} />
 </div>
