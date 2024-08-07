@@ -1,8 +1,6 @@
 MIT License
 
-Copyright (c) 2023 Hunter Johnston <https://github.com/huntabyte>
-Copyright (c) 2023 CokaKoala <https://github.com/adriangonz97>
-Copyright (c) 2023 shadcn
+Copyright (c) 2023 Hunter Johnston <https://github.com/engageintellect>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
