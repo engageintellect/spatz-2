@@ -21,15 +21,7 @@ spatz-2 uses svelte-superforms, shadcn-svelte, and animation-svelte.
 - [animation-svelte](https://animation-svelte.vercel.app/): A svelte port of Magic-UI.
 - [Zod](https://zod.dev): TypeScript-first schema declaration and validation.
 
-## Screenshots
-
 ![Image Description](/src/lib/assets/images/marketing/spatz2.png)
-
-### Home & Features
-
-### User Profile & Settings UI
-
-### Client/Pocketbase UI
 
 ## Getting Started
 
@@ -88,6 +80,8 @@ pnpm i && pnpm run dev --host
 ├── /assets
 │   └── /images
 ├── /components
+│   ├── /magic-ui (animations)
+│   └── /ui (shared components)
 ├── /stores (global state)
 ├── /routes
 │   ├── /guestbook
