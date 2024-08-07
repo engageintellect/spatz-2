@@ -4,6 +4,8 @@
 	export let issues;
 	export let forks;
 
+	import BlurIn from '$lib/components/magic-ui/BlurIn.svelte';
+
 	import Icon from '@iconify/svelte';
 </script>
 
@@ -14,7 +16,7 @@
 	>
 		<div class="stat-title">Stars</div>
 		<div class="flex items-center justify-between">
-			<div class="text-5xl font-bold">{stars || 0}</div>
+			<BlurIn word={stars || 0} class="" />
 			<div>
 				<Icon
 					icon="mdi:star"
@@ -31,7 +33,7 @@
 	>
 		<div class="stat-title">Issues</div>
 		<div class="flex items-center justify-between">
-			<div class="text-5xl font-bold">{issues || 0}</div>
+			<BlurIn word={issues || 0} class="" />
 			<div>
 				<Icon
 					icon="octicon:issue-opened-24"
@@ -45,7 +47,7 @@
 	<a href={`${PUBLIC_REPOSITORY_URL}`} class="group w-full p-2 px-5 sm:p-5">
 		<div class="stat-title">Forks</div>
 		<div class="flex items-center justify-between">
-			<div class="text-5xl font-bold">{forks || 0}</div>
+			<BlurIn word={forks || 0} class="" />
 
 			<div>
 				<Icon

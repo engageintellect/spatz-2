@@ -288,7 +288,7 @@
 
 	<!-- CARD 6 -->
 	<div
-		class="card4 relative order-3 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-neutral-300 text-white shadow-lg dark:bg-neutral-500 md:order-4"
+		class="card4 relative order-3 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg border border-orange-500 bg-neutral-300 text-white shadow-lg dark:bg-neutral-500 md:order-4"
 	>
 		<enhanced:img
 			src={pocketbaseImage}
