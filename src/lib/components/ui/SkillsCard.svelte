@@ -13,25 +13,25 @@
 	const initializeAnimations = () => {
 		tick();
 
-		gsapInstance.from('.card1', {
+		gsapInstance.from('.orbitCard', {
 			duration: 1,
 			opacity: 0,
 			y: 20,
 			ease: 'power2.out',
 			scrollTrigger: {
-				trigger: '.card1',
+				trigger: '.orbitCard',
 				start: 'top 90%',
 				toggleActions: 'play none none none'
 			}
 		});
 
-		gsapInstance.from('.card2', {
+		gsapInstance.from('.rocketText', {
 			duration: 1,
 			opacity: 0,
 			y: -20,
 			ease: 'power2.out',
 			scrollTrigger: {
-				trigger: '.card2',
+				trigger: '.rocketText',
 				start: 'top 90%',
 				toggleActions: 'play none none none'
 			}
@@ -76,25 +76,25 @@
 				}
 			});
 
-			gsapInstance.from('.card5', {
+			gsapInstance.from('.rocketCard', {
 				duration: 1,
 				opacity: 0,
 				scale: 0.9,
 				ease: 'power2.out',
 				scrollTrigger: {
-					trigger: '.card5',
+					trigger: '.rocketCard',
 					start: 'top 90%',
 					toggleActions: 'play none none none'
 				}
 			});
 
-			gsapInstance.from('.card6', {
+			gsapInstance.from('.orbitText', {
 				duration: 1,
 				opacity: 0,
 				y: 20,
 				ease: 'power2.out',
 				scrollTrigger: {
-					trigger: '.card6',
+					trigger: '.orbitText',
 					start: 'top 90%',
 					toggleActions: 'play none none none'
 				}
@@ -123,25 +123,25 @@
 				}
 			});
 
-			gsapInstance.from('.card5', {
+			gsapInstance.from('.rocketCard', {
 				duration: 1,
 				opacity: 0,
 				y: 20,
 				ease: 'power2.out',
 				scrollTrigger: {
-					trigger: '.card5',
+					trigger: '.rocketCard',
 					start: 'top 90%',
 					toggleActions: 'play none none none'
 				}
 			});
 
-			gsapInstance.from('.card6', {
+			gsapInstance.from('.orbitText', {
 				duration: 1,
 				opacity: 0,
 				y: -20,
 				ease: 'power2.out',
 				scrollTrigger: {
-					trigger: '.card6',
+					trigger: '.orbitText',
 					start: 'top 90%',
 					toggleActions: 'play none none none'
 				}
@@ -175,7 +175,53 @@
 >
 	<!-- CARD 1 -->
 	<div
-		class="card1 relative order-1 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-gradient-to-br from-orange-500 to-orange-700 text-white shadow-lg"
+		class="rocketCard relative order-1 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-gradient-to-bl from-orange-500 to-yellow-500 text-white shadow-lg"
+	>
+		<div class="absolute bottom-0 right-0 h-full w-full overflow-hidden text-white drop-shadow-lg">
+			<MeteorCard />
+		</div>
+
+		<div class="rocketAnimation absolute bottom-0 right-0 h-72 w-72">
+			<Icon
+				icon="material-symbols:rocket-launch"
+				class=" absolute bottom-5 right-5 m-5 h-72 w-72 animate-slowBounce text-white drop-shadow-lg"
+			/>
+		</div>
+		<div class="z-20 flex w-2/3 flex-col gap-5 p-5">
+			<div class="flex w-full flex-col text-5xl font-bold uppercase drop-shadow">
+				<div>build</div>
+				<div>at</div>
+				<div>warp</div>
+				<div>speed</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- CARD 2 -->
+	<div class="orbitText relative order-2 flex h-full w-full">
+		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
+			<div class="w-full text-3xl font-bold uppercase">spatz helps you move fast</div>
+			<div class="text-2xl font-thin">
+				spatz is a complete, minimal toolkit for building modern web applications. It's designed to
+				be a flexible and efficient solution for developers who want to create high-quality,
+				performant applications with ease.
+			</div>
+			<div class="flex items-center gap-2">
+				<a href="https://bento.engage-dev.com/tags/svelte">
+					<Button
+						size="lg"
+						variant="default"
+						class="bg-gradient-to-br from-orange-500 to-yellow-700 lowercase transition-shadow duration-200  hover:shadow"
+						>View Examples</Button
+					>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- CARD 3 -->
+	<div
+		class="orbitCard relative order-5 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-gradient-to-br from-orange-500 to-orange-700 text-white shadow-lg"
 	>
 		<StackOrbit />
 
@@ -188,8 +234,8 @@
 		</div> -->
 	</div>
 
-	<!-- CARD 2 -->
-	<div class="card2 relative order-2 flex h-full w-full">
+	<!-- CARD 4 -->
+	<div class="rocketText relative order-6 flex h-full w-full">
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
 			<div class="w-full text-3xl font-bold uppercase">Why spatz?</div>
 			<!-- <div class="text-2xl font-thin">
@@ -222,7 +268,7 @@
 		</div>
 	</div>
 
-	<!-- CARD 3 -->
+	<!-- CARD 5 -->
 	<div class="card3 relative order-4 flex h-full w-full md:order-3">
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
 			<div class="w-full text-3xl font-bold">DATABASE, AUTH, ADMIN PANEL</div>
@@ -240,61 +286,14 @@
 		</div>
 	</div>
 
-	<!-- CARD 4 -->
+	<!-- CARD 6 -->
 	<div
 		class="card4 relative order-3 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-neutral-300 text-white shadow-lg dark:bg-neutral-500 md:order-4"
 	>
-		<!-- <MeteorCard /> -->
 		<enhanced:img
 			src={pocketbaseImage}
 			alt="PocketBase"
 			class="absolute bottom-0 right-0 h-full rounded-lg object-cover object-right"
 		></enhanced:img>
-	</div>
-
-	<!-- CARD 5 -->
-	<div
-		class="card5 relative order-5 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-gradient-to-bl from-orange-500 to-yellow-500 text-white shadow-lg"
-	>
-		<div class="absolute bottom-0 right-0 h-full w-full overflow-hidden text-white drop-shadow-lg">
-			<MeteorCard />
-		</div>
-
-		<div class="rocketAnimation absolute bottom-0 right-0 h-72 w-72">
-			<Icon
-				icon="material-symbols:rocket-launch"
-				class=" absolute bottom-5 right-5 m-5 h-72 w-72 animate-slowBounce text-white drop-shadow-lg"
-			/>
-		</div>
-		<div class="z-20 flex w-2/3 flex-col gap-5 p-5">
-			<div class="flex w-full flex-col text-5xl font-bold uppercase drop-shadow">
-				<div>build</div>
-				<div>at</div>
-				<div>warp</div>
-				<div>speed</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- CARD 6 -->
-	<div class="card6 relative order-6 flex h-full w-full">
-		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
-			<div class="w-full text-3xl font-bold uppercase">spatz let's you move fast</div>
-			<div class="text-2xl font-thin">
-				spatz is a complete, minimal toolkit for building modern web applications. It's designed to
-				be a flexible and efficient solution for developers who want to create high-quality,
-				performant applications with ease.
-			</div>
-			<div class="flex items-center gap-2">
-				<a href="https://bento.engage-dev.com/tags/svelte">
-					<Button
-						size="lg"
-						variant="default"
-						class="bg-gradient-to-br from-orange-500 to-yellow-700 lowercase transition-shadow duration-200  hover:shadow"
-						>View Examples</Button
-					>
-				</a>
-			</div>
-		</div>
 	</div>
 </div>
