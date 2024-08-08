@@ -112,7 +112,7 @@
 			<div class="">
 				<div class="animate-subtitle mt-2 text-2xl">
 					<span class="text-orange-500">Back for round two</span>. This time with superforms,
-					shadcn, and magic-ui.
+					svelte-animations, and shadcn.
 				</div>
 			</div>
 

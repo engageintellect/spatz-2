@@ -9,7 +9,7 @@ A complete, fullstack template for Svelte, based on the original [spatz](https:/
 ## What's the difference between spatz and spatz-2?
 
 spatz uses standard forms in svelte and daisyUI.
-spatz-2 uses svelte-superforms, shadcn-svelte, and animation-svelte.
+spatz-2 uses svelte-superforms, shadcn-svelte, and svelte-animations.
 
 ## Features
 
@@ -18,7 +18,7 @@ spatz-2 uses svelte-superforms, shadcn-svelte, and animation-svelte.
 - [OpenAI](https://openai.com): chatGPT 3.5-turbo & 4.0-turbo for contextually aware chatbots.
 - [Vercel AI SDK](https://vercel.com/ai): AI/ML models for image, text, and audio processing.
 - [TailwindCSS](https://tailwindcss.com): A utility-first CSS framework for rapid UI development.
-- [animation-svelte](https://animation-svelte.vercel.app/): A svelte port of Magic-UI.
+- [svelte-animations](https://animation-svelte.vercel.app/): A svelte port of Magic-UI.
 - [Zod](https://zod.dev): TypeScript-first schema declaration and validation.
 
 ![Image Description](/src/lib/assets/images/marketing/spatz2.png)
