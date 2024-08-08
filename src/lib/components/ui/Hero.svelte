@@ -122,7 +122,7 @@
 						<div class="text-xl lowercase">get started</div>
 						<Icon
 							icon="material-symbols:rocket-launch"
-							class="h-5 w-5 transition-transform duration-300 lg:group-hover/bookingsButton:translate-x-1"
+							class="h-5 w-5 transition-transform duration-300 lg:group-hover/bookingsButton:rotate-45"
 						/>
 					</Button>
 				</a>
