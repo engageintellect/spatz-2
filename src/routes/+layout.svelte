@@ -5,6 +5,7 @@
 	import type { PageData } from './$types';
 	import Footer from '$lib/components/ui/Footer.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
+	import Command from '$lib/components/ui/Command.svelte';
 	import { currentUser } from '$lib/stores/user';
 
 	export let data: PageData;
@@ -31,6 +32,10 @@
 
 <ModeWatcher defaultMode={'dark'} />
 <Toaster position="bottom-right" richColors={true} />
+
+{#if $currentUser}
+	<Command />
+{/if}
 
 <div class="flex min-h-screen flex-col">
 	<Nav />

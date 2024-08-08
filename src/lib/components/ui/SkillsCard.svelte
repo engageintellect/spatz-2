@@ -207,7 +207,7 @@
 				performant applications with ease.
 			</div>
 			<div class="flex items-center gap-2">
-				<a href="https://bento.engage-dev.com/tags/svelte">
+				<a href="https://bento.engage-dev.com/tags/spatz">
 					<Button
 						size="lg"
 						variant="default"

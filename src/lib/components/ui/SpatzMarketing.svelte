@@ -57,15 +57,25 @@
 					<div class="spatz-stack-2 font-thin tracking-tighter text-foreground/[50%]">2</div>
 				</div>
 			</h1>
-			<p class="mt-2">
+			<p class="mt-5">
 				visit <a class="underline" href={PUBLIC_DOCS_URL}>docs</a> for more info
+			</p>
+
+			<p class="mt-2 text-sm text-muted-foreground">
+				Press
+				<kbd
+					class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100"
+				>
+					<span class="text-xs">⌘</span>J
+				</kbd>
+				to open the command palette
 			</p>
 			<div class="mt-2 flex w-full gap-2">
 				<a
 					href="https://github.com/new?template_name=spatz-2&template_owner=engageintellect"
 					class="my-2 flex-1"
 				>
-					<Button variant="default" class="w-full bg-teal-500 hover:bg-teal-400">
+					<Button variant="default" class="w-full bg-orange-500 hover:bg-orange-400">
 						<div class="flex items-center gap-2">
 							use template
 							<Icon icon="mdi-download" class="h-5 w-5" />
@@ -96,7 +106,7 @@
 			<p class="mt-2 text-lg">
 				<a href={PUBLIC_REPOSITORY_URL} class="underline">spatz</a>
 				is ready, out of the box to help you build your next great idea. It includes all the features
-				you need to get started quickly:
+				you need to get started, and move quickly:
 			</p>
 			<ul class="mt-2 list-disc pl-10">
 				<li>User Authentication</li>
@@ -133,7 +143,7 @@
 					href="https://github.com/new?template_name=spatz-2&template_owner=engageintellect"
 					class="my-2 w-fit"
 				>
-					<Button variant="default" class="w-full bg-teal-500 hover:bg-teal-400">
+					<Button variant="default" class="w-full bg-orange-500 hover:bg-orange-400">
 						<div class="flex items-center gap-2">
 							use template
 							<Icon icon="mdi-download" class="h-5 w-5" />
