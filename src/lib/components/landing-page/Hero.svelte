@@ -1,6 +1,6 @@
 <script lang="ts">
 	import heroImage from '$lib/assets/images/svelteHero.png?enhanced';
-	import { Button } from './button/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import Icon from '@iconify/svelte';

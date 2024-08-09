@@ -3,13 +3,13 @@
 	export let data: PageData;
 	import Form from '$lib/components/ui/Form.svelte';
 	import { fade } from 'svelte/transition';
-	import AboutCard from '$lib/components/ui/AboutCard.svelte';
-	import Hero from '$lib/components/ui/Hero.svelte';
-	import Quote from '$lib/components/ui/Quote.svelte';
+	import AboutCard from '$lib/components/landing-page/AboutCard.svelte';
+	import Hero from '$lib/components/landing-page/Hero.svelte';
+	import Quote from '$lib/components/landing-page/Quote.svelte';
 	import { siteInfo } from '$lib/data.js';
 	import { currentUser } from '$lib/stores/user.js';
 	import Command from '$lib/components/ui/Command.svelte';
-	import SkillsCard from '$lib/components/ui/SkillsCard.svelte';
+	import SkillsCard from '$lib/components/landing-page/SkillsCard.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import SpatzMarketing from '$lib/components/ui/SpatzMarketing.svelte';
 	import { welcomeMessage } from '$lib/stores/user';
