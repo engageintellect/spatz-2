@@ -79,10 +79,12 @@
 					class="w-full text-left"
 					on:click={() => copyToClipboard('pnpm i && pnpm run dev --host')}
 				>
-					$ pnpm i && pnpm run dev --host
-					<div data-prefix=">" class="text-yellow-500">installing...</div>
-					<div data-prefix="" class="text-emerald-500">
-						server running on: http://localhost:5173
+					<div class="flex flex-col gap-2">
+						<div>$ pnpm i && pnpm run dev --host</div>
+						<div data-prefix=">" class="text-yellow-500">installing...</div>
+						<div data-prefix="" class="text-emerald-500">
+							server running on: http://localhost:5173
+						</div>
 					</div>
 				</button>
 			</div>
@@ -91,8 +93,29 @@
 
 	<div>
 		<h1 class="text-xl font-bold">Pocketbase Config</h1>
+		<p class="mt-2">
+			Go to the<a
+				href="https://github.com/pocketbase/pocketbase/releases"
+				class="mx-1 border-b border-blue-500 text-blue-500">pocketbase release</a
+			>page to download the latest version of pocketbase.
+		</p>
 		<p class="mt-2">Run the below commands to get started.</p>
 		<div>
+			<div class="relative my-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
+				<button
+					type="button"
+					class="w-full whitespace-nowrap text-left"
+					on:click={() =>
+						copyToClipboard(
+							'wget https://github.com/pocketbase/pocketbase/releases/download/v0.22.9/pocketbase_0.22.9_linux_amd64.zip'
+						)}
+				>
+					$ wget
+					https://github.com/pocketbase/pocketbase/releases/download/YOUR_VERSION/YOUR_DOWNLOAD.zip
+				</button>
+			</div>
+
+			<p class="mt-2">Here is an example:</p>
 			<div class="relative my-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
 				<button
 					type="button"
@@ -106,6 +129,8 @@
 					https://github.com/pocketbase/pocketbase/releases/download/v0.22.9/pocketbase_0.22.9_linux_amd64.zip
 				</button>
 			</div>
+
+			<p class="mt-2">Then unzip the file:</p>
 			<div class="relative my-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
 				<button
 					type="button"
@@ -117,6 +142,7 @@
 			</div>
 		</div>
 
+		<p class="mt-2">Then run the following command:</p>
 		<div class="relative my-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
 			<button
 				type="button"
@@ -130,7 +156,7 @@
 
 	<p class="mt-5">
 		Log into the Pocketbase Admin UI <a
-			class="text-blue-500 text-primary"
+			class="border-b border-blue-500 text-blue-500"
 			href="http://localhost:8090/_/">http://localhost:8090/_/</a
 		>
 	</p>
@@ -138,13 +164,11 @@
 		Go to settings > Import collections, then paste in the contents of ./pocketbase/pb_schema.json
 	</p>
 	<p class="mt-5">
-		Visit app in browser <a class="text-blue-500" href="http://localhost:5173"
-			>http://localhost:5173</a
+		Visit app in browser <a
+			class="border-b border-blue-500 text-blue-500"
+			href="http://localhost:5173">http://localhost:5173</a
 		>
 	</p>
-	<div class="mt-5">
-		For more information, check out the <a class="text-blue-500" href={PUBLIC_DOCS_URL}>docs</a>.
-	</div>
 </div>
 
 <Toast type={$toast.type} message={$toast.message} show={$toast.show} />
