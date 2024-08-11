@@ -11,11 +11,11 @@
 <a
 	href={url}
 	class={cn(
-		'relative w-64 cursor-pointer overflow-hidden rounded-2xl border p-4',
+		'relative w-64 cursor-pointer overflow-hidden rounded-2xl border p-4 shadow transition-all duration-200 hover:shadow-lg'
 		// light styles
-		'border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]',
+		// 'border-gray-950/[.1]',
 		// dark styles
-		'dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]'
+		// 'dark:border-gray-50/[.1]'
 	)}
 >
 	<div class="flex flex-col">
