@@ -4,12 +4,10 @@
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import Icon from '@iconify/svelte';
-	import { siteInfo } from '$lib/data';
 	import WordsPullUp from '$lib/components/magic-ui/WordsPullUp.svelte';
 
 	function scrollToAnchor() {
 		const element = document.getElementById('anchorLink');
-		// console.log(element);
 		if (element) {
 			element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 		}
@@ -81,20 +79,15 @@
 				{
 					duration: 3,
 					opacity: 0,
-					y: -10,
+					y: -20,
 					scale: 0.0,
 					ease: 'power4.out',
 					delay: 0
 				},
-				'-=5'
+				'-=3'
 			);
 	});
 </script>
-
-<!-- TODO: Debug as to why this works, but throws an error -->
-<!-- <svelte:head>
-	<link rel="preload" as="image" href={heroImage} />
-</svelte:head> -->
 
 <div class={`mb-10 md:my-5 md:mb-20 ${heroHidden ? 'opacity-0' : ''}`}>
 	<div

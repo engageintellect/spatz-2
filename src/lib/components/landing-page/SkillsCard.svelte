@@ -4,7 +4,6 @@
 	import Icon from '@iconify/svelte';
 	import { onDestroy, onMount, tick } from 'svelte';
 	import pocketbaseImage from '$lib/assets/images/pocketbase.png?enhanced';
-	import { M } from 'svelte-motion';
 	import MeteorCard from '$lib/components/ui/MeteorCard.svelte';
 
 	let gsapInstance: any;
@@ -224,23 +223,12 @@
 		class="orbitCard relative order-5 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-gradient-to-br from-orange-500 to-orange-700 text-white shadow-lg"
 	>
 		<StackOrbit />
-
-		<!-- <div class="absolute left-0 top-0 p-5 text-3xl font-bold uppercase drop-shadow">
-			<div>Sveltekit</div>
-			<div>PocketBase</div>
-			<div>AI</div>
-			<div>Tailwind</div>
-			<div>Zod</div>
-		</div> -->
 	</div>
 
 	<!-- CARD 4 -->
 	<div class="rocketText relative order-6 flex h-full w-full">
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
 			<div class="w-full text-3xl font-bold uppercase">Why spatz?</div>
-			<!-- <div class="text-2xl font-thin">
-				Offering a range of cosmetic injections to address your unique beauty goals.
-			</div> -->
 
 			<div>
 				Combining SvelteKit, PocketBase, OpenAI, TailwindCSS, and Zod makes a powerful tech stack.

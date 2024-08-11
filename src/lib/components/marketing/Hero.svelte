@@ -6,7 +6,6 @@
 	import { onMount } from 'svelte';
 
 	onMount(() => {
-		// Animate "stack" on mount
 		gsap.fromTo(
 			'.spatz-stack',
 			{ opacity: 0 },
