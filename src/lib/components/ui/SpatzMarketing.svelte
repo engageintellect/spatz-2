@@ -26,7 +26,7 @@
 </script>
 
 <div class="mx-auto w-full max-w-2xl">
-	<div class="flex flex-col gap-10">
+	<div class="flex flex-col gap-16 md:gap-16">
 		<Hero />
 		<Stats {stars} {issues} {forks} />
 		<About />

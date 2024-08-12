@@ -120,7 +120,7 @@
 
 	<div class="section2 relative flex w-full justify-end">
 		<div
-			class="invisible relative mx-auto flex h-64 w-64 items-center justify-center rounded-lg transition-opacity duration-500 ease-in-out"
+			class="invisible relative mx-auto flex h-52 w-52 items-center justify-center rounded-lg transition-opacity duration-500 ease-in-out md:h-64 md:w-64"
 			bind:this={imageContainer}
 		>
 			<a href="https://github.com/engageintellect/spatz-2">
