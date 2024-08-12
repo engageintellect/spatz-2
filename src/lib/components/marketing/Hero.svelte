@@ -38,9 +38,20 @@
 			<div class="spatz-stack-2 font-thin tracking-tighter text-foreground/[50%]">2</div>
 		</div>
 	</h1>
-	<p class="mt-2">
+	<!-- <p class="mt-2">
 		visit <a class="underline" href={PUBLIC_DOCS_URL}>docs</a> for more info
+	</p> -->
+
+	<p class="mt-5 text-sm text-muted-foreground">
+		Press
+		<kbd
+			class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100"
+		>
+			<span class="text-xs">⌘</span>J
+		</kbd>
+		to open the command palette
 	</p>
+
 	<div class="mt-2 flex w-full gap-2">
 		<a
 			href="https://github.com/new?template_name=spatz-2&template_owner=engageintellect"
