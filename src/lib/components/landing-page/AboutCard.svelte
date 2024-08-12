@@ -3,20 +3,20 @@
 	import Icon from '@iconify/svelte';
 
 	import { onDestroy, onMount, tick } from 'svelte';
-	import * as Avatar from '$lib/components/ui/avatar/index.js';
 
 	let gsapInstance: any;
 	let ScrollTriggerInstance: any;
 	let imageContainer: HTMLDivElement;
 	let section1Container: HTMLDivElement;
 
-	import { siteInfo } from '$lib/data.js';
-
+	let heroHidden = true;
 	const initializeAnimations = () => {
 		tick();
+		heroHidden = false;
 
 		gsapInstance.from('.section1', {
 			duration: 1,
+			delay: 0.1,
 			opacity: 0,
 			y: 20,
 			ease: 'power2.out',
@@ -29,6 +29,7 @@
 
 		gsapInstance.from('.section2', {
 			duration: 1,
+			delay: 0.1,
 			opacity: 0,
 			scale: 0.9,
 			ease: 'power2.out',
@@ -90,7 +91,7 @@
 
 <div
 	id="about"
-	class="mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-5 rounded-lg transition-all duration-300 md:flex-row md:gap-0"
+	class={` ${heroHidden ? 'opacity-0' : ''} mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-5 rounded-lg transition-all duration-300 md:flex-row md:gap-0`}
 >
 	<div class="section1 invisible relative flex w-full justify-center" bind:this={section1Container}>
 		<div class="flex w-full max-w-md flex-col gap-5 text-center lg:p-5">
