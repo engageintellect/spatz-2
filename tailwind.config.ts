@@ -75,6 +75,12 @@ const config: Config = {
             opacity: '0',
           },
         },
+
+				scaleInAndOut: {
+					'0%, 100%': { transform: 'scale(0.75)' },
+					'50%': { transform: 'scale(1)' },
+				},
+
         customBounce: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' }, // Adjust height here
@@ -105,10 +111,31 @@ const config: Config = {
           to: { transform: "translateY(calc(-100% - var(--gap)))" },
         },
 
+
+				randomScale: {
+					'0%, 100%': { transform: 'scale(0.5)' },
+					'50%': { transform: 'scale(1)' },
+				},
+				randomUpDown: {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'25%': { transform: 'translateY(-10px)' },
+					'50%': { transform: 'translateY(20px)' },
+					'75%': { transform: 'translateY(-15px)' },
+				},
+				randomLeftRight: {
+					'0%, 100%': { transform: 'translateX(0)' },
+					'25%': { transform: 'translateX(-10px)' },
+					'50%': { transform: 'translateX(20px)' },
+					'75%': { transform: 'translateX(-15px)' },
+				}
+
       },
       animation: {
         customBounce: 'customBounce 10s ease-in-out infinite', // Adjust duration here
         slowBounce: 'customBounce 3s ease-in-out infinite', // Adjust duration here
+				scaleInAndOut: 'scaleInAndOut 3s ease-in-out infinite',
+				scaleAndMove: 'randomScale 3s ease-in-out infinite, randomUpDown 4s ease-in-out infinite, randomLeftRight 5s ease-in-out infinite',
+
 				orbit: "orbit calc(var(--duration)*1s) linear infinite",
 				meteor: "meteor 2s linear infinite",
        marquee: "marquee var(--duration) linear infinite",

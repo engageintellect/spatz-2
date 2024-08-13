@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@ai-sdk/openai':
+        specifier: ^0.0.45
+        version: 0.0.45(zod@3.23.8)
+      '@ai-sdk/svelte':
+        specifier: ^0.0.35
+        version: 0.0.35(svelte@5.0.0-next.192)(zod@3.23.8)
       '@iconify/svelte':
         specifier: ^4.0.2
         version: 4.0.2(svelte@5.0.0-next.192)
@@ -147,6 +153,21 @@ importers:
 
 packages:
 
+  '@ai-sdk/openai@0.0.45':
+    resolution: {integrity: sha512-+ywipfosdChbbAYxZDtqcTCUWiujNodML8AwMEBJJuIcffOpH9NjNYNFxctC7qf3xlKVcTezaIuHVYDFXVsa+Q==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.0.0
+
+  '@ai-sdk/provider-utils@1.0.10':
+    resolution: {integrity: sha512-xciXF2PorLQMNdhYe+n9CafVkXZANHURsME85RXjtAoZSs631l2t8Blqwz2C/pHUb9bxLdMRRuIEB4PnHLnHvQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.0.0
+    peerDependenciesMeta:
+      zod:
+        optional: true
+
   '@ai-sdk/provider-utils@1.0.3':
     resolution: {integrity: sha512-QIHLu5fUT+9393SNQk0Zy6gKRIuWM+dOQtvUrz/wV/CpeqDSPbDmwPyvDVIgH4BvbVjivct1bb5vsiZom2xabQ==}
     engines: {node: '>=18'}
@@ -158,6 +179,10 @@ packages:
 
   '@ai-sdk/provider@0.0.13':
     resolution: {integrity: sha512-RBstpG/3RqVBBJgTvjZpou/+1fNQMDIwB9enqQPXqr0MoCrJHscLD2Zsfr6cKM5HFfY1D4KhdSPTycCDebVGlQ==}
+    engines: {node: '>=18'}
+
+  '@ai-sdk/provider@0.0.18':
+    resolution: {integrity: sha512-LF4aUAKDTKIHa2e7ozwRJDMhUC9cs7t224sUilG1HfyFWyyh+01oPZwMob/hj111SozZkvXIukN0BIa+sXS0mw==}
     engines: {node: '>=18'}
 
   '@ai-sdk/react@0.0.27':
@@ -190,8 +215,26 @@ packages:
       svelte:
         optional: true
 
+  '@ai-sdk/svelte@0.0.35':
+    resolution: {integrity: sha512-vbDmvcu2MRZvvxoOtCUH8ydKSaugaQkhiBtZRp/U1YvSIuzR7xUkYSf0EQ173kWBWsaoPO9PFava0WxF7k1q4g==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      svelte: ^3.0.0 || ^4.0.0
+    peerDependenciesMeta:
+      svelte:
+        optional: true
+
   '@ai-sdk/ui-utils@0.0.18':
     resolution: {integrity: sha512-POyvsJv0Sja2B/gwK4xKiXg5GvjAzW7XRFtchfdtmU6zX+iUyVo8yDcVupPaHvdeIS3gJySDngtKi76VmccARA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.0.0
+    peerDependenciesMeta:
+      zod:
+        optional: true
+
+  '@ai-sdk/ui-utils@0.0.30':
+    resolution: {integrity: sha512-ifmYSQtSVdeY1XlOFirAdbgWVnSg5hYPhG8bEiNI9TvR1HFdMN/zZhxscjLyKXXAelf/ACYvUjwNQmCnWSurZQ==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.0.0
@@ -2801,6 +2844,21 @@ packages:
 
 snapshots:
 
+  '@ai-sdk/openai@0.0.45(zod@3.23.8)':
+    dependencies:
+      '@ai-sdk/provider': 0.0.18
+      '@ai-sdk/provider-utils': 1.0.10(zod@3.23.8)
+      zod: 3.23.8
+
+  '@ai-sdk/provider-utils@1.0.10(zod@3.23.8)':
+    dependencies:
+      '@ai-sdk/provider': 0.0.18
+      eventsource-parser: 1.1.2
+      nanoid: 3.3.6
+      secure-json-parse: 2.7.0
+    optionalDependencies:
+      zod: 3.23.8
+
   '@ai-sdk/provider-utils@1.0.3(zod@3.23.8)':
     dependencies:
       '@ai-sdk/provider': 0.0.13
@@ -2811,6 +2869,10 @@ snapshots:
       zod: 3.23.8
 
   '@ai-sdk/provider@0.0.13':
+    dependencies:
+      json-schema: 0.4.0
+
+  '@ai-sdk/provider@0.0.18':
     dependencies:
       json-schema: 0.4.0
 
@@ -2839,10 +2901,30 @@ snapshots:
     transitivePeerDependencies:
       - zod
 
+  '@ai-sdk/svelte@0.0.35(svelte@5.0.0-next.192)(zod@3.23.8)':
+    dependencies:
+      '@ai-sdk/provider-utils': 1.0.10(zod@3.23.8)
+      '@ai-sdk/ui-utils': 0.0.30(zod@3.23.8)
+      sswr: 2.1.0(svelte@5.0.0-next.192)
+    optionalDependencies:
+      svelte: 5.0.0-next.192
+    transitivePeerDependencies:
+      - zod
+
   '@ai-sdk/ui-utils@0.0.18(zod@3.23.8)':
     dependencies:
       '@ai-sdk/provider-utils': 1.0.3(zod@3.23.8)
       secure-json-parse: 2.7.0
+    optionalDependencies:
+      zod: 3.23.8
+
+  '@ai-sdk/ui-utils@0.0.30(zod@3.23.8)':
+    dependencies:
+      '@ai-sdk/provider': 0.0.18
+      '@ai-sdk/provider-utils': 1.0.10(zod@3.23.8)
+      json-schema: 0.4.0
+      secure-json-parse: 2.7.0
+      zod-to-json-schema: 3.22.5(zod@3.23.8)
     optionalDependencies:
       zod: 3.23.8
 

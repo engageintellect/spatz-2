@@ -1,35 +1,43 @@
-import OpenAI from 'openai';
-import { OpenAIStream, StreamingTextResponse } from 'ai';
-import { PUBLIC_OPENAI_MODEL } from '$env/static/public';
-// You may want to replace the above with a static private env variable
-// for dead-code elimination and build-time type-checking:
-import { OPENAI_API_KEY } from '$env/static/private'
- 
+import { createOpenAI } from '@ai-sdk/openai';
+import { convertToCoreMessages, streamText } from 'ai';
 import type { RequestHandler } from './$types';
+import { env } from '$env/dynamic/private';
 
- 
-// Create an OpenAI API client
-const openai = new OpenAI({
-  apiKey: OPENAI_API_KEY || '',
+// Create an OpenAI Provider instance
+const openai = createOpenAI({
+	apiKey: env.OPENAI_API_KEY ?? ''
 });
- 
-export const POST = (async ({ request }) => {
-  // Extract the `prompt` from the body of the request
-  const { messages } = await request.json();
- 
-  // Ask OpenAI for a streaming chat completion given the prompt
-  const response = await openai.chat.completions.create({
-    model: PUBLIC_OPENAI_MODEL || 'gpt-3.5-turbo',
-    stream: true,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    messages: messages.map((message: App.Message) => ({
-      content: message.content,
-      role: message.role,
-    })),
-  });
- 
-  // Convert the response into a friendly text-stream
-  const stream = OpenAIStream(response);
-  // Respond with the stream
-  return new StreamingTextResponse(stream);
-}) satisfies RequestHandler;
+
+export const POST: RequestHandler = async ({ request }) => {
+	// Extract the `messages` from the body of the request
+	const { messages } = await request.json();
+
+	// Define a pre-prompt or context as a system message
+	const prePrompt = {
+		role: 'system',
+		content: 'You are an AI assistant named spatz.'
+	};
+
+	// Prepend the pre-prompt to the messages array
+	const updatedMessages = [
+		prePrompt,
+		...messages.map((message: { content: string; role: string }) => ({
+			content: message.content,
+			role: message.role
+		}))
+	];
+
+	// Call the language model with streaming
+	const result = await streamText({
+		model: openai('gpt-3.5-turbo'),
+		messages: convertToCoreMessages(updatedMessages),
+		temperature: 0.5,
+		async onFinish({ text, toolCalls, toolResults, usage, finishReason }) {
+			// Implement your own logic here, e.g., for storing messages
+			// or recording token usage
+		}
+	});
+
+	// Respond with the stream
+	return result.toAIStreamResponse();
+};

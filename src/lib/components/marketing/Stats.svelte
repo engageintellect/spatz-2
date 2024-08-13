@@ -76,7 +76,7 @@
 	>
 		<h1 class="mb-2 text-4xl font-bold text-primary">github stats</h1>
 	</Animate>
-	<div class="stat-card flex w-full rounded-lg border shadow-lg sm:flex-row">
+	<div class="stat-card flex w-full rounded-lg border shadow sm:flex-row">
 		<a href={`${PUBLIC_REPOSITORY_URL}`} class="group w-full border-b border-r p-2 md:px-5">
 			<div class="stat-title">Stars</div>
 			<div class="flex items-center justify-between">

@@ -31,7 +31,7 @@
 </script>
 
 <div>
-	<h1 class="text-7xl">
+	<h1 class="text-7xl md:text-8xl">
 		<div class="spatz-stack flex items-center font-extrabold tracking-tight">
 			<div>spatz</div>
 			<!-- <div class="spatz-stack font-thin tracking-tighter text-foreground/[50%]">stack</div> -->

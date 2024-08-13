@@ -10,7 +10,7 @@
 	</div>
 
 	<div class="">
-		<div class="card rounded-lg border shadow-xl">
+		<div class="card rounded-lg border shadow">
 			<div class="card-body p-5">
 				<div class="flex flex-col md:flex-row">
 					<div>

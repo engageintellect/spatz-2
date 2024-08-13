@@ -9,6 +9,39 @@
 	let gsapInstance: any;
 	let ScrollTriggerInstance: any;
 
+	const randomizeAnimation = () => {
+		const rocketship = document.getElementById('rocketship');
+
+		if (rocketship) {
+			const randomDuration = () => Math.random() * 3 + 2; // Duration between 2s and 5s
+			const randomDelay = () => Math.random() * 1 + 0.5; // Delay between 0.5s and 1.5s
+			const randomX = () => Math.random() * 100 - 10; // Random horizontal movement between -50px and 50px
+			const randomY = () => Math.random() * 100 - 25; // Random vertical movement between -50px and 50px
+			const randomScale = () => Math.random() * 0.2 + 0.8; // Scale between 0.5 and 1
+
+			// Scale in and out
+			gsapInstance.to(rocketship, {
+				scale: randomScale(),
+				duration: randomDuration(),
+				ease: 'power2.inOut',
+				repeat: -1,
+				yoyo: true,
+				delay: randomDelay()
+			});
+
+			// Move side to side
+			gsapInstance.to(rocketship, {
+				x: randomX(),
+				y: randomY(),
+				duration: randomDuration(),
+				ease: 'power2.inOut',
+				repeat: -1,
+				yoyo: true,
+				delay: randomDelay()
+			});
+		}
+	};
+
 	const initializeAnimations = () => {
 		tick();
 
@@ -146,6 +179,8 @@
 				}
 			});
 		}
+
+		randomizeAnimation(); // Apply the random animation to the rocketship
 	};
 
 	onMount(() => {
@@ -180,10 +215,10 @@
 			<MeteorCard />
 		</div>
 
-		<div class="rocketAnimation absolute bottom-0 right-0 h-72 w-72">
+		<div id="rocketship" class="rocketAnimation absolute bottom-0 right-0 h-72 w-72">
 			<Icon
 				icon="material-symbols:rocket-launch"
-				class=" absolute bottom-5 right-5 m-5 h-72 w-72 animate-slowBounce text-white drop-shadow-lg"
+				class="absolute bottom-5 right-5 m-5 h-72 w-72 text-white drop-shadow-lg"
 			/>
 		</div>
 		<div class="z-20 flex w-2/3 flex-col gap-5 p-5">

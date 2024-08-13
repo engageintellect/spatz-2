@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { useChat } from 'ai/svelte';
+	import { useChat } from '@ai-sdk/svelte';
 	import { fade } from 'svelte/transition';
 	import { onMount, tick } from 'svelte';
 	import { currentUser } from '$lib/stores/user';
@@ -8,7 +8,6 @@
 	import { get } from 'svelte/store';
 	import { PUBLIC_OPENAI_MODEL } from '$env/static/public';
 	import robot from '$lib/assets/images/robot14-nobg.png';
-	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
 	import Icon from '@iconify/svelte';
 	import Toast from '$lib/components/ui/Toast.svelte';
 	import { toast } from '$lib/stores/toast'; // Import the toast store
@@ -35,7 +34,7 @@
 
 	async function handleSubmit(event: any) {
 		event.preventDefault();
-		await originalHandleSubmit(event);
+		originalHandleSubmit(event);
 		chatMessages.set(get(messages));
 		scrollToBottom();
 		animateNewMessages();
@@ -135,7 +134,7 @@
 			{#each $messages as message}
 				<div class={`flex items-start gap-2`}>
 					<div class="chat-image avatar">
-						<div class="w-10 rounded-full">
+						<div class="mt-2 w-10 rounded-full">
 							<img
 								src={message.role === 'user'
 									? $currentUser?.avatar
@@ -162,7 +161,7 @@
 						</div>
 
 						<div
-							class={`card shadow ${message.role === 'user' ? 'rounded-lg border' : 'rounded-lg bg-secondary'}`}
+							class={`card mt-1 shadow ${message.role === 'user' ? 'rounded-lg border' : 'rounded-lg bg-secondary'}`}
 						>
 							<div class="card-body px-4 py-2">
 								{@html message.content}
