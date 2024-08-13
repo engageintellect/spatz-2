@@ -47,6 +47,15 @@
 		</a>
 	</div>
 
+	<div class="mt-5">
+		<p>
+			spatz comes in two pieces, a web app (Sveltekit) and a backend (PocketBase). You can run the
+			client the using Vercel, Netflify, Docker, or however you usually run a Sveltekit app. The
+			backend can run on your own server or VPS as a single service, and reverse-proxied using
+			something like Nginx.
+		</p>
+	</div>
+
 	<Accordion.Root class="mt-2 w-full">
 		<Accordion.Item value="item-1">
 			<Accordion.Trigger class="text-xl font-bold">Sveltekit Config</Accordion.Trigger>

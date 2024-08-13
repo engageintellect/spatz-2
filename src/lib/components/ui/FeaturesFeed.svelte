@@ -42,7 +42,7 @@
 
 <Animate>
 	<div>
-		<h1 class="mb-2 text-4xl font-bold">technologies</h1>
+		<h1 class="mb-2 text-4xl font-bold">tech stack</h1>
 		<div
 			class="relative my-2 flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background"
 		>
