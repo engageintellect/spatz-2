@@ -47,7 +47,7 @@
 		</a>
 	</div>
 
-	<div class="mt-5">
+	<div class="my-5">
 		<p>
 			spatz comes in two pieces, a web app (Sveltekit) and a backend (PocketBase). You can run the
 			client the using Vercel, Netflify, Docker, or however you usually run a Sveltekit app. The
@@ -58,7 +58,7 @@
 
 	<Accordion.Root class="mt-2 w-full">
 		<Accordion.Item value="item-1">
-			<Accordion.Trigger class="text-xl font-bold">Sveltekit Config</Accordion.Trigger>
+			<Accordion.Trigger class="text-lg font-bold lowercase">Sveltekit Config</Accordion.Trigger>
 			<Accordion.Content>
 				<div class="">
 					<!-- <h1 class="text-2xl font-bold">Sveltekit Config</h1> -->
@@ -107,7 +107,7 @@
 			</Accordion.Content>
 		</Accordion.Item>
 		<Accordion.Item value="item-2">
-			<Accordion.Trigger class="text-xl font-bold">PocketBase Config</Accordion.Trigger>
+			<Accordion.Trigger class="text-lg font-bold lowercase">PocketBase Config</Accordion.Trigger>
 			<Accordion.Content>
 				<div>
 					<!-- <h1 class="text-xl font-bold">Pocketbase Config</h1> -->
