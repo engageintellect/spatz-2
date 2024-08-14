@@ -19,7 +19,7 @@
 
 		gsap.fromTo(
 			'.spatz-stack-2',
-			{ opacity: 0, x: -75 },
+			{ opacity: 0, x: -25 },
 			{
 				opacity: 1,
 				x: 0,

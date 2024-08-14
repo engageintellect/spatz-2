@@ -65,7 +65,7 @@
 							<button type="submit" class="flex items-center">
 								<Icon
 									icon={likes.includes(currentUser.id) ? 'ph:heart-fill' : 'ph:heart'}
-									class={`h-5 w-5 text-destructive ${loading ? 'animate-bounce' : ''}`}
+									class={`h-5 w-5 text-destructive ${loading ? 'animate-likePost' : ''}`}
 								/>
 								<span class="sr-only">Like</span>
 							</button>
