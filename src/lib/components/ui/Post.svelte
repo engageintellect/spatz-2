@@ -28,7 +28,7 @@
 			</div>
 		</div> -->
 
-		<div class="flex items-start gap-2">
+		<div class="flex items-start gap-3">
 			<div class="">
 				<div class="h-12 w-12">
 					<img src={avatar} class="h-full w-full rounded-full object-cover" alt="user-avatar" />
@@ -45,7 +45,7 @@
 					</div>
 				</div>
 
-				<div class="pb-2 font-thin">{@html postContent}</div>
+				<div class="pb-2 pt-1 font-thin">{@html postContent}</div>
 
 				<div class="mt-2 flex items-center gap-5">
 					<div class="flex items-center gap-1">
