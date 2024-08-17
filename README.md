@@ -129,10 +129,6 @@ pnpm i && pnpm run dev --host
 Icons are provided by [iconify/svelte](https://www.npmjs.com/package/@iconify/svelte).
 You can search for icons on [Icones](https://icones.js.org/collection/all).
 
-### Theming and Styling
-
-The app comes pre-loaded with all of the standard themes from DaisyUI. You can also create your own [here](https://daisyui.com/docs/themes/#-4)
-
 ### Animations
 
 Animations are provided by GSAP and are easy to implement. You can find the documentation [here](https://greensock.com/docs/v3/GSAP).
