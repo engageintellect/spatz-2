@@ -11,7 +11,7 @@ A complete, fullstack template for Svelte, based on the original [spatz](https:/
 spatz uses standard forms in svelte and daisyUI.
 spatz-2 uses svelte-superforms, shadcn-svelte, and svelte-animations.
 
-## Features
+## Tech Stack
 
 - [Sveltekit](https://kit.svelte.dev/): Futuristic web framework for building blazing fast web apps.
 - [Pocketbase](https://pocketbase.io): Self-contained User Auth, Database, Admin UI, and API documentation.
@@ -20,6 +20,19 @@ spatz-2 uses svelte-superforms, shadcn-svelte, and svelte-animations.
 - [TailwindCSS](https://tailwindcss.com): A utility-first CSS framework for rapid UI development.
 - [svelte-animations](https://animation-svelte.vercel.app/): A svelte port of Magic-UI.
 - [Zod](https://zod.dev): TypeScript-first schema declaration and validation.
+
+## Features
+- User Authentication
+- User Profile and Settings on client.
+- Admin Dashboard in Pocketbase.
+- Dark/Light Mode Themes.
+- Iconifty Icons.
+- GSAP Animations.
+- Command Pallette (CMD+j)
+- AI Chatbot with OpenAI.
+- Guestbook with Pocketbase.
+- Forms by svelte-superforms, with client/server validation via Zod.
+
 
 ![Image Description](/src/lib/assets/images/marketing/spatz2.png)
 
@@ -80,13 +93,13 @@ pnpm i && pnpm run dev --host
 ├── /assets
 │   └── /images
 ├── /components
-│   ├── /magic-ui (animations)
+│   ├── /magic-ui (svelte-animations)
 │   └── /ui (shared components)
 ├── /stores (global state)
 ├── /routes
 │   ├── /guestbook
 │   ├── /technologies
-│   ├── /ai (nested routes)
+│   ├── /ai
 │   │   ├── /chat
 │   │   ├── /a
 │   │   ├── /b
