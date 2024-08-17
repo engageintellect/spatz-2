@@ -64,7 +64,7 @@
 					<!-- <h1 class="text-2xl font-bold">Sveltekit Config</h1> -->
 					<p class="mt-2">Run the below commands to get started.</p>
 					<div class="mt-5 flex flex-col gap-2">
-						<div class="">clone repo and navigate to directory</div>
+						<div class="">1. Clone repo and navigate to directory</div>
 						<div class="relative overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
 							<button
 								type="button"
@@ -75,7 +75,7 @@
 								$ git clone https://github.com/engageintellect/spatz
 							</button>
 						</div>
-						<div class=""># copy .env.example and replace values with your own</div>
+						<div class="">2. Copy .env.example and replace values with your own</div>
 						<div class="relative overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
 							<button
 								type="button"
@@ -85,7 +85,7 @@
 								$ cp .env.example .env.local
 							</button>
 						</div>
-						<div class=""># install dependencies and run dev server</div>
+						<div class="">3. Install dependencies and run dev server</div>
 
 						<div class="relative overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
 							<button

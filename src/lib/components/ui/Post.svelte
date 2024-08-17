@@ -96,8 +96,8 @@
 								/>
 								<Button variant="ghost" type="submit" class="group/deleteButton flex items-center">
 									<Icon
-										icon={'ph:trash-fill'}
-										class={`h-5 w-5 group-hover/deleteButton:text-destructive ${deleteLoading ? 'animate-bounce' : ''}`}
+										icon={'mdi:close'}
+										class={`h-5 w-5 transition-all duration-200 group-hover/deleteButton:scale-110 ${deleteLoading ? 'animate-bounce' : ''}`}
 									/>
 									<span class="sr-only">Delete</span>
 								</Button>
