@@ -18,18 +18,6 @@
 
 <div class="cursor-pointer border-b transition-all duration-300">
 	<div class="card-body p-3 transition-all duration-300">
-		<!-- <div class="flex items-center">
-			<div
-				class={`text-xs ${timeSince(formatFriendlyDate(postDate)) === 'just now' ? 'text-primary' : 'text-foreground/70'}`}
-			>
-				{timeSince(formatFriendlyDate(postDate))}
-			</div>
-			<Icon icon="ph:dot" class="h-5 w-5" />
-			<div class="text-xs text-foreground/70">
-				{formatFriendlyDate(postDate)}
-			</div>
-		</div> -->
-
 		<div class="flex items-start gap-3">
 			<div class="">
 				<div class="h-12 w-12">

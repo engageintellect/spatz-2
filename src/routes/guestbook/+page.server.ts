@@ -2,7 +2,6 @@ import type { PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { error, fail } from '@sveltejs/kit';
-import { z } from 'zod';
 import { validateData } from '$lib/utils';
 import {
 	createGuestBookPostSchema,
@@ -108,8 +107,12 @@ export const actions: Actions = {
 
 			// Ensure the user is authorized to delete the post
 
+			console.log(locals.pb.authStore)
+
+
 			//! TODO: look into this
-			if (post.author !== locals.pb.authStore?.baseModel.id) {
+			// @ts-expect-error - ignore type error on this line
+			if (post.author !== locals.pb.authStore?.baseModel?.id) {
 				throw error(403, 'Unauthorized');
 			}
 

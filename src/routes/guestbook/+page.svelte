@@ -95,7 +95,7 @@
 									opacity: 1,
 									y: 0,
 									duration: 1,
-									stagger: 0.1,
+									stagger: 0.05,
 									ease: 'power4.out'
 								}
 							);

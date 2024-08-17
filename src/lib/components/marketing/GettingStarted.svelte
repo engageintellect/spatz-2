@@ -64,7 +64,7 @@
 					<!-- <h1 class="text-2xl font-bold">Sveltekit Config</h1> -->
 					<p class="mt-2">Run the below commands to get started.</p>
 					<div class="mt-5 flex flex-col gap-2">
-						<div class=""># clone repo and navigate to directory</div>
+						<div class="">clone repo and navigate to directory</div>
 						<div class="relative overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
 							<button
 								type="button"
