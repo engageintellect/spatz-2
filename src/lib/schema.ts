@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 const imageTypes = [
 	'image/jpeg',
@@ -8,25 +8,12 @@ const imageTypes = [
 	'image/svg+xml',
 	'image/gif'
 ];
+
 // ------------------------------
 // REGISTER USER
 // ------------------------------
 export const registerUserSchema = z
 	.object({
-		// name: z
-		// 	.string({ required_error: 'Name is required' })
-		// 	.regex(/^[a-zA-z\s]*$/, { message: 'Name can only contain letters and spaces.' })
-		// 	.min(2, { message: 'Name must be at least 2 characters' })
-		// 	.max(64, { message: 'Name must be less than 64 characters' })
-		// 	.trim(),
-
-		// job_title: z
-		// 	.string({ required_error: 'Job Title is required' })
-		// 	.regex(/^[a-zA-z\s]*$/, { message: 'Job Title can only contain letters and spaces.' })
-		// 	.min(2, { message: 'Job Title must be at least 2 characters' })
-		// 	.max(64, { message: 'Job Title must be less than 64 characters' })
-		// 	.trim(),
-
 		email: z
 			.string({ required_error: 'Email is required' })
 			.email({ message: 'Email must be a valid email' }),
@@ -60,8 +47,6 @@ export const registerUserSchema = z
 
 export type RegisterUserSchema = typeof registerUserSchema;
 
-
-
 // ------------------------------
 // LOGIN USER
 // ------------------------------
@@ -69,8 +54,7 @@ export const loginUserSchema = z.object({
 	email: z
 		.string({ required_error: 'Email is required' })
 		.email({ message: 'Email must be a valid email.' }),
-	password: z
-    .string({ required_error: 'Password is required' })
+	password: z.string({ required_error: 'Password is required' })
 });
 
 export type LoginUserSchema = typeof loginUserSchema;
@@ -106,7 +90,6 @@ export const updatePasswordSchema = z
 		}
 	});
 
-
 // ------------------------------
 // PASSWORD RESET
 // ------------------------------
@@ -114,8 +97,7 @@ export const resetPasswordSchema = z.object({
 	email: z
 		.string({ required_error: 'Email is required' })
 		.email({ message: 'Email must be a valid email.' }),
-	password: z
-    .string({ required_error: 'Password is required' })
+	password: z.string({ required_error: 'Password is required' })
 });
 
 // ------------------------------
@@ -178,36 +160,34 @@ export const updateProfileSchema = z.object({
 		})
 });
 
-
 // ------------------------------
 //  CONTACT FORM
 // ------------------------------
 export const formSchema = z.object({
-  firstName: z.string()
-    .min(2, { message: "Name must be at least 2 characters" })
-    .max(50, { message: "Name must be at most 50 characters" }),
-  lastName: z.string()
-    .min(2, { message: "Name must be at least 2 characters" })
-    .max(50, { message: "Name must be at most 50 characters" }),
-  // phone: z.string()
-  //   .min(10, { message: "Phone number must contain at least 10 characters" })
-  //   .max(15, { message: "Phone number must be at most 15 characters" }),
-  email: z.string()
-    .email({ message: "Invalid email address" }),
-  type: z.string()
-    .min(2, { message: "Type must be selected" })
-    .max(50, { message: "Type must be selected" }),
-  priority: z.string()
-    .min(1, { message: "Location must be selected" })
-    .max(2, { message: "Location must be selected" }),
-  message: z.string()
-    .min(10, { message: "Message must be at least 10 characters" })
-    .max(500, { message: "Message must be at most 500 characters" }),
+	firstName: z
+		.string()
+		.min(2, { message: 'Name must be at least 2 characters' })
+		.max(50, { message: 'Name must be at most 50 characters' }),
+	lastName: z
+		.string()
+		.min(2, { message: 'Name must be at least 2 characters' })
+		.max(50, { message: 'Name must be at most 50 characters' }),
+	email: z.string().email({ message: 'Invalid email address' }),
+	type: z
+		.string()
+		.min(2, { message: 'Type must be selected' })
+		.max(50, { message: 'Type must be selected' }),
+	priority: z
+		.string()
+		.min(1, { message: 'Location must be selected' })
+		.max(2, { message: 'Location must be selected' }),
+	message: z
+		.string()
+		.min(10, { message: 'Message must be at least 10 characters' })
+		.max(500, { message: 'Message must be at most 500 characters' })
 });
 
 export type FormSchema = typeof formSchema;
-
-
 
 // ------------------------------
 // CREATE GUEST BOOK POST
@@ -217,8 +197,8 @@ export const createGuestBookPostSchema = z.object({
 	content: z
 		.string({ required_error: 'Message is required' })
 		.min(1, { message: 'Message must be at least 1 character' })
-		.max(250, { message: 'Message must be 2500 characters or less' })
-});	
+		.max(250, { message: 'Message must be 250 characters or less' })
+});
 
 // ------------------------------
 // LIKE GUEST BOOK POST
@@ -226,4 +206,11 @@ export const createGuestBookPostSchema = z.object({
 export const likeGuestBookPostSchema = z.object({
 	postId: z.string(),
 	currentUserId: z.string()
-});	
+});
+
+// ------------------------------
+// DELETE GUEST BOOK POST
+// ------------------------------
+export const deleteGuestBookPostSchema = z.object({
+	postId: z.string()
+});

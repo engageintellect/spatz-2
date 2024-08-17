@@ -8,8 +8,10 @@
 	export let likes;
 	export let id;
 	export let currentUser;
+	import { Button } from '$lib/components/ui/button/index.js';
 
 	let loading = false;
+	let deleteLoading = false;
 
 	import { formatFriendlyDate, timeSince } from '$lib/utils';
 </script>
@@ -31,7 +33,11 @@
 		<div class="flex items-start gap-3">
 			<div class="">
 				<div class="h-12 w-12">
-					<img src={avatar} class="h-full w-full rounded-full object-cover" alt="user-avatar" />
+					<img
+						src={avatar}
+						class="h-full w-full rounded-full object-cover shadow"
+						alt="user-avatar"
+					/>
 				</div>
 			</div>
 			<div class="w-full">
@@ -78,6 +84,37 @@
 						>
 							<Icon icon="tabler:send" class="text-base-content h-5 w-5" />
 						</a>
+					{/if}
+
+					{#if currentUser.username === postAuthor}
+						<div class="absolute right-2 top-5 flex items-center gap-1">
+							<form
+								use:enhance={() => {
+									deleteLoading = true;
+									return async ({ update }) => {
+										await update();
+										deleteLoading = false;
+									};
+								}}
+								action="?/deletePost"
+								method="POST"
+							>
+								<input type="hidden" name="postId" value={id} />
+								<input
+									type="hidden"
+									name="currentUserId"
+									value={currentUser.id}
+									disabled={deleteLoading}
+								/>
+								<Button variant="ghost" type="submit" class="group/deleteButton flex items-center">
+									<Icon
+										icon={'ph:trash-fill'}
+										class={`h-5 w-5 group-hover/deleteButton:text-destructive ${deleteLoading ? 'animate-bounce' : ''}`}
+									/>
+									<span class="sr-only">Delete</span>
+								</Button>
+							</form>
+						</div>
 					{/if}
 				</div>
 			</div>

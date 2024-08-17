@@ -73,17 +73,29 @@
 						}
 					);
 
+					// Animate text on mount
+					gsap.fromTo(
+						'.text-3xl',
+						{ opacity: 0, y: 50 },
+						{
+							opacity: 1,
+							y: 0,
+							duration: 1,
+							ease: 'power4.out'
+						}
+					);
+
 					ScrollTrigger.batch('.post-wrapper.hidden', {
 						onEnter: (batch) => {
 							batch.forEach((el) => el.classList.remove('hidden'));
 							gsap.fromTo(
 								batch,
-								{ opacity: 0, y: 50 },
+								{ opacity: 0, y: 200 },
 								{
 									opacity: 1,
 									y: 0,
 									duration: 1,
-									stagger: 0.2,
+									stagger: 0.1,
 									ease: 'power4.out'
 								}
 							);
