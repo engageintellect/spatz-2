@@ -4,6 +4,5 @@
 </script>
 
 <div class="overflow-hidden">
-	<MeteorCard />
-	<!-- <img src={robot} alt="robot" class="animate-slowBounce drop-shadow" /> -->
+	<img src={robot} alt="robot" class="drop-shadow" />
 </div>

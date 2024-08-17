@@ -75,7 +75,7 @@
 					{/if}
 
 					{#if currentUser.username === postAuthor}
-						<div class="absolute right-2 top-5 flex items-center gap-1">
+						<div class="absolute right-2 top-2 flex items-center gap-1">
 							<form
 								use:enhance={() => {
 									deleteLoading = true;

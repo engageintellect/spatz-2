@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
+
 	const navigation = [
 		{
 			title: 'chat',
