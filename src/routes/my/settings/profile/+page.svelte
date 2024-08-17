@@ -71,7 +71,7 @@
 		use:enhance={submitUpdateProfile}
 	>
 		<div class="text-3xl font-bold lowercase md:text-5xl">Update Profile</div>
-		<div class="w-full max-w-lg">
+		<div class="w-full max-w-lg pt-5">
 			<!-- <label for="avatar" class="label  pb-1"> -->
 			<!-- <span class="label-text">Profile Picture</span> -->
 			<!-- </label> -->

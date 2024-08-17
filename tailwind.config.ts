@@ -128,9 +128,16 @@ const config: Config = {
 					'0%': { transform: 'scale(1)', opacity: '1' },
 					'50%': { transform: 'scale(1.25)', opacity: '0.8' },
 					'100%': { transform: 'scale(1)', opacity: '1' }
+				},
+
+				pulse: {
+					'0%, 100%': { boxShadow: '0 0 0 0 var(--pulse-color)' },
+					'50%': { boxShadow: '0 0 0 8px var(--pulse-color)' }
 				}
 			},
 			animation: {
+				pulse: 'pulse var(--duration) ease-out infinite',
+
 				customBounce: 'customBounce 10s ease-in-out infinite', // Adjust duration here
 				slowBounce: 'customBounce 3s ease-in-out infinite', // Adjust duration here
 				likePost: 'likePost 0.3s ease-in-out forwards',

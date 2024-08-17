@@ -38,7 +38,8 @@
 				{ opacity: 0 },
 				{
 					opacity: 1,
-					duration: 1,
+					y: -20,
+					duration: 0.5,
 					scrollTrigger: {
 						trigger: element,
 						start: 'top 90%',

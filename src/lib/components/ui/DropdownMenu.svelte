@@ -82,7 +82,7 @@
 					data-sveltekit-preload-data="hover"
 					class="flex w-full items-center"
 				>
-					<CreditCard class="mr-2 h-4 w-4" />
+					<Icon icon="material-symbols:lock-outline" class="mr-2 h-4 w-4" />
 					<span>Security</span>
 				</a>
 				<!-- <DropdownMenu.Shortcut>⌘B</DropdownMenu.Shortcut> -->
@@ -103,7 +103,7 @@
 					data-sveltekit-preload-data="hover"
 					class="flex w-full w-full items-center"
 				>
-					<Icon icon="material-symbols:dynamic-feed" class="mr-2 h-4 w-4" />
+					<Icon icon="ion:chatbubble-outline" class="mr-2 h-4 w-4" />
 					<span>Guestbook</span>
 				</a>
 			</DropdownMenu.Item>

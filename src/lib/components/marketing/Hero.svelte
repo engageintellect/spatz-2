@@ -52,10 +52,10 @@
 		to open the command palette
 	</p>
 
-	<div class="mt-2 flex w-full gap-2">
+	<div class="mt-2 grid w-full grid-cols-2 gap-2 md:grid-cols-3">
 		<a
 			href="https://github.com/new?template_name=spatz-2&template_owner=engageintellect"
-			class="my-2 flex-1"
+			class=" flex-1"
 		>
 			<Button variant="default" class="w-full bg-teal-500 hover:bg-teal-400">
 				<div class="flex items-center gap-2">
@@ -64,13 +64,25 @@
 				</div>
 			</Button>
 		</a>
-		<a href={PUBLIC_REPOSITORY_URL} class="group/githubButton my-2 flex-1">
+		<a href={PUBLIC_REPOSITORY_URL} class="group/githubButton flex-1">
 			<Button variant="outline" class="w-full">
 				<div class="flex items-center gap-2">
 					star on github
 					<Icon
 						icon="mdi-star"
 						class="transition-color h-5 w-5 duration-500 md:group-hover/githubButton:text-yellow-500"
+					/>
+				</div>
+			</Button>
+		</a>
+
+		<a href={`/guestbook`} class="group/githubButton col-span-2 w-full md:col-span-1">
+			<Button variant="outline" class="w-full">
+				<div class="flex items-center gap-2">
+					guestbook
+					<Icon
+						icon="ion:chatbubble-outline"
+						class="transition-color h-5 w-5 duration-500 md:group-hover/githubButton:text-teal-500"
 					/>
 				</div>
 			</Button>
