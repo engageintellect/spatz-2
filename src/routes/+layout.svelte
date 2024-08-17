@@ -39,7 +39,7 @@
 
 <div class="flex min-h-screen flex-col">
 	<Nav />
-	<main class="overflowx-x-clip mx-auto w-full max-w-5xl flex-grow px-2 py-5">
+	<main class="overflowx-x-clip mx-auto my-5 w-full max-w-5xl flex-grow px-2 md:my-10">
 		<slot />
 	</main>
 	<Footer />
