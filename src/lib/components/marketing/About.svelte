@@ -7,7 +7,7 @@
 	<div class="">
 		<h1 class="mb-2 text-4xl font-bold">about</h1>
 		<p class="mt-2 text-lg">
-			<a href={PUBLIC_REPOSITORY_URL} class="underline">spatz</a>
+			<a href={PUBLIC_REPOSITORY_URL} class="text-blue-500 underline">spatz</a>
 			is ready, out of the box to help you build your next great idea. It includes all the features you
 			need to get started, and move quickly:
 		</p>

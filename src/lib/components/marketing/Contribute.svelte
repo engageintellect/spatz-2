@@ -19,6 +19,12 @@
 							If you have any ideas for improvements, please fork the repository and submit a pull
 							request.
 						</p>
+						<p class="mt-2 text-foreground/70">
+							Or, check out one of the <a
+								href={`${PUBLIC_REPOSITORY_URL}/issues`}
+								class="text-blue-500 underline">open issues</a
+							>.
+						</p>
 
 						<div class="justify-star mt-2 flex w-full gap-2">
 							<a href={PUBLIC_REPOSITORY_URL} class="my-2 w-fit">
