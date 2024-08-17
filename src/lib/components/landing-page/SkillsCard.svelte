@@ -15,9 +15,9 @@
 		if (rocketship) {
 			const randomDuration = () => Math.random() * 3 + 2; // Duration between 2s and 5s
 			const randomDelay = () => Math.random() * 1 + 0.5; // Delay between 0.5s and 1.5s
-			const randomX = () => Math.random() * 100 - 10; // Random horizontal movement between -50px and 50px
-			const randomY = () => Math.random() * 100 - 25; // Random vertical movement between -50px and 50px
-			const randomScale = () => Math.random() * 0.2 + 0.8; // Scale between 0.5 and 1
+			const randomX = () => Math.random() * 100 - 20; // Random horizontal movement between -10px and 10px
+			const randomY = () => Math.random() * 20 - 20; // Random vertical movement between -10px and 10px
+			const randomScale = () => Math.random() * 0.2 + 0.8; // Scale between 0.8 and 1
 
 			// Scale in and out
 			gsapInstance.to(rocketship, {
