@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { PUBLIC_BASE_URL } from '$env/static/public';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import { gsap } from 'gsap';
 	import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 
@@ -23,11 +23,15 @@
 		forks = fetchedForks;
 	};
 
-	onMount(() => {
-		getStars();
-
+	onMount(async () => {
+		await getStars();
 		gsap.registerPlugin(ScrollTrigger);
+		await tick(); // Wait for DOM updates
+		applyAnimations();
+	});
 
+	async function applyAnimations() {
+		await tick(); // Ensure the DOM is fully updated
 		gsap.utils.toArray<HTMLElement>('.fade-in').forEach((element: HTMLElement) => {
 			gsap.fromTo(
 				element,
@@ -37,14 +41,13 @@
 					duration: 1,
 					scrollTrigger: {
 						trigger: element,
-						start: 'top 90%', // Adjust the trigger point as needed
+						start: 'top 90%',
 						end: 'bottom top'
-						//scrub: true,
 					}
 				}
 			);
 		});
-	});
+	}
 </script>
 
 <div class="mx-auto w-full max-w-2xl">
