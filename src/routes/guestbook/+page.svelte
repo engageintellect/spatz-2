@@ -9,6 +9,7 @@
 	import TextArea from '$lib/components/ui/TextArea.svelte';
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { gsap } from 'gsap'; // Ensure GSAP is directly imported
 
 	export let form: {
 		data: {
@@ -52,6 +53,35 @@
 		}
 	};
 
+	function lazyLoad(target: HTMLElement) {
+		const observer = new IntersectionObserver(
+			(entries, observer) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('visible');
+						entry.target.classList.remove('invisible');
+						gsap.fromTo(
+							entry.target,
+							{ opacity: 0, y: 200 },
+							{
+								opacity: 1,
+								y: 0,
+								duration: 1,
+								ease: 'power4.out',
+								stagger: 0.1 // Adding stagger here
+							}
+						);
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{
+				threshold: 0.1
+			}
+		);
+		observer.observe(target);
+	}
+
 	onMount(() => {
 		tick();
 		window.addEventListener('scroll', handleScroll);
@@ -85,21 +115,9 @@
 						}
 					);
 
-					ScrollTrigger.batch('.post-wrapper.hidden', {
-						onEnter: (batch) => {
-							batch.forEach((el) => el.classList.remove('hidden'));
-							gsap.fromTo(
-								batch,
-								{ opacity: 0, y: 200 },
-								{
-									opacity: 1,
-									y: 0,
-									duration: 1,
-									stagger: 0.05,
-									ease: 'power4.out'
-								}
-							);
-						}
+					// Apply lazy loading to posts
+					document.querySelectorAll('.post-wrapper').forEach((el) => {
+						lazyLoad(el as HTMLElement);
 					});
 
 					ScrollTrigger.refresh();
@@ -140,7 +158,6 @@
 		<div class="my-2 mt-5 flex flex-col gap-5">
 			<form action="?/createPost" method="POST" class="w-full" use:enhance>
 				<div class="form-control gap-0">
-					<!-- <div>sign the guestbook</div> -->
 					<input type="hidden" name="author" value={data?.user?.id} />
 					<TextArea
 						id="content"
@@ -169,7 +186,7 @@
 					<div class="flex flex-col">
 						{#if data.posts.length > 0}
 							{#each data.posts as post}
-								<div class="post-wrapper hidden">
+								<div class="post-wrapper invisible">
 									<Post
 										id={post.id}
 										postDate={post.created}
@@ -202,7 +219,12 @@
 </div>
 
 <style>
-	.hidden {
-		display: none;
+	.invisible {
+		opacity: 0;
+		height: auto;
+	}
+
+	.visible {
+		opacity: 1;
 	}
 </style>
