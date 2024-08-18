@@ -160,8 +160,8 @@
 			aria-label="Scroll Down"
 		>
 			<Icon
-				icon="material-symbols:arrow-drop-down"
-				class="animate-down-button h-16 w-16 animate-pulse"
+				icon="material-symbols:arrow-circle-down-outline"
+				class="animate-down-button h-10 w-10 animate-pulse"
 			/>
 		</button>
 	</div>

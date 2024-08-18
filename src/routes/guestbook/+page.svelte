@@ -62,7 +62,7 @@
 						entry.target.classList.remove('invisible');
 						gsap.fromTo(
 							entry.target,
-							{ opacity: 0, y: 200 },
+							{ opacity: 0, y: 50 },
 							{
 								opacity: 1,
 								y: 0,

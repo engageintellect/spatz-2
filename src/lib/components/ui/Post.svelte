@@ -17,13 +17,13 @@
 </script>
 
 <div class="cursor-pointer border-b transition-all duration-300">
-	<div class="card-body p-3 transition-all duration-300">
+	<div class="card-body px-1 py-3 transition-all duration-300 md:px-3">
 		<div class="flex items-start gap-3">
 			<div class="">
-				<div class="h-12 w-12">
+				<div class="h-10 w-10 md:h-12 md:w-12">
 					<img
 						src={avatar}
-						class="h-full w-full rounded-full object-cover shadow"
+						class="mt-1 h-full w-full rounded-full object-cover shadow"
 						alt="user-avatar"
 					/>
 				</div>
@@ -94,10 +94,15 @@
 									value={currentUser.id}
 									disabled={deleteLoading}
 								/>
-								<Button variant="ghost" type="submit" class="group/deleteButton flex items-center">
+								<Button
+									variant="ghost"
+									size="sm"
+									type="submit"
+									class="group/deleteButton flex scale-[0.75] items-center active:scale-[0.70] "
+								>
 									<Icon
 										icon={'mdi:close'}
-										class={`h-5 w-5 transition-all duration-200 group-hover/deleteButton:scale-110 ${deleteLoading ? 'animate-bounce' : ''}`}
+										class={`h-5 w-5 transition-all duration-200 group-hover/deleteButton:scale-110 ${deleteLoading ? 'animate-deletePost' : ''}`}
 									/>
 									<span class="sr-only">Delete</span>
 								</Button>
