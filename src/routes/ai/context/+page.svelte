@@ -4,24 +4,26 @@
 	import { onMount, tick } from 'svelte';
 	import { currentUser } from '$lib/stores/user';
 	import { getImageURL } from '$lib/utils';
-	import { chatMessages } from '$lib/stores/chatMessages';
+	import { contextChatMessages } from '$lib/stores/contextChatMessages';
 	import { get } from 'svelte/store';
 	import { PUBLIC_OPENAI_MODEL } from '$env/static/public';
 	import robot from '$lib/assets/images/robot14-nobg.png';
 	import Icon from '@iconify/svelte';
 	import Toast from '$lib/components/ui/Toast.svelte';
-	import { toast } from '$lib/stores/toast'; // Import the toast store
+	import { toast } from '$lib/stores/toast';
 	import { gsap } from 'gsap';
 	import { Button } from '$lib/components/ui/button/index.js';
 
 	let messagesEnd: HTMLElement;
 	let inputElement: HTMLInputElement;
+	let customContext = ''; // New context input state
+
 	const { input, handleSubmit: originalHandleSubmit, messages, setMessages } = useChat();
 	let initialLoadComplete = false;
 
 	onMount(() => {
 		tick();
-		const savedMessages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
+		const savedMessages = JSON.parse(localStorage.getItem('contextChatMessages') || '[]');
 		setMessages(savedMessages);
 		initialLoadComplete = true;
 		scrollToBottom();
@@ -34,21 +36,26 @@
 
 	async function handleSubmit(event: any) {
 		event.preventDefault();
-		originalHandleSubmit(event);
-		chatMessages.set(get(messages));
+
+		// Modify the request to include the custom context
+		await originalHandleSubmit(event, {
+			body: { customPrePrompt: customContext }
+		});
+
+		contextChatMessages.set(get(messages));
 		scrollToBottom();
 		animateNewMessages();
 	}
 
 	function clearChat() {
 		setMessages([]); // Clear the messages state
-		chatMessages.set([]);
-		localStorage.removeItem('chatMessages');
+		contextChatMessages.set([]);
+		localStorage.removeItem('contextChatMessages');
 	}
 
 	$: {
 		if (initialLoadComplete) {
-			chatMessages.set($messages);
+			contextChatMessages.set($messages);
 			scrollToBottom();
 		}
 	}
@@ -104,27 +111,36 @@
 
 	<div class="sticky top-[57px] z-10 w-full border-b backdrop-blur-sm">
 		<form class="w-full bg-background py-2" on:submit={handleSubmit}>
-			<div class="flex w-full gap-2">
+			<div class="flex w-full flex-col gap-2">
+				<!-- New Context Input Field -->
+				<input
+					placeholder="Enter your context"
+					bind:value={customContext}
+					class="w-full rounded-lg border bg-card p-2 focus-within:outline-none focus:outline-none"
+				/>
+
+				<!-- Existing Query Input Field -->
 				<input
 					placeholder="Enter your query"
 					bind:value={$input}
 					class="w-full rounded-lg border bg-card p-2 focus-within:outline-none focus:outline-none"
 					bind:this={inputElement}
 				/>
-				<Button type="submit" variant="default" class="">
-					<div class="flex items-center gap-2">
-						<Icon icon="mdi:send" class="h-5 w-5" />
-					</div>
-				</Button>
-				{#if $messages.length > 0}
-					<div in:fade={{ duration: 300 }}>
-						<Button type="button" variant="destructive" class="" on:click={clearChat}>
+
+				<div class="mt-2 flex gap-2">
+					<Button type="submit" variant="default">
+						<div class="flex items-center gap-2">
+							<Icon icon="mdi:send" class="h-5 w-5" />
+						</div>
+					</Button>
+					{#if $messages.length > 0}
+						<Button type="button" variant="destructive" on:click={clearChat}>
 							<div class="flex items-center gap-2">
 								<Icon icon="mdi:delete" class="h-5 w-5" />
 							</div>
 						</Button>
-					</div>
-				{/if}
+					{/if}
+				</div>
 			</div>
 		</form>
 	</div>
@@ -185,4 +201,4 @@
 	</div>
 </section>
 
-<Toast type={$toast.type} message={$toast.message} show={$toast.show} />
+<Toast type={$toast.type} message={$toast.message} />

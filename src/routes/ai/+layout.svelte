@@ -9,6 +9,10 @@
 			href: '/ai/chat'
 		},
 		{
+			title: 'context',
+			href: '/ai/context'
+		},
+		{
 			title: 'a',
 			href: '/ai/a'
 		},

@@ -171,7 +171,7 @@
 						<div class="lowercase">register</div>
 						<Icon
 							icon={`${isSubmitting ? 'mingcute:loading-fill' : 'mdi:plus'}`}
-							class={`${isSubmitting ? 'animate-spin' : ''} h-5 w-5 transition-transform duration-300 lg:group-hover/sendButton:translate-x-1`}
+							class={`${isSubmitting ? 'animate-spin' : ''} h-5 w-5 transition-transform duration-300 lg:group-hover/sendButton:rotate-90`}
 						/>
 					</div>
 				</Form.Button>

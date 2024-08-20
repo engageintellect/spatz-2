@@ -167,9 +167,9 @@
 						placeholder={'type your post here...'}
 					/>
 
-					<Button type="submit" class="group/submitButton">
+					<Button type="submit" class="group/submitButton" disabled={loading}>
 						{#if loading}
-							<span class="loading loading-spinner loading-md"></span>
+							<span class="">hi</span>
 						{:else}
 							submit <Icon
 								icon="mdi-send"

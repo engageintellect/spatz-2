@@ -94,9 +94,9 @@
 	class={` ${heroHidden ? 'opacity-0' : ''} mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-5 rounded-lg transition-all duration-300 md:flex-row md:gap-0`}
 >
 	<div class="section1 invisible relative flex w-full justify-center" bind:this={section1Container}>
-		<div class="flex w-full max-w-md flex-col gap-5 text-center lg:p-5">
+		<div class="flex w-full max-w-sm flex-col gap-5 text-center lg:p-5">
 			<div class="w-full text-4xl font-bold">@engageintellect</div>
-			<div class="text-xl font-thin md:text-2xl">
+			<div class="text-lg font-thin md:text-xl">
 				I invite you to use and improve this project. Feedback and pull requests are welcome, and
 				appreciated.
 			</div>
@@ -105,7 +105,7 @@
 					<Button
 						size="lg"
 						class="group/readMoreButton flex w-full items-center gap-2 text-xl uppercase md:w-fit"
-						variant="ghost"
+						variant="outline"
 					>
 						<div class="lowercase">Homepage</div>
 						<Icon

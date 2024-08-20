@@ -235,7 +235,7 @@
 	<div class="orbitText relative order-2 flex h-full w-full">
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
 			<div class="w-full text-3xl font-bold uppercase">spatz helps you move fast</div>
-			<div class="text-2xl font-thin">
+			<div class="text-lg font-thin">
 				spatz is a complete, minimal toolkit for building modern web applications. It's designed to
 				be a flexible and efficient solution for developers who want to create high-quality,
 				performant applications with ease.
@@ -265,15 +265,10 @@
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
 			<div class="w-full text-3xl font-bold uppercase">Why spatz?</div>
 
-			<div>
+			<div class="text-lg">
 				Combining SvelteKit, PocketBase, OpenAI, TailwindCSS, and Zod makes a powerful tech stack.
 				This minimal setup leverages each technology's strengths for modern, efficient, and scalable
-				web applications. SvelteKit provides a reactive framework for enhanced productivity and
-				performance. PocketBase offers a lightweight backend with real-time capabilities. AI
-				integration enables personalized user experiences and intelligent automation. TailwindCSS
-				ensures a cohesive design system with utility-first CSS, and Zod brings type-safe schema
-				validation for data integrity. Together, these tools enable developers to build
-				sophisticated, responsive, and high-performance applications with ease.
+				web applications.
 			</div>
 			<div class="flex items-center gap-2">
 				<a href="/technologies">
@@ -295,16 +290,12 @@
 	<div class="card3 relative order-4 flex h-full w-full md:order-3">
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
 			<div class="w-full text-3xl font-bold">DATABASE, AUTH, ADMIN PANEL</div>
-			<div class="">
-				PocketBase is the ideal backend solution for rapidly building modern web applications with
-				minimal friction. It offers authentication, a high-performance database, an intuitive admin
-				panel, logging, and complex query support—all within a single file. This lightweight
+
+			<div class="text-lg">
+				PocketBase makes for an ideal backend solution for rapidly building modern web applications
+				with minimal friction. It offers authentication, a high-performance database, an intuitive
+				admin panel, logging, and complex query support—all within a single file. This lightweight
 				platform enables developers to quickly create responsive, secure, and scalable applications.
-				PocketBase's real-time capabilities ensure seamless data synchronization and instant updates
-				across clients. Its RESTful API and WebSocket support provide robust connectivity options,
-				making it easy to integrate with various frontend frameworks. With PocketBase, you get a
-				highly performant solution that can scale surprisingly large, allowing you to focus on
-				feature development without worrying about backend complexities.
 			</div>
 		</div>
 	</div>

@@ -9,35 +9,27 @@ const openai = createOpenAI({
 });
 
 export const POST: RequestHandler = async ({ request }) => {
-	// Extract the `messages` from the body of the request
-	const { messages } = await request.json();
+	const { messages, customPrePrompt } = await request.json();
 
-	// Define a pre-prompt or context as a system message
-	const prePrompt = {
-		role: 'system',
-		content: 'You are an AI assistant named spatz.'
-	};
+	// Log the custom pre-prompt and messages
+	console.log('Custom pre-prompt received on the server:', customPrePrompt);
+	console.log('Messages received on the server:', messages);
 
-	// Prepend the pre-prompt to the messages array
-	const updatedMessages = [
-		prePrompt,
-		...messages.map((message: { content: string; role: string }) => ({
-			content: message.content,
-			role: message.role
-		}))
-	];
-
-	// Call the language model with streaming
 	const result = await streamText({
 		model: openai('gpt-3.5-turbo'),
-		messages: convertToCoreMessages(updatedMessages),
+		messages: convertToCoreMessages([
+			...(customPrePrompt ? [{ role: 'system', content: customPrePrompt }] : []),
+			...messages
+		]),
 		temperature: 0.5,
 		async onFinish({ text, toolCalls, toolResults, usage, finishReason }) {
-			// Implement your own logic here, e.g., for storing messages
-			// or recording token usage
+			console.log('Response Text:', text);
+			console.log('Tool Calls:', toolCalls);
+			console.log('Tool Results:', toolResults);
+			console.log('Usage:', usage);
+			console.log('Finish Reason:', finishReason);
 		}
 	});
 
-	// Respond with the stream
 	return result.toAIStreamResponse();
 };
