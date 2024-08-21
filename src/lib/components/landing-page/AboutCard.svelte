@@ -91,20 +91,20 @@
 
 <div
 	id="about"
-	class={` ${heroHidden ? 'opacity-0' : ''} mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-5 rounded-lg transition-all duration-300 md:flex-row md:gap-0`}
+	class={` ${heroHidden ? 'opacity-0' : ''} mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-5 rounded-lg py-20 transition-all duration-300 md:flex-row md:gap-0`}
 >
 	<div class="section1 invisible relative flex w-full justify-center" bind:this={section1Container}>
 		<div class="flex w-full max-w-xs flex-col gap-5 text-center lg:p-5">
-			<div class="w-full text-4xl font-bold">@engageintellect</div>
-			<div class="text-lg font-thin md:text-xl">
-				I invite you to use and improve this project. Feedback and pull requests are welcome, and
-				appreciated.
+			<a href={``} class="w-full text-4xl font-thin">@engageintellect</a>
+			<div class="text-lg font-thin italic text-foreground/80 md:text-xl">
+				"I invite you to use and improve this project. Feedback and pull requests are welcome, and
+				appreciated."
 			</div>
 			<div class="flex items-center justify-center gap-5">
 				<a href="https://cook.engage-dev.com">
 					<Button
 						size="lg"
-						class="group/readMoreButton flex w-full items-center gap-2 text-xl uppercase md:w-fit"
+						class="group/readMoreButton flex w-full items-center gap-2 uppercase md:w-fit"
 						variant="outline"
 					>
 						<div class="lowercase">Homepage</div>
@@ -129,7 +129,7 @@
 				<img
 					src={`https://github.com/engageintellect.png`}
 					alt="@engageintellect"
-					class="h-full w-full rounded-full object-cover object-top transition-shadow duration-300 hover:shadow-lg md:rounded-lg"
+					class="h-full w-full rounded-full object-cover object-top transition-shadow duration-300 hover:shadow-lg"
 				/>
 			</a>
 			<!-- <div

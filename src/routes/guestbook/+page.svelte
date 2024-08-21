@@ -85,57 +85,56 @@
 		observer.observe(target);
 	}
 
-	onMount(() => {
-		tick();
+	onMount(async () => {
+		await tick(); // Ensure the DOM is fully updated
 		window.addEventListener('scroll', handleScroll);
 
 		if (typeof window !== 'undefined') {
-			import('gsap').then(({ gsap }) => {
-				import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-					gsap.registerPlugin(ScrollTrigger);
+			const { gsap } = await import('gsap');
+			const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+			gsap.registerPlugin(ScrollTrigger);
 
-					// Animate "book" on mount
-					gsap.fromTo(
-						'.guestbook-book',
-						{ opacity: 0, x: -50 },
-						{
-							opacity: 1,
-							x: 0,
-							duration: 3,
-							ease: 'power4.out'
-						}
-					);
+			// Animate "book" on mount
+			gsap.fromTo(
+				'.guestbook-book',
+				{ opacity: 0, x: -50 },
+				{
+					opacity: 1,
+					x: 0,
+					duration: 3,
+					ease: 'power4.out'
+				}
+			);
 
-					// Animate text on mount
-					gsap.fromTo(
-						'.text-3xl',
-						{ opacity: 0, y: 50 },
-						{
-							opacity: 1,
-							y: 0,
-							duration: 1,
-							ease: 'power4.out'
-						}
-					);
+			// Animate text on mount
+			gsap.fromTo(
+				'.text-3xl',
+				{ opacity: 0, y: 50 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 1,
+					ease: 'power4.out'
+				}
+			);
 
-					// Apply lazy loading to posts
-					document.querySelectorAll('.post-wrapper').forEach((el) => {
-						lazyLoad(el as HTMLElement);
-					});
+			// Apply lazy loading to posts
+			document.querySelectorAll('.post-wrapper').forEach((el) => {
+				console.log('Observing post-wrapper:', el);
+				lazyLoad(el as HTMLElement);
+			});
 
-					ScrollTrigger.refresh();
+			ScrollTrigger.refresh();
 
-					const unsubscribe = page.subscribe(() => {
-						ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-						ScrollTrigger.refresh();
-					});
+			const unsubscribe = page.subscribe(() => {
+				ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+				ScrollTrigger.refresh();
+			});
 
-					onDestroy(() => {
-						unsubscribe();
-						ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-						window.removeEventListener('scroll', handleScroll);
-					});
-				});
+			onDestroy(() => {
+				unsubscribe();
+				ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+				window.removeEventListener('scroll', handleScroll);
 			});
 		}
 	});
@@ -169,13 +168,34 @@
 
 					return async ({ result, update }) => {
 						if (result.type === 'success') {
-							toast.success('Post submission success!', {});
+							toast('Post submission success!', {});
+
+							// Update the DOM to include the new post
+							await update();
+
+							// Ensure DOM updates are complete
+							await tick();
+
+							// Find the newly added post (assuming it's added at the top)
+							const newPost = document.querySelector('.post-wrapper:first-child');
+							if (newPost) {
+								// Apply a fade-in and scale-in animation to the new post
+								gsap.fromTo(
+									newPost,
+									{ opacity: 0, scale: 0.8, y: 0 },
+									{
+										opacity: 1,
+										y: 0,
+										scale: 1,
+										duration: 0.5,
+										ease: 'power4.out'
+									}
+								);
+							}
 						} else {
-							toast.error('Failed to Submit Form', {});
+							toast.error('Failed to submit Post', {});
 						}
 
-						await update();
-						//applyAction(result);
 						isSubmitting = false;
 					};
 				}}
