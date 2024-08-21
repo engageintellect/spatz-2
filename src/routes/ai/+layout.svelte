@@ -2,6 +2,8 @@
 	import { page } from '$app/stores';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
+	import { onMount } from 'svelte';
+	import { gsap } from 'gsap';
 
 	const navigation = [
 		{
@@ -25,6 +27,15 @@
 			href: '/ai/c'
 		}
 	];
+
+	onMount(() => {
+		gsap.from('.nav-item', {
+			opacity: 0,
+			y: 10,
+			stagger: 0.1,
+			duration: 0.25
+		});
+	});
 </script>
 
 <div class="bg-base-100 mx-auto h-full w-full max-w-2xl">
@@ -38,7 +49,7 @@
 	>
 		<div class="flex w-full flex-row gap-1 md:flex-col">
 			{#each navigation as navItem}
-				<li>
+				<li class="nav-item">
 					<a href={navItem.href} class="text-lg">
 						<Button
 							class="w-full"

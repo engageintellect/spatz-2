@@ -1,8 +1,21 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { gsap } from 'gsap';
 	import robot from '$lib/assets/images/robot14-nobg.png';
-	import MeteorCard from '$lib/components/ui/MeteorCard.svelte';
+
+	let imgRef: HTMLImageElement;
+
+	onMount(() => {
+		gsap.from(imgRef, {
+			opacity: 0, // Start fully transparent
+			delay: 0.1, // Delay the animation
+			y: 0, // Start slightly to the left
+			duration: 1, // Duration of the animation
+			ease: 'power2.out'
+		});
+	});
 </script>
 
 <div class="overflow-hidden">
-	<img src={robot} alt="robot" class="drop-shadow" />
+	<img bind:this={imgRef} src={robot} alt="robot" class="border-b drop-shadow" />
 </div>

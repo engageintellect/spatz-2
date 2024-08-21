@@ -111,8 +111,8 @@
 
 			<div class="animate-buttons mx-auto mt-10 flex w-full items-center gap-2 md:max-w-lg">
 				<a href="/auth/register" class="group/bookingsButton w-full">
-					<Button size="lg" class="flex w-full items-center gap-2">
-						<div class="text-xl lowercase">get started</div>
+					<Button size="default" class="flex w-full items-center gap-2">
+						<div class="text-lg lowercase md:text-xl">get started</div>
 						<Icon
 							icon="material-symbols:rocket-launch"
 							class="h-5 w-5 transition-transform duration-300 lg:group-hover/bookingsButton:rotate-45"
@@ -121,8 +121,8 @@
 				</a>
 
 				<a href="/auth/login" class="group/bookingsButton w-full">
-					<Button size="lg" variant="outline" class="flex w-full items-center gap-2">
-						<div class="text-xl lowercase">login</div>
+					<Button size="default" variant="outline" class="flex w-full items-center gap-2">
+						<div class="text-lg lowercase md:text-xl">login</div>
 						<Icon
 							icon="mdi:arrow-right"
 							class="h-5 w-5 transition-transform duration-300 lg:group-hover/bookingsButton:translate-x-1"

@@ -131,6 +131,17 @@
 
 	<div class="-z-10 w-full py-5 md:p-5">
 		<div class="flex w-full flex-col gap-5">
+			{#if $messages.length < 1}
+				<div>
+					This is a chatbot that uses the OpenAI API to generate responses. Ask me anything!
+				</div>
+
+				<div>
+					The model is currently set to <strong>{PUBLIC_OPENAI_MODEL}</strong>. You can change the
+					model by setting the <code>PUBLIC_OPENAI_MODEL</code> environment variable in your
+					<code>.env</code> file.
+				</div>
+			{/if}
 			{#each $messages as message}
 				<div in:fade={{ duration: 250 }} class={`flex items-start gap-2`}>
 					<div class="chat-image avatar">
@@ -156,7 +167,7 @@
 								? $currentUser
 									? '@' + $currentUser?.username
 									: 'no'
-								: '@chatGPT'}
+								: 'spatz'}
 							<time class="text-neutral-content/50 text-xs">{new Date().toLocaleTimeString()}</time>
 						</div>
 

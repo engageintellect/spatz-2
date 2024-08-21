@@ -109,11 +109,7 @@
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item>
-				<a
-					href="/ai/chat"
-					data-sveltekit-preload-data="hover"
-					class="flex w-full w-full items-center"
-				>
+				<a href="/ai" data-sveltekit-preload-data="hover" class="flex w-full w-full items-center">
 					<Icon icon="tabler:brain" class="mr-2 h-4 w-4" />
 					<span>AI</span>
 				</a>

@@ -9,6 +9,9 @@
 	export let id;
 	export let currentUser;
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { toast } from 'svelte-sonner';
+
+	let isDeleting = false;
 
 	let loading = false;
 	let deleteLoading = false;
@@ -17,7 +20,7 @@
 </script>
 
 <div class="cursor-pointer border-b transition-all duration-300">
-	<div class="card-body px-1 py-3 transition-all duration-300 md:px-3">
+	<div class="card-body px-1 py-3 transition-all duration-300 md:px-1">
 		<div class="flex items-start gap-3">
 			<div class="">
 				<div class="h-10 w-10 md:h-12 md:w-12">
@@ -77,11 +80,20 @@
 					{#if currentUser.username === postAuthor}
 						<div class="absolute right-2 top-2 flex items-center gap-1">
 							<form
-								use:enhance={() => {
-									deleteLoading = true;
-									return async ({ update }) => {
+								use:enhance={({ cancel }) => {
+									if (isDeleting) return cancel(); // Prevent multiple submissions
+									isDeleting = true;
+
+									return async ({ result, update }) => {
+										if (result.type === 'success') {
+											toast('Post deleted successfully.', {});
+										} else {
+											toast.error('Failed to delete post.', {});
+										}
+
 										await update();
-										deleteLoading = false;
+										//applyAction(result);
+										isDeleting = false;
 									};
 								}}
 								action="?/deletePost"

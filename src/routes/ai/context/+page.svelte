@@ -38,7 +38,8 @@
 		event.preventDefault();
 
 		// Modify the request to include the custom context
-		await originalHandleSubmit(event, {
+
+		originalHandleSubmit(event, {
 			body: { customPrePrompt: customContext }
 		});
 
@@ -111,15 +112,13 @@
 
 	<div class="sticky top-[57px] z-10 w-full border-b backdrop-blur-sm">
 		<form class="w-full bg-background py-2" on:submit={handleSubmit}>
-			<div class="flex w-full flex-col gap-2">
-				<!-- New Context Input Field -->
-				<input
-					placeholder="Enter your context"
-					bind:value={customContext}
-					class="w-full rounded-lg border bg-card p-2 focus-within:outline-none focus:outline-none"
-				/>
+			<input
+				placeholder="Explain it to me like I'm 5..."
+				bind:value={customContext}
+				class="w-full rounded-lg border bg-card p-2 focus-within:outline-none focus:outline-none"
+			/>
 
-				<!-- Existing Query Input Field -->
+			<div class="mt-2 flex w-full gap-2">
 				<input
 					placeholder="Enter your query"
 					bind:value={$input}
@@ -127,7 +126,7 @@
 					bind:this={inputElement}
 				/>
 
-				<div class="mt-2 flex gap-2">
+				<div class="flex gap-2">
 					<Button type="submit" variant="default">
 						<div class="flex items-center gap-2">
 							<Icon icon="mdi:send" class="h-5 w-5" />
@@ -147,8 +146,25 @@
 
 	<div class="-z-10 w-full py-5 md:p-5">
 		<div class="flex w-full flex-col gap-5">
+			{#if $messages.length < 1}
+				<div>
+					This is a chatbot that uses the OpenAI API to generate responses. Ask me anything!
+				</div>
+
+				<div>
+					It has an extra feature that allows you to provide a custom context for the model to
+					consider when generating responses. Try it out!
+				</div>
+
+				<div>
+					The model is currently set to <strong>{PUBLIC_OPENAI_MODEL}</strong>. You can change the
+					model by setting the <code>PUBLIC_OPENAI_MODEL</code> environment variable in your
+					<code>.env</code> file.
+				</div>
+			{/if}
+
 			{#each $messages as message}
-				<div in:fade={{ duration: 250 }} class={`flex items-start gap-2`}>
+				<div in:fade={{ duration: 250 }} class={`chat flex items-start gap-2`}>
 					<div class="chat-image avatar">
 						<div in:fade={{ delay: 0, duration: 500 }} class="mt-2 w-10 rounded-full">
 							<img
@@ -168,11 +184,7 @@
 					</div>
 					<div class="flex flex-col">
 						<div class="chat-header">
-							{message.role === 'user'
-								? $currentUser
-									? '@' + $currentUser?.username
-									: 'no'
-								: '@chatGPT'}
+							{message.role === 'user' ? ($currentUser ? $currentUser?.username : 'no') : 'spatz'}
 							<time class="text-neutral-content/50 text-xs">{new Date().toLocaleTimeString()}</time>
 						</div>
 
@@ -201,4 +213,4 @@
 	</div>
 </section>
 
-<Toast type={$toast.type} message={$toast.message} />
+<Toast type={$toast.type} message={$toast.message} show={$toast.show} />

@@ -2,7 +2,7 @@
 	import { onMount, onDestroy, tick } from 'svelte';
 	import { page } from '$app/stores';
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
-	import { enhance } from '$app/forms';
+	import { enhance, applyAction } from '$app/forms';
 	import { currentUser } from '$lib/stores/user.js';
 	import { getImageURL } from '$lib/utils';
 	import Post from '$lib/components/ui/Post.svelte';
@@ -10,6 +10,9 @@
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { gsap } from 'gsap'; // Ensure GSAP is directly imported
+	import { toast } from 'svelte-sonner';
+
+	let isSubmitting = false;
 
 	export let form: {
 		data: {
@@ -156,7 +159,27 @@
 		</div>
 
 		<div class="my-2 mt-5 flex flex-col gap-5">
-			<form action="?/createPost" method="POST" class="w-full" use:enhance>
+			<form
+				action="?/createPost"
+				method="POST"
+				class="w-full"
+				use:enhance={({ cancel }) => {
+					if (isSubmitting) return cancel(); // Prevent multiple submissions
+					isSubmitting = true;
+
+					return async ({ result, update }) => {
+						if (result.type === 'success') {
+							toast.success('Post submission success!', {});
+						} else {
+							toast.error('Failed to Submit Form', {});
+						}
+
+						await update();
+						//applyAction(result);
+						isSubmitting = false;
+					};
+				}}
+			>
 				<div class="form-control gap-0">
 					<input type="hidden" name="author" value={data?.user?.id} />
 					<TextArea
@@ -168,10 +191,11 @@
 					/>
 
 					<Button type="submit" class="group/submitButton" disabled={loading}>
-						{#if loading}
-							<span class="">hi</span>
+						submit
+						{#if isSubmitting}
+							<Icon icon="eos-icons:loading" class="ml-2 h-5 w-5" />
 						{:else}
-							submit <Icon
+							<Icon
 								icon="mdi-send"
 								class="ml-2 h-5 w-5 transition-all duration-300 md:group-hover/submitButton:translate-x-1"
 							/>
