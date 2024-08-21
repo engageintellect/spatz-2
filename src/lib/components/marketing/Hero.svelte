@@ -38,11 +38,8 @@
 			<div class="spatz-stack-2 font-thin tracking-tighter text-foreground/[50%]">2</div>
 		</div>
 	</h1>
-	<!-- <p class="mt-2">
-		visit <a class="underline" href={PUBLIC_DOCS_URL}>docs</a> for more info
-	</p> -->
 
-	<p class="mt-5 text-sm text-muted-foreground">
+	<p class="my-5 text-sm text-muted-foreground">
 		Press
 		<kbd
 			class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100"
@@ -65,8 +62,8 @@
 			</Button>
 		</a>
 		<a href={PUBLIC_REPOSITORY_URL} class="group/githubButton flex-1">
-			<Button variant="ghost" class="w-full outline outline-[1px] outline-teal-500">
-				<div class="flex items-center gap-2 text-teal-500">
+			<Button variant="default" class="w-full">
+				<div class="flex items-center gap-2">
 					star on github
 					<Icon
 						icon="mdi-star"
@@ -75,7 +72,6 @@
 				</div>
 			</Button>
 		</a>
-
 		<a href={`/guestbook`} class="group/githubButton col-span-2 w-full md:col-span-1">
 			<Button variant="outline" class="w-full">
 				<div class="flex items-center gap-2">
