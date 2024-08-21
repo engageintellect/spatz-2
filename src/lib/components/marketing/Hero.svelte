@@ -65,8 +65,8 @@
 			</Button>
 		</a>
 		<a href={PUBLIC_REPOSITORY_URL} class="group/githubButton flex-1">
-			<Button variant="outline" class="w-full">
-				<div class="flex items-center gap-2">
+			<Button variant="ghost" class="w-full outline outline-[1px] outline-teal-500">
+				<div class="flex items-center gap-2 text-teal-500">
 					star on github
 					<Icon
 						icon="mdi-star"

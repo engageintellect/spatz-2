@@ -31,7 +31,7 @@
 	onMount(() => {
 		gsap.from('.nav-item', {
 			opacity: 0,
-			y: 10,
+			x: 10,
 			stagger: 0.1,
 			duration: 0.25
 		});

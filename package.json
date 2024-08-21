@@ -41,6 +41,7 @@
 		"@ai-sdk/svelte": "^0.0.35",
 		"@iconify/svelte": "^4.0.2",
 		"ai": "^3.2.34",
+		"bad-words": "^4.0.0",
 		"bits-ui": "^0.21.12",
 		"clsx": "^2.1.1",
 		"cmdk-sv": "^0.0.18",

@@ -86,7 +86,7 @@
 
 									return async ({ result, update }) => {
 										if (result.type === 'success') {
-											toast('Post deleted successfully.', {});
+											toast.success('Post deleted successfully.', {});
 										} else {
 											toast.error('Failed to delete post.', {});
 										}
