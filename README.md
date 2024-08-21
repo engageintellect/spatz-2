@@ -89,6 +89,7 @@ pnpm i && pnpm run dev --host
 ```
 /src
 ├── /lib
+│   ├── /schema.ts (Zod schema)
 │   └── app.d.ts (global types)
 ├── /assets
 │   └── /images
@@ -101,6 +102,7 @@ pnpm i && pnpm run dev --host
 │   ├── /technologies
 │   ├── /ai
 │   │   ├── /chat
+│   │   ├── /context
 │   │   ├── /a
 │   │   ├── /b
 │   │   └── /c
