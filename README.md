@@ -34,6 +34,7 @@ spatz-2 uses svelte-superforms, shadcn-svelte, and svelte-animations.
 - Forms by svelte-superforms, with client/server validation via Zod.
 
 
+![Image Description](/src/lib/assets/images/marketing/lighthouse.png)
 ![Image Description](/src/lib/assets/images/marketing/spatz2.png)
 
 ## Getting Started
