@@ -193,9 +193,12 @@
 								);
 							}
 						} else {
+							// Apply form errors to the state
+							applyAction(result);
 							toast.error('Failed to submit Post', {});
 						}
 
+						await update(); // Ensure form state (including errors) is updated
 						isSubmitting = false;
 					};
 				}}
