@@ -9,8 +9,9 @@
 	import TextArea from '$lib/components/ui/TextArea.svelte';
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import { gsap } from 'gsap'; // Ensure GSAP is directly imported
+	import { gsap } from 'gsap';
 	import { toast } from 'svelte-sonner';
+	import { lazyLoad } from '$lib/lazyLoad';
 
 	let isSubmitting = false;
 
@@ -34,6 +35,36 @@
 
 	let showScrollToTop = false;
 
+	// Sorting logic
+	let sortOption = 'date'; // Default sort option
+
+	function sortByDate(posts: App.Post[]) {
+		return posts.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+	}
+
+	function sortByLikes(posts: App.Post[]) {
+		return posts.sort((a, b) => b.likes.length - a.likes.length); // Sort by the length of likes array
+	}
+
+	function sortByCurrentUser(posts: App.Post[]) {
+		console.log('posts', posts);
+		return posts.filter((post) => post.author === $currentUser.id);
+	}
+
+	$: sortedPosts = (() => {
+		let posts = [...data.posts];
+		switch (sortOption) {
+			case 'likes':
+				return sortByLikes(posts);
+			case 'user':
+				return sortByCurrentUser(posts);
+
+			case 'date':
+			default:
+				return sortByDate(posts);
+		}
+	})();
+
 	const handleScroll = () => {
 		const shouldShow = window.scrollY > 100;
 		if (shouldShow !== showScrollToTop) {
@@ -55,35 +86,6 @@
 			}
 		}
 	};
-
-	function lazyLoad(target: HTMLElement) {
-		const observer = new IntersectionObserver(
-			(entries, observer) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						entry.target.classList.add('visible');
-						entry.target.classList.remove('invisible');
-						gsap.fromTo(
-							entry.target,
-							{ opacity: 0, y: 50 },
-							{
-								opacity: 1,
-								y: 0,
-								duration: 1,
-								ease: 'power4.out',
-								stagger: 0.1 // Adding stagger here
-							}
-						);
-						observer.unobserve(entry.target);
-					}
-				});
-			},
-			{
-				threshold: 0.1
-			}
-		);
-		observer.observe(target);
-	}
 
 	onMount(async () => {
 		await tick(); // Ensure the DOM is fully updated
@@ -120,7 +122,6 @@
 
 			// Apply lazy loading to posts
 			document.querySelectorAll('.post-wrapper').forEach((el) => {
-				console.log('Observing post-wrapper:', el);
 				lazyLoad(el as HTMLElement);
 			});
 
@@ -182,12 +183,11 @@
 								// Apply a fade-in and scale-in animation to the new post
 								gsap.fromTo(
 									newPost,
-									{ opacity: 0, scale: 0.8, y: 0 },
+									{ opacity: 0, scale: 0.8 },
 									{
 										opacity: 1,
-										y: 0,
 										scale: 1,
-										duration: 0.5,
+										duration: 1,
 										ease: 'power4.out'
 									}
 								);
@@ -224,12 +224,45 @@
 				</div>
 			</form>
 
-			<div class="w-full">
+			<div class="post-wrapper w-full">
 				<div class="">
-					<div class="mb-2 text-3xl font-thin">posts</div>
+					<div class="flex items-end justify-between gap-5 border-b">
+						<div class="mb-2 text-xl font-thin">posts: {data.posts.length}</div>
+
+						<!-- Sorting Controls -->
+						<div class="my-4 flex items-end justify-end gap-2">
+							<Button
+								size="sm"
+								variant={sortOption === 'date' ? 'default' : 'outline'}
+								on:click={() => (sortOption = 'date')}
+							>
+								New
+								<Icon icon="mdi:fire" class="ml-1 h-4 w-4" />
+							</Button>
+							<Button
+								size="sm"
+								variant={sortOption === 'likes' ? 'default' : 'outline'}
+								on:click={() => (sortOption = 'likes')}
+							>
+								Likes
+								<Icon icon="mdi:heart" class="ml-1 h-4 w-4" />
+							</Button>
+
+							<!--							<Button
+								size="sm"
+								variant={sortOption === 'user' ? 'default' : 'secondary'}
+								on:click={() => (sortOption = 'user')}
+							>
+								user
+								<Icon icon="mdi:account" class="ml-1 h-4 w-4" />
+              </Button>
+              -->
+						</div>
+					</div>
+
 					<div class="flex flex-col">
-						{#if data.posts.length > 0}
-							{#each data.posts as post}
+						{#if sortedPosts.length > 0}
+							{#each sortedPosts as post}
 								<div class="post-wrapper invisible">
 									<Post
 										id={post.id}

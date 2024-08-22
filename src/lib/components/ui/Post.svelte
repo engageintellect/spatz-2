@@ -7,7 +7,6 @@
 	export let avatar;
 	export let likes;
 	export let id;
-	import { fade, slide } from 'svelte/transition';
 	export let currentUser;
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { toast } from 'svelte-sonner';
@@ -20,7 +19,7 @@
 	import { formatFriendlyDate, timeSince } from '$lib/utils';
 </script>
 
-<div out:fade={{ duration: 1000 }} class="cursor-pointer border-b transition-all duration-300">
+<div class="cursor-pointer border-b transition-all duration-300">
 	<div class="card-body px-1 py-3 transition-all duration-300 md:px-1">
 		<div class="flex items-start gap-3">
 			<div class="">

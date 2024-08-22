@@ -107,8 +107,7 @@ export const actions: Actions = {
 
 			// Ensure the user is authorized to delete the post
 
-			console.log(locals.pb.authStore)
-
+			console.log(locals.pb.authStore);
 
 			//! TODO: look into this
 			// @ts-expect-error - ignore type error on this line
