@@ -3,6 +3,7 @@
 	import { onMount, tick } from 'svelte';
 	import { gsap } from 'gsap';
 	import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+	import SignGuestbookButton from '$lib/components/ui/SignGuestbookButton.svelte';
 
 	import Hero from '$lib/components/marketing/Hero.svelte';
 	import Stats from '$lib/components/marketing/Stats.svelte';
@@ -68,8 +69,11 @@
 		<div class="fade-in">
 			<GettingStarted />
 		</div>
-		<div class="fade-in pb-20">
+		<div class="fade-in">
 			<Contribute />
+		</div>
+		<div class="fade-in">
+			<SignGuestbookButton />
 		</div>
 	</div>
 </div>
