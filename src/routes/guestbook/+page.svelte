@@ -158,7 +158,7 @@
 			</h1>
 		</div>
 
-		<div class="my-2 mt-5 flex flex-col gap-5">
+		<div class="user-input my-2 mt-5 flex flex-col gap-5">
 			<form
 				action="?/createPost"
 				method="POST"
@@ -183,10 +183,11 @@
 								// Apply a fade-in and scale-in animation to the new post
 								gsap.fromTo(
 									newPost,
-									{ opacity: 0, y: 0 },
+									{ opacity: 0, y: 0, scale: 0.95 },
 									{
 										opacity: 1,
 										y: 0,
+										scale: 1,
 										duration: 2,
 										ease: 'power4.out'
 									}

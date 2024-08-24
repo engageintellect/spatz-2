@@ -2,7 +2,6 @@
 	import type { PageData } from './$types.js';
 	import SpatzLanding from '$lib/components/ui/SpatzLanding.svelte';
 	export let data: PageData;
-	import { fade } from 'svelte/transition';
 	import { siteInfo } from '$lib/data.js';
 	import { currentUser } from '$lib/stores/user.js';
 	import SpatzMarketing from '$lib/components/ui/SpatzMarketing.svelte';
@@ -22,7 +21,7 @@
 		<SpatzLanding formData={data.form} />
 		<!-- IF USER IS LOGGED IN -->
 	{:else}
-		<div in:fade={{ duration: 200, delay: 200 }}>
+		<div>
 			<SpatzMarketing />
 		</div>
 	{/if}
