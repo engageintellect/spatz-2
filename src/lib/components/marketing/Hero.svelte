@@ -31,11 +31,10 @@
 	});
 </script>
 
-<div>
+<div class="mt-5 md:mt-0">
 	<h1 class="text-7xl md:text-8xl">
 		<div class="spatz-stack flex items-center font-extrabold tracking-tight">
 			<div>spatz</div>
-			<!-- <div class="spatz-stack font-thin tracking-tighter text-foreground/[50%]">stack</div> -->
 			<div class="spatz-stack-2 font-thin tracking-tighter text-foreground/[50%]">2</div>
 		</div>
 	</h1>
@@ -90,7 +89,10 @@
 
 	<div class="mt-10 flex w-full justify-center gap-2 md:mt-16">
 		<a href="/guestbook" class="group/signGuestbook w-fit">
-			<ShineBorder class="text-center text-lg lowercase shadow-lg" color={['#14b8a6', '#00000000']}>
+			<ShineBorder
+				class="text-center text-lg lowercase shadow transition-all duration-300 md:hover:shadow-lg"
+				color={['#14b8a6', '#00000000']}
+			>
 				<div class="flex items-center gap-2">
 					sign the guestbook
 					<Icon
