@@ -16,7 +16,7 @@
 	style:--duration={duration}
 >
 	<div class="relative z-10">
-		<slot>Button</slot>
+		<slot />
 	</div>
 	<div
 		class="absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-lg bg-inherit"

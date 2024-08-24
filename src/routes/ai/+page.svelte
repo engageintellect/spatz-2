@@ -10,7 +10,7 @@
 			opacity: 0, // Start fully transparent
 			delay: 0.1, // Delay the animation
 			y: 0, // Start slightly to the left
-			duration: 1, // Duration of the animation
+			duration: 5, // Duration of the animation
 			ease: 'power2.out'
 		});
 	});

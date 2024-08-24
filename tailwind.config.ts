@@ -138,11 +138,23 @@ const config: Config = {
 
 				pulse: {
 					'0%, 100%': { boxShadow: '0 0 0 0 var(--pulse-color)' },
-					'50%': { boxShadow: '0 0 0 8px var(--pulse-color)' }
+					'50%': { boxShadow: '0 0 0 6px var(--pulse-color)' }
+				},
+
+				'shine-pulse': {
+					'0%': {
+						'background-position': '0% 0%'
+					},
+					'50%': {
+						'background-position': '100% 100%'
+					},
+					to: {
+						'background-position': '0% 0%'
+					}
 				}
 			},
 			animation: {
-				pulse: 'pulse var(--duration) ease-out infinite',
+				pulse: 'pulse 2s ease-out infinite',
 
 				customBounce: 'customBounce 10s ease-in-out infinite', // Adjust duration here
 				slowBounce: 'customBounce 3s ease-in-out infinite', // Adjust duration here

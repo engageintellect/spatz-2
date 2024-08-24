@@ -21,7 +21,7 @@
 	}
 </script>
 
-<div>
+<div id="getting-started">
 	<h1 class="mb-2 text-4xl font-bold">getting started</h1>
 
 	<div class="flex items-center gap-2">

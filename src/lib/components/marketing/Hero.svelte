@@ -4,6 +4,7 @@
 	import Icon from '@iconify/svelte';
 	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
+	import ShineBorder from '$lib/components/magic-ui/ShineBorder.svelte';
 
 	onMount(() => {
 		gsap.fromTo(
@@ -67,21 +68,37 @@
 					star on github
 					<Icon
 						icon="mdi-star"
-						class="transition-color h-5 w-5 duration-500 md:group-hover/githubButton:text-yellow-500"
+						class="transition-color h-5 w-5 duration-300 md:group-hover/githubButton:text-yellow-500"
 					/>
 				</div>
 			</Button>
 		</a>
-		<a href={`/guestbook`} class="group/githubButton col-span-2 w-full md:col-span-1">
+
+		<a href={PUBLIC_DOCS_URL} class="group/githubButton col-span-2 w-full md:col-span-1">
 			<Button variant="outline" class="w-full">
 				<div class="flex items-center gap-2">
-					guestbook
+					docs
+
 					<Icon
-						icon="ion:chatbubble-outline"
-						class="transition-color h-5 w-5 duration-500 md:group-hover/githubButton:text-teal-500"
+						icon="material-symbols:docs-outline"
+						class="transition-color h-5 w-5 duration-300 md:group-hover/githubButton:text-teal-500"
 					/>
 				</div>
 			</Button>
+		</a>
+	</div>
+
+	<div class="mt-10 flex w-full justify-center gap-2 md:mt-16">
+		<a href="/guestbook" class="group/signGuestbook w-fit">
+			<ShineBorder class="text-center text-lg lowercase shadow-lg" color={['#14b8a6', '#00000000']}>
+				<div class="flex items-center gap-2">
+					sign the guestbook
+					<Icon
+						icon="ion:chatbubble-outline"
+						class="transition-color h-5 w-5 duration-300 md:group-hover/signGuestbook:text-teal-500"
+					/>
+				</div>
+			</ShineBorder>
 		</a>
 	</div>
 </div>
