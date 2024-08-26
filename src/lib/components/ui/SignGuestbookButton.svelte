@@ -3,7 +3,7 @@
 	import ShineBorder from '$lib/components/magic-ui/ShineBorder.svelte';
 </script>
 
-<div class="flex w-full justify-center gap-2 px-10 pb-10">
+<div class="flex w-full justify-center gap-2 px-10">
 	<a href="/guestbook" class="group/signGuestbook w-full">
 		<ShineBorder
 			class="text-center text-lg lowercase shadow transition-all duration-300 md:hover:shadow-lg"

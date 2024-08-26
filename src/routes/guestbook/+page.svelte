@@ -18,6 +18,7 @@
 	export let form: {
 		data: {
 			content?: string;
+			post?: string;
 		};
 		errors: {
 			content?: string[];
@@ -27,6 +28,7 @@
 	export let data: {
 		user: App.User;
 		posts: App.Post[];
+		comments: App.Comment[];
 	};
 
 	let loading = false;
@@ -47,7 +49,6 @@
 	}
 
 	function sortByCurrentUser(posts: App.Post[]) {
-		console.log('posts', posts);
 		return posts.filter((post) => post.author === $currentUser.id);
 	}
 
@@ -170,13 +171,10 @@
 					return async ({ result, update }) => {
 						if (result.type === 'success') {
 							toast('Post submission success!', {});
-
 							// Update the DOM to include the new post
 							await update();
-
 							// Ensure DOM updates are complete
 							await tick();
-
 							// Find the newly added post (assuming it's added at the top)
 							const newPost = document.querySelector('.post-wrapper:first-child');
 							if (newPost) {
@@ -251,16 +249,6 @@
 								Likes
 								<Icon icon="mdi:heart" class="ml-1 h-4 w-4" />
 							</Button>
-
-							<!--							<Button
-								size="sm"
-								variant={sortOption === 'user' ? 'default' : 'secondary'}
-								on:click={() => (sortOption = 'user')}
-							>
-								user
-								<Icon icon="mdi:account" class="ml-1 h-4 w-4" />
-              </Button>
-              -->
 						</div>
 					</div>
 
@@ -269,6 +257,7 @@
 							{#each sortedPosts as post}
 								<div class="post-wrapper invisible">
 									<Post
+										comments={post.comments}
 										id={post.id}
 										postDate={post.created}
 										postAuthor={post.username}
@@ -278,7 +267,7 @@
 										postContent={post.content}
 										likes={post.likes}
 										currentUser={$currentUser}
-									/>
+									></Post>
 								</div>
 							{/each}
 						{:else}
@@ -298,14 +287,3 @@
 		</div>
 	{/if}
 </div>
-
-<style>
-	.invisible {
-		opacity: 0;
-		height: auto;
-	}
-
-	.visible {
-		opacity: 1;
-	}
-</style>

@@ -9,6 +9,8 @@
 	import { pb } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
 	import Icon from '@iconify/svelte';
+	import { gsap } from 'gsap';
+	import { onMount } from 'svelte';
 
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
@@ -25,6 +27,14 @@
 		localStorage.removeItem('chatMessages');
 		goto('/');
 	}
+
+	onMount(() => {
+		gsap.from('.dropdown-menu-item', {
+			opacity: 0,
+			stagger: 0.1,
+			duration: 2.25
+		});
+	});
 </script>
 
 <DropdownMenu.Root>
@@ -41,7 +51,9 @@
 					data-sveltekit-preload-data="hover"
 					class="flex w-full items-center gap-2"
 				>
-					<Avatar />
+					<div class="dropdown-menu-item">
+						<Avatar />
+					</div>
 					<div class="truncate">
 						<h3 class="overflow-hidden text-ellipsis text-base">@{$currentUser.username}</h3>
 						<p class="overflow-hidden text-ellipsis text-xs font-thin text-foreground/70">

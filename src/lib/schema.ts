@@ -221,6 +221,21 @@ export const createGuestBookPostSchema = z.object({
 });
 
 // ------------------------------
+// CREATE POST COMMENT
+// ------------------------------
+export const createPostCommentSchema = z.object({
+	author: z.string(),
+	content: z
+		.string({ required_error: 'Message is required' })
+		.min(1, { message: 'Message must be at least 1 character' })
+		.max(250, { message: 'Message must be 250 characters or less' })
+		.refine((value) => !filter.isProfane(value), {
+			message: 'Message contains inappropriate language'
+		}),
+	post: z.string()
+});
+
+// ------------------------------
 // LIKE GUEST BOOK POST
 // ------------------------------
 export const likeGuestBookPostSchema = z.object({
@@ -233,4 +248,11 @@ export const likeGuestBookPostSchema = z.object({
 // ------------------------------
 export const deleteGuestBookPostSchema = z.object({
 	postId: z.string()
+});
+
+// ------------------------------
+// DELETE POST COMMENT
+// ------------------------------
+export const deletePostCommentSchema = z.object({
+	post: z.string()
 });

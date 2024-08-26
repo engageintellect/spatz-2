@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import { enhance, applyAction } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import Icon from '@iconify/svelte';
 	export let postAuthor;
 	export let postContent;
+	export let comments;
 	export let postDate;
 	export let avatar;
 	export let likes;
@@ -11,25 +13,35 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { toast } from 'svelte-sonner';
 
-	let isDeleting = false;
-
 	let loading = false;
+	let isDeleting = false;
 	let deleteLoading = false;
+	let showComments = true;
 
 	import { formatFriendlyDate, timeSince } from '$lib/utils';
+
+	const handleCommentClick = () => {
+		if (window.location.href.split('/').pop() === 'guestbook') {
+			window.location.href = `/guestbook/post/${id}`;
+		} else {
+			showComments = !showComments;
+		}
+	};
 </script>
 
-<div class="cursor-pointer border-b transition-all duration-300">
+<div class="relative cursor-pointer border-b transition-all duration-300">
 	<div class="card-body px-1 py-3 transition-all duration-300 md:px-1">
 		<div class="flex items-start gap-3">
 			<div class="">
-				<div class="h-10 w-10 md:h-12 md:w-12">
-					<img
-						src={avatar}
-						class="mt-1 h-full w-full rounded-full object-cover shadow"
-						alt="user-avatar"
-					/>
-				</div>
+				<a href={`/guestbook/post/${id}`}>
+					<div class="h-10 w-10 md:h-12 md:w-12">
+						<img
+							src={avatar}
+							class="mt-1 h-full w-full rounded-full object-cover shadow"
+							alt="user-avatar"
+						/>
+					</div>
+				</a>
 			</div>
 			<div class="w-full">
 				<div class="flex items-center gap-2">
@@ -42,7 +54,9 @@
 					</div>
 				</div>
 
-				<div class="pb-2 pt-1 font-thin">{@html postContent}</div>
+				<a href={`/guestbook/post/${id}`}>
+					<div class="pb-2 pt-1 font-thin">{@html postContent}</div>
+				</a>
 
 				<div class="mt-2 flex items-center gap-5">
 					<div class="flex items-center gap-1">
@@ -69,6 +83,16 @@
 						</form>
 						<div class="font-thin">{likes.length ?? 0}</div>
 					</div>
+
+					<button class="" on:click={handleCommentClick}>
+						<div class="flex items-center gap-1">
+							<Icon icon="mdi:comment-outline" class="h-5 w-5" />
+							<div>
+								{comments.length}
+							</div>
+						</div>
+					</button>
+
 					{#if typeof window !== 'undefined'}
 						<a
 							href={`mailto:?subject=check this out&body=${encodeURIComponent(window.location.href)}`}
@@ -78,7 +102,7 @@
 					{/if}
 
 					{#if currentUser.username === postAuthor}
-						<div class="absolute right-2 top-2 flex items-center gap-1">
+						<div class="absolute right-0 top-1 flex items-center gap-1">
 							<form
 								use:enhance={({ cancel }) => {
 									if (isDeleting) return cancel(); // Prevent multiple submissions
@@ -91,8 +115,12 @@
 											toast.error('Failed to delete post.', {});
 										}
 
-										await update();
-										//applyAction(result);
+										if (window.location.href.split('/').pop() !== 'guestbook') {
+											goto('/guestbook');
+										} else {
+											await update();
+										}
+
 										isDeleting = false;
 									};
 								}}
@@ -122,6 +150,12 @@
 						</div>
 					{/if}
 				</div>
+
+				{#if showComments}
+					<div class="mt-3">
+						<slot name="commentsFeed" />
+					</div>
+				{/if}
 			</div>
 		</div>
 	</div>
