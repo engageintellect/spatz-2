@@ -26,8 +26,8 @@ export const POST: RequestHandler = async ({ request }) => {
 				}
 			],
 			mode: 'payment',
-			success_url: `${PUBLIC_BASE_URL}/success`,
-			cancel_url: `${PUBLIC_BASE_URL}/cancel`
+			success_url: `${PUBLIC_BASE_URL}/donate/success`,
+			cancel_url: `${PUBLIC_BASE_URL}/donate/cancel`
 		});
 
 		return new Response(JSON.stringify({ sessionId: session.id }), {
