@@ -101,6 +101,8 @@ pnpm i && pnpm run dev --host
 ├── /stores (global state)
 ├── /routes
 │   ├── /guestbook
+│   │   └── /post
+│   │       └── /[id]
 │   ├── /technologies
 │   ├── /ai
 │   │   ├── /chat
@@ -108,10 +110,14 @@ pnpm i && pnpm run dev --host
 │   │   ├── /a
 │   │   ├── /b
 │   │   └── /c
+│   ├── /donate
+│   │   ├── /cancel (redirect when cancelling stripe payment)
+│   │   └── /success (redirect after successful stripe payment)
 │   ├── /api
 │   │   ├── /repo-data (fetch github repository stars)
 │   │   ├── /fortune (fetch random tech founder quote)
 │   │   ├── /chat (OpenAI streaming API)
+│   │   ├── /donate (for stripe payments)
 │   │__ /auth (Pocketbase auth)
 │   │   ├── /login
 │   │   ├── /register
