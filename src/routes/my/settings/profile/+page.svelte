@@ -32,16 +32,12 @@
 		return async ({ result }: any) => {
 			switch (result.type) {
 				case 'success':
-					toast.success('Form Submitted Successfully!', {
-						description: "We'll get back to you as soon as possible, typically within 24 hours."
-					});
+					toast.success(`Job title updated.`, {});
 
 					await invalidateAll();
 					break;
 				case 'error':
-					toast.success('Form Submitted Successfully!', {
-						description: "We'll get back to you as soon as possible, typically within 24 hours."
-					});
+					toast.error('Failed to update job title.', {});
 					break;
 				default:
 					await applyAction(result);
@@ -49,17 +45,6 @@
 			loading = false;
 		};
 	};
-
-	function copyToClipboard(content: string) {
-		navigator.clipboard.writeText(content).then(
-			() => {
-				toast.success('Message copied to clipboard', {
-					description: ''
-				});
-			},
-			(err) => console.error('Could not copy text: ', err)
-		);
-	}
 </script>
 
 <div class="flex h-full w-full flex-col">

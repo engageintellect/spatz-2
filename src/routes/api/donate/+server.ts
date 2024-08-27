@@ -7,7 +7,7 @@ const stripe = new Stripe(SECRET_STRIPE_KEY, {
 });
 
 export const POST: RequestHandler = async ({ request }) => {
-	const { amount } = await request.json();
+	const { amount, theme } = await request.json();
 
 	try {
 		const session = await stripe.checkout.sessions.create({
@@ -25,8 +25,8 @@ export const POST: RequestHandler = async ({ request }) => {
 				}
 			],
 			mode: 'payment',
-			success_url: 'https://yourdomain.com/success',
-			cancel_url: 'https://yourdomain.com/cancel'
+			success_url: `https://yourdomain.com/success?theme=${theme}`,
+			cancel_url: `https://yourdomain.com/cancel?theme=${theme}`
 		});
 
 		return new Response(JSON.stringify({ sessionId: session.id }), {

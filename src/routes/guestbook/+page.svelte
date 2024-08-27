@@ -231,7 +231,6 @@
 					<div class="flex items-end justify-between gap-5 border-b">
 						<div class="mb-2 text-xl font-thin">posts: {data.posts.length}</div>
 
-						<!-- Sorting Controls -->
 						<div class="my-4 flex items-end justify-end gap-2">
 							<Button
 								size="sm"
@@ -255,7 +254,7 @@
 					<div class="flex flex-col">
 						{#if sortedPosts.length > 0}
 							{#each sortedPosts as post}
-								<div class="post-wrapper invisible">
+								<div class="post-wrapper invisible border-b">
 									<Post
 										comments={post.comments}
 										id={post.id}

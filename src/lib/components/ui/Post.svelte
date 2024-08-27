@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { enhance, applyAction } from '$app/forms';
+	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import Icon from '@iconify/svelte';
 	export let postAuthor;
@@ -22,15 +22,15 @@
 
 	const handleCommentClick = () => {
 		if (window.location.href.split('/').pop() === 'guestbook') {
-			window.location.href = `/guestbook/post/${id}`;
+			goto(`/guestbook/post/${id}`);
 		} else {
 			showComments = !showComments;
 		}
 	};
 </script>
 
-<div class="relative cursor-pointer border-b transition-all duration-300">
-	<div class="card-body px-1 py-3 transition-all duration-300 md:px-1">
+<div class="relative cursor-pointer transition-all duration-300">
+	<div class="card-body mt-2 px-1 transition-all duration-300 md:px-1">
 		<div class="flex items-start gap-3">
 			<div class="">
 				<a href={`/guestbook/post/${id}`}>
@@ -84,7 +84,7 @@
 						<div class="font-thin">{likes.length ?? 0}</div>
 					</div>
 
-					<button class="" on:click={handleCommentClick}>
+					<button class="font-thin" on:click={handleCommentClick}>
 						<div class="flex items-center gap-1">
 							<Icon icon="mdi:comment-outline" class="h-5 w-5" />
 							<div>

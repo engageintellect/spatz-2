@@ -5,8 +5,10 @@
 	import type { PageData } from './$types';
 	import Footer from '$lib/components/ui/Footer.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
+	import { toast } from '$lib/stores/toast';
 	import Command from '$lib/components/ui/Command.svelte';
 	import { currentUser } from '$lib/stores/user';
+	import Toast from '$lib/components/ui/Toast.svelte';
 
 	export let data: PageData;
 
@@ -32,6 +34,7 @@
 
 <ModeWatcher defaultMode={'dark'} />
 <Toaster position="bottom-right" richColors={true} />
+<Toast icon={$toast.icon} type={$toast.type} message={$toast.message} show={$toast.show} />
 
 {#if $currentUser}
 	<Command />

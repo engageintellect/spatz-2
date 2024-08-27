@@ -176,10 +176,17 @@
 				target="_blank"
 				class="flex w-full items-center"
 			>
-				<LifeBuoy class="mr-2 h-4 w-4" />
-				<span>Support</span>
+				<Icon icon="mdi:bug" class="mr-2 h-4 w-4" />
+				<span>Submit Bug</span>
 			</a>
 		</DropdownMenu.Item>
+		<DropdownMenu.Item>
+			<a href="/donate" class="flex w-full items-center">
+				<Icon icon="mdi:money" class="mr-2 h-4 w-4" />
+				<span>Donate</span>
+			</a>
+		</DropdownMenu.Item>
+
 		<DropdownMenu.Item>
 			<a
 				href="https://github.com/engageintellect/spatz-2/blob/main/README.md"

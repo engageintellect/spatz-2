@@ -22,7 +22,7 @@
 						<p class="mt-2 text-foreground/70">
 							Or, check out one of the <a
 								href={`${PUBLIC_REPOSITORY_URL}/issues`}
-								class="text-blue-500 underline">open issues</a
+								class="text-info underline">open issues</a
 							>.
 						</p>
 

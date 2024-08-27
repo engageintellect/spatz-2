@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getImageURL } from '$lib/utils';
+	import { onMount } from 'svelte';
 	import Post from '$lib/components/ui/Post.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { currentUser } from '$lib/stores/user';
@@ -39,6 +40,25 @@
 			content?: string[];
 		};
 	};
+
+	onMount(() => {
+		gsap.from('.post-hero', {
+			opacity: 0,
+			y: 0,
+			scale: 0.95,
+			stagger: 0.1,
+			duration: 1,
+			ease: 'power4.out'
+		});
+
+		gsap.from('.comment-feed', {
+			opacity: 0,
+			y: 50,
+			stagger: 0.1,
+			duration: 1,
+			ease: 'power4.out'
+		});
+	});
 </script>
 
 <div class="mx-auto max-w-lg">
@@ -54,17 +74,15 @@
 		<span class="text-xs">back</span>
 	</Button>
 
-	<div class="mt-5">
+	<div class="post-hero mt-5">
 		<Post
 			postAuthor={data.post.expand.author.username}
 			postContent={data.post.content}
 			comments={data.post.comments}
 			postDate={data.post.created}
-			avatar={getImageURL(
-				$currentUser?.collectionId,
-				data.post.author,
-				data.post.expand.author.avatar
-			)}
+			avatar={data.post.expand.author.avatar
+				? getImageURL($currentUser?.collectionId, data.post.author, data.post.expand.author.avatar)
+				: `https://ui-avatars.com/api/?name=${data.post.expand.author.username}`}
 			likes={data.post.likes}
 			id={data.post.id}
 			currentUser={$currentUser}
@@ -72,8 +90,12 @@
 	</div>
 </div>
 
-<div class="mx-auto mt-5 max-w-lg">
-	<div class="flex w-full justify-end pb-2">
+<div class="comment-feed mx-auto mt-5 max-w-lg">
+	<div class="flex w-full justify-between border-b pb-2">
+		<div class="flex items-center gap-1">
+			<span class="text-xl font-thin">comments: {data.post.comments.length}</span>
+		</div>
+
 		<Button variant="ghost" size="sm" on:click={() => (showCommentsForm = !showCommentsForm)}>
 			{#if showCommentsForm}
 				<Icon icon="mdi:close" class="h-5 w-5" />
@@ -158,9 +180,11 @@
 	{/if}
 
 	{#each data.post.comments.slice().reverse() as comment}
-		<div class="relative flex items-start gap-2 border-b border-t py-5">
+		<div class="relative flex items-start gap-2 border-b py-5 pl-2">
 			<img
-				src={getImageURL($currentUser?.collectionId, comment?.author, comment?.authorAvatar)}
+				src={comment?.authorAvatar
+					? getImageURL($currentUser?.collectionId, comment?.author, comment?.authorAvatar)
+					: `https://ui-avatars.com/api/?name=${$currentUser?.email}`}
 				class="h-8 w-8 rounded-full object-cover"
 				alt="user-avatar"
 			/>
@@ -174,7 +198,7 @@
 						{timeSince(formatFriendlyDate(comment?.created))}
 					</div>
 				</div>
-				<div class="mt-1">{comment?.content}</div>
+				<div class="mt-1 font-thin">{comment?.content}</div>
 			</div>
 
 			{#if $currentUser.username === comment.authorUsername}

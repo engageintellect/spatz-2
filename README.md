@@ -22,13 +22,14 @@ spatz-2 uses svelte-superforms, shadcn-svelte, and svelte-animations.
 - [Zod](https://zod.dev): TypeScript-first schema declaration and validation.
 
 ## Features
-- User Authentication
+- User Authentication.
 - User Profile and Settings on client.
 - Admin Dashboard in Pocketbase.
+- Stripe Payments.
 - Dark/Light Mode Themes.
 - Iconifty Icons.
 - GSAP Animations.
-- Command Pallette (CMD+j)
+- Command Pallette (CMD+j).
 - AI Chatbot with OpenAI.
 - Guestbook with Pocketbase.
 - Forms by svelte-superforms, with client/server validation via Zod.
