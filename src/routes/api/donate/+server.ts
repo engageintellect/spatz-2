@@ -1,6 +1,7 @@
 import type { RequestHandler } from './$types';
 import Stripe from 'stripe';
 import { SECRET_STRIPE_KEY } from '$env/static/private';
+import { PUBLIC_BASE_URL } from '$env/static/public';
 
 const stripe = new Stripe(SECRET_STRIPE_KEY, {
 	apiVersion: '2024-06-20'
@@ -25,8 +26,8 @@ export const POST: RequestHandler = async ({ request }) => {
 				}
 			],
 			mode: 'payment',
-			success_url: `https://yourdomain.com/success?theme=${theme}`,
-			cancel_url: `https://yourdomain.com/cancel?theme=${theme}`
+			success_url: `${PUBLIC_BASE_URL}/success?theme=${theme}`,
+			cancel_url: `${PUBLIC_BASE_URL}/cancel?theme=${theme}`
 		});
 
 		return new Response(JSON.stringify({ sessionId: session.id }), {
