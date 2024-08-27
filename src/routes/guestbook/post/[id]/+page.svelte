@@ -108,7 +108,7 @@
 		</Button>
 	</div>
 
-	{#if showCommentsForm}
+	{#if showCommentsForm || data.post.comments.length === 0}
 		<div>
 			<form
 				action="?/createPostComment"
