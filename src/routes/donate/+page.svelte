@@ -7,7 +7,6 @@
 	let amount: number = 0;
 
 	onMount(() => {
-		// Initialize the Stripe object only once on mount
 		stripePromise = loadStripe(PUBLIC_STRIPE_KEY);
 	});
 
@@ -33,6 +32,11 @@
 			}
 
 			const { sessionId }: { sessionId: string } = await response.json();
+
+			if (!sessionId) {
+				console.error('No session ID returned from the API');
+				return;
+			}
 
 			const { error } = await stripe.redirectToCheckout({ sessionId });
 
