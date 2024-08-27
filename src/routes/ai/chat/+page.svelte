@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { useChat } from '@ai-sdk/svelte';
-	import { fade, slide } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import { onMount, tick } from 'svelte';
 	import { currentUser } from '$lib/stores/user';
 	import { getImageURL } from '$lib/utils';
@@ -9,7 +9,6 @@
 	import { PUBLIC_OPENAI_MODEL } from '$env/static/public';
 	import robot from '$lib/assets/images/robot14-nobg.png';
 	import Icon from '@iconify/svelte';
-	import Toast from '$lib/components/ui/Toast.svelte';
 	import { toast } from '$lib/stores/toast'; // Import the toast store
 	import { gsap } from 'gsap';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -63,10 +62,12 @@
 				toast.set({
 					show: true,
 					message: 'Message copied to clipboard',
-					type: 'bg-emerald-300 text-emerald-900'
+					type: 'bg-background',
+					icon: 'material-symbols:content-copy-outline'
 				});
-				setTimeout(() => toast.set({ show: false, message: '', type: '' }), 2000);
+				setTimeout(() => toast.set({ show: false, message: '', type: '', icon: '' }), 2000);
 			},
+
 			(err) => console.error('Could not copy text: ', err)
 		);
 	}
@@ -195,5 +196,3 @@
 		<div bind:this={messagesEnd}></div>
 	</div>
 </section>
-
-<Toast type={$toast.type} message={$toast.message} show={$toast.show} />

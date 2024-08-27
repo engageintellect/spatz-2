@@ -17,7 +17,7 @@
 	];
 </script>
 
-<div class="mx-auto h-full w-full max-w-2xl bg-red-500">
+<div class="mx-auto h-full w-full max-w-2xl">
 	<!-- <div class="text-7xl">settings</div> -->
 </div>
 <div class="mx-auto flex h-full w-full max-w-2xl gap-5 rounded-lg md:border md:p-5 md:shadow-lg">

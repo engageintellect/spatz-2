@@ -4,7 +4,6 @@
 	import { gsap } from 'gsap';
 	import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 	import SignGuestbookButton from '$lib/components/ui/SignGuestbookButton.svelte';
-
 	import Hero from '$lib/components/marketing/Hero.svelte';
 	import Stats from '$lib/components/marketing/Stats.svelte';
 	import About from '$lib/components/marketing/About.svelte';
@@ -57,23 +56,27 @@
 		<div class="fade-in">
 			<Hero />
 		</div>
+
 		<div class="fade-in">
 			<Stats {stars} {issues} {forks} />
 		</div>
+
 		<div class="fade-in">
 			<About />
 		</div>
+
 		<div class="fade-in">
 			<FeaturesFeed />
 		</div>
 		<div class="fade-in">
 			<GettingStarted />
 		</div>
-		<div class="fade-in">
-			<Contribute />
-		</div>
+
 		<div class="fade-in">
 			<SignGuestbookButton />
+		</div>
+		<div class="fade-in">
+			<Contribute />
 		</div>
 	</div>
 </div>

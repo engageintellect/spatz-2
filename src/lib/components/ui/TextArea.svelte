@@ -45,7 +45,7 @@
 	></textarea>
 
 	<div class="flex justify-end text-sm">
-		<div class={`${value.length > 250 ? 'text-destructive' : 'text-success'} flex justify-end`}>
+		<div class={`${value.length > 250 ? 'text-destructive' : ''} flex justify-end`}>
 			{value.length}/250
 		</div>
 	</div>

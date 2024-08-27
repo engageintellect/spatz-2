@@ -21,18 +21,20 @@
 					toast.set({
 						show: true,
 						message: 'Email updated successfully',
-						type: 'bg-success'
+						type: 'bg-success',
+						icon: 'mdi:check'
 					});
-					setTimeout(() => toast.set({ show: false, message: '', type: '' }), 2000);
+					setTimeout(() => toast.set({ show: false, message: '', type: '', icon: '' }), 2000);
 					break;
 				case 'error':
 					await invalidateAll();
 					toast.set({
 						show: true,
 						message: 'Email update failed',
-						type: 'error'
+						type: 'error',
+						icon: 'mdi:alert-circle'
 					});
-					setTimeout(() => toast.set({ show: false, message: '', type: '' }), 2000);
+					setTimeout(() => toast.set({ show: false, message: '', type: '', icon: '' }), 2000);
 					break;
 				default:
 					await applyAction(result);
@@ -50,18 +52,20 @@
 					toast.set({
 						show: true,
 						message: 'Profile updated successfully',
-						type: 'bg-emerald-500 text-emerald-900'
+						type: 'bg-success text-success-foreground',
+						icon: 'mdi:check'
 					});
-					setTimeout(() => toast.set({ show: false, message: '', type: '' }), 2000);
+					setTimeout(() => toast.set({ show: false, message: '', type: '', icon: '' }), 2000);
 					await invalidateAll();
 					break;
 				case 'error':
 					toast.set({
 						show: true,
 						message: 'Profile update failed',
-						type: 'bg-red-500 text-red-900'
+						type: 'bg-destructive text-destructive-foreground',
+						icon: 'mdi:alert-circle'
 					});
-					setTimeout(() => toast.set({ show: false, message: '', type: '' }), 2000);
+					setTimeout(() => toast.set({ show: false, message: '', type: '', icon: '' }), 2000);
 					break;
 				default:
 					await applyAction(result);

@@ -7,7 +7,8 @@ import {
 	createGuestBookPostSchema,
 	createPostCommentSchema,
 	likeGuestBookPostSchema,
-	deleteGuestBookPostSchema
+	deleteGuestBookPostSchema,
+	deletePostCommentSchema
 } from '$lib/schema';
 
 // Define the custom error type
@@ -16,34 +17,38 @@ interface CustomError {
 	message: string;
 }
 
-export const load: PageServerLoad = async ({ locals }) => {
-	if (!locals.pb.authStore.isValid) {
-		throw redirect(303, '/auth/login');
+export const load: PageServerLoad = async ({ params, locals }) => {
+	// Extract the post ID from the route parameters
+	const { id } = params;
+
+	// Fetch the post data from your database or API
+	const post = await locals.pb.collection('posts').getOne(id, { expand: 'comments,author' });
+
+	if (!post) {
+		// Handle the case where the post is not found
+		return {
+			status: 404,
+			error: new Error('Post not found')
+		};
 	}
 
-	// GET POSTS
-	const posts = await locals.pb.collection('posts').getFullList({
+	// Fetch additional data if necessary
+	const users = await locals.pb.collection('users').getFullList({
 		sort: '-created'
 	});
-
-	// GET COMMENTS
 	const comments = await locals.pb.collection('comments').getFullList({
 		sort: '-created'
 	});
 
-	// GET USERS
-	const users = await locals.pb.collection('users').getFullList({
-		sort: '-created'
-	});
-
-	// TRANSFORM POSTS
-	const transformedPosts = posts.map((post) => {
-		// Replace the comment IDs with the actual comment objects and include author details
-		const postComments = post.comments
+	// Transform the post object
+	const transformedPost = {
+		...post,
+		username: users.find((user) => user.id === post.author)?.username,
+		avatar: users.find((user) => user.id === post.author)?.avatar,
+		comments: post.comments
 			.map((commentId: string) => {
 				const comment = comments.find((comment) => comment.id === commentId);
 				if (comment) {
-					// Find the author of the comment
 					const author = users.find((user) => user.id === comment.author);
 					return {
 						...comment,
@@ -53,18 +58,13 @@ export const load: PageServerLoad = async ({ locals }) => {
 				}
 				return null;
 			})
-			.filter((comment: any) => comment !== null); // Ensure only valid comments are returned
+			.filter((comment: any) => comment !== null) // Ensure only valid comments are returned
+	};
 
-		// Add author's username and avatar to each post
-		return {
-			...post,
-			username: users.find((user) => user.id === post.author)?.username,
-			avatar: users.find((user) => user.id === post.author)?.avatar,
-			comments: postComments // Replace the comment IDs with the actual comment objects
-		};
-	});
-
-	return { posts: transformedPosts };
+	// Return the transformed post data
+	return {
+		post: transformedPost
+	};
 };
 
 // Define the actions
@@ -129,7 +129,6 @@ export const actions: Actions = {
 			await request.formData(),
 			createPostCommentSchema
 		);
-		console.log('this is form data', formData);
 		if (errors) {
 			return fail(400, {
 				data: formData,
@@ -142,7 +141,6 @@ export const actions: Actions = {
 			const comment = await locals.pb.collection('comments').create(formData);
 
 			// Get the associated post
-			console.log('this is form data', formData);
 			const post = await locals.pb.collection('posts').getOne(formData.post);
 
 			// Update the post's comments array to include the new comment ID
@@ -182,6 +180,42 @@ export const actions: Actions = {
 			console.error('Error deleting post:', err);
 			return {
 				error: 'Error deleting post'
+			};
+		}
+	},
+
+	deletePostComment: async ({ request, locals }) => {
+		try {
+			// Parse and validate the commentId and other fields
+			const formData = await request.formData();
+			const commentId = formData.get('commentId') as string;
+			const currentUserId = formData.get('currentUserId') as string;
+
+			if (!commentId || !currentUserId) {
+				throw error(400, 'Comment ID or User ID is missing');
+			}
+
+			// Validate using schema
+			deletePostCommentSchema.parse({ post: commentId });
+
+			// Fetch the comment to ensure it exists
+			const comment = await locals.pb.collection('comments').getOne(commentId);
+
+			// Ensure the user is authorized to delete the comment
+			if (comment.author !== locals.pb.authStore.model?.id) {
+				throw error(403, 'Unauthorized');
+			}
+
+			// Perform the delete operation
+			await locals.pb.collection('comments').delete(commentId);
+
+			return {
+				success: true
+			};
+		} catch (err) {
+			console.error('Error deleting comment:', err);
+			return {
+				error: 'Error deleting comment'
 			};
 		}
 	}

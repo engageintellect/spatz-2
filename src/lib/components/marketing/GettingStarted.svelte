@@ -3,7 +3,6 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 	import { toast } from '$lib/stores/toast'; // Import the toast store
-	import Toast from '$lib/components/ui/Toast.svelte';
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
 
 	function copyToClipboard(content: string) {
@@ -12,9 +11,10 @@
 				toast.set({
 					show: true,
 					message: 'Command copied to clipboard',
-					type: 'bg-emerald-300 text-emerald-900'
+					type: 'bg-background border',
+					icon: 'material-symbols:content-copy-outline'
 				});
-				setTimeout(() => toast.set({ show: false, message: '', type: '' }), 2000);
+				setTimeout(() => toast.set({ show: false, message: '', type: '', icon: '' }), 2000);
 			},
 			(err) => console.error('Could not copy text: ', err)
 		);
@@ -96,7 +96,7 @@
 								<div class="flex flex-col gap-2">
 									<div>$ pnpm i && pnpm run dev --host</div>
 									<div data-prefix=">" class="text-yellow-500">installing...</div>
-									<div data-prefix="" class="text-emerald-500">
+									<div data-prefix="" class="text-success">
 										server running on: http://localhost:5173
 									</div>
 								</div>
@@ -114,7 +114,7 @@
 					<p class="mt-2">
 						Go to the<a
 							href="https://github.com/pocketbase/pocketbase/releases"
-							class="mx-1 border-b border-blue-500 text-blue-500">pocketbase release</a
+							class="mx-1 border-b border-info text-info">pocketbase release</a
 						>page to download the latest version of pocketbase.
 					</p>
 					<p class="mt-2">Run the below commands to get started.</p>
@@ -174,7 +174,7 @@
 
 				<p class="mt-5">
 					Log into the Pocketbase Admin UI <a
-						class="border-b border-blue-500 text-blue-500"
+						class="border-b border-info text-info"
 						href="http://localhost:8090/_/">http://localhost:8090/_/</a
 					>
 				</p>
@@ -184,7 +184,7 @@
 				</p>
 				<p class="mt-5">
 					Visit app in browser <a
-						class="border-b border-blue-500 text-blue-500"
+						class="border-b border-info text-info"
 						href="http://localhost:5173">http://localhost:5173</a
 					>
 				</p>
@@ -198,5 +198,3 @@
 		</Accordion.Item> -->
 	</Accordion.Root>
 </div>
-
-<Toast type={$toast.type} message={$toast.message} show={$toast.show} />

@@ -16,7 +16,7 @@
       --border-radius: {borderRadius}px;
     "
 	class={cn(
-		'relative grid place-items-center rounded-[var(--border-radius)] bg-background bg-white p-3 px-10 py-5 text-background text-foreground dark:bg-background dark:text-foreground',
+		'relative grid place-items-center rounded-[var(--border-radius)] border bg-background bg-white p-3 px-10 py-5 text-background text-foreground dark:bg-background dark:text-foreground',
 		className
 	)}
 >
