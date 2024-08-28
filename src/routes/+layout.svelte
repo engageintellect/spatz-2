@@ -36,7 +36,7 @@
 		// Add a small delay to allow the browser to finish rendering
 		setTimeout(() => {
 			window.scrollTo(0, 0);
-		}, 100); // 100ms delay
+		}, 300); // 100ms delay
 	});
 </script>
 
