@@ -11,10 +11,6 @@
 	import Toast from '$lib/components/ui/Toast.svelte';
 	import { afterNavigate } from '$app/navigation';
 
-	afterNavigate(() => {
-		window.scrollTo(0, 0);
-	});
-
 	export let data: PageData;
 
 	$: currentUser.set(data.user);
@@ -35,6 +31,13 @@
 		});
 	});
 	// END VIEW TRANSITIONS API
+
+	afterNavigate(() => {
+		// Add a small delay to allow the browser to finish rendering
+		setTimeout(() => {
+			window.scrollTo(0, 0);
+		}, 100); // 100ms delay
+	});
 </script>
 
 <ModeWatcher defaultMode={'dark'} />

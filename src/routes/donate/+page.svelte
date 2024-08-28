@@ -26,6 +26,20 @@
 				ease: 'power4.out'
 			}
 		);
+
+		gsap.fromTo(
+			'.donate-button',
+			{ opacity: 0, scale: 0.95 },
+			{
+				opacity: 1,
+				y: 0,
+				scale: 1,
+				duration: 2,
+				delay: 0.1,
+				ease: 'power4.out',
+				stagger: 0.1
+			}
+		);
 	});
 
 	async function handleDonate(): Promise<void> {
@@ -122,7 +136,7 @@
 			{#each prices as price}
 				<Button
 					variant="success"
-					class="transition-transform duration-300 md:hover:scale-[102%] md:hover:shadow"
+					class="donate-button transition-transform duration-300 md:hover:scale-[102%] md:hover:shadow"
 					on:click={() => {
 						amount = price;
 						handleDonate();
