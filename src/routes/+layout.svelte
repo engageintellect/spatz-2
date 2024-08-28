@@ -12,51 +12,25 @@
 	import { afterNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
 
-	// Force the page to scroll to the top on each navigation
-	afterNavigate(() => {
-		if (typeof window !== 'undefined') {
-			window.scrollTo(0, 0);
-		}
-	});
-
-	// Set the user data from the server
 	export let data: PageData;
 	$: currentUser.set(data.user);
 
-	// Scroll to the top on initial mount (for mobile browsers)
+	function scrollToTop() {
+		window.scrollTo(0, 0);
+	}
+
+	afterNavigate(() => {
+		scrollToTop();
+	});
+
 	onMount(() => {
-		if (typeof window !== 'undefined') {
-			// Check if we're on a mobile device
-			const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+		scrollToTop();
 
-			// If it's a mobile device, scroll to the top
-			if (isMobile) {
-				window.scrollTo(0, 0);
-			}
-
-			// Disable scroll restoration (prevents Chrome from trying to restore the scroll position)
-			if ('scrollRestoration' in history) {
-				history.scrollRestoration = 'manual';
-			}
+		// Disable scroll restoration
+		if ('scrollRestoration' in history) {
+			history.scrollRestoration = 'manual';
 		}
 	});
-
-	// START VIEW TRANSITIONS API
-	import { onNavigate } from '$app/navigation';
-
-	onNavigate((navigation) => {
-		// @ts-ignore <-- This is a private API so we need to ignore the TS error
-		if (!document.startViewTransition) return;
-
-		return new Promise((resolve) => {
-			// @ts-ignore <-- This is a private API so we need to ignore the TS error
-			document.startViewTransition(async () => {
-				resolve();
-				await navigation.complete;
-			});
-		});
-	});
-	// END VIEW TRANSITIONS API
 </script>
 
 <ModeWatcher defaultMode={'dark'} />
