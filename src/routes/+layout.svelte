@@ -12,21 +12,34 @@
 	import { afterNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
 
-	onMount(() => {
-		console.log('Page loaded, forcing scroll to top');
-		window.scrollTo(0, 0);
-	});
-
+	// Force the page to scroll to the top on each navigation
 	afterNavigate(() => {
-		// Scroll to top of the page on navigation
 		if (typeof window !== 'undefined') {
 			window.scrollTo(0, 0);
 		}
 	});
 
+	// Set the user data from the server
 	export let data: PageData;
-
 	$: currentUser.set(data.user);
+
+	// Scroll to the top on initial mount (for mobile browsers)
+	onMount(() => {
+		if (typeof window !== 'undefined') {
+			// Check if we're on a mobile device
+			const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
+			// If it's a mobile device, scroll to the top
+			if (isMobile) {
+				window.scrollTo(0, 0);
+			}
+
+			// Disable scroll restoration (prevents Chrome from trying to restore the scroll position)
+			if ('scrollRestoration' in history) {
+				history.scrollRestoration = 'manual';
+			}
+		}
+	});
 
 	// START VIEW TRANSITIONS API
 	import { onNavigate } from '$app/navigation';
