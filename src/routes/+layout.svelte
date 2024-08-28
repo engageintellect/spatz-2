@@ -10,6 +10,12 @@
 	import { currentUser } from '$lib/stores/user';
 	import Toast from '$lib/components/ui/Toast.svelte';
 	import { afterNavigate } from '$app/navigation';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		console.log('Page loaded, forcing scroll to top');
+		window.scrollTo(0, 0);
+	});
 
 	afterNavigate(() => {
 		// Scroll to top of the page on navigation
