@@ -33,7 +33,9 @@
 	}
 </script>
 
-<nav class={`nav sticky top-0 -z-[-1] border-b bg-background p-2 ${navHidden ? 'opacity-0' : ''}`}>
+<nav
+	class={`nav sticky top-0 -z-[-1] border-b bg-background p-2 ${navHidden ? 'invisible' : 'visible'}`}
+>
 	<div class="mx-auto flex w-full max-w-5xl items-center justify-between">
 		<a href="/" class="nav-logo" aria-label="Home">
 			<div class="px-2 text-2xl font-bold">spatz</div>
