@@ -12,25 +12,38 @@
 	import { afterNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
 
-	export let data: PageData;
-	$: currentUser.set(data.user);
-
-	function scrollToTop() {
+	onMount(() => {
+		console.log('Page loaded, forcing scroll to top');
 		window.scrollTo(0, 0);
-	}
+	});
 
 	afterNavigate(() => {
-		scrollToTop();
-	});
-
-	onMount(() => {
-		scrollToTop();
-
-		// Disable scroll restoration
-		if ('scrollRestoration' in history) {
-			history.scrollRestoration = 'manual';
+		// Scroll to top of the page on navigation
+		if (typeof window !== 'undefined') {
+			window.scrollTo(0, 0);
 		}
 	});
+
+	export let data: PageData;
+
+	$: currentUser.set(data.user);
+
+	// START VIEW TRANSITIONS API
+	//	import { onNavigate } from '$app/navigation';
+
+	//	onNavigate((navigation) => {
+	// @ts-ignore <-- This is a private API so we need to ignore the TS error
+	//		if (!document.startViewTransition) return;
+
+	//		return new Promise((resolve) => {
+	// @ts-ignore <-- This is a private API so we need to ignore the TS error
+	//			document.startViewTransition(async () => {
+	//				resolve();
+	//				await navigation.complete;
+	//			});
+	//		});
+	//	});
+	// END VIEW TRANSITIONS API
 </script>
 
 <ModeWatcher defaultMode={'dark'} />
