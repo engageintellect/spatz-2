@@ -9,8 +9,29 @@
 	import Command from '$lib/components/ui/Command.svelte';
 	import { currentUser } from '$lib/stores/user';
 	import Toast from '$lib/components/ui/Toast.svelte';
+	import { beforeNavigate, afterNavigate } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 
 	export let data: PageData;
+
+	// 1. Maka a variable that stores old pathname.
+	let pathname = '';
+	// 2. When the layout page mount, store the pathname.
+	onMount(() => {
+		pathname = $page.url.pathname;
+	});
+
+	// 4. Store the pathname before navigating.
+	beforeNavigate(() => {
+		pathname = $page.url.pathname;
+	});
+
+	// 3. Compare the pathnames and if they are different then make the scroll top.
+	afterNavigate(() => {
+		if (pathname === $page.url.pathname) return;
+		window.scrollTo({ top: 0, behavior: 'auto' });
+	});
 
 	$: currentUser.set(data.user);
 
@@ -54,5 +75,6 @@
 		height: 100%;
 		margin: 0;
 		padding: 0;
+		overflow-x: hidden;
 	}
 </style>

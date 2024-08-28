@@ -88,10 +88,6 @@
 		@apply bg-background text-foreground;
 		font-family: 'Ubuntu', sans-serif;
 	}
-
-	/* html {
-    scroll-behavior: smooth;
-  } */
 }
 
 /* NATIVE VIEW TRANSITIONS API */
