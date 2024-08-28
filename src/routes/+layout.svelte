@@ -9,6 +9,11 @@
 	import Command from '$lib/components/ui/Command.svelte';
 	import { currentUser } from '$lib/stores/user';
 	import Toast from '$lib/components/ui/Toast.svelte';
+	import { afterNavigate } from '$app/navigation';
+
+	afterNavigate(() => {
+		window.scrollTo(0, 0);
+	});
 
 	export let data: PageData;
 
