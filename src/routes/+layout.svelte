@@ -9,24 +9,27 @@
 	import Command from '$lib/components/ui/Command.svelte';
 	import { currentUser } from '$lib/stores/user';
 	import Toast from '$lib/components/ui/Toast.svelte';
-	import { afterNavigate } from '$app/navigation';
-	import { onMount } from 'svelte';
 
 	export let data: PageData;
+
 	$: currentUser.set(data.user);
 
-	afterNavigate(() => {
-		window.scrollTo(0, 0); // Ensure scroll resets to top after navigating
-	});
+	// START VIEW TRANSITIONS API
+	import { onNavigate } from '$app/navigation';
 
-	onMount(() => {
-		window.scrollTo(0, 0); // Ensure scroll resets to top when the component mounts
+	onNavigate((navigation) => {
+		// @ts-ignore <-- This is a private API so we need to ignore the TS error
+		if (!document.startViewTransition) return;
 
-		// Disable scroll restoration in browsers that support it
-		if ('scrollRestoration' in history) {
-			history.scrollRestoration = 'manual';
-		}
+		return new Promise((resolve) => {
+			// @ts-ignore <-- This is a private API so we need to ignore the TS error
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
 	});
+	// END VIEW TRANSITIONS API
 </script>
 
 <ModeWatcher defaultMode={'dark'} />
@@ -37,13 +40,14 @@
 	<Command />
 {/if}
 
-<!-- Adjusted Layout with min-h-screen -->
-<div class="flex min-h-[calc(100vh)] flex-col">
-	<Nav />
-	<main class="mx-auto my-5 w-full max-w-5xl flex-grow px-2 md:my-10">
-		<slot />
-	</main>
-	<Footer />
+<div>
+	<div class="flex min-h-screen flex-col">
+		<Nav />
+		<main class="mx-auto my-5 w-full max-w-5xl flex-grow overflow-x-clip px-2 md:my-10">
+			<slot />
+		</main>
+		<Footer />
+	</div>
 </div>
 
 <style>
