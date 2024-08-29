@@ -6,7 +6,7 @@
 	import { currentUser } from '$lib/stores/user.js';
 	import { getImageURL } from '$lib/utils';
 	import Post from '$lib/components/ui/Post.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import PostInputArea from '$lib/components/ui/PostInputArea.svelte';
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { gsap } from 'gsap';
@@ -98,12 +98,24 @@
 
 			// Animate "book" on mount
 			gsap.fromTo(
-				'.guestbook-book',
+				'.title-guest',
+				{ opacity: 0, y: -10 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 1,
+					ease: 'power4.out'
+				}
+			);
+
+			// Animate "book" on mount
+			gsap.fromTo(
+				'.title-book',
 				{ opacity: 0, x: -50 },
 				{
 					opacity: 1,
 					x: 0,
-					duration: 3,
+					duration: 1,
 					ease: 'power4.out'
 				}
 			);
@@ -153,8 +165,9 @@
 <div class="">
 	<div class="mx-auto w-full max-w-lg transition-all duration-300">
 		<div class="">
-			<h1 class="text-7xl font-bold text-primary">
-				guest<span class="guestbook-book font-thin text-primary/50">book</span>
+			<h1 class="flex items-center text-7xl font-bold text-primary">
+				<span class="title-guest">guest</span>
+				<span class="title-book font-thin text-primary/50">book</span>
 			</h1>
 		</div>
 
@@ -199,25 +212,17 @@
 			>
 				<div class="form-control gap-0">
 					<input type="hidden" name="author" value={data?.user?.id} />
-					<TextArea
+					<PostInputArea
+						avatar={$currentUser?.avatar
+							? getImageURL($currentUser?.collectionId, $currentUser?.id, $currentUser?.avatar)
+							: `https://ui-avatars.com/api/?name=${$currentUser?.email}`}
+						{isSubmitting}
 						id="content"
 						value={form?.data?.content ?? ''}
 						errors={form?.errors?.content}
 						disabled={loading}
 						placeholder={'type your post here...'}
 					/>
-
-					<Button type="submit" class="group/submitButton" disabled={loading}>
-						submit
-						{#if isSubmitting}
-							<Icon icon="eos-icons:loading" class="ml-2 h-5 w-5" />
-						{:else}
-							<Icon
-								icon="mdi-send"
-								class="ml-2 h-5 w-5 transition-all duration-300 md:group-hover/submitButton:translate-x-1"
-							/>
-						{/if}
-					</Button>
 				</div>
 			</form>
 

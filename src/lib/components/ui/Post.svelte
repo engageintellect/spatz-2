@@ -31,9 +31,9 @@
 	};
 </script>
 
-<div class="relative cursor-pointer transition-all duration-300">
+<div class="text-elipsis relative cursor-pointer overflow-x-hidden transition-all duration-300">
 	<div class="card-body mt-2 px-1 transition-all duration-300 md:px-1">
-		<div class="flex items-start gap-3">
+		<div class="flex items-start gap-2">
 			<div class="">
 				<a href={`/guestbook/post/${id}`}>
 					<div class="h-10 w-10 md:h-12 md:w-12">
@@ -57,7 +57,7 @@
 				</div>
 
 				<a href={`/guestbook/post/${id}`}>
-					<div class="pb-2 pt-1 font-thin">{@html postContent}</div>
+					<div class="pb-2 pr-5 pt-1 font-thin">{@html postContent}</div>
 				</a>
 
 				<div class="mt-2 flex items-center gap-5">

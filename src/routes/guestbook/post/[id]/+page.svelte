@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { getImageURL } from '$lib/utils';
 	import { onMount } from 'svelte';
-	import Post from '$lib/components/ui/Post.svelte';
-	import { Button } from '$lib/components/ui/button/index.js';
 	import { currentUser } from '$lib/stores/user';
-	import Icon from '@iconify/svelte';
 	import { toast } from 'svelte-sonner';
 	import { timeSince, formatFriendlyDate } from '$lib/utils';
 	import { enhance, applyAction } from '$app/forms';
 	import { tick } from 'svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import * as Dialog from '$lib/components/ui/dialog';
 	import { gsap } from 'gsap';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import Post from '$lib/components/ui/Post.svelte';
+	import PostInputArea from '$lib/components/ui/PostInputArea.svelte';
+	import Comment from '$lib/components/ui/Comment.svelte';
+	import Icon from '@iconify/svelte';
 	export let data: {
 		user: App.User;
 		posts: App.Post[];
@@ -23,9 +23,6 @@
 
 	let loading = false;
 	let isSubmitting = false;
-	let isDeleting = false;
-	let deleteLoading = false;
-	let dialogOpen = false;
 
 	let showCommentsForm = false;
 
@@ -44,6 +41,9 @@
 	};
 
 	onMount(() => {
+		if (data.post.comments.length === 0) {
+			showCommentsForm = true;
+		}
 		gsap.from('.post-hero', {
 			opacity: 0,
 			y: 0,
@@ -79,6 +79,10 @@
 		<span class="text-sm">back</span>
 	</Button>
 
+	<!-- ------------------------------------ -->
+	<!-- MAIN POST -->
+	<!-- ------------------------------------ -->
+
 	<div class="post-hero mt-5">
 		<Post
 			postAuthor={data.post.expand.author.username}
@@ -113,14 +117,17 @@
 		</Button>
 	</div>
 
-	{#if showCommentsForm || data.post.comments.length === 0}
+	<!-- ------------------------------------ -->
+	<!-- ADD COMMENT -->
+	<!-- ------------------------------------ -->
+	{#if showCommentsForm}
 		<div>
 			<form
 				action="?/createPostComment"
 				method="POST"
 				class="mb-10 w-full"
 				use:enhance={({ cancel }) => {
-					if (isSubmitting) return cancel(); // Prevent multiple submissions
+					if (isSubmitting) return cancel();
 					isSubmitting = true;
 
 					return async ({ result, update }) => {
@@ -129,10 +136,8 @@
 							await update();
 							await tick();
 
-							// Find the newly added post (assuming it's added at the top)
 							const newPost = document.querySelector('.post-wrapper:first-child');
 							if (newPost) {
-								// Apply a fade-in and scale-in animation to the new post
 								gsap.fromTo(
 									newPost,
 									{ opacity: 0, y: 0, scale: 0.95 },
@@ -146,140 +151,47 @@
 								);
 							}
 						} else {
-							// Apply form errors to the state
 							applyAction(result);
 							toast.error('Failed to submit comment', {});
 						}
 
-						await update(); // Ensure form state (including errors) is updated
+						await update();
 						isSubmitting = false;
 					};
 				}}
 			>
-				<div class="form-control gap-0">
+				<div class="mt-5 gap-0">
 					<input type="hidden" name="author" value={data?.user?.id} />
 					<input type="hidden" name="recordId" value={data.post?.id} />
 					<input type="hidden" name="post" value={data.post?.id} />
-					<TextArea
+					<PostInputArea
+						avatar={$currentUser?.avatar
+							? getImageURL($currentUser?.collectionId, $currentUser?.id, $currentUser?.avatar)
+							: `https://ui-avatars.com/api/?name=${$currentUser?.email}`}
 						id="content"
 						value={form?.data?.content ?? ''}
 						errors={form?.errors?.content}
 						disabled={loading}
+						{isSubmitting}
 						placeholder={`type your reply to ${data.post.expand.author.username} here...`}
 					/>
-
-					<Button type="submit" class="group/submitButton w-full" disabled={loading}>
-						submit
-						{#if isSubmitting}
-							<Icon icon="eos-icons:loading" class="ml-2 h-5 w-5" />
-						{:else}
-							<Icon
-								icon="mdi-send"
-								class="ml-2 h-5 w-5 transition-all duration-300 md:group-hover/submitButton:translate-x-1"
-							/>
-						{/if}
-					</Button>
 				</div>
 			</form>
 		</div>
 	{/if}
 
+	<!-- ------------------------------------ -->
+	<!-- COMMENT FEED -->
+	<!-- ------------------------------------ -->
 	{#each data.post.comments.slice().reverse() as comment}
-		<div class="relative flex items-start gap-2 border-b py-5 pl-2">
-			<img
-				src={comment?.authorAvatar
-					? getImageURL($currentUser?.collectionId, comment?.author, comment?.authorAvatar)
-					: `https://ui-avatars.com/api/?name=${$currentUser?.email}`}
-				class="h-8 w-8 rounded-full object-cover"
-				alt="user-avatar"
-			/>
-
-			<div class="-mt-1 flex flex-col">
-				<div class="flex items-center gap-2">
-					<div class="text-sm">
-						{comment?.authorUsername}
-					</div>
-					<div class="text-xs text-foreground/70">
-						{timeSince(formatFriendlyDate(comment?.created))}
-					</div>
-				</div>
-				<div class="mt-1 font-thin">{comment?.content}</div>
-			</div>
-
-			{#if $currentUser.username === comment.authorUsername}
-				<div class="absolute right-0 top-1 flex items-center gap-1">
-					<Dialog.Root bind:open={dialogOpen}>
-						<Dialog.Trigger>
-							<div>
-								<Button
-									variant="ghost"
-									size="sm"
-									on:click={() => (dialogOpen = true)}
-									class="group/deleteButton flex scale-[0.75] items-center active:scale-[0.70] "
-								>
-									<Icon
-										icon={'mdi:close'}
-										class={`h-5 w-5 transition-all duration-200 group-hover/deleteButton:scale-110 ${deleteLoading ? 'animate-deletePost' : ''}`}
-									/>
-									<span class="sr-only">Delete</span>
-								</Button>
-							</div>
-						</Dialog.Trigger>
-						<Dialog.Content>
-							<Dialog.Header>
-								<Dialog.Title>Are you sure?</Dialog.Title>
-								<Dialog.Description>
-									Are you sure you want to delete this post? This action cannot be undone.
-
-									<form
-										use:enhance={({ cancel }) => {
-											if (isDeleting) return cancel(); // Prevent multiple submissions
-											isDeleting = true;
-
-											return async ({ result, update }) => {
-												if (result.type === 'success') {
-													toast('Comment deleted successfully.', {});
-												} else {
-													toast.error('Failed to delete comment.', {});
-												}
-
-												await update();
-												isDeleting = false;
-											};
-										}}
-										action="?/deletePostComment"
-										method="POST"
-									>
-										<input type="hidden" name="commentId" value={comment.id} />
-										<input
-											type="hidden"
-											name="currentUserId"
-											value={$currentUser.id}
-											disabled={deleteLoading}
-										/>
-
-										<div class="mt-5 flex items-center justify-between gap-2">
-											<Button
-												type="submit"
-												variant="destructive"
-												on:click={() => (dialogOpen = false)}
-												class="w-full text-white">delete</Button
-											>
-
-											<Button
-												variant="default"
-												type="button"
-												on:click={() => (dialogOpen = false)}
-												class="w-full">cancel</Button
-											>
-										</div>
-									</form>
-								</Dialog.Description>
-							</Dialog.Header>
-						</Dialog.Content>
-					</Dialog.Root>
-				</div>
-			{/if}
-		</div>
+		<Comment
+			currentUser={$currentUser}
+			userId={comment.author}
+			username={comment.authorUsername}
+			commentId={comment.id}
+			avatar={comment.authorAvatar}
+			createdDate={timeSince(formatFriendlyDate(comment.created))}
+			comment={comment.content}
+		/>
 	{/each}
 </div>
