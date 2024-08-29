@@ -15,6 +15,12 @@
 
 	let isSubmitting = false;
 
+	export let data: {
+		user: App.User;
+		posts: App.Post[];
+		comments: App.Comment[];
+	};
+
 	export let form: {
 		data: {
 			content?: string;
@@ -25,19 +31,12 @@
 		};
 	};
 
-	export let data: {
-		user: App.User;
-		posts: App.Post[];
-		comments: App.Comment[];
-	};
-
 	let loading = false;
 
 	$: currentUser.set(data.user);
 
 	let showScrollToTop = false;
 
-	// Sorting logic
 	let sortOption = 'date'; // Default sort option
 
 	function sortByDate(posts: App.Post[]) {
@@ -171,14 +170,10 @@
 					return async ({ result, update }) => {
 						if (result.type === 'success') {
 							toast('Post submission success!', {});
-							// Update the DOM to include the new post
 							await update();
-							// Ensure DOM updates are complete
 							await tick();
-							// Find the newly added post (assuming it's added at the top)
 							const newPost = document.querySelector('.post-wrapper:first-child');
 							if (newPost) {
-								// Apply a fade-in and scale-in animation to the new post
 								gsap.fromTo(
 									newPost,
 									{ opacity: 0, y: 0, scale: 0.95 },
@@ -226,7 +221,7 @@
 				</div>
 			</form>
 
-			<div class="post-wrapper w-full">
+			<div class="w-full">
 				<div class="">
 					<div class="flex items-end justify-between gap-5 border-b">
 						<div class="mb-2 text-xl font-thin">posts: {data.posts.length}</div>

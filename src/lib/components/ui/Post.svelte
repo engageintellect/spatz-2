@@ -45,7 +45,7 @@
 			</div>
 			<div class="w-full">
 				<div class="flex items-center gap-2">
-					<div class="text-base lowercase text-primary hover:underline">{postAuthor}</div>
+					<div class="text-base lowercase text-primary">{postAuthor}</div>
 
 					<div
 						class={`text-xs ${timeSince(formatFriendlyDate(postDate)) === 'just now' ? 'text-primary' : 'text-foreground/70'}`}
