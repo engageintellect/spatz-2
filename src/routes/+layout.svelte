@@ -40,14 +40,12 @@
 	<Command />
 {/if}
 
-<div>
-	<div class="flex min-h-screen flex-col">
-		<Nav />
-		<main class="mx-auto my-5 w-full max-w-5xl flex-grow overflow-x-clip px-2 md:my-10">
-			<slot />
-		</main>
-		<Footer />
-	</div>
+<div class="flex min-h-[calc(100dvh)] flex-col">
+	<Nav />
+	<main class="mx-auto my-5 w-full max-w-5xl flex-grow overflow-x-clip px-2 md:my-10">
+		<slot />
+	</main>
+	<Footer />
 </div>
 
 <style>
