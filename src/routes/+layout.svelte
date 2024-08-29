@@ -40,7 +40,7 @@
 	<Command />
 {/if}
 
-<div class="flex min-h-[calc(100dvh)] flex-col">
+<div class="flex min-h-[calc(100svh)] flex-col">
 	<Nav />
 	<main class="mx-auto my-5 w-full max-w-5xl flex-grow overflow-x-clip px-2 md:my-10">
 		<slot />
