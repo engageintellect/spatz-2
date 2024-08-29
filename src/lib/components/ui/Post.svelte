@@ -11,12 +11,14 @@
 	export let id;
 	export let currentUser;
 	import { Button } from '$lib/components/ui/button/index.js';
+	import * as Dialog from '$lib/components/ui/dialog';
 	import { toast } from 'svelte-sonner';
 
 	let loading = false;
 	let isDeleting = false;
 	let deleteLoading = false;
 	let showComments = true;
+	let dialogOpen = false;
 
 	import { formatFriendlyDate, timeSince } from '$lib/utils';
 
@@ -103,50 +105,80 @@
 
 					{#if currentUser.username === postAuthor}
 						<div class="absolute right-0 top-1 flex items-center gap-1">
-							<form
-								use:enhance={({ cancel }) => {
-									if (isDeleting) return cancel(); // Prevent multiple submissions
-									isDeleting = true;
+							<Dialog.Root bind:open={dialogOpen}>
+								<Dialog.Trigger>
+									<div>
+										<Button
+											variant="ghost"
+											size="sm"
+											on:click={() => (dialogOpen = true)}
+											class="group/deleteButton flex scale-[0.75] items-center active:scale-[0.70] "
+										>
+											<Icon
+												icon={'mdi:close'}
+												class={`h-5 w-5 transition-all duration-200 group-hover/deleteButton:scale-110 ${deleteLoading ? 'animate-deletePost' : ''}`}
+											/>
+											<span class="sr-only">Delete</span>
+										</Button>
+									</div>
+								</Dialog.Trigger>
+								<Dialog.Content>
+									<Dialog.Header>
+										<Dialog.Title>Are you sure?</Dialog.Title>
+										<Dialog.Description>
+											Are you sure you want to delete this post? This action cannot be undone.
+											<form
+												use:enhance={({ cancel }) => {
+													if (isDeleting) return cancel(); // Prevent multiple submissions
+													isDeleting = true;
 
-									return async ({ result, update }) => {
-										if (result.type === 'success') {
-											toast('Post deleted successfully.', {});
-										} else {
-											toast.error('Failed to delete post.', {});
-										}
+													return async ({ result, update }) => {
+														if (result.type === 'success') {
+															toast('Post deleted successfully.', {});
+														} else {
+															toast.error('Failed to delete post.', {});
+														}
 
-										if (window.location.href.split('/').pop() !== 'guestbook') {
-											goto('/guestbook');
-										} else {
-											await update();
-										}
+														if (window.location.href.split('/').pop() !== 'guestbook') {
+															goto('/guestbook');
+														} else {
+															await update();
+														}
 
-										isDeleting = false;
-									};
-								}}
-								action="?/deletePost"
-								method="POST"
-							>
-								<input type="hidden" name="postId" value={id} />
-								<input
-									type="hidden"
-									name="currentUserId"
-									value={currentUser.id}
-									disabled={deleteLoading}
-								/>
-								<Button
-									variant="ghost"
-									size="sm"
-									type="submit"
-									class="group/deleteButton flex scale-[0.75] items-center active:scale-[0.70] "
-								>
-									<Icon
-										icon={'mdi:close'}
-										class={`h-5 w-5 transition-all duration-200 group-hover/deleteButton:scale-110 ${deleteLoading ? 'animate-deletePost' : ''}`}
-									/>
-									<span class="sr-only">Delete</span>
-								</Button>
-							</form>
+														isDeleting = false;
+													};
+												}}
+												action="?/deletePost"
+												method="POST"
+											>
+												<input type="hidden" name="postId" value={id} />
+												<input
+													type="hidden"
+													name="currentUserId"
+													value={currentUser.id}
+													disabled={deleteLoading}
+												/>
+
+												<div class="mt-5 flex items-center justify-between gap-2">
+													<Button
+														type="submit"
+														variant="destructive"
+														on:click={() => (dialogOpen = false)}
+														class="w-full text-white">delete</Button
+													>
+
+													<Button
+														variant="default"
+														type="button"
+														on:click={() => (dialogOpen = false)}
+														class="w-full">cancel</Button
+													>
+												</div>
+											</form>
+										</Dialog.Description>
+									</Dialog.Header>
+								</Dialog.Content>
+							</Dialog.Root>
 						</div>
 					{/if}
 				</div>
