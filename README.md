@@ -9,7 +9,7 @@ A complete, fullstack template for Svelte, based on the original [spatz](https:/
 ## What's the difference between spatz and spatz-2?
 
 spatz uses standard forms in svelte and daisyUI.
-spatz-2 uses svelte-superforms, shadcn-svelte, and svelte-animations.
+spatz-2 uses svelte-superforms, shadcn-svelte, stripe payments, and svelte-animations.
 
 ## Tech Stack
 

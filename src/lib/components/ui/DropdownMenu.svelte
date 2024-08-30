@@ -1,23 +1,13 @@
 <script lang="ts">
-	import Book from 'lucide-svelte/icons/book';
-	import CreditCard from 'lucide-svelte/icons/credit-card';
-	import Github from 'lucide-svelte/icons/github';
-	import LifeBuoy from 'lucide-svelte/icons/life-buoy';
-	import LogOut from 'lucide-svelte/icons/log-out';
-	import Settings from 'lucide-svelte/icons/settings';
-	import User from 'lucide-svelte/icons/user';
+	import Icon from '@iconify/svelte';
 	import { pb } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
-	import Icon from '@iconify/svelte';
 	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
-
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import Avatar from '$lib/components/ui/Avatar.svelte';
-
 	import { PUBLIC_POCKETBASE_ADMIN } from '$env/static/public';
-
 	import { currentUser } from '$lib/stores/user';
 
 	function handleLogout() {
@@ -71,7 +61,7 @@
 					data-sveltekit-preload-data="hover"
 					class="flex w-full items-center"
 				>
-					<User class="mr-2 h-4 w-4" />
+					<Icon icon="mdi:account" class="mr-2 h-4 w-4" />
 					<span>Profile</span>
 				</a>
 				<!-- <DropdownMenu.Shortcut>⇧⌘P</DropdownMenu.Shortcut> -->
@@ -82,7 +72,7 @@
 					data-sveltekit-preload-data="hover"
 					class="flex w-full items-center"
 				>
-					<Settings class="mr-2 h-4 w-4" />
+					<Icon icon="mdi:settings" class="mr-2 h-4 w-4" />
 					<span>Account</span>
 				</a>
 				<!-- <DropdownMenu.Shortcut>⌘S</DropdownMenu.Shortcut> -->
@@ -101,7 +91,8 @@
 			</DropdownMenu.Item>
 
 			<!-- <DropdownMenu.Item>
-				<Keyboard class="mr-2 h-4 w-4" />
+        <Keyboard class="mr-2 h-4 w-4" />
+        <Icon icon="mdi:keyboard" class="mr-2 h-4 w-4" />
 				<span>Keyboard shortcuts</span>
 				<DropdownMenu.Shortcut>⌘K</DropdownMenu.Shortcut>
 			</DropdownMenu.Item> -->
@@ -166,8 +157,8 @@
 				target="_blank"
 				class="flex w-full items-center"
 			>
-				<Github class="mr-2 h-4 w-4" />
-				<span>GitHub</span>
+				<Icon icon="mdi:github" class="mr-2 h-4 w-4" />
+				<span>Repository</span>
 			</a>
 		</DropdownMenu.Item>
 		<DropdownMenu.Item>
@@ -193,7 +184,7 @@
 				target="_blank"
 				class="flex w-full items-center"
 			>
-				<Book class="mr-2 h-4 w-4" />
+				<Icon icon="mdi:book-open-variant" class="mr-2 h-4 w-4" />
 				<!-- <Icon icon="material-symbols:docs-outline" class="mr-2 h-5 w-5" /> -->
 				<span>Docs</span>
 			</a>
@@ -208,7 +199,7 @@
 				aria-label="Logout"
 			>
 				<button type="submit" class="flex w-full items-center">
-					<LogOut class="mr-2 h-4 w-4" />
+					<Icon icon="mdi:logout" class="mr-2 h-4 w-4" />
 					<span>Logout</span>
 				</button>
 			</form>

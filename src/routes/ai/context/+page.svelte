@@ -15,7 +15,7 @@
 
 	let messagesEnd: HTMLElement;
 	let inputElement: HTMLInputElement;
-	let customContext = ''; // New context input state
+	let customContext = `Explain it to me like I'm 5....`; // New context input state
 
 	const { input, handleSubmit: originalHandleSubmit, messages, setMessages } = useChat();
 	let initialLoadComplete = false;
@@ -114,7 +114,7 @@
 	<div class="sticky top-[57px] z-10 w-full border-b backdrop-blur-sm">
 		<form class="w-full bg-background py-2" on:submit={handleSubmit}>
 			<input
-				placeholder="Explain it to me like I'm 5..."
+				placeholder="Enter your custom context..."
 				bind:value={customContext}
 				class="w-full rounded-lg border bg-card p-2 focus-within:outline-none focus:outline-none"
 			/>

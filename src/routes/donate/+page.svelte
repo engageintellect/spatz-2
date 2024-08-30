@@ -34,7 +34,7 @@
 				opacity: 1,
 				y: 0,
 				scale: 1,
-				duration: 2,
+				duration: 2.5,
 				delay: 0.1,
 				ease: 'power4.out',
 				stagger: 0.1
@@ -132,7 +132,7 @@
 			</div>
 		</div>
 
-		<div class="mt-10 grid grid-cols-2 gap-2 md:grid-cols-3">
+		<div class="mt-10 grid grid-cols-3 gap-2 md:grid-cols-3">
 			{#each prices as price}
 				<Button
 					variant="success"

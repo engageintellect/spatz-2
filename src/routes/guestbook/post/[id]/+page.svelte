@@ -2,10 +2,7 @@
 	import { getImageURL } from '$lib/utils';
 	import { onMount } from 'svelte';
 	import { currentUser } from '$lib/stores/user';
-	import { toast } from 'svelte-sonner';
 	import { timeSince, formatFriendlyDate } from '$lib/utils';
-	import { enhance, applyAction } from '$app/forms';
-	import { tick } from 'svelte';
 	import { gsap } from 'gsap';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Post from '$lib/components/ui/Post.svelte';
@@ -107,10 +104,13 @@
 
 		<Button variant="ghost" size="sm" on:click={() => (showCommentsForm = !showCommentsForm)}>
 			{#if showCommentsForm}
-				<Icon icon="mdi:close" class="h-5 w-5" />
+				<div class="flex items-center gap-1">
+					<span>hide input</span>
+					<Icon icon="ic:baseline-minus" class="h-5 w-5" />
+				</div>
 			{:else}
 				<div class="flex items-center gap-1">
-					<span>reply</span>
+					<span>add comment</span>
 					<Icon icon="mdi:plus" class="h-5 w-5" />
 				</div>
 			{/if}
@@ -122,61 +122,26 @@
 	<!-- ------------------------------------ -->
 	{#if showCommentsForm}
 		<div>
-			<form
-				action="?/createPostComment"
-				method="POST"
-				class="mb-10 w-full"
-				use:enhance={({ cancel }) => {
-					if (isSubmitting) return cancel();
-					isSubmitting = true;
-
-					return async ({ result, update }) => {
-						if (result.type === 'success') {
-							toast('Comment submission success!', {});
-							await update();
-							await tick();
-
-							const newPost = document.querySelector('.post-wrapper:first-child');
-							if (newPost) {
-								gsap.fromTo(
-									newPost,
-									{ opacity: 0, y: 0, scale: 0.95 },
-									{
-										opacity: 1,
-										y: 0,
-										scale: 1,
-										duration: 2,
-										ease: 'power4.out'
-									}
-								);
-							}
-						} else {
-							applyAction(result);
-							toast.error('Failed to submit comment', {});
-						}
-
-						await update();
-						isSubmitting = false;
-					};
-				}}
-			>
-				<div class="mt-5 gap-0">
-					<input type="hidden" name="author" value={data?.user?.id} />
-					<input type="hidden" name="recordId" value={data.post?.id} />
-					<input type="hidden" name="post" value={data.post?.id} />
-					<PostInputArea
-						avatar={$currentUser?.avatar
-							? getImageURL($currentUser?.collectionId, $currentUser?.id, $currentUser?.avatar)
-							: `https://ui-avatars.com/api/?name=${$currentUser?.email}`}
-						id="content"
-						value={form?.data?.content ?? ''}
-						errors={form?.errors?.content}
-						disabled={loading}
-						{isSubmitting}
-						placeholder={`type your reply to ${data.post.expand.author.username} here...`}
-					/>
-				</div>
-			</form>
+			<div class="mt-5 gap-0 border-b pb-5">
+				<input type="hidden" name="author" value={data?.user?.id} />
+				<PostInputArea
+					action="?/createPostComment"
+					toastSuccess="Comment submission success!"
+					toastError="Failed to submit comment"
+					recordId={data.post.id}
+					postId={data.post.id}
+					userId={$currentUser?.id}
+					avatar={$currentUser?.avatar
+						? getImageURL($currentUser?.collectionId, $currentUser?.id, $currentUser?.avatar)
+						: `https://ui-avatars.com/api/?name=${$currentUser?.email}`}
+					id="content"
+					value={form?.data?.content ?? ''}
+					errors={form?.errors?.content}
+					disabled={loading}
+					{isSubmitting}
+					placeholder={`type your reply to ${data.post.expand.author.username} here...`}
+				/>
+			</div>
 		</div>
 	{/if}
 

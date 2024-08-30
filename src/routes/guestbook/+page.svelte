@@ -162,69 +162,32 @@
 	});
 </script>
 
-<div class="">
-	<div class="mx-auto w-full max-w-lg transition-all duration-300">
-		<div class="">
-			<h1 class="flex items-center text-7xl font-bold text-primary">
-				<span class="title-guest">guest</span>
-				<span class="title-book font-thin text-primary/50">book</span>
-			</h1>
-		</div>
+<div class="mx-auto w-full max-w-lg transition-all duration-300">
+	<div class="">
+		<h1 class="flex items-center text-7xl font-bold text-primary">
+			<span class="title-guest">guest</span>
+			<span class="title-book font-thin text-primary/50">book</span>
+		</h1>
+	</div>
 
-		<div class="user-input my-2 mt-5 flex flex-col gap-5">
-			<form
+	<div class="user-input my-2 mt-5 flex flex-col gap-5">
+		<div class="form-control gap-0">
+			<input type="hidden" name="author" value={data?.user?.id} />
+			<PostInputArea
+				toastSuccess="Post submission success!"
+				toastError="Failed to submit post"
 				action="?/createPost"
-				method="POST"
-				class="w-full"
-				use:enhance={({ cancel }) => {
-					if (isSubmitting) return cancel(); // Prevent multiple submissions
-					isSubmitting = true;
-
-					return async ({ result, update }) => {
-						if (result.type === 'success') {
-							toast('Post submission success!', {});
-							await update();
-							await tick();
-							const newPost = document.querySelector('.post-wrapper:first-child');
-							if (newPost) {
-								gsap.fromTo(
-									newPost,
-									{ opacity: 0, y: 0, scale: 0.95 },
-									{
-										opacity: 1,
-										y: 0,
-										scale: 1,
-										duration: 2,
-										ease: 'power4.out'
-									}
-								);
-							}
-						} else {
-							// Apply form errors to the state
-							applyAction(result);
-							toast.error('Failed to submit Post', {});
-						}
-
-						await update(); // Ensure form state (including errors) is updated
-						isSubmitting = false;
-					};
-				}}
-			>
-				<div class="form-control gap-0">
-					<input type="hidden" name="author" value={data?.user?.id} />
-					<PostInputArea
-						avatar={$currentUser?.avatar
-							? getImageURL($currentUser?.collectionId, $currentUser?.id, $currentUser?.avatar)
-							: `https://ui-avatars.com/api/?name=${$currentUser?.email}`}
-						{isSubmitting}
-						id="content"
-						value={form?.data?.content ?? ''}
-						errors={form?.errors?.content}
-						disabled={loading}
-						placeholder={'type your post here...'}
-					/>
-				</div>
-			</form>
+				userId={$currentUser.id}
+				avatar={$currentUser?.avatar
+					? getImageURL($currentUser?.collectionId, $currentUser?.id, $currentUser?.avatar)
+					: `https://ui-avatars.com/api/?name=${$currentUser?.email}`}
+				{isSubmitting}
+				id="content"
+				value={form?.data?.content ?? ''}
+				errors={form?.errors?.content}
+				disabled={loading}
+				placeholder={'type your post here...'}
+			/>
 
 			<div class="w-full">
 				<div class="">
@@ -237,7 +200,7 @@
 								variant={sortOption === 'date' ? 'default' : 'outline'}
 								on:click={() => (sortOption = 'date')}
 							>
-								New
+								new
 								<Icon icon="mdi:fire" class="ml-1 h-4 w-4" />
 							</Button>
 							<Button
@@ -245,7 +208,7 @@
 								variant={sortOption === 'likes' ? 'default' : 'outline'}
 								on:click={() => (sortOption = 'likes')}
 							>
-								Likes
+								likes
 								<Icon icon="mdi:heart" class="ml-1 h-4 w-4" />
 							</Button>
 						</div>
