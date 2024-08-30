@@ -9,6 +9,7 @@
 	import PostInputArea from '$lib/components/ui/PostInputArea.svelte';
 	import Comment from '$lib/components/ui/Comment.svelte';
 	import Icon from '@iconify/svelte';
+
 	export let data: {
 		user: App.User;
 		posts: App.Post[];
@@ -20,7 +21,6 @@
 
 	let loading = false;
 	let isSubmitting = false;
-
 	let showCommentsForm = false;
 
 	function goBack() {
@@ -41,22 +41,37 @@
 		if (data.post.comments.length === 0) {
 			showCommentsForm = true;
 		}
-		gsap.from('.post-hero', {
-			opacity: 0,
-			y: 0,
-			scale: 0.95,
-			stagger: 0.1,
-			duration: 1,
-			ease: 'power4.out'
-		});
 
-		gsap.from('.comment-feed', {
-			opacity: 0,
-			y: 50,
-			stagger: 0.1,
-			duration: 1,
-			ease: 'power4.out'
-		});
+		gsap
+			.timeline()
+			.from('.backButton', {
+				opacity: 0,
+				x: -10,
+				duration: 0.5,
+				ease: 'power4.out'
+			})
+			.from(
+				'.post-hero',
+				{
+					opacity: 0,
+					y: 10,
+					scale: 0.95,
+					duration: 0.8,
+					ease: 'power4.out'
+				},
+				'-=0.5'
+			)
+			.from(
+				'.comment-feed',
+				{
+					opacity: 0,
+					y: 30,
+					duration: 1,
+					stagger: 0.15,
+					ease: 'power4.out'
+				},
+				'-=0.75'
+			);
 	});
 </script>
 
@@ -66,7 +81,7 @@
 		size="sm"
 		variant="ghost"
 		type="submit"
-		class="group/backButton flex items-center gap-2"
+		class="group/backButton backButton flex items-center gap-2"
 		disabled={loading}
 	>
 		<Icon
@@ -79,7 +94,6 @@
 	<!-- ------------------------------------ -->
 	<!-- MAIN POST -->
 	<!-- ------------------------------------ -->
-
 	<div class="post-hero mt-5">
 		<Post
 			postAuthor={data.post.expand.author.username}
@@ -92,7 +106,7 @@
 			likes={data.post.likes}
 			id={data.post.id}
 			currentUser={$currentUser}
-		></Post>
+		/>
 	</div>
 </div>
 

@@ -21,14 +21,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const response = await resolve(event);
 
-	// send back the default 'pb_auth' cookie to the client with adjusted attributes
+	// send back the default 'pb_auth' cookie to the client with the latest store state
 	response.headers.set(
 		'set-cookie',
-		pb.authStore.exportToCookie({
-			httpOnly: true, // Keep it secure
-			sameSite: 'Lax', // Adjust for cross-site requests
-			secure: true // Ensure the site is accessed via HTTPS
-		})
+		pb.authStore.exportToCookie({ httpOnly: false, sameSite: 'lax' })
 	);
 
 	return response;

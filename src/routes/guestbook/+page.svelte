@@ -2,7 +2,6 @@
 	import { onMount, onDestroy, tick } from 'svelte';
 	import { page } from '$app/stores';
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
-	import { enhance, applyAction } from '$app/forms';
 	import { currentUser } from '$lib/stores/user.js';
 	import { getImageURL } from '$lib/utils';
 	import Post from '$lib/components/ui/Post.svelte';
@@ -10,7 +9,6 @@
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { gsap } from 'gsap';
-	import { toast } from 'svelte-sonner';
 	import { lazyLoad } from '$lib/lazyLoad';
 
 	let isSubmitting = false;
@@ -174,8 +172,6 @@
 		<div class="form-control gap-0">
 			<input type="hidden" name="author" value={data?.user?.id} />
 			<PostInputArea
-				toastSuccess="Post submission success!"
-				toastError="Failed to submit post"
 				action="?/createPost"
 				userId={$currentUser.id}
 				avatar={$currentUser?.avatar
@@ -187,6 +183,8 @@
 				errors={form?.errors?.content}
 				disabled={loading}
 				placeholder={'type your post here...'}
+				toastSuccess="Post submission success!"
+				toastError="Failed to submit post"
 			/>
 
 			<div class="w-full">
@@ -217,7 +215,7 @@
 					<div class="flex flex-col">
 						{#if sortedPosts.length > 0}
 							{#each sortedPosts as post}
-								<div class="post-wrapper invisible border-b">
+								<div class="post-wrapper border-b">
 									<Post
 										comments={post.comments}
 										id={post.id}

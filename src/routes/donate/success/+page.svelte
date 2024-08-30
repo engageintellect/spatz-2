@@ -1,11 +1,37 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { gsap } from 'gsap';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import Icon from '@iconify/svelte';
+
+	let hidden = true;
+
+	onMount(() => {
+		hidden = false;
+		gsap.from('.animate-item', {
+			opacity: 0,
+			y: 20,
+			duration: 1,
+			delay: 0.1,
+			stagger: 0.2,
+			ease: 'power4.out'
+		});
+	});
 </script>
 
 <main
-	class="mx-auto max-w-lg rounded-lg p-2 transition-all duration-300 md:border md:p-5 md:shadow"
+	class={`${hidden ? 'opacity-0' : ''} animate-item mx-auto max-w-lg rounded-lg p-2 md:border md:p-5 md:shadow`}
 >
-	<h1 class="text-3xl font-bold">payment successful</h1>
-	<p class="mt-4 text-lg">Thank you for your donation! We appreciate your support.</p>
-	<Button href="/" class="mt-5">return to home</Button>
+	<h1 class="animate-item text-3xl font-bold">payment success</h1>
+	<p class="animate-item mt-4 text-lg">Thank you for your donation! Your payment was successful.</p>
+	<div class="animate-item mt-5 flex items-center justify-between gap-2">
+		<Button href="/" variant="default" class="flex w-full items-center gap-2">
+			<Icon icon="mdi:home" class="h-5 w-5" />
+			<div>go home</div>
+		</Button>
+		<Button href="/donate" variant="success" class="flex w-full items-center gap-2">
+			<div>try again</div>
+			<Icon icon="mdi:arrow-right" class="h-5 w-5" />
+		</Button>
+	</div>
 </main>
