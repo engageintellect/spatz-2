@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { gsap } from 'gsap';
+	import { animateMainStagger } from '$lib/animations';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 
@@ -8,14 +8,7 @@
 
 	onMount(() => {
 		hidden = false;
-		gsap.from('.animate-item', {
-			opacity: 0,
-			y: 20,
-			duration: 1,
-			delay: 0.1,
-			stagger: 0.2,
-			ease: 'power4.out'
-		});
+		animateMainStagger();
 	});
 </script>
 

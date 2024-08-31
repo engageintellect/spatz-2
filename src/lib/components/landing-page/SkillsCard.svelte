@@ -209,7 +209,7 @@
 >
 	<!-- CARD 1 -->
 	<div
-		class="rocketCard relative order-1 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-gradient-to-bl from-orange-500 to-yellow-500 text-white shadow-lg"
+		class="rocketCard relative order-1 flex h-full min-h-[360px] w-full overflow-hidden rounded-lg bg-gradient-to-bl from-orange-500 to-yellow-500 text-white shadow-lg"
 	>
 		<div class="absolute bottom-0 right-0 h-full w-full overflow-hidden text-white drop-shadow-lg">
 			<MeteorCard />
@@ -222,7 +222,7 @@
 			/>
 		</div>
 		<div class="z-20 flex w-2/3 flex-col gap-5 p-5">
-			<div class="flex w-full flex-col text-5xl font-bold uppercase drop-shadow">
+			<div class="flex w-full flex-col text-5xl font-bold uppercase text-orange-600 drop-shadow">
 				<div>build</div>
 				<div>at</div>
 				<div>warp</div>
@@ -255,7 +255,7 @@
 
 	<!-- CARD 3 -->
 	<div
-		class="orbitCard relative order-5 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg bg-gradient-to-br from-orange-500 to-orange-700 text-white shadow-lg"
+		class="orbitCard relative order-5 flex h-full min-h-[360px] w-full rounded-lg bg-gradient-to-br from-orange-500 to-orange-700 text-white shadow-lg"
 	>
 		<StackOrbit />
 	</div>
@@ -302,7 +302,7 @@
 
 	<!-- CARD 6 -->
 	<div
-		class="card4 relative order-3 flex h-full min-h-[500px] w-full overflow-hidden rounded-lg border border-orange-500 bg-neutral-300 text-white shadow-lg dark:bg-neutral-500 md:order-4"
+		class="card4 relative order-3 flex h-full min-h-[360px] w-full overflow-hidden rounded-lg border border-orange-500 bg-neutral-300 text-white shadow-lg dark:bg-neutral-500 md:order-4"
 	>
 		<enhanced:img
 			src={pocketbaseImage}

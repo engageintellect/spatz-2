@@ -1,22 +1,35 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Toast from '$lib/components/ui/Toast.svelte';
-
-	import CircleAlert from 'lucide-svelte/icons/circle-alert';
 	import * as Alert from '$lib/components/ui/alert/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { onMount } from 'svelte';
+	import { animateMainStagger } from '$lib/animations';
+	import Icon from '@iconify/svelte';
+
+	onMount(() => {
+		animateMainStagger();
+	});
 </script>
 
-<div class="mx-auto w-full max-w-sm">
-	<Alert.Root variant="destructive">
-		<CircleAlert class="h-4 w-4" />
+<div class="animate-item mx-auto w-full max-w-sm">
+	<Alert.Root variant="destructive" class="animate-item">
+		<Icon icon="mdi:alert-circle" class="h-4 w-4" />
 		<Alert.Title>Error</Alert.Title>
 		<Alert.Description>{$page?.error?.message}</Alert.Description>
 	</Alert.Root>
 
-	<div class="mt-5 flex items-center gap-2">
-		<Button variant="default" href="/auth/login" class="lowercase">Back to login</Button>
-		<Button variant="outline" href="/auth/register" class="lowercase">create account</Button>
+	<div class="animate-item mt-5 flex items-center gap-2">
+		<Button variant="default" href="/auth/login" class="flex w-full items-center gap-2 lowercase">
+			<Icon icon="mdi:arrow-left" class="h-5 w-5" />
+			<div>back to login</div>
+		</Button>
+		<Button
+			variant="outline"
+			href="/auth/register"
+			class="flex w-full items-center gap-2 lowercase"
+		>
+			<div>create an account</div>
+			<Icon icon="mdi:plus" class="h-5 w-5" />
+		</Button>
 	</div>
 </div>
-
