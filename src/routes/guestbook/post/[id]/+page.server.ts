@@ -34,8 +34,6 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		sort: '-created'
 	});
 
-
-
 	const mentioning = await locals.pb.collection('posts').getFullList({
 		sort: '-created'
 	});
@@ -57,7 +55,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	const transformedPost = {
 		...post,
 		username: users.find((user) => user.id === post.author)?.username,
-		avatar: users.find((user) => user.id === post.author)?.avatar,
+		avatar: users.find((user) => user.id === post.author)?.avatar
 	};
 
 	// Return the transformed post data
@@ -142,7 +140,6 @@ export const actions: Actions = {
 
 			// Get the associated post
 			const post = await locals.pb.collection('posts').getOne(formData.post);
-			console.log({ 'post-id': post.id, 'mentioning-id': mentioning.id });
 
 			// Update the post's comments array to include the new comment ID
 			await locals.pb.collection('posts').update(mentioning.id, { mentioning: post.id });

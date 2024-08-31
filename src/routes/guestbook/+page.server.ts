@@ -26,7 +26,6 @@ export const load: PageServerLoad = async ({ locals }) => {
 		sort: '-created'
 	});
 
-
 	// GET USERS
 	const users = await locals.pb.collection('users').getFullList({
 		sort: '-created'
@@ -40,7 +39,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		return {
 			...post,
 			username: users.find((user) => user.id === post.author)?.username,
-			avatar: users.find((user) => user.id === post.author)?.avatar,
+			avatar: users.find((user) => user.id === post.author)?.avatar
 		};
 	});
 
@@ -109,7 +108,6 @@ export const actions: Actions = {
 			await request.formData(),
 			createPostCommentSchema
 		);
-		console.log('this is form data', formData);
 		if (errors) {
 			return fail(400, {
 				data: formData,
@@ -122,7 +120,6 @@ export const actions: Actions = {
 			const comment = await locals.pb.collection('comments').create(formData);
 
 			// Get the associated post
-			console.log('this is form data', formData);
 			const post = await locals.pb.collection('posts').getOne(formData.post);
 
 			// Update the post's comments array to include the new comment ID
