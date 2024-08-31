@@ -136,7 +136,7 @@
 			{#each prices as price}
 				<Button
 					variant="success"
-					class="donate-button transition-transform duration-300 md:hover:scale-[102%] md:hover:shadow"
+					class="donate-button border border-[2px] border-emerald-700 transition-transform duration-300 md:hover:scale-[102%] md:hover:shadow"
 					on:click={() => {
 						amount = price;
 						handleDonate();

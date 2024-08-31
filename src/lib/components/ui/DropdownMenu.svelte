@@ -54,6 +54,9 @@
 			</DropdownMenu.Item>
 		</DropdownMenu.Label>
 		<DropdownMenu.Separator />
+
+		<!-- <DropdownMenu.Label>Settings</DropdownMenu.Label> -->
+
 		<DropdownMenu.Group>
 			<DropdownMenu.Item>
 				<a
@@ -98,6 +101,7 @@
 			</DropdownMenu.Item> -->
 		</DropdownMenu.Group>
 		<DropdownMenu.Separator />
+		<!-- <DropdownMenu.Label>App</DropdownMenu.Label> -->
 		<DropdownMenu.Group>
 			<DropdownMenu.Item>
 				<!-- <Users class="mr-2 h-4 w-4" /> -->
@@ -123,34 +127,9 @@
 					<span>PocketBase</span>
 				</a>
 			</DropdownMenu.Item>
-			<!-- 
-			<DropdownMenu.Sub>
-				<DropdownMenu.SubTrigger>
-					<UserPlus class="mr-2 h-4 w-4" />
-					<span>Invite users</span>
-				</DropdownMenu.SubTrigger>
-				<DropdownMenu.SubContent>
-					<DropdownMenu.Item>
-						<Mail class="mr-2 h-4 w-4" />
-						<span>Email</span>
-					</DropdownMenu.Item>
-					<DropdownMenu.Item>
-						<MessageSquare class="mr-2 h-4 w-4" />
-						<span>Message</span>
-					</DropdownMenu.Item>
-					<DropdownMenu.Item>
-						<CirclePlus class="mr-2 h-4 w-4" />
-						<span>More...</span>
-					</DropdownMenu.Item>
-				</DropdownMenu.SubContent>
-			</DropdownMenu.Sub>
-			<DropdownMenu.Item>
-				<Plus class="mr-2 h-4 w-4" />
-				<span>New Team</span>
-				<DropdownMenu.Shortcut>⌘+T</DropdownMenu.Shortcut>
-			</DropdownMenu.Item> -->
 		</DropdownMenu.Group>
 		<DropdownMenu.Separator />
+		<!-- <DropdownMenu.Label>Support</DropdownMenu.Label> -->
 		<DropdownMenu.Item>
 			<a
 				href="https://github.com/engageintellect/spatz-2"
@@ -171,6 +150,7 @@
 				<span>Submit Bug</span>
 			</a>
 		</DropdownMenu.Item>
+
 		<DropdownMenu.Item>
 			<a href="/donate" class="flex w-full items-center">
 				<Icon icon="mdi:money" class="mr-2 h-4 w-4" />
@@ -185,7 +165,6 @@
 				class="flex w-full items-center"
 			>
 				<Icon icon="mdi:book-open-variant" class="mr-2 h-4 w-4" />
-				<!-- <Icon icon="material-symbols:docs-outline" class="mr-2 h-5 w-5" /> -->
 				<span>Docs</span>
 			</a>
 		</DropdownMenu.Item>
@@ -203,8 +182,6 @@
 					<span>Logout</span>
 				</button>
 			</form>
-
-			<!-- <DropdownMenu.Shortcut>⇧⌘Q</DropdownMenu.Shortcut> -->
 		</DropdownMenu.Item>
 	</DropdownMenu.Content>
 </DropdownMenu.Root>

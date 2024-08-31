@@ -4,10 +4,8 @@
 	import { getImageURL } from '$lib/utils';
 	import Icon from '@iconify/svelte';
 	import Input from '$lib/components/ui/Input.svelte';
-	// import { toast } from '$lib/stores/toast'
 	import { toast } from 'svelte-sonner';
 	import { Button } from '$lib/components/ui/button/index.js';
-	// import Toast from '$lib/components/Toast.svelte'
 
 	export let data;
 	export let form;
