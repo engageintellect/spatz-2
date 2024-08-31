@@ -1,5 +1,4 @@
 import type { PageServerLoad } from './$types';
-import { redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { error, fail } from '@sveltejs/kit';
 import { validateData } from '$lib/utils';
@@ -11,7 +10,6 @@ import {
 	deletePostCommentSchema
 } from '$lib/schema';
 
-// Define the custom error type
 interface CustomError {
 	status: number;
 	message: string;
@@ -25,7 +23,6 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	const post = await locals.pb.collection('posts').getOne(id, { expand: 'comments,author' });
 
 	if (!post) {
-		// Handle the case where the post is not found
 		return {
 			status: 404,
 			error: new Error('Post not found')
@@ -36,34 +33,37 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	const users = await locals.pb.collection('users').getFullList({
 		sort: '-created'
 	});
-	const comments = await locals.pb.collection('comments').getFullList({
+
+
+
+	const mentioning = await locals.pb.collection('posts').getFullList({
 		sort: '-created'
 	});
+
+	// show mentioning if mentioning.mentioning is the same as post.id
+	const transformedMentioning = mentioning
+		.filter((mention) => mention.mentioning.includes(post.id))
+		.map((mention) => {
+			const author = users.find((user) => user.id === mention.author);
+			return {
+				...mention,
+				authorUsername: author?.username,
+				authorAvatar: author?.avatar,
+				comments: mention.comments
+			};
+		});
 
 	// Transform the post object
 	const transformedPost = {
 		...post,
 		username: users.find((user) => user.id === post.author)?.username,
 		avatar: users.find((user) => user.id === post.author)?.avatar,
-		comments: post.comments
-			.map((commentId: string) => {
-				const comment = comments.find((comment) => comment.id === commentId);
-				if (comment) {
-					const author = users.find((user) => user.id === comment.author);
-					return {
-						...comment,
-						authorUsername: author?.username,
-						authorAvatar: author?.avatar
-					};
-				}
-				return null;
-			})
-			.filter((comment: any) => comment !== null) // Ensure only valid comments are returned
 	};
 
 	// Return the transformed post data
 	return {
-		post: transformedPost
+		post: transformedPost,
+		mentioning: transformedMentioning
 	};
 };
 
@@ -138,14 +138,22 @@ export const actions: Actions = {
 
 		try {
 			// Create the comment
-			const comment = await locals.pb.collection('comments').create(formData);
+			const mentioning = await locals.pb.collection('posts').create(formData);
 
 			// Get the associated post
 			const post = await locals.pb.collection('posts').getOne(formData.post);
+			console.log({ 'post-id': post.id, 'mentioning-id': mentioning.id });
 
 			// Update the post's comments array to include the new comment ID
-			const updatedComments = [...post.comments, comment.id];
-			await locals.pb.collection('posts').update(post.id, { comments: updatedComments });
+			await locals.pb.collection('posts').update(mentioning.id, { mentioning: post.id });
+
+			const currentMentions = post.mentionedBy || [];
+
+			// Append the new mention ID
+			currentMentions.push(mentioning.id);
+
+			// Update the post with the new array
+			await locals.pb.collection('posts').update(post.id, { mentionedBy: currentMentions });
 
 			return { success: true };
 		} catch (err) {

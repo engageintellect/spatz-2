@@ -16,7 +16,7 @@
 	export let data: {
 		user: App.User;
 		posts: App.Post[];
-		comments: App.Comment[];
+		post: App.Post;
 	};
 
 	export let form: {
@@ -48,6 +48,8 @@
 	function sortByCurrentUser(posts: App.Post[]) {
 		return posts.filter((post) => post.author === $currentUser.id);
 	}
+
+	$: emptyMentioningPostsCount = data.posts.filter((post) => post.mentioning.length === 0).length;
 
 	$: sortedPosts = (() => {
 		let posts = [...data.posts];
@@ -191,7 +193,7 @@
 			<div class="w-full">
 				<div class="">
 					<div class="flex items-end justify-between gap-5 border-b">
-						<div class="mb-2 text-xl font-thin">posts: {data.posts.length}</div>
+						<div class="mb-2 text-xl font-thin">posts: {emptyMentioningPostsCount}</div>
 
 						<div class="my-4 flex items-end justify-end gap-2">
 							<Button
@@ -216,20 +218,22 @@
 					<div class="flex flex-col">
 						{#if sortedPosts.length > 0}
 							{#each sortedPosts as post}
-								<div class="post-wrapper border-b">
-									<Post
-										comments={post.comments}
-										id={post.id}
-										postDate={post.created}
-										postAuthor={post.username}
-										avatar={post?.avatar
-											? getImageURL($currentUser?.collectionId, post?.author, post?.avatar)
-											: `https://ui-avatars.com/api/?name=${post?.username}`}
-										postContent={post.content}
-										likes={post.likes}
-										currentUser={$currentUser}
-									></Post>
-								</div>
+								{#if post.mentioning.length === 0}
+									<div class="post-wrapper border-b">
+										<Post
+											comments={post.mentionedBy}
+											id={post.id}
+											postDate={post.created}
+											postAuthor={post.username}
+											avatar={post?.avatar
+												? getImageURL($currentUser?.collectionId, post?.author, post?.avatar)
+												: `https://ui-avatars.com/api/?name=${post?.username}`}
+											postContent={post.content}
+											likes={post.likes}
+											currentUser={$currentUser}
+										></Post>
+									</div>
+								{/if}
 							{/each}
 						{:else}
 							<div class="alert">

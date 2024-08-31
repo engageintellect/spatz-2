@@ -7,27 +7,21 @@ declare global {
 			user: import('pocketbase').default['authStore']['model'];
 		}
 
-		interface Comment {
-			id: string;
-			postId: string;
-			content: string;
-			author: string[];
-			created: string;
-			authorUsername: string;
-			authorAvatar: string;
-		}
-
 		interface Post {
 			id: string;
 			author: string;
-			comments: Comment[];
+			comments: string[];
 			content: string;
 			collectionId: string;
 			collectionName: string;
 			created: string;
 			updated: string;
-			avatar: string;
-			username: string;
+			mentioning: string[];
+			mentionedBy: string[];
+			authorUsername?: string; // Add this property
+			authorAvatar?: string; // Add this property
+			avatar?: string;
+			username?: string;
 			likes: string[];
 			expand: {
 				author: {

@@ -2,19 +2,17 @@
 	import { getImageURL } from '$lib/utils';
 	import { onMount } from 'svelte';
 	import { currentUser } from '$lib/stores/user';
-	import { timeSince, formatFriendlyDate } from '$lib/utils';
 	import { gsap } from 'gsap';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Post from '$lib/components/ui/Post.svelte';
 	import PostInputArea from '$lib/components/ui/PostInputArea.svelte';
-	import Comment from '$lib/components/ui/Comment.svelte';
 	import Icon from '@iconify/svelte';
 
 	export let data: {
 		user: App.User;
 		posts: App.Post[];
 		post: App.Post;
-		comments: App.Comment[];
+		mentioning: App.Post[];
 	};
 
 	$: currentUser.set(data.user);
@@ -38,7 +36,7 @@
 	};
 
 	onMount(() => {
-		if (data.post.comments.length === 0) {
+		if (data.post.mentionedBy.length === 0) {
 			showCommentsForm = true;
 		}
 
@@ -98,7 +96,7 @@
 		<Post
 			postAuthor={data.post.expand.author.username}
 			postContent={data.post.content}
-			comments={data.post.comments}
+			comments={data.post.mentionedBy}
 			postDate={data.post.created}
 			avatar={data.post.expand.author.avatar
 				? getImageURL($currentUser?.collectionId, data.post.author, data.post.expand.author.avatar)
@@ -113,7 +111,7 @@
 <div class="comment-feed mx-auto mt-5 max-w-lg">
 	<div class="flex w-full justify-between border-b pb-2">
 		<div class="flex items-center gap-1">
-			<span class="text-xl font-thin">comments: {data.post.comments.length}</span>
+			<span class="text-xl font-thin">comments: {data.post.mentionedBy.length}</span>
 		</div>
 
 		<Button variant="ghost" size="sm" on:click={() => (showCommentsForm = !showCommentsForm)}>
@@ -162,15 +160,21 @@
 	<!-- ------------------------------------ -->
 	<!-- COMMENT FEED -->
 	<!-- ------------------------------------ -->
-	{#each data.post.comments.slice().reverse() as comment}
-		<Comment
-			currentUser={$currentUser}
-			userId={comment.author}
-			username={comment.authorUsername}
-			commentId={comment.id}
-			avatar={comment.authorAvatar}
-			createdDate={timeSince(formatFriendlyDate(comment.created))}
-			comment={comment.content}
-		/>
+
+	{#each data.mentioning.slice() as comment}
+		<div class="border-b">
+			<Post
+				postAuthor={comment.authorUsername}
+				postContent={comment.content}
+				comments={comment.mentionedBy}
+				postDate={comment.created}
+				avatar={comment.authorAvatar
+					? getImageURL($currentUser?.collectionId, comment.author, comment.authorAvatar)
+					: `https://ui-avatars.com/api/?name=${comment.authorUsername}`}
+				likes={comment.likes}
+				id={comment.id}
+				currentUser={$currentUser}
+			/>
+		</div>
 	{/each}
 </div>

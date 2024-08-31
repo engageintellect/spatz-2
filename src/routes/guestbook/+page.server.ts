@@ -26,10 +26,6 @@ export const load: PageServerLoad = async ({ locals }) => {
 		sort: '-created'
 	});
 
-	// GET COMMENTS
-	const comments = await locals.pb.collection('comments').getFullList({
-		sort: '-created'
-	});
 
 	// GET USERS
 	const users = await locals.pb.collection('users').getFullList({
@@ -39,28 +35,12 @@ export const load: PageServerLoad = async ({ locals }) => {
 	// TRANSFORM POSTS
 	const transformedPosts = posts.map((post) => {
 		// Replace the comment IDs with the actual comment objects and include author details
-		const postComments = post.comments
-			.map((commentId: string) => {
-				const comment = comments.find((comment) => comment.id === commentId);
-				if (comment) {
-					// Find the author of the comment
-					const author = users.find((user) => user.id === comment.author);
-					return {
-						...comment,
-						authorUsername: author?.username,
-						authorAvatar: author?.avatar
-					};
-				}
-				return null;
-			})
-			.filter((comment: any) => comment !== null); // Ensure only valid comments are returned
 
 		// Add author's username and avatar to each post
 		return {
 			...post,
 			username: users.find((user) => user.id === post.author)?.username,
 			avatar: users.find((user) => user.id === post.author)?.avatar,
-			comments: postComments // Replace the comment IDs with the actual comment objects
 		};
 	});
 
@@ -164,7 +144,7 @@ export const actions: Actions = {
 			const postId = formData.get('postId') as string;
 			deleteGuestBookPostSchema.parse({ postId });
 
-			// Fetch the post to ensure it exists
+			// Ensure the post exists
 			const post = await locals.pb.collection('posts').getOne(postId);
 
 			// Ensure the user is authorized to delete the post
@@ -172,8 +152,24 @@ export const actions: Actions = {
 				throw error(403, 'Unauthorized');
 			}
 
-			// Perform the delete operation
-			await locals.pb.collection('posts').delete(postId);
+			// Recursive function to delete a post and all posts mentioning it
+			const deletePostAndMentions = async (currentPostId: string) => {
+				// Find posts that mention the current post's ID
+				const mentioningPosts = await locals.pb.collection('posts').getFullList({
+					filter: `mentioning ~ "${currentPostId}"`
+				});
+
+				// Recursively delete each post that mentions the current post
+				for (const mentioningPost of mentioningPosts) {
+					await deletePostAndMentions(mentioningPost.id); // Recursive call to handle nested mentions
+				}
+
+				// Delete the current post
+				await locals.pb.collection('posts').delete(currentPostId);
+			};
+
+			// Start the deletion process with the selected post
+			await deletePostAndMentions(postId);
 
 			return {
 				success: true

@@ -23,11 +23,7 @@
 	import { formatFriendlyDate, timeSince } from '$lib/utils';
 
 	const handleCommentClick = () => {
-		if (window.location.href.split('/').pop() === 'guestbook') {
-			goto(`/guestbook/post/${id}`);
-		} else {
-			showComments = !showComments;
-		}
+		goto(`/guestbook/post/${id}`);
 	};
 </script>
 
@@ -139,7 +135,7 @@
 															toast.error('Failed to delete post.', {});
 														}
 
-														if (window.location.href.split('/').pop() !== 'guestbook') {
+														if (window.location.href.split('/').pop() === `${id}`) {
 															goto('/guestbook');
 														} else {
 															await update();
