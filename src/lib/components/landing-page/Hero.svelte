@@ -104,8 +104,8 @@
 
 			<div class="">
 				<div class="animate-subtitle mt-5 text-xl font-thin text-foreground/70 lg:text-2xl">
-					<span class="font-base text-orange-500">Back for round two</span>. This time with
-					superforms, svelte-animations, and shadcn.
+					<span class="font-base text-orange-500">Back for round two</span>, this time with
+					superforms, svelte-animations, stripe, and shadcn.
 				</div>
 			</div>
 

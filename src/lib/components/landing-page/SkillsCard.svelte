@@ -222,7 +222,7 @@
 			/>
 		</div>
 		<div class="z-20 flex w-2/3 flex-col gap-5 p-5">
-			<div class="flex w-full flex-col text-5xl font-bold uppercase text-orange-600 drop-shadow">
+			<div class="flex w-full flex-col text-5xl font-bold uppercase text-yellow-300 drop-shadow">
 				<div>build</div>
 				<div>at</div>
 				<div>warp</div>

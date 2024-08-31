@@ -221,67 +221,6 @@
 		"options": {}
 	},
 	{
-		"id": "comments_collection_id",
-		"name": "comments",
-		"type": "base",
-		"system": false,
-		"schema": [
-			{
-				"system": false,
-				"id": "comment_content_id",
-				"name": "content",
-				"type": "text",
-				"required": true,
-				"presentable": false,
-				"unique": false,
-				"options": {
-					"min": 1,
-					"max": 500,
-					"pattern": ""
-				}
-			},
-			{
-				"system": false,
-				"id": "comment_post_id",
-				"name": "post",
-				"type": "relation",
-				"required": true,
-				"presentable": false,
-				"unique": false,
-				"options": {
-					"collectionId": "xdpgh3fikj0tetr",
-					"cascadeDelete": true,
-					"minSelect": 1,
-					"maxSelect": 1,
-					"displayFields": null
-				}
-			},
-			{
-				"system": false,
-				"id": "comment_author_id",
-				"name": "author",
-				"type": "relation",
-				"required": true,
-				"presentable": false,
-				"unique": false,
-				"options": {
-					"collectionId": "_pb_users_auth_",
-					"cascadeDelete": false,
-					"minSelect": 1,
-					"maxSelect": 1,
-					"displayFields": null
-				}
-			}
-		],
-		"indexes": [],
-		"listRule": "",
-		"viewRule": "",
-		"createRule": "@request.auth.id !=\"\"",
-		"updateRule": "@request.auth.id = author",
-		"deleteRule": "@request.auth.id = author",
-		"options": {}
-	},
-	{
 		"id": "9ktkng9a95n6199",
 		"name": "pages",
 		"type": "base",
@@ -497,18 +436,34 @@
 			},
 			{
 				"system": false,
-				"id": "related_comments_id",
-				"name": "comments",
+				"id": "nglo2vyq",
+				"name": "mentioning",
 				"type": "relation",
 				"required": false,
 				"presentable": false,
 				"unique": false,
 				"options": {
-					"collectionId": "comments_collection_id",
+					"collectionId": "xdpgh3fikj0tetr",
+					"cascadeDelete": true,
+					"minSelect": null,
+					"maxSelect": null,
+					"displayFields": null
+				}
+			},
+			{
+				"system": false,
+				"id": "nlm7ecd4",
+				"name": "mentionedBy",
+				"type": "relation",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {
+					"collectionId": "xdpgh3fikj0tetr",
 					"cascadeDelete": false,
 					"minSelect": null,
 					"maxSelect": null,
-					"displayFields": ["content", "author"]
+					"displayFields": null
 				}
 			}
 		],
