@@ -134,7 +134,6 @@
 						{disabled}
 						{id}
 						name={id}
-						autofocus
 						bind:value
 						on:input={autoResize}
 						on:keydown={handleKeydown}

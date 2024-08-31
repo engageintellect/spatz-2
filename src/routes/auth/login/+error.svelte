@@ -11,7 +11,7 @@
 	});
 </script>
 
-<div class="animate-item mx-auto w-full max-w-lg rounded-lg p-2 md:border md:p-5 md:shadow">
+<div class="animate-item mx-auto w-full max-w-lg rounded-lg p-2 md:p-5">
 	<Alert.Root variant="destructive" class="animate-item">
 		<Icon icon="mdi:alert-circle" class="h-4 w-4" />
 		<Alert.Title>Error</Alert.Title>

@@ -171,6 +171,7 @@
 	<div class="user-input my-2 mt-5 flex flex-col gap-5">
 		<div class="form-control gap-0">
 			<input type="hidden" name="author" value={data?.user?.id} />
+
 			<PostInputArea
 				action="?/createPost"
 				userId={$currentUser.id}

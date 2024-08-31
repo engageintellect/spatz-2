@@ -177,7 +177,7 @@
 				</Form.Button>
 			</div>
 
-			<p class="mt-2 text-center text-sm text-muted-foreground">
+			<p class="mt-5 text-center text-sm text-muted-foreground">
 				Already have an account? <a
 					href="/auth/login"
 					class="underline underline-offset-4 hover:text-primary">Login</a

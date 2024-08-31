@@ -156,7 +156,7 @@
 				</Form.Button>
 			</div>
 
-			<p class="mt-2 text-center text-sm text-muted-foreground">
+			<p class="mt-5 text-center text-sm text-muted-foreground">
 				Don't have an account? <a
 					href="/auth/register"
 					class="underline underline-offset-4 hover:text-primary">Register</a

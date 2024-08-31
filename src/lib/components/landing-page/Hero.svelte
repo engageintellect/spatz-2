@@ -103,16 +103,16 @@
 			</div>
 
 			<div class="">
-				<div class="animate-subtitle mt-2 text-2xl">
-					<span class="text-orange-500">Back for round two</span>. This time with superforms,
-					svelte-animations, and shadcn.
+				<div class="animate-subtitle mt-5 text-xl font-thin text-foreground/70 lg:text-2xl">
+					<span class="font-base text-orange-500">Back for round two</span>. This time with
+					superforms, svelte-animations, and shadcn.
 				</div>
 			</div>
 
 			<div class="animate-buttons mx-auto mt-10 flex w-full items-center gap-2 md:max-w-lg">
 				<a href="/auth/register" class="group/bookingsButton w-full">
 					<Button size="default" class="flex w-full items-center gap-2">
-						<div class="text-lg lowercase md:text-xl">get started</div>
+						<div class="text-lg lowercase">get started</div>
 						<Icon
 							icon="material-symbols:rocket-launch"
 							class="h-5 w-5 transition-transform duration-300 lg:group-hover/bookingsButton:rotate-45"
@@ -122,7 +122,7 @@
 
 				<a href="/auth/login" class="group/bookingsButton w-full">
 					<Button size="default" variant="outline" class="flex w-full items-center gap-2">
-						<div class="text-lg lowercase md:text-xl">login</div>
+						<div class="text-lg lowercase">login</div>
 						<Icon
 							icon="mdi:arrow-right"
 							class="h-5 w-5 transition-transform duration-300 lg:group-hover/bookingsButton:translate-x-1"
