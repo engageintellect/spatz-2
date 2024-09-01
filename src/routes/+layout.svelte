@@ -32,7 +32,7 @@
 </script>
 
 <ModeWatcher defaultMode={'dark'} />
-<Toaster position="bottom-right" richColors={true} />
+<Toaster position="bottom-right" richColors={false} />
 <Toast icon={$toast.icon} type={$toast.type} message={$toast.message} show={$toast.show} />
 
 {#if $currentUser}

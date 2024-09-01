@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
+	import ParticleGrid from '$lib/components/magic-ui/ParticleGrid.svelte';
 
 	import { onDestroy, onMount, tick } from 'svelte';
+
+	let theme: any;
 
 	let gsapInstance: any;
 	let ScrollTriggerInstance: any;
@@ -13,6 +16,19 @@
 	const initializeAnimations = () => {
 		tick();
 		heroHidden = false;
+
+		gsapInstance.from('.particle-grid', {
+			duration: 1,
+			delay: 0.1,
+			opacity: 0,
+			scale: 0.95,
+			y: 20,
+			ease: 'power2.out',
+			scrollTrigger: {
+				trigger: '.section1',
+				toggleActions: 'play none none none'
+			}
+		});
 
 		gsapInstance.from('.section1', {
 			duration: 1,
@@ -67,6 +83,9 @@
 	};
 
 	onMount(() => {
+		// get current theme
+		theme = localStorage.getItem('mode-watcher-mode');
+		console.log('theme', theme);
 		if (typeof window !== 'undefined') {
 			import('gsap').then(({ gsap }) => {
 				import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
@@ -91,14 +110,21 @@
 
 <div
 	id="about"
-	class={` ${heroHidden ? 'opacity-0' : ''} mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-5 rounded-lg py-20 transition-all duration-300 md:flex-row md:gap-0`}
+	class={` ${heroHidden ? 'opacity-0' : ''} relative mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-5 rounded-lg py-40 transition-all duration-300 md:flex-row md:gap-0`}
 >
+	<ParticleGrid
+		color={`${theme === 'light' ? '#d4d4d4' : '#0a0a0a'}`}
+		className="absolute inset-0 z-0 particle-grid"
+		refresh={true}
+		quantity={150}
+	/>
 	<div class="section1 invisible relative flex w-full justify-center" bind:this={section1Container}>
-		<div class="flex w-full max-w-xs flex-col gap-5 text-center lg:p-5">
+		<div class="flex w-full max-w-sm flex-col gap-5 text-center md:max-w-sm lg:p-5">
 			<a href={``} class="w-full text-4xl font-thin">@engageintellect</a>
 			<div class="text-lg font-thin italic text-foreground/80 md:text-xl">
-				"I invite you to use and improve this project. Feedback and pull requests are welcome, and
-				appreciated."
+				"I made spatz to help connect all the dots when building new applications. This helps me
+				build fast. I invite you to use and improve this project. Feedback and pull requests are
+				welcome, and appreciated."
 			</div>
 			<div class="flex items-center justify-center gap-5">
 				<a href="https://cook.engage-dev.com">
@@ -115,7 +141,6 @@
 					</Button>
 				</a>
 			</div>
-			<!-- <TikTokStats /> -->
 		</div>
 	</div>
 
@@ -129,7 +154,7 @@
 				<img
 					src={`https://github.com/engageintellect.png`}
 					alt="@engageintellect"
-					class="h-full w-full rounded-full object-cover object-top transition-shadow duration-300 hover:shadow-lg"
+					class="z-10 h-full w-full rounded-full object-cover object-top shadow transition-shadow duration-300 hover:shadow-lg"
 				/>
 			</a>
 			<!-- <div

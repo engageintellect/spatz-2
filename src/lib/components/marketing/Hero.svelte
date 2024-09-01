@@ -4,7 +4,6 @@
 	import Icon from '@iconify/svelte';
 	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
-	import ShineBorder from '$lib/components/magic-ui/ShineBorder.svelte';
 
 	onMount(() => {
 		gsap.fromTo(
