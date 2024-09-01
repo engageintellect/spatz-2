@@ -1,5 +1,6 @@
 import { createInstance } from '$lib/pocketbase';
 import type { Handle } from '@sveltejs/kit';
+import { dev } from '$app/environment';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const pb = createInstance();
@@ -22,9 +23,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event);
 
 	// send back the default 'pb_auth' cookie to the client with the latest store state
+
 	response.headers.set(
 		'set-cookie',
-		pb.authStore.exportToCookie({ httpOnly: false, sameSite: 'lax' })
+		pb.authStore.exportToCookie({ httpOnly: false, sameSite: 'lax', secure: !dev })
 	);
 
 	return response;
