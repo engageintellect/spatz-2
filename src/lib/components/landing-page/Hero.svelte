@@ -91,9 +91,9 @@
 
 <div class={`mb-10 md:my-5 md:mb-20 ${heroHidden ? 'opacity-0' : ''}`}>
 	<div
-		class="flex w-full flex-col gap-2 rounded-lg transition-all duration-300 md:flex-row md:gap-5"
+		class="flex w-full flex-col items-start gap-2 rounded-lg transition-all duration-300 md:flex-row md:gap-5"
 	>
-		<div class="flex w-full flex-col rounded-l-lg p-5 md:max-w-lg md:p-10">
+		<div class="flex w-full flex-col rounded-l-lg p-2 md:max-w-lg md:p-10 md:p-5">
 			<div class="mx-auto flex w-full flex-col items-center gap-5">
 				<div
 					class="animate-title w-full text-7xl font-bold lowercase tracking-tight transition-transform duration-300 lg:text-9xl"
@@ -104,8 +104,8 @@
 
 			<div class="">
 				<div class="animate-subtitle mt-5 text-xl font-thin text-foreground/70 lg:text-2xl">
-					<span class="font-base text-orange-500">Back for round two</span>, this time with
-					superforms, svelte-animations, stripe, and shadcn.
+					<div class="font-base text-orange-500">The ultimate Sveltekit boilerplate</div>
+					<div>this time with svelte-animations, superforms, stripe, and shadcn.</div>
 				</div>
 			</div>
 

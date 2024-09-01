@@ -247,7 +247,7 @@
 			</div>
 		</Form.Button>
 
-		<p class="mt-2 text-center text-sm text-muted-foreground">
+		<p class="mt-5 text-center text-sm text-muted-foreground">
 			By clicking continue, you agree to our
 			<a href="/terms" class="underline underline-offset-4 hover:text-primary">
 				Terms of Service
