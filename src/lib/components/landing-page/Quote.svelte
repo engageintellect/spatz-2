@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onDestroy, onMount, tick } from 'svelte';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
+	import Particles from '$lib/components/magic-ui/Particles.svelte';
 
 	let quote: string;
 
@@ -17,7 +18,6 @@
 		tick();
 
 		const isLargeScreen = window.matchMedia('(min-width: 768px)').matches;
-
 		if (isLargeScreen) {
 			gsapInstance.from('.quote-animation', {
 				duration: 3,
@@ -68,8 +68,14 @@
 	});
 </script>
 
-<div class="quote-animation mx-auto my-40 flex w-full justify-center p-5">
-	<div class="w-full max-w-lg text-3xl md:text-5xl">
+<div
+	class="quote-animation relative mx-auto flex h-full min-h-[500px] w-full justify-center p-5 py-40"
+>
+	<Particles
+		className="particles-animation absolute inset-0 h-full z-0 particle-grid"
+		color="#fff"
+	/>
+	<div class="w-full max-w-lg text-xl md:text-3xl">
 		<div class="font-thin italic leading-normal">
 			<div>
 				{#if quote}
