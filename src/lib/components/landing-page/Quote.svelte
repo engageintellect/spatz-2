@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onDestroy, onMount, tick } from 'svelte';
-	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import Particles from '$lib/components/magic-ui/Particles.svelte';
 
 	let quote: string;
@@ -10,6 +9,8 @@
 		const data = await response.json();
 		quote = data;
 	};
+
+	let theme: any;
 
 	let gsapInstance: any;
 	let ScrollTriggerInstance: any;
@@ -46,6 +47,7 @@
 	};
 
 	onMount(() => {
+		theme = localStorage.getItem('mode-watcher-mode');
 		if (typeof window !== 'undefined') {
 			import('gsap').then(({ gsap }) => {
 				import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
@@ -69,13 +71,13 @@
 </script>
 
 <div
-	class="quote-animation relative mx-auto flex h-full min-h-[500px] w-full justify-center p-5 py-40"
+	class="quote-animation relative mx-auto flex h-full min-h-[525px] w-full justify-center p-5 py-40"
 >
 	<Particles
 		className="particles-animation absolute inset-0 h-full z-0 particle-grid"
-		color="#fff"
+		color={`${theme === 'light' ? '#e5e5e5' : '#525252'}`}
 	/>
-	<div class="w-full max-w-lg text-xl md:text-3xl">
+	<div class="w-full max-w-lg text-2xl md:text-3xl">
 		<div class="font-thin italic leading-normal">
 			<div>
 				{#if quote}
