@@ -234,7 +234,7 @@
 	<!-- CARD 2 -->
 	<div class="orbitText relative order-2 flex h-full w-full">
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
-			<div class="w-full text-3xl font-bold uppercase">spatz helps you move fast</div>
+			<div class="w-full text-3xl font-bold uppercase">build apps faster</div>
 			<div class="text-lg font-thin">
 				spatz is a complete, minimal toolkit for building modern web applications. It's designed to
 				be a flexible and efficient solution for developers who want to create high-quality,
@@ -289,7 +289,7 @@
 	<!-- CARD 5 -->
 	<div class="card3 relative order-4 flex h-full w-full md:order-3">
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
-			<div class="w-full text-3xl font-bold">DATABASE, AUTH, ADMIN PANEL</div>
+			<div class="w-full text-3xl font-bold uppercase">Users & Data</div>
 
 			<div class="text-lg">
 				PocketBase makes for an ideal backend solution for rapidly building modern web applications

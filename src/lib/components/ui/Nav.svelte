@@ -5,6 +5,7 @@
 	import { gsap } from 'gsap';
 	import { currentUser } from '$lib/stores/user';
 	import DropdownMenu from '$lib/components/ui/DropdownMenu.svelte';
+	import { siteInfo } from '$lib/data.js';
 
 	let navHidden = true;
 	onMount(() => {
@@ -23,7 +24,7 @@
 <nav class={`nav sticky top-0 -z-[-1] border-b bg-background p-2 ${navHidden ? 'opacity-0' : ''}`}>
 	<div class="mx-auto flex w-full max-w-5xl items-center justify-between">
 		<a href="/" class="nav-logo" aria-label="Home">
-			<div class="px-2 text-2xl font-bold">spatz</div>
+			<div class="px-2 text-2xl font-bold">{siteInfo.name}</div>
 		</a>
 
 		<div class="buttons flex items-center gap-2">
