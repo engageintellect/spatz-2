@@ -1,48 +1,51 @@
 <script lang="ts">
 	import { loadStripe, type Stripe } from '@stripe/stripe-js';
 	import { onMount } from 'svelte';
-	import { PUBLIC_STRIPE_KEY } from '$env/static/public';
+	import { PUBLIC_STRIPE_KEY, PUBLIC_BTC_DONATION_ADDRESS } from '$env/static/public';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import Icon from '@iconify/svelte';
 	import { gsap } from 'gsap';
+	import QRCode from 'qrcode';
 
 	let stripePromise: Promise<Stripe | null> | undefined;
 	let amount: number;
+	let btcQrCode: string = ''; // Stores the generated QR code
 
-	let prices = [1, 5, 10, 20, 50, 100];
+	const prices = [1, 5, 10, 20, 50, 100];
 
 	onMount(() => {
+		// Load Stripe and generate BTC QR code on mount
 		stripePromise = loadStripe(PUBLIC_STRIPE_KEY);
+		generateBtcQrCode();
+
+		// Animate elements on load
+		animateElements();
+	});
+
+	async function generateBtcQrCode() {
+		try {
+			btcQrCode = await QRCode.toDataURL(PUBLIC_BTC_DONATION_ADDRESS);
+		} catch (err) {
+			console.error('Error generating QR code:', err);
+		}
+	}
+
+	function animateElements() {
 		gsap.fromTo(
 			'.donate-card',
 			{ opacity: 0, y: 20, scale: 0.95 },
-			{
-				opacity: 1,
-				y: 0,
-				scale: 1,
-				duration: 1,
-				delay: 0.1,
-				ease: 'power4.out'
-			}
+			{ opacity: 1, y: 0, scale: 1, duration: 1, ease: 'power4.out', delay: 0.1 }
 		);
 
 		gsap.fromTo(
 			'.donate-button',
 			{ opacity: 0, scale: 0.95 },
-			{
-				opacity: 1,
-				y: 0,
-				scale: 1,
-				duration: 2.5,
-				delay: 0.1,
-				ease: 'power4.out',
-				stagger: 0.1
-			}
+			{ opacity: 1, scale: 1, duration: 2.5, ease: 'power4.out', stagger: 0.1 }
 		);
-	});
+	}
 
-	async function handleDonate(): Promise<void> {
+	async function handleDonate() {
 		const stripe = await stripePromise;
 		if (!stripe) {
 			console.error('Stripe failed to load');
@@ -51,49 +54,28 @@
 
 		try {
 			const theme = localStorage.getItem('mode-watcher-mode') || 'light';
-
 			const response = await fetch('/api/donate', {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
+				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ amount, theme })
 			});
-
-			const { sessionId }: { sessionId: string } = await response.json();
-
-			if (!sessionId) {
-				console.error('No session ID returned from the API');
-				return;
-			}
-
-			const { error } = await stripe.redirectToCheckout({ sessionId });
-
-			if (error) {
-				console.error('Error redirecting to checkout:', error.message);
-			} else {
-				console.log('Redirecting to checkout with session ID:', sessionId);
+			const { sessionId } = await response.json();
+			if (sessionId) {
+				await stripe.redirectToCheckout({ sessionId });
 			}
 		} catch (err) {
 			console.error('An error occurred:', err);
 		}
 	}
 
-	function donationMessage(amount: number): string {
-		const boldAmount = `<span class="font-bold bg-success text-success-foreground py-1 px-2 rounded-lg">$${amount === null ? '0' : amount}</span>`;
-		if (amount === null || amount === undefined)
-			return 'Enter an amount to donate, or choose from the options below.';
-		if (amount === 0 || amount === null || amount === undefined)
-			return 'You have chosen not to donate at this time.';
+	function donationMessage(amount: number) {
+		const boldAmount = `<span class="font-bold bg-success text-success-foreground py-1 px-2 rounded-lg">$${amount || '0'}</span>`;
+		if (!amount) return 'Enter an amount to donate, or choose from the options below.';
 		if (amount === 1) return `Thank you for your ${boldAmount} donation! Every bit helps.`;
 		if (amount <= 5) return `Your ${boldAmount} donation is greatly appreciated!`;
 		if (amount <= 10) return `Thank you for your ${boldAmount} donation! Your support means a lot.`;
-		if (amount <= 15)
-			return `Thank you for your ${boldAmount} donation! You're making a difference.`;
 		if (amount <= 20)
 			return `Thank you for your ${boldAmount} donation! We are grateful for your generosity.`;
-		if (amount <= 25)
-			return `Wow, a ${boldAmount} donation! Thank you for your incredible support.`;
 		if (amount <= 50) return `A ${boldAmount} donation is amazing! Thank you for your generosity.`;
 		if (amount <= 100)
 			return `Your ${boldAmount} donation is deeply appreciated. Thank you for your outstanding support!`;
@@ -103,15 +85,13 @@
 </script>
 
 <div class="donate-card">
-	<main
-		class="mx-auto max-w-lg rounded-lg p-2 transition-all duration-300 md:border md:p-5 md:shadow"
-	>
-		<h1 class="text-5xl font-bold md:text-7xl">donate</h1>
+	<main class="mx-auto max-w-lg rounded-lg border p-5 shadow-md transition-all duration-300">
+		<h1 class="text-5xl font-bold md:text-7xl">Donate</h1>
 
 		<div class="mt-10">
 			<p>{@html donationMessage(amount)}</p>
 
-			<div class="mt-5 flex items-center gap-2">
+			<div class="mt-5 flex gap-2">
 				<Input
 					type="number"
 					bind:value={amount}
@@ -119,32 +99,50 @@
 					placeholder="Enter amount"
 					min="1"
 				/>
-
 				<Button on:click={handleDonate} class="group/donateButton">
 					<div class="flex items-center gap-2">
-						<div>donate</div>
+						<span>Donate</span>
 						<Icon
 							icon="mdi:send"
-							class="h-5 w-5 transition-all duration-300 md:active:animate-bounce md:group-hover/donateButton:translate-x-1 md:group-hover/donateButton:-rotate-45"
+							class="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:rotate-45"
 						/>
 					</div>
 				</Button>
 			</div>
 		</div>
 
-		<div class="mt-10 grid grid-cols-3 gap-2 md:grid-cols-3">
+		<div class="mt-10 grid grid-cols-3 gap-2">
 			{#each prices as price}
 				<Button
 					variant="success"
-					class="donate-button border border-[2px] border-emerald-700 transition-transform duration-300 md:hover:scale-[102%] md:hover:shadow"
-					on:click={() => {
-						amount = price;
-						handleDonate();
-					}}
+					class="donate-button transition-transform md:hover:scale-105"
+					on:click={() => (amount = price)}
 				>
-					<div>$ {price}</div>
+					$ {price}
 				</Button>
 			{/each}
+		</div>
+
+		<div class="donate-button mt-10 border-t pt-5 text-center">
+			<div class="flex items-center justify-center gap-1">
+				<p class="text-2xl font-bold">Or, send bitcoin</p>
+				<Icon icon="mdi:bitcoin" class="h-10 w-10" />.
+			</div>
+
+			<a
+				href={`https://mempool.space/address/${PUBLIC_BTC_DONATION_ADDRESS}`}
+				class="my-2 block text-sm">{PUBLIC_BTC_DONATION_ADDRESS}</a
+			>
+
+			{#if btcQrCode}
+				<a href={`https://mempool.space/address/${PUBLIC_BTC_DONATION_ADDRESS}`}>
+					<img
+						src={btcQrCode}
+						alt="BTC Donation QR Code"
+						class="mx-auto my-5 h-40 w-40 rounded-lg border shadow"
+					/>
+				</a>
+			{/if}
 		</div>
 	</main>
 </div>
