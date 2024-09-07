@@ -81,8 +81,12 @@
 }
 
 @layer base {
+	:root {
+		overscroll-behavior: none;
+	}
 	* {
 		@apply border-border;
+		overscroll-behavior: none;
 	}
 	body {
 		@apply bg-background text-foreground;

@@ -10,6 +10,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { gsap } from 'gsap';
 	import { lazyLoad } from '$lib/lazyLoad';
+	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
 
 	let isSubmitting = false;
 
@@ -34,7 +35,6 @@
 	$: currentUser.set(data.user);
 
 	let showScrollToTop = false;
-
 	let sortOption = 'date'; // Default sort option
 
 	function sortByDate(posts: App.Post[]) {
@@ -58,7 +58,6 @@
 				return sortByLikes(posts);
 			case 'user':
 				return sortByCurrentUser(posts);
-
 			case 'date':
 			default:
 				return sortByDate(posts);
@@ -161,6 +160,8 @@
 		}
 	});
 </script>
+
+<ScrollIndicator />
 
 <div class="mx-auto w-full max-w-lg transition-all duration-300">
 	<div class="">
