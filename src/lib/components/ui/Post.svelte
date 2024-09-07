@@ -40,7 +40,7 @@
 </script>
 
 <div class="text-elipsis relative cursor-pointer overflow-x-hidden transition-all duration-300">
-	<div class="card-body mt-2 px-1 transition-all duration-300 md:px-1">
+	<div class="card-body p-3 px-1 transition-all duration-300">
 		<div class="flex items-start gap-2">
 			<div>
 				<a href={`/guestbook/post/${id}`}>
@@ -65,7 +65,7 @@
 					<div class="pb-2 pr-5 pt-1 font-thin">{@html postContent}</div>
 				</a>
 
-				<div class="mt-4 flex items-center gap-5">
+				<div class=" flex items-center gap-5">
 					<div class="flex items-center gap-1">
 						<form
 							use:enhance={() => {
@@ -93,7 +93,7 @@
 											optimisticLikes = likes.length;
 											toast.error('Server count mismatch, rolling back.');
 										} else {
-											toast.success('Liked the post!');
+											toast.success(`${isLiked ? 'Liked' : 'Unliked'} post by ${postAuthor}`);
 										}
 
 										// Reset flags after handling the server response

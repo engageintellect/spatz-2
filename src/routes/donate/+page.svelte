@@ -125,8 +125,8 @@
 
 		<div class="donate-button mt-10 border-t pt-5 text-center">
 			<div class="flex items-center justify-center gap-1">
-				<p class="text-2xl font-bold">Or, send bitcoin</p>
-				<Icon icon="mdi:bitcoin" class="h-10 w-10" />.
+				<p class="text-2xl font-bold">Or, send bitcoin.</p>
+				<Icon icon="mdi:bitcoin" class="h-10 w-10" />
 			</div>
 
 			<a
