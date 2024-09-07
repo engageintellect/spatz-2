@@ -19,6 +19,7 @@
 			<li>User Settings & Profile panels</li>
 			<li>Themes & Styling</li>
 			<li>Forms & Form Validation</li>
+			<li>Optimistic UI rendering</li>
 			<li>Toast Notifications</li>
 			<li>Icons</li>
 		</ul>

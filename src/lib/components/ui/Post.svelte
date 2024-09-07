@@ -93,7 +93,7 @@
 											optimisticLikes = likes.length;
 											toast.error('Server count mismatch, rolling back.');
 										} else {
-											toast.success(`${isLiked ? 'Liked' : 'Unliked'} post by ${postAuthor}`);
+											toast.success(`${isLiked ? 'Liked' : 'Unliked'} post by @${postAuthor}`);
 										}
 
 										// Reset flags after handling the server response
