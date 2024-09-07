@@ -18,7 +18,7 @@
 		heroHidden = false;
 
 		gsapInstance.from('.particle-grid', {
-			duration: 1,
+			duration: 3,
 			delay: 0.1,
 			opacity: 0,
 			scale: 0.95,

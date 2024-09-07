@@ -65,7 +65,7 @@
 				<div class="relative mb-5 w-32 rounded-full">
 					{#if data.user?.avatar}
 						<img
-							class="rounded-full"
+							class="rounded-full border shadow"
 							src={data.user?.avatar
 								? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar)
 								: `https://ui-avatars.com/api/?name=${data.user?.email}`}

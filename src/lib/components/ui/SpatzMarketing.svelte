@@ -10,6 +10,7 @@
 	import FeaturesFeed from '$lib/components/ui/FeaturesFeed.svelte';
 	import GettingStarted from '$lib/components/marketing/GettingStarted.svelte';
 	import Contribute from '$lib/components/marketing/Contribute.svelte';
+	import FeatureButtons from '$lib/components/ui/FeatureButtons.svelte';
 
 	let stars = 0,
 		issues = 0,
@@ -55,6 +56,10 @@
 	<div class="flex flex-col gap-16 md:gap-16">
 		<div class="fade-in">
 			<Hero />
+		</div>
+
+		<div class="fade-in">
+			<FeatureButtons />
 		</div>
 
 		<div class="fade-in">
