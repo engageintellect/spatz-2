@@ -4,7 +4,9 @@
 	import Icon from '@iconify/svelte';
 	import { toast } from 'svelte-sonner';
 	import { onMount } from 'svelte';
-	import { timeSince, formatFriendlyDate } from '$lib/utils';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import * as Dialog from '$lib/components/ui/dialog';
+	import { formatFriendlyDate, timeSince } from '$lib/utils';
 
 	export let postAuthor;
 	export let postContent;
@@ -16,6 +18,10 @@
 	export let currentUser;
 
 	let loading = false;
+	let isDeleting = false;
+	let deleteLoading = false;
+	let showComments = true;
+	let dialogOpen = false;
 	let isLiked: boolean;
 	let optimisticLikes = likes.length;
 
@@ -63,17 +69,18 @@
 					<div class="pb-2 pr-5 pt-1 font-thin">{@html postContent}</div>
 				</a>
 
-				<div class="mb-4 mt-2 flex items-center gap-5">
+				<div class="mt-4 flex items-center gap-5">
 					<div class="flex items-center gap-1">
 						<form
 							use:enhance={() => {
 								loading = true;
 								toggleLiked();
 
-								return async ({ result }) => {
+								return async ({ result, update }) => {
 									if (result.type === 'failure') {
+										// Rollback optimistic update if failed
+										toast.error('Failed to like the post.');
 										toggleLiked();
-									} else {
 									}
 									loading = false;
 								};
@@ -108,7 +115,92 @@
 							<Icon icon="tabler:send" class="text-base-content h-5 w-5" />
 						</a>
 					{/if}
+
+					{#if currentUser.username === postAuthor}
+						<div class="absolute right-0 top-1 flex items-center gap-1">
+							<Dialog.Root bind:open={dialogOpen}>
+								<Dialog.Trigger>
+									<div>
+										<Button
+											variant="ghost"
+											size="sm"
+											on:click={() => (dialogOpen = true)}
+											class="group/deleteButton flex scale-[0.75] items-center active:scale-[0.70]"
+										>
+											<Icon
+												icon="mdi:close"
+												class={`h-5 w-5 transition-all duration-200 group-hover/deleteButton:scale-110 ${deleteLoading ? 'animate-deletePost' : ''}`}
+											/>
+											<span class="sr-only">Delete</span>
+										</Button>
+									</div>
+								</Dialog.Trigger>
+								<Dialog.Content>
+									<Dialog.Header>
+										<Dialog.Title>Are you sure?</Dialog.Title>
+										<Dialog.Description>
+											Are you sure you want to delete this post? This action cannot be undone.
+											<form
+												use:enhance={({ cancel }) => {
+													if (isDeleting) return cancel(); // Prevent multiple submissions
+													isDeleting = true;
+
+													return async ({ result, update }) => {
+														if (result.type === 'success') {
+															toast('Post deleted successfully.', {});
+														} else {
+															toast.error('Failed to delete post.', {});
+														}
+
+														if (window.location.href.split('/').pop() === `${id}`) {
+															goto('/guestbook');
+														} else {
+															await update();
+														}
+
+														isDeleting = false;
+													};
+												}}
+												action="?/deletePost"
+												method="POST"
+											>
+												<input type="hidden" name="postId" value={id} />
+												<input
+													type="hidden"
+													name="currentUserId"
+													value={currentUser.id}
+													disabled={deleteLoading}
+												/>
+
+												<div class="mt-5 flex items-center justify-between gap-2">
+													<Button
+														type="submit"
+														variant="destructive"
+														on:click={() => (dialogOpen = false)}
+														class="w-full text-white">delete</Button
+													>
+
+													<Button
+														variant="default"
+														type="button"
+														on:click={() => (dialogOpen = false)}
+														class="w-full">cancel</Button
+													>
+												</div>
+											</form>
+										</Dialog.Description>
+									</Dialog.Header>
+								</Dialog.Content>
+							</Dialog.Root>
+						</div>
+					{/if}
 				</div>
+
+				{#if showComments}
+					<div class="mt-3">
+						<slot name="commentsFeed" />
+					</div>
+				{/if}
 			</div>
 		</div>
 	</div>
