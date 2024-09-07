@@ -121,6 +121,14 @@
 					<span>AI</span>
 				</a>
 			</DropdownMenu.Item>
+
+			<DropdownMenu.Item>
+				<a href={`/users`} class="flex w-full w-full items-center">
+					<Icon icon="mdi:users" class="mr-2 h-4 w-4" />
+					<span>Users</span>
+				</a>
+			</DropdownMenu.Item>
+
 			<DropdownMenu.Item>
 				<a href={PUBLIC_POCKETBASE_ADMIN} class="flex w-full w-full items-center">
 					<Icon icon="simple-icons:pocketbase" class="mr-2 h-4 w-4" />
