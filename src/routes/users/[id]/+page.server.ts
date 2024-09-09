@@ -16,13 +16,17 @@ interface CustomError {
 	message: string;
 }
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load: PageServerLoad = async ({ params, locals }) => {
+	const { id } = params;
 	if (!locals.pb.authStore.isValid) {
 		throw redirect(303, '/auth/login');
 	}
 
+	const user = await locals.pb.collection('users').getOne(id, {});
+
 	// GET POSTS
 	const posts = await locals.pb.collection('posts').getFullList({
+		filter: `author = "${id}"`, // Use single equals sign (=) and properly quote the id
 		sort: '-created'
 	});
 
@@ -38,13 +42,17 @@ export const load: PageServerLoad = async ({ locals }) => {
 		// Add author's username and avatar to each post
 		return {
 			...post,
-			userId: users.find((user) => user.id === post.author),
 			username: users.find((user) => user.id === post.author)?.username,
 			avatar: users.find((user) => user.id === post.author)?.avatar
 		};
 	});
 
-	return { posts: transformedPosts };
+	console.log('user', user);
+
+	return {
+		userProfile: user,
+		userPosts: transformedPosts
+	};
 };
 
 // Define the actions

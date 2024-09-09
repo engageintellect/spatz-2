@@ -33,7 +33,7 @@
 			<Avatar />
 		</Button>
 	</DropdownMenu.Trigger>
-	<DropdownMenu.Content class="mt-3 w-fit max-w-64 bg-background" align="end">
+	<DropdownMenu.Content class="mt-3 w-fit min-w-52 max-w-64 bg-background" align="end">
 		<DropdownMenu.Label class=" p-0">
 			<DropdownMenu.Item class="">
 				<a
@@ -116,16 +116,16 @@
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item>
-				<a href="/ai" data-sveltekit-preload-data="hover" class="flex w-full w-full items-center">
-					<Icon icon="tabler:brain" class="mr-2 h-4 w-4" />
-					<span>AI</span>
+				<a href={`/users`} class="flex w-full w-full items-center">
+					<Icon icon="mdi:users" class="mr-2 h-4 w-4" />
+					<span>Users</span>
 				</a>
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item>
-				<a href={`/users`} class="flex w-full w-full items-center">
-					<Icon icon="mdi:users" class="mr-2 h-4 w-4" />
-					<span>Users</span>
+				<a href="/ai" data-sveltekit-preload-data="hover" class="flex w-full w-full items-center">
+					<Icon icon="tabler:brain" class="mr-2 h-4 w-4" />
+					<span>AI</span>
 				</a>
 			</DropdownMenu.Item>
 

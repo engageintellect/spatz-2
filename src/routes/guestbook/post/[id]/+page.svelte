@@ -7,12 +7,14 @@
 	import Post from '$lib/components/ui/Post.svelte';
 	import PostInputArea from '$lib/components/ui/PostInputArea.svelte';
 	import Icon from '@iconify/svelte';
+	import { Badge } from '$lib/components/ui/badge/index.js';
 
 	export let data: {
 		user: App.User;
 		posts: App.Post[];
 		post: App.Post;
 		mentioning: App.Post[];
+		respondingTo: App.Post[];
 	};
 
 	$: currentUser.set(data.user);
@@ -92,8 +94,40 @@
 	<!-- ------------------------------------ -->
 	<!-- MAIN POST -->
 	<!-- ------------------------------------ -->
+
+	<!--
+	{#if data.post.mentioning.length > 0}
+		<div class="mt-5 gap-0 pb-2">
+			{#if data.respondingTo.length > 0}
+				<Badge variant="outline" class="pr-0">
+					<div class="flex items-center justify-between gap-2">
+						<div class="text-sm font-thin">responding to</div>
+						{#each data.respondingTo as mention}
+							<a href={`/guestbook/post/${mention.id}`}>
+								<div class="flex items-start gap-2">
+									<img
+										src={mention.authorAvatar
+											? getImageURL(
+													$currentUser?.collectionId,
+													mention.author,
+													mention.authorAvatar
+												)
+											: `https://ui-avatars.com/api/?name=${mention.authorUsername}`}
+										alt={mention.authorUsername}
+										class="h-7 w-7 rounded-full"
+									/>
+								</div>
+							</a>
+						{/each}
+					</div>
+				</Badge>
+			{/if}
+		</div>
+  {/if}
+  -->
 	<div class="post-hero mt-5">
 		<Post
+			postAuthorId={data.post.author}
 			postAuthor={data.post.expand.author.username}
 			postContent={data.post.content}
 			comments={data.post.mentionedBy}
@@ -164,6 +198,7 @@
 	{#each data.mentioning.slice() as comment}
 		<div class="border-b">
 			<Post
+				postAuthorId={comment.author}
 				postAuthor={comment.authorUsername}
 				postContent={comment.content}
 				comments={comment.mentionedBy}

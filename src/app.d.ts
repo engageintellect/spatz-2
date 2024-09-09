@@ -10,6 +10,7 @@ declare global {
 		interface Post {
 			id: string;
 			author: string;
+			authorId: string;
 			comments: string[];
 			content: string;
 			collectionId: string;
@@ -18,6 +19,7 @@ declare global {
 			updated: string;
 			mentioning: string[];
 			mentionedBy: string[];
+			respondingTo: string[];
 			authorUsername?: string; // Add this property
 			authorAvatar?: string; // Add this property
 			avatar?: string;

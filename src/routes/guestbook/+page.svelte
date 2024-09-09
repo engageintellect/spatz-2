@@ -222,6 +222,7 @@
 								{#if post.mentioning.length === 0}
 									<div class="post-wrapper border-b">
 										<Post
+											postAuthorId={post.author}
 											comments={post.mentionedBy}
 											id={post.id}
 											postDate={post.created}

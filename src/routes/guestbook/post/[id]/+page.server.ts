@@ -19,7 +19,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	// Extract the post ID from the route parameters
 	const { id } = params;
 
-	// Fetch the post data from your database or API
+	// Fetch the post data, including expanding the author and comments
 	const post = await locals.pb.collection('posts').getOne(id, { expand: 'comments,author' });
 
 	if (!post) {
@@ -34,12 +34,12 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		sort: '-created'
 	});
 
-	const mentioning = await locals.pb.collection('posts').getFullList({
+	const posts = await locals.pb.collection('posts').getFullList({
 		sort: '-created'
 	});
 
-	// show mentioning if mentioning.mentioning is the same as post.id
-	const transformedMentioning = mentioning
+	// Show mentioning if mentioning.mentioning is the same as post.id
+	const transformedMentioning = posts
 		.filter((mention) => mention.mentioning.includes(post.id))
 		.map((mention) => {
 			const author = users.find((user) => user.id === mention.author);
@@ -58,10 +58,29 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		avatar: users.find((user) => user.id === post.author)?.avatar
 	};
 
-	// Return the transformed post data
+	// NEW: Fetch posts that are mentioned by this post
+	let respondingTo = [];
+	if (post.mentioning && post.mentioning.length > 0) {
+		respondingTo = await Promise.all(
+			post.mentioning.map(async (mentionId: string) => {
+				const mentionedPost = await locals.pb.collection('posts').getOne(mentionId, {
+					expand: 'author,comments'
+				});
+				const author = users.find((user) => user.id === mentionedPost.author);
+				return {
+					...mentionedPost,
+					authorUsername: author?.username,
+					authorAvatar: author?.avatar
+				};
+			})
+		);
+	}
+
+	// Return the transformed post data and transformed mentioning posts
 	return {
 		post: transformedPost,
-		mentioning: transformedMentioning
+		mentioning: transformedMentioning,
+		respondingTo
 	};
 };
 
