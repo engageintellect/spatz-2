@@ -70,6 +70,18 @@
 				}
 			);
 
+			// input on mount
+			gsap.fromTo(
+				'.animate-input',
+				{ opacity: 0, scale: 0.95 },
+				{
+					opacity: 1,
+					scale: 1,
+					duration: 1,
+					ease: 'power4.out'
+				}
+			);
+
 			// Animate text on mount
 			gsap.fromTo(
 				'.text-3xl',
@@ -117,8 +129,8 @@
 
 <ScrollIndicator />
 
-<div class="mx-auto max-w-lg">
-	<div class="bg-base-100 mx-auto h-full w-full max-w-2xl">
+<div class="mx-auto max-w-2xl">
+	<div class="bg-base-100 mx-auto h-full w-full">
 		<h1 class="flex items-center gap-2 text-7xl font-bold text-primary">
 			<span class="title-user">user</span>
 			<span class="title-db font-thin text-primary/50">db</span>
@@ -127,7 +139,7 @@
 
 	<!-- Add an input field to filter by username -->
 	<div
-		class="my-5 flex items-center rounded-lg border px-2 focus-within:ring-1 focus-within:ring-foreground focus-within:ring-offset-1"
+		class="animate-input my-5 flex items-center rounded-lg border px-2 focus-within:ring-1 focus-within:ring-foreground focus-within:ring-offset-1"
 	>
 		<Icon icon={`material-symbols:search`} class="h-7 w-7" />
 		<Input
@@ -144,7 +156,7 @@
 	</div>
 
 	<!-- Display filtered users -->
-	<div class="grid grid-cols-1 gap-2 border-t pt-5 sm:grid-cols-2">
+	<div class="grid grid-cols-1 gap-2 border-t pt-5 sm:grid-cols-2 md:grid-cols-3">
 		{#each filteredUsers as user}
 			<a href={`/users/${user.id}`} class="user-wrapper">
 				<div

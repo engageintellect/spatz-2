@@ -79,7 +79,7 @@
 	<Button
 		on:click={goBack}
 		size="sm"
-		variant="ghost"
+		variant="outline"
 		type="submit"
 		class="group/backButton backButton flex items-center gap-2"
 		disabled={loading}

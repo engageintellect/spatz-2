@@ -18,22 +18,24 @@
 </script>
 
 <div class="mx-auto max-w-lg">
-	<Button
-		on:click={goBack}
-		size="sm"
-		variant="ghost"
-		type="submit"
-		class="group/backButton backButton flex items-center gap-2"
-		disabled={loading}
-	>
-		<Icon
-			icon="mdi:arrow-left"
-			class="h-5 w-5 transition-all duration-300 md:group-hover/backButton:-translate-x-1"
-		/>
-		<span class="text-sm">back</span>
-	</Button>
-	<div class="mx-auto mt-5 max-w-lg rounded-lg">
-		<div class="flex items-start gap-2">
+	<div class="flex justify-start">
+		<Button
+			on:click={goBack}
+			size="sm"
+			variant="outline"
+			type="submit"
+			class="group/backButton backButton flex items-center gap-2"
+			disabled={loading}
+		>
+			<Icon
+				icon="mdi:arrow-left"
+				class="h-5 w-5 transition-all duration-300 md:group-hover/backButton:-translate-x-1"
+			/>
+			<span class="text-sm">back</span>
+		</Button>
+	</div>
+	<div class="mx-auto mt-10 max-w-lg rounded-lg">
+		<div class="flex items-start justify-start gap-2 md:gap-5">
 			<div class="h-16 w-16 md:h-24 md:w-24">
 				<img
 					class="h-full w-full rounded-full border object-cover shadow"
@@ -48,8 +50,14 @@
 				/>
 			</div>
 
-			<div class="text-2xl">
-				{data.userProfile.username}
+			<div class="flex flex-col">
+				<div class="text-2xl">
+					{data.userProfile.username}
+				</div>
+
+				<div class="text-lg font-thin text-foreground/70">
+					{data.userProfile.job_title}
+				</div>
 			</div>
 		</div>
 

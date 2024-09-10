@@ -41,7 +41,7 @@
 
 <div class="flex min-h-[calc(100svh)] flex-col md:min-h-screen">
 	<Nav />
-	<main class="mx-auto my-5 w-full max-w-5xl flex-grow overflow-x-clip px-2 md:my-10">
+	<main class="mx-auto my-2 w-full max-w-5xl flex-grow overflow-x-clip px-2 md:my-5">
 		<slot />
 	</main>
 	<Footer />
