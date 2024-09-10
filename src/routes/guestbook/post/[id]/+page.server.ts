@@ -16,10 +16,8 @@ interface CustomError {
 }
 
 export const load: PageServerLoad = async ({ params, locals }) => {
-	// Extract the post ID from the route parameters
 	const { id } = params;
 
-	// Fetch the post data, including expanding the author and comments
 	const post = await locals.pb.collection('posts').getOne(id, { expand: 'comments,author' });
 
 	if (!post) {
@@ -29,7 +27,6 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		};
 	}
 
-	// Fetch additional data if necessary
 	const users = await locals.pb.collection('users').getFullList({
 		sort: '-created'
 	});
@@ -38,7 +35,6 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		sort: '-created'
 	});
 
-	// Show mentioning if mentioning.mentioning is the same as post.id
 	const transformedMentioning = posts
 		.filter((mention) => mention.mentioning.includes(post.id))
 		.map((mention) => {
@@ -51,14 +47,12 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 			};
 		});
 
-	// Transform the post object
 	const transformedPost = {
 		...post,
 		username: users.find((user) => user.id === post.author)?.username,
 		avatar: users.find((user) => user.id === post.author)?.avatar
 	};
 
-	// NEW: Fetch posts that are mentioned by this post
 	let respondingTo = [];
 	if (post.mentioning && post.mentioning.length > 0) {
 		respondingTo = await Promise.all(
@@ -76,7 +70,6 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		);
 	}
 
-	// Return the transformed post data and transformed mentioning posts
 	return {
 		post: transformedPost,
 		mentioning: transformedMentioning,
@@ -84,7 +77,6 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	};
 };
 
-// Define the actions
 export const actions: Actions = {
 	createPost: async ({ request, locals }) => {
 		const { formData, errors } = await validateData(

@@ -47,8 +47,6 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		};
 	});
 
-	console.log('user', user);
-
 	return {
 		userProfile: user,
 		userPosts: transformedPosts
