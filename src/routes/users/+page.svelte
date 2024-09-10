@@ -138,25 +138,28 @@
 	</div>
 
 	<!-- Add an input field to filter by username -->
-	<div
-		class="animate-input my-5 flex items-center rounded-lg border px-2 focus-within:ring-1 focus-within:ring-foreground focus-within:ring-offset-1"
-	>
-		<Icon icon={`material-symbols:search`} class="h-7 w-7" />
-		<Input
-			type="text"
-			class="border-none p-2 outline-none focus-visible:shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
-			placeholder="Search users by username..."
-			bind:value={filter}
-		/>
-	</div>
 
-	<div class="mb-2 text-xl font-thin">
-		<!-- Display the total count of filtered users -->
-		{filter ? 'query matches' : 'total users'}: {filteredUsers.length}
+	<div class="sticky top-[57px] z-50 mb-5 border-b bg-background pt-5">
+		<div
+			class="animate-input mb-5 flex items-center rounded-lg border bg-background bg-background px-2 focus-within:ring-1 focus-within:ring-foreground focus-within:ring-offset-1"
+		>
+			<Icon icon={`material-symbols:search`} class="h-7 w-7" />
+			<Input
+				type="text"
+				class="border-none p-2 outline-none focus-visible:shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
+				placeholder="Search users by username..."
+				bind:value={filter}
+			/>
+		</div>
+
+		<div class="mb-2 text-xl font-thin">
+			<!-- Display the total count of filtered users -->
+			{filter ? 'query matches' : 'total users'}: {filteredUsers.length}
+		</div>
 	</div>
 
 	<!-- Display filtered users -->
-	<div class="grid grid-cols-1 gap-2 border-t pt-5 sm:grid-cols-2 md:grid-cols-3">
+	<div class="grid grid-cols-1 gap-2 px-1 sm:grid-cols-2 md:grid-cols-3">
 		{#each filteredUsers as user}
 			<a href={`/users/${user.id}`} class="user-wrapper">
 				<div

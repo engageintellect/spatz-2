@@ -20,6 +20,6 @@
 
 <!-- Scroll progress bar -->
 <div
-	class="fixed left-0 top-[57px] z-50 h-[2px] rounded-r-full bg-foreground transition-all duration-300 ease-out"
+	class="fixed left-0 top-[57px] z-[999] h-[2px] rounded-r-full bg-foreground transition-all duration-300 ease-out"
 	style="width: {scrollProgress}%"
 ></div>
