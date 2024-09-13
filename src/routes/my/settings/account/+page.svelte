@@ -5,6 +5,7 @@
 	import { toast } from '$lib/stores/toast';
 	import Toast from '$lib/components/ui/Toast.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import Icon from '@iconify/svelte';
 
 	export let form;
 	export let data;
@@ -77,8 +78,8 @@
 
 <div class="flex h-full w-full flex-col space-y-12">
 	<div class="w-full">
-		<div class="mb-5 text-3xl font-bold lowercase md:text-5xl">account settings</div>
-		<div class="text-2xl">Change Email</div>
+		<div class="mb-5 text-2xl font-bold lowercase sm:text-3xl md:text-5xl">account settings</div>
+		<div class="text-xl md:text-2xl">change email</div>
 
 		<!-- <Modal label="change-email" checked={emailModalOpen}> -->
 		<form
@@ -96,14 +97,15 @@
 				disabled={loading}
 				errors={form?.errors?.email}
 			/>
-			<Button type="submit" variant="default" class="lowercase" disabled={loading}
-				>update email</Button
-			>
+			<Button class="flex items-center gap-2 lowercase" type="submit" disabled={loading}>
+				<Icon icon="material-symbols:sync" class={`${loading ? 'animate-spin' : ''}h-5 w-5`} />
+				<div>update email</div>
+			</Button>
 		</form>
 	</div>
 
 	<div class="w-full">
-		<div class="text-2xl">Change Username</div>
+		<div class="text-xl md:text-2xl">change username</div>
 		<form
 			action="?/updateUsername"
 			method="POST"
@@ -119,11 +121,14 @@
 				errors={form?.errors?.username}
 				disabled={loading}
 			/>
-			<Button type="submit" variant="default" class="lowercase" disabled={loading}
-				>Save username</Button
-			>
+
+			<Button class="flex items-center gap-2 lowercase" type="submit" disabled={loading}>
+				<Icon
+					icon={`${loading ? 'material-symbols:sync' : 'material-symbols:save'}`}
+					class={`${loading ? 'animate-spin' : ''}h-5 w-5`}
+				/>
+				<div>save username</div>
+			</Button>
 		</form>
 	</div>
 </div>
-
-<Toast type={$toast.type} message={$toast.message} show={$toast.show} />

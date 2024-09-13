@@ -144,6 +144,8 @@ export const updateProfileSchema = z.object({
 		.max(64, { message: 'Job Title must be 64 characters or less' })
 		.trim(),
 
+	website: z.string().url({ message: 'Must be a valid URL' }).optional(), // Optional if users aren't required to enter a website
+
 	avatar: z
 		.instanceof(Blob)
 		.optional()

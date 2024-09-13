@@ -3,18 +3,22 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { onMount } from 'svelte';
 	import { animateMainStagger } from '$lib/animations';
+	import Icon from '@iconify/svelte';
 	const navigation = [
 		{
 			title: 'Profile',
-			href: '/my/settings/profile'
+			href: '/my/settings/profile',
+			icon: 'mdi:account'
 		},
 		{
 			title: 'Account',
-			href: '/my/settings/account'
+			href: '/my/settings/account',
+			icon: 'mdi:settings'
 		},
 		{
 			title: 'Security',
-			href: '/my/settings/security'
+			href: '/my/settings/security',
+			icon: 'material-symbols:lock-outline'
 		}
 	];
 
@@ -34,10 +38,13 @@
 			<li class="">
 				<a href={navItem.href} class="text-lg">
 					<Button
-						class="w-full"
+						class="flex w-full items-center gap-2"
 						variant={`${$page.url.pathname === navItem.href ? 'default' : 'outline'}`}
 					>
-						{navItem.title}
+						<Icon icon={navItem.icon} class="h-4 w-4" />
+						<div>
+							{navItem.title}
+						</div>
 					</Button>
 				</a>
 			</li>

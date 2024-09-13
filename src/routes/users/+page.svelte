@@ -12,6 +12,8 @@
 
 	export let data: any;
 
+	let hidden = true;
+
 	let filter = ''; // Add a filter variable
 	let showScrollToTop = false;
 
@@ -45,10 +47,11 @@
 			const { gsap } = await import('gsap');
 			const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 			gsap.registerPlugin(ScrollTrigger);
+			hidden = false;
 
 			// Animate "book" on mount
 			gsap.fromTo(
-				'.title-user',
+				'.animate-user',
 				{ opacity: 0, y: -10 },
 				{
 					opacity: 1,
@@ -60,7 +63,7 @@
 
 			// Animate "book" on mount
 			gsap.fromTo(
-				'.title-db',
+				'.animate-db',
 				{ opacity: 0, x: -50 },
 				{
 					opacity: 1,
@@ -82,14 +85,15 @@
 				}
 			);
 
-			// Animate text on mount
+			// input on mount
 			gsap.fromTo(
-				'.text-3xl',
-				{ opacity: 0, y: 50 },
+				'.animate-grid',
+				{ opacity: 0, y: 20 },
 				{
 					opacity: 1,
+					delay: 0.25,
 					y: 0,
-					duration: 1,
+					duration: 3,
 					ease: 'power4.out'
 				}
 			);
@@ -129,11 +133,11 @@
 
 <ScrollIndicator />
 
-<div class="mx-auto max-w-2xl">
+<div class={`${hidden ? 'opacity-0' : ''} mx-auto max-w-2xl`}>
 	<div class="bg-base-100 mx-auto h-full w-full">
 		<h1 class="flex items-center gap-2 text-7xl font-bold text-primary">
-			<span class="title-user">user</span>
-			<span class="title-db font-thin text-primary/50">db</span>
+			<span class="animate-user">user</span>
+			<span class="animate-db font-thin text-primary/50">db</span>
 		</h1>
 	</div>
 
@@ -159,7 +163,7 @@
 	</div>
 
 	<!-- Display filtered users -->
-	<div class="grid grid-cols-1 gap-2 px-1 sm:grid-cols-2 md:grid-cols-3">
+	<div class="animate-grid grid grid-cols-1 gap-2 px-1 sm:grid-cols-2 md:grid-cols-3">
 		{#each filteredUsers as user}
 			<a href={`/users/${user.id}`} class="user-wrapper">
 				<div

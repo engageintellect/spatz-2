@@ -6,6 +6,9 @@
 	import Input from '$lib/components/ui/Input.svelte';
 	import { toast } from 'svelte-sonner';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { currentUser } from '$lib/stores/user';
+
+	$: currentUser.set(data.user);
 
 	export let data;
 	export let form;
@@ -53,7 +56,7 @@
 		enctype="multipart/form-data"
 		use:enhance={submitUpdateProfile}
 	>
-		<div class="text-3xl font-bold lowercase md:text-5xl">Update Profile</div>
+		<div class="text-2xl font-bold lowercase sm:text-3xl md:text-5xl">Update Profile</div>
 		<div class="w-full max-w-lg pt-5">
 			<!-- <label for="avatar" class="label  pb-1"> -->
 			<!-- <span class="label-text">Profile Picture</span> -->
@@ -128,8 +131,37 @@
 			placeholder="Title"
 		/>
 
-		<div class="w-full max-w-lg pt-3">
-			<Button class="lowercase" type="submit" disabled={loading}>Update Profile</Button>
+		<Input
+			id="website"
+			value={form?.data?.website ?? data?.user?.website}
+			disabled={loading}
+			errors={form?.errors?.website}
+			placeholder="Title"
+		/>
+
+		<div class="w-full max-w-lg pt-2">
+			<div class="flex w-full justify-between">
+				<Button
+					class="flex w-full items-center gap-2 lowercase md:w-fit"
+					type="submit"
+					disabled={loading}
+				>
+					<Icon icon="material-symbols:sync" class={`${loading ? 'animate-spin' : ''} h-5 w-5`} />
+					<div>update profile</div>
+				</Button>
+
+				<div class="w-full md:w-fit">
+					<a href={`/users/${$currentUser.id}`} class="w-full">
+						<Button variant="outline" class="flex w-full items-center gap-2 lowercase md:w-fit">
+							<Icon
+								icon="material-symbols:account-circle"
+								class={`${loading ? 'animate-spin' : ''} h-5 w-5`}
+							/>
+							<div>go to profile</div>
+						</Button>
+					</a>
+				</div>
+			</div>
 		</div>
 	</form>
 </div>

@@ -141,6 +141,19 @@
 					"maxSelect": 1,
 					"displayFields": null
 				}
+			},
+			{
+				"system": false,
+				"id": "6hidtwhb",
+				"name": "website",
+				"type": "url",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {
+					"exceptDomains": null,
+					"onlyDomains": null
+				}
 			}
 		],
 		"indexes": [],
