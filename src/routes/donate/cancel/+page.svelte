@@ -17,8 +17,7 @@
 >
 	<h1 class="animate-item text-3xl font-bold">payment canceled</h1>
 	<p class="animate-item mt-4 text-lg">
-		It looks like your payment was cancelled. If this was a mistake, you can
-		<a href="/donate" class="text-info hover:underline">try again</a>.
+		It looks like your payment was cancelled. If this was a mistake, you can try again.
 	</p>
 	<div class="animate-item mt-5 flex items-center justify-between gap-2">
 		<Button href="/" variant="default" class="flex w-full items-center gap-2">

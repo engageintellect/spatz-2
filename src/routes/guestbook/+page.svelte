@@ -11,6 +11,7 @@
 	import { gsap } from 'gsap';
 	import { lazyLoad } from '$lib/lazyLoad';
 	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
+	import { animateMainStagger } from '$lib/animations';
 
 	let isSubmitting = false;
 
@@ -42,7 +43,8 @@
 	}
 
 	function sortByLikes(posts: App.Post[]) {
-		return posts.sort((a, b) => b.likes.length - a.likes.length); // Sort by the length of likes array
+		// Create a new sorted array without mutating the original posts array
+		return [...posts].sort((a, b) => b.likes.length - a.likes.length);
 	}
 
 	function sortByCurrentUser(posts: App.Post[]) {
@@ -52,7 +54,7 @@
 	$: emptyMentioningPostsCount = data.posts.filter((post) => post.mentioning.length === 0).length;
 
 	$: sortedPosts = (() => {
-		let posts = [...data.posts];
+		let posts = [...data.posts]; // Create a copy of posts to avoid mutation
 		switch (sortOption) {
 			case 'likes':
 				return sortByLikes(posts);
@@ -89,6 +91,7 @@
 	onMount(async () => {
 		await tick(); // Ensure the DOM is fully updated
 		window.addEventListener('scroll', handleScroll);
+		animateMainStagger();
 
 		if (typeof window !== 'undefined') {
 			const { gsap } = await import('gsap');
@@ -191,7 +194,7 @@
 				toastError="Failed to submit post"
 			/>
 
-			<div class="w-full">
+			<div class="animate-item w-full">
 				<div class="">
 					<div class="flex items-end justify-between gap-5 border-b">
 						<div class="mb-2 text-xl font-thin">posts: {emptyMentioningPostsCount}</div>

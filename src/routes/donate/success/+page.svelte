@@ -23,7 +23,7 @@
 			<div>go home</div>
 		</Button>
 		<Button href="/donate" variant="success" class="flex w-full items-center gap-2">
-			<div>try again</div>
+			<div>donate again</div>
 			<Icon icon="mdi:arrow-right" class="h-5 w-5" />
 		</Button>
 	</div>

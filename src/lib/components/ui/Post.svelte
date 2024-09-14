@@ -18,14 +18,19 @@
 	export let id;
 	export let currentUser;
 
+	let isDeleting = false;
+	let deleteLoading = false;
+	let dialogOpen = false;
+
 	let isLiked = false;
 	let optimisticLikes: number;
 	let hasOptimisticallyUpdated = false; // Track if the user has clicked the like button
 	let isLocked = false; // Lock to prevent premature syncing
 
-	let isDeleting = false;
-	let deleteLoading = false;
-	let dialogOpen = false;
+	// Remove the onMount block and use a reactive statement
+	// Set `isLiked` whenever `likes` or `currentUser` changes
+	$: isLiked = likes.includes(currentUser.id);
+	$: optimisticLikes = likes.length; // Set the actual number of likes reactively
 
 	// Set initial likes count and liked state on mount
 	onMount(() => {
@@ -121,6 +126,7 @@
 						>
 							<input type="hidden" name="postId" value={id} />
 							<input type="hidden" name="currentUserId" value={currentUser.id} />
+
 							<button type="submit" class="flex items-center">
 								<Icon
 									icon={isLiked ? 'ph:heart-fill' : 'ph:heart'}
