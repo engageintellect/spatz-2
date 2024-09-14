@@ -37,7 +37,7 @@
 		<DropdownMenu.Label class=" p-0">
 			<DropdownMenu.Item class="">
 				<a
-					href="/my/settings/profile"
+					href={`/users/${$currentUser.id}`}
 					data-sveltekit-preload-data="hover"
 					class="flex w-full items-center gap-2"
 				>

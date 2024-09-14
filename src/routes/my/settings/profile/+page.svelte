@@ -140,7 +140,7 @@
 		/>
 
 		<div class="w-full max-w-lg pt-2">
-			<div class="flex w-full justify-between">
+			<div class="flex w-full justify-between gap-2">
 				<Button
 					class="flex w-full items-center gap-2 lowercase md:w-fit"
 					type="submit"
@@ -153,11 +153,8 @@
 				<div class="w-full md:w-fit">
 					<a href={`/users/${$currentUser.id}`} class="w-full">
 						<Button variant="outline" class="flex w-full items-center gap-2 lowercase md:w-fit">
-							<Icon
-								icon="material-symbols:account-circle"
-								class={`${loading ? 'animate-spin' : ''} h-5 w-5`}
-							/>
 							<div>go to profile</div>
+							<Icon icon="mdi:arrow-right" class={`${loading ? 'animate-spin' : ''} h-5 w-5`} />
 						</Button>
 					</a>
 				</div>

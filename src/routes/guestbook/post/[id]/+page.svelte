@@ -76,55 +76,23 @@
 </script>
 
 <div class="mx-auto max-w-lg">
-	<Button
-		on:click={goBack}
-		size="sm"
-		variant="outline"
-		type="submit"
-		class="group/backButton backButton flex items-center gap-2"
-		disabled={loading}
-	>
-		<Icon
-			icon="mdi:arrow-left"
-			class="h-5 w-5 transition-all duration-300 md:group-hover/backButton:-translate-x-1"
-		/>
-		<span class="text-sm">back</span>
-	</Button>
+	<div class="">
+		<Button
+			on:click={goBack}
+			size="sm"
+			variant="outline"
+			type="submit"
+			class="group/backButton backButton flex items-center gap-2"
+			disabled={loading}
+		>
+			<Icon
+				icon="mdi:arrow-left"
+				class="h-5 w-5 transition-all duration-300 md:group-hover/backButton:-translate-x-1"
+			/>
+			<span class="text-sm">back</span>
+		</Button>
+	</div>
 
-	<!-- ------------------------------------ -->
-	<!-- MAIN POST -->
-	<!-- ------------------------------------ -->
-
-	<!--
-	{#if data.post.mentioning.length > 0}
-		<div class="mt-5 gap-0 pb-2">
-			{#if data.respondingTo.length > 0}
-				<Badge variant="outline" class="pr-0">
-					<div class="flex items-center justify-between gap-2">
-						<div class="text-sm font-thin">responding to</div>
-						{#each data.respondingTo as mention}
-							<a href={`/guestbook/post/${mention.id}`}>
-								<div class="flex items-start gap-2">
-									<img
-										src={mention.authorAvatar
-											? getImageURL(
-													$currentUser?.collectionId,
-													mention.author,
-													mention.authorAvatar
-												)
-											: `https://ui-avatars.com/api/?name=${mention.authorUsername}`}
-										alt={mention.authorUsername}
-										class="h-7 w-7 rounded-full"
-									/>
-								</div>
-							</a>
-						{/each}
-					</div>
-				</Badge>
-			{/if}
-		</div>
-  {/if}
-  -->
 	<div class="post-hero mt-5">
 		<Post
 			postAuthorId={data.post.author}
@@ -134,12 +102,47 @@
 			postDate={data.post.created}
 			avatar={data.post.expand.author.avatar
 				? getImageURL($currentUser?.collectionId, data.post.author, data.post.expand.author.avatar)
-				: `https://ui-avatars.com/api/?name=${data.post.expand.author.username}`}
+				: `https://ui-avatars.com/api/?name=${data.post.expand.author.username}&background=random`}
 			likes={data.post.likes}
 			id={data.post.id}
 			currentUser={$currentUser}
 		/>
 	</div>
+
+	{#if data.post.mentioning.length > 0}
+		<div class="mt-5 gap-0 pb-2">
+			{#if data.respondingTo.length > 0}
+				<div class="mb-2 flex items-end gap-2">
+					<div class="text-sm font-thin">responding to:</div>
+				</div>
+
+				<div class="flex items-center gap-2">
+					<Badge variant="outline" class="pl-0">
+						<div class="flex items-center justify-between gap-2">
+							{#each data.respondingTo as mention}
+								<a href={`/guestbook/post/${mention.id}`}>
+									<div class="flex items-center gap-2">
+										<img
+											src={mention.authorAvatar
+												? getImageURL(
+														$currentUser?.collectionId,
+														mention.author,
+														mention.authorAvatar
+													)
+												: `https://ui-avatars.com/api/?name=${mention.authorUsername}&background=random`}
+											alt={mention.authorUsername}
+											class="h-7 w-7 rounded-full"
+										/>
+										<div class="text-sm font-thin">{mention.authorUsername}</div>
+									</div>
+								</a>
+							{/each}
+						</div>
+					</Badge>
+				</div>
+			{/if}
+		</div>
+	{/if}
 </div>
 
 <div class="comment-feed mx-auto mt-5 max-w-lg">
@@ -179,7 +182,7 @@
 					userId={$currentUser?.id}
 					avatar={$currentUser?.avatar
 						? getImageURL($currentUser?.collectionId, $currentUser?.id, $currentUser?.avatar)
-						: `https://ui-avatars.com/api/?name=${$currentUser?.email}`}
+						: `https://ui-avatars.com/api/?name=${$currentUser?.username}&background=random`}
 					id="content"
 					value={form?.data?.content ?? ''}
 					errors={form?.errors?.content}
@@ -205,7 +208,7 @@
 				postDate={comment.created}
 				avatar={comment.authorAvatar
 					? getImageURL($currentUser?.collectionId, comment.author, comment.authorAvatar)
-					: `https://ui-avatars.com/api/?name=${comment.authorUsername}`}
+					: `https://ui-avatars.com/api/?name=${comment.authorUsername}&background=random`}
 				likes={comment.likes}
 				id={comment.id}
 				currentUser={$currentUser}

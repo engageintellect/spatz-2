@@ -180,7 +180,7 @@
 				userId={$currentUser.id}
 				avatar={$currentUser?.avatar
 					? getImageURL($currentUser?.collectionId, $currentUser?.id, $currentUser?.avatar)
-					: `https://ui-avatars.com/api/?name=${$currentUser?.email}`}
+					: `https://ui-avatars.com/api/?name=${$currentUser?.email}&background=random`}
 				{isSubmitting}
 				id="content"
 				value={form?.data?.content ?? ''}
@@ -229,7 +229,7 @@
 											postAuthor={post.username}
 											avatar={post?.avatar
 												? getImageURL($currentUser?.collectionId, post?.author, post?.avatar)
-												: `https://ui-avatars.com/api/?name=${post?.username}`}
+												: `https://ui-avatars.com/api/?name=${post?.username}&background=random`}
 											postContent={post.content}
 											likes={post.likes}
 											currentUser={$currentUser}

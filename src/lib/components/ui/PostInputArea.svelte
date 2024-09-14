@@ -122,13 +122,13 @@
 
 				<div class="flex w-full gap-2 rounded-lg duration-300">
 					<div class="animate-avatar flex flex-col">
-						<div class="h-10 w-10 md:h-12 md:w-12">
+						<div class="h-12 w-12 md:h-16 md:w-16">
 							<img src={avatar} class="h-full w-full rounded-full object-cover" alt="user avatar" />
 						</div>
 					</div>
 
 					<textarea
-						class="animate-textarea w-full resize-none rounded-lg bg-background focus-within:outline-none"
+						class="animate-textarea w-full resize-none rounded-lg bg-background text-lg font-thin focus-within:outline-none"
 						{placeholder}
 						{required}
 						{disabled}

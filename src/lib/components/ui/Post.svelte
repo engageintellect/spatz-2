@@ -158,7 +158,7 @@
 											variant="ghost"
 											size="sm"
 											on:click={() => (dialogOpen = true)}
-											class="group/deleteButton flex scale-[0.75] items-center active:scale-[0.70] "
+											class="group/deleteButton flex scale-[0.75] items-center active:scale-[0.70]"
 										>
 											<Icon
 												icon={'mdi:close'}

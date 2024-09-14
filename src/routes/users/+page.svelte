@@ -6,6 +6,7 @@
 	import { page } from '$app/stores';
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
 	import Icon from '@iconify/svelte';
+	import { animateMainStagger } from '$lib/animations';
 
 	import { gsap } from 'gsap';
 	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
@@ -41,6 +42,7 @@
 
 	onMount(async () => {
 		await tick();
+		animateMainStagger();
 		window.addEventListener('scroll', handleScroll);
 
 		if (typeof window !== 'undefined') {
@@ -133,7 +135,7 @@
 
 <ScrollIndicator />
 
-<div class={`${hidden ? 'opacity-0' : ''} mx-auto max-w-2xl`}>
+<div class={`${hidden ? 'opacity-0' : ''} animate-item mx-auto max-w-2xl`}>
 	<div class="bg-base-100 mx-auto h-full w-full">
 		<h1 class="flex items-center gap-2 text-7xl font-bold text-primary">
 			<span class="animate-user">user</span>
@@ -163,21 +165,21 @@
 	</div>
 
 	<!-- Display filtered users -->
-	<div class="animate-grid grid grid-cols-1 gap-2 px-1 sm:grid-cols-2 md:grid-cols-3">
+	<div class="animate-grid grid grid-cols-1 gap-2 px-1 pb-40 sm:grid-cols-2 md:grid-cols-3">
 		{#each filteredUsers as user}
-			<a href={`/users/${user.id}`} class="user-wrapper">
+			<a href={`/users/${user.id}`} class="user-wrapper group/userCard">
 				<div
-					class={` rounded-lg border p-3 shadow transition-all duration-300 md:hover:border-foreground`}
+					class={`rounded-lg border p-3 shadow transition-all duration-300 md:hover:border-foreground`}
 				>
 					<div class="flex flex-row items-center gap-2">
 						<div>
 							<div class="h-10 w-10">
 								<img
-									class="h-full w-full rounded-full border object-cover shadow"
+									class="transition-translate h-full w-full rounded-full border object-cover shadow duration-200 md:group-hover/userCard:scale-[102%]"
 									alt={user.username}
 									src={user?.avatar
 										? getImageURL(user?.collectionId, user?.id, user?.avatar)
-										: `https://ui-avatars.com/api/?name=${user?.username}`}
+										: `https://ui-avatars.com/api/?name=${user?.username}&background=random`}
 								/>
 							</div>
 						</div>
@@ -188,10 +190,10 @@
 			</a>
 		{/each}
 	</div>
-
-	{#if showScrollToTop === true}
-		<div class="flex justify-center">
-			<ScrollToTopButton />
-		</div>
-	{/if}
 </div>
+
+{#if showScrollToTop === true}
+	<div class="flex justify-center">
+		<ScrollToTopButton />
+	</div>
+{/if}
