@@ -64,7 +64,9 @@
 		<div class="fade-in">
 			<About />
 		</div>
-
+		<div class="fade-in">
+			<SignGuestbookButton />
+		</div>
 		<div class="fade-in">
 			<FeaturesFeed />
 		</div>
@@ -72,9 +74,6 @@
 			<GettingStarted />
 		</div>
 
-		<div class="fade-in">
-			<SignGuestbookButton />
-		</div>
 		<div class="fade-in">
 			<Contribute />
 		</div>

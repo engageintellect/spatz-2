@@ -9,7 +9,9 @@
 			class="text-center text-lg lowercase shadow transition-all duration-300 md:hover:shadow-lg"
 			color={['#14b8a6', '#00000000']}
 		>
-			<div class="flex items-center gap-2">
+			<div
+				class="transition-scale flex items-center gap-2 duration-300 group-hover/signGuestbook:scale-105"
+			>
 				sign the guestbook
 				<Icon
 					icon="ion:chatbubble-outline"

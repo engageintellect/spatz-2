@@ -75,7 +75,7 @@
 	});
 </script>
 
-<div class="mx-auto max-w-lg">
+<div class="mx-auto max-w-2xl">
 	<div class="">
 		<Button
 			on:click={goBack}
@@ -93,7 +93,7 @@
 		</Button>
 	</div>
 
-	<div class="post-hero mt-5">
+	<div class="post-hero mx-auto mt-5 max-w-lg">
 		<Post
 			postAuthorId={data.post.author}
 			postAuthor={data.post.expand.author.username}

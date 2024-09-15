@@ -55,7 +55,7 @@
 
 <ScrollIndicator />
 
-<div class={` ${hidden ? 'opacity-0' : ''} mx-auto max-w-lg`}>
+<div class={` ${hidden ? 'opacity-0' : ''} mx-auto max-w-2xl`}>
 	<div class="flex justify-between">
 		<Button
 			on:click={goBack}
@@ -80,17 +80,17 @@
 					class="group/backButton backButton animate-item flex items-center gap-2"
 					disabled={loading}
 				>
+					<span class="text-sm">edit profile</span>
 					<Icon
 						icon="material-symbols:edit"
 						class="h-5 w-5 transition-all duration-300 md:group-hover/backButton:-translate-x-1"
 					/>
-					<span class="text-sm">edit profile</span>
 				</Button>
 			</a>
 		{/if}
 	</div>
-	<main class="mx-auto mt-10 max-w-lg rounded-lg md:mt-20">
-		<div class="animate-item flex items-start justify-start gap-2 md:gap-5">
+	<main class="mx-auto mt-10 max-w-lg rounded-lg">
+		<div class="animate-item flex h-full items-start justify-start gap-2 md:gap-5">
 			<div class="h-20 w-20 md:h-24 md:w-24">
 				<img
 					class="h-full w-full rounded-full border object-cover shadow"
