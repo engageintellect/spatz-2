@@ -56,16 +56,14 @@
 		<div class="fade-in">
 			<Hero />
 		</div>
-
 		<div class="fade-in">
 			<Stats {stars} {issues} {forks} />
 		</div>
-
-		<div class="fade-in">
-			<About />
-		</div>
 		<div class="fade-in">
 			<SignGuestbookButton />
+		</div>
+		<div class="fade-in">
+			<About />
 		</div>
 		<div class="fade-in">
 			<FeaturesFeed />
