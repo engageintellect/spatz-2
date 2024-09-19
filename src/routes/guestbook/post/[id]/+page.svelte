@@ -89,7 +89,7 @@
 	</div>
 
 	{#if data.post.mentioning.length > 0}
-		<div class="mt-5 gap-0 pb-2">
+		<div class="mx-auto mt-5 max-w-lg gap-0 pb-2">
 			{#if data.respondingTo.length > 0}
 				<div class="mb-2 flex items-end gap-2">
 					<div class="text-sm font-thin">responding to:</div>
