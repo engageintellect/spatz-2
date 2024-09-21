@@ -72,22 +72,9 @@
 </script>
 
 <div class="mx-auto max-w-2xl">
-	<div class="post-hero mx-auto mt-5 max-w-lg">
-		<Post
-			postAuthorId={data.post.author}
-			postAuthor={data.post.expand.author.username}
-			postContent={data.post.content}
-			comments={data.post.mentionedBy}
-			postDate={data.post.created}
-			avatar={data.post.expand.author.avatar
-				? getImageURL($currentUser?.collectionId, data.post.author, data.post.expand.author.avatar)
-				: `https://ui-avatars.com/api/?name=${data.post.expand.author.username}&background=random`}
-			likes={data.post.likes}
-			id={data.post.id}
-			currentUser={$currentUser}
-		/>
-	</div>
-
+	<!-- ------------------------------------ -->
+	<!-- RESPONSE TO POST -->
+	<!-- ------------------------------------ -->
 	{#if data.post.mentioning.length > 0}
 		<div class="mx-auto mt-5 max-w-lg gap-0 pb-2">
 			{#if data.respondingTo.length > 0}
@@ -122,8 +109,30 @@
 			{/if}
 		</div>
 	{/if}
+
+	<!-- ------------------------------------ -->
+	<!-- MAIN POST -->
+	<!-- ------------------------------------ -->
+	<div class="post-hero mx-auto mt-5 max-w-lg">
+		<Post
+			postAuthorId={data.post.author}
+			postAuthor={data.post.expand.author.username}
+			postContent={data.post.content}
+			comments={data.post.mentionedBy}
+			postDate={data.post.created}
+			avatar={data.post.expand.author.avatar
+				? getImageURL($currentUser?.collectionId, data.post.author, data.post.expand.author.avatar)
+				: `https://ui-avatars.com/api/?name=${data.post.expand.author.username}&background=random`}
+			likes={data.post.likes}
+			id={data.post.id}
+			currentUser={$currentUser}
+		/>
+	</div>
 </div>
 
+<!-- ------------------------------------ -->
+<!-- COMMENT FEED -->
+<!-- ------------------------------------ -->
 <div class="comment-feed mx-auto mt-5 max-w-lg">
 	<div class="flex w-full justify-between border-b pb-2">
 		<div class="flex items-center gap-1">
