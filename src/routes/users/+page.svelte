@@ -7,9 +7,9 @@
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
 	import Icon from '@iconify/svelte';
 	import { animateMainStagger } from '$lib/animations';
-
 	import { gsap } from 'gsap';
 	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 	export let data: any;
 
@@ -46,10 +46,8 @@
 		window.addEventListener('scroll', handleScroll);
 
 		if (typeof window !== 'undefined') {
-			const { gsap } = await import('gsap');
-			const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-			gsap.registerPlugin(ScrollTrigger);
 			hidden = false;
+			gsap.registerPlugin(ScrollTrigger);
 
 			// Animate "book" on mount
 			gsap.fromTo(
