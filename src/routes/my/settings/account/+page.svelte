@@ -3,7 +3,6 @@
 	import { invalidateAll } from '$app/navigation';
 	import Input from '$lib/components/ui/Input.svelte';
 	import { toast } from '$lib/stores/toast';
-	import Toast from '$lib/components/ui/Toast.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 
