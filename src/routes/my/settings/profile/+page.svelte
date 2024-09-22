@@ -162,5 +162,3 @@
 		</div>
 	</form>
 </div>
-
-<!-- <Toast type={$toast.type} message={$toast.message} show={$toast.show} /> -->

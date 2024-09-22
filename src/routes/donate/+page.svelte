@@ -86,7 +86,7 @@
 
 <div class="donate-card">
 	<main class="mx-auto max-w-lg rounded-lg border p-5 shadow-md transition-all duration-300">
-		<h1 class="text-5xl font-bold md:text-7xl">Donate</h1>
+		<h1 class="text-5xl font-bold md:text-7xl">donate</h1>
 
 		<div class="mt-10">
 			<p>{@html donationMessage(amount)}</p>

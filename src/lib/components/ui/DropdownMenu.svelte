@@ -179,7 +179,7 @@
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item>
 			<form
-				class="flex w-full"
+				class="flex w-full py-2"
 				method="POST"
 				action="/auth/logout"
 				on:submit={handleLogout}

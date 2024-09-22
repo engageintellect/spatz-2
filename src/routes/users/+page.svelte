@@ -46,9 +46,9 @@
 		window.addEventListener('scroll', handleScroll);
 
 		if (typeof window !== 'undefined') {
-			hidden = false;
 			const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 			gsap.registerPlugin(ScrollTrigger);
+			hidden = false;
 
 			// Animate "book" on mount
 			gsap.fromTo(
