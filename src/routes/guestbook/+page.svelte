@@ -51,11 +51,17 @@
 		return posts.filter((post) => post.author === $currentUser.id);
 	}
 
+	function sortByFollowing(posts: App.Post[]) {
+		return posts.filter((post) => $currentUser.following.includes(post.author));
+	}
+
 	$: emptyMentioningPostsCount = data.posts.filter((post) => post.mentioning.length === 0).length;
 
 	$: sortedPosts = (() => {
 		let posts = [...data.posts]; // Create a copy of posts to avoid mutation
 		switch (sortOption) {
+			case 'following':
+				return sortByFollowing(posts);
 			case 'likes':
 				return sortByLikes(posts);
 			case 'user':
@@ -178,31 +184,33 @@
 		<div class="form-control gap-0">
 			<input type="hidden" name="author" value={data?.user?.id} />
 
-			<PostInputArea
-				action="?/createPost"
-				userId={$currentUser.id}
-				avatar={$currentUser?.avatar
-					? getImageURL($currentUser?.collectionId, $currentUser?.id, $currentUser?.avatar)
-					: `https://ui-avatars.com/api/?name=${$currentUser?.email}&background=random`}
-				{isSubmitting}
-				id="content"
-				value={form?.data?.content ?? ''}
-				errors={form?.errors?.content}
-				disabled={loading}
-				placeholder={'type your post here...'}
-				toastSuccess="Post submission success!"
-				toastError="Failed to submit post"
-			/>
+			<div class="pb-10">
+				<PostInputArea
+					action="?/createPost"
+					userId={$currentUser.id}
+					avatar={$currentUser?.avatar
+						? getImageURL($currentUser?.collectionId, $currentUser?.id, $currentUser?.avatar)
+						: `https://ui-avatars.com/api/?name=${$currentUser?.email}&background=random`}
+					{isSubmitting}
+					id="content"
+					value={form?.data?.content ?? ''}
+					errors={form?.errors?.content}
+					disabled={loading}
+					placeholder={'type your post here...'}
+					toastSuccess="Post submission success!"
+					toastError="Failed to submit post"
+				/>
+			</div>
 
 			<div class="animate-item w-full">
 				<div class="">
 					<div class="flex items-end justify-between gap-5 border-b">
 						<div class="mb-2 text-xl font-thin">posts: {emptyMentioningPostsCount}</div>
 
-						<div class="my-4 flex items-end justify-end gap-2">
+						<div class="mb-2 flex items-end justify-end gap-3">
 							<Button
 								size="sm"
-								variant={sortOption === 'date' ? 'default' : 'outline'}
+								variant={sortOption === 'date' ? 'default' : 'ghost'}
 								on:click={() => (sortOption = 'date')}
 							>
 								new
@@ -210,11 +218,20 @@
 							</Button>
 							<Button
 								size="sm"
-								variant={sortOption === 'likes' ? 'default' : 'outline'}
+								variant={sortOption === 'likes' ? 'default' : 'ghost'}
 								on:click={() => (sortOption = 'likes')}
 							>
 								likes
 								<Icon icon="mdi:heart" class="ml-1 h-4 w-4" />
+							</Button>
+
+							<Button
+								size="sm"
+								variant={sortOption === 'following' ? 'default' : 'ghost'}
+								on:click={() => (sortOption = 'following')}
+							>
+								feed
+								<Icon icon="material-symbols:rss-feed" class="ml-1 h-4 w-4" />
 							</Button>
 						</div>
 					</div>

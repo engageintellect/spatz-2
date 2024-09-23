@@ -2,6 +2,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
+	import { enhance } from '$app/forms';
 
 	import { getImageURL } from '$lib/utils.js';
 	import { onMount } from 'svelte';
@@ -128,8 +129,50 @@
 						</a>
 					</div>
 				{/if}
+
+				<div class="mt-5 flex items-center gap-5 text-sm font-thin text-foreground/70">
+					<div class="">
+						{data.userFollowers.length}
+						{data.userFollowers.length === 1 ? ' follower' : ' followers'}
+					</div>
+
+					<div class="">
+						{data.userProfile.following.length} following
+					</div>
+				</div>
 			</div>
 		</div>
+
+		{#if data.userProfile.id !== $currentUser.id}
+			<div class="mt-10 flex items-center gap-2">
+				<form action="?/followUser" method="POST" class="w-full" use:enhance>
+					<input type="hidden" name="userId" value={data.userProfile.id} />
+					<input type="hidden" name="currentUserId" value={$currentUser.id} />
+					{#if data.userFollowers.map((follower: any) => follower.id).includes($currentUser.id)}
+						<Button type="submit" class="animate-item w-full" variant="destructive" size="sm">
+							<div class="item-center flex gap-2">
+								<div>Unfollow</div>
+								<Icon icon="mdi:minus" class="h-5 w-5" />
+							</div>
+						</Button>
+					{:else}
+						<Button type="submit" class="animate-item w-full" variant="success" size="sm">
+							<div class="item-center flex gap-2">
+								<div>Follow</div>
+								<Icon icon="mdi:plus" class="h-5 w-5" />
+							</div>
+						</Button>
+					{/if}
+				</form>
+
+				<Button href="/guestbook" class="animate-item w-full" variant="outline" size="sm">
+					<div class="item-center flex gap-2">
+						<div>Mention</div>
+						<Icon icon="mdi:plus" class="h-5 w-5" />
+					</div>
+				</Button>
+			</div>
+		{/if}
 
 		{#if data.userPosts.length > 0}
 			<div class="animate-item mb-2 mt-10 text-xl font-thin md:mt-20">

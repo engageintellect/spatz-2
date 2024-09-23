@@ -103,7 +103,10 @@ pnpm i && pnpm run dev --host
 │   ├── /guestbook
 │   │   └── /post
 │   │       └── /[id]
+│   ├── /users
+│   │   └── /[id]
 │   ├── /technologies
+│   ├── /terms
 │   ├── /ai
 │   │   ├── /chat
 │   │   ├── /context

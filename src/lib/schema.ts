@@ -169,6 +169,17 @@ export const updateProfileSchema = z.object({
 });
 
 // ------------------------------
+//FOLLOW USER
+// ------------------------------
+
+export const followUserSchema = z.object({
+	userId: z.string(),
+	currentUserId: z.string()
+});
+
+export type FollowUserSchema = typeof followUserSchema;
+
+// ------------------------------
 //  CONTACT FORM
 // ------------------------------
 export const formSchema = z.object({

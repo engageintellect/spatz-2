@@ -7,7 +7,8 @@ import {
 	createGuestBookPostSchema,
 	createPostCommentSchema,
 	likeGuestBookPostSchema,
-	deleteGuestBookPostSchema
+	deleteGuestBookPostSchema,
+	followUserSchema
 } from '$lib/schema';
 
 // Define the custom error type
@@ -47,9 +48,15 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		};
 	});
 
+	// GET USER FOLLOWERS
+	const followers = await locals.pb.collection('users').getFullList({
+		filter: `following ~ "${id}"`
+	});
+
 	return {
 		userProfile: user,
-		userPosts: transformedPosts
+		userPosts: transformedPosts,
+		userFollowers: followers
 	};
 };
 
@@ -74,6 +81,40 @@ export const actions: Actions = {
 			throw error(customError.status, customError.message);
 		}
 		return { success: true };
+	},
+
+	followUser: async ({ request, locals }) => {
+		const { formData, errors } = await validateData(await request.formData(), followUserSchema);
+		if (errors) {
+			return fail(400, {
+				data: formData,
+				errors: errors.fieldErrors
+			});
+		}
+
+		try {
+			const user = await locals.pb.collection('users').getOne(formData.userId);
+			const currentUser = await locals.pb.collection('users').getOne(formData.currentUserId);
+
+			if (currentUser.following.includes(user.id)) {
+				currentUser.following = currentUser.following.filter((id: any) => id !== user.id);
+			} else {
+				currentUser.following.push(user.id);
+			}
+
+			await locals.pb
+				.collection('users')
+				.update(currentUser.id, { following: currentUser.following });
+
+			return {
+				success: true
+			};
+		} catch (err) {
+			console.error('Error following user:', err);
+			return {
+				error: 'Error following user'
+			};
+		}
 	},
 
 	likePost: async ({ request, locals }) => {
