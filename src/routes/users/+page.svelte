@@ -7,6 +7,8 @@
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
 	import Icon from '@iconify/svelte';
 	import { animateMainStagger } from '$lib/animations';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import { currentUser } from '$lib/stores/user.js';
 
 	import { gsap } from 'gsap';
 	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
@@ -17,6 +19,21 @@
 
 	let filter = ''; // Add a filter variable
 	let showScrollToTop = false;
+
+	$: $currentUser = data.user;
+
+	let sortOption = 'all'; // Default sort option
+
+	// Reactive block to handle filtering users based on filter text and sort option
+	$: filteredUsers = (() => {
+		let result = data.users.filter((user: any) =>
+			user.username.toLowerCase().includes(filter.toLowerCase())
+		);
+		if (sortOption === 'following') {
+			result = result.filter((user: any) => $currentUser.following.includes(user.id));
+		}
+		return result;
+	})();
 
 	const handleScroll = () => {
 		const shouldShow = window.scrollY > 100;
@@ -50,7 +67,6 @@
 			gsap.registerPlugin(ScrollTrigger);
 			hidden = false;
 
-			// Animate "book" on mount
 			gsap.fromTo(
 				'.animate-user',
 				{ opacity: 0, y: -10 },
@@ -61,8 +77,6 @@
 					ease: 'power4.out'
 				}
 			);
-
-			// Animate "book" on mount
 			gsap.fromTo(
 				'.animate-db',
 				{ opacity: 0, x: -50 },
@@ -73,8 +87,6 @@
 					ease: 'power4.out'
 				}
 			);
-
-			// input on mount
 			gsap.fromTo(
 				'.animate-input',
 				{ opacity: 0, scale: 0.95 },
@@ -85,8 +97,6 @@
 					ease: 'power4.out'
 				}
 			);
-
-			// input on mount
 			gsap.fromTo(
 				'.animate-grid',
 				{ opacity: 0, y: 20 },
@@ -125,11 +135,6 @@
 			});
 		}
 	});
-
-	// Reactive filteredUsers array based on the filter input
-	$: filteredUsers = data.users.filter((user: any) =>
-		user.username.toLowerCase().includes(filter.toLowerCase())
-	);
 </script>
 
 <ScrollIndicator />
@@ -143,7 +148,6 @@
 	</div>
 
 	<!-- Add an input field to filter by username -->
-
 	<div class="sticky top-[57px] z-50 mb-5 border-b bg-background pt-5">
 		<div
 			class="animate-input mb-5 flex items-center rounded-lg border bg-background bg-background px-2 focus-within:ring-1 focus-within:ring-foreground focus-within:ring-offset-1"
@@ -157,9 +161,31 @@
 			/>
 		</div>
 
-		<div class="mb-2 text-xl font-thin">
+		<div class="mb-2 flex items-center justify-between text-xl font-thin">
 			<!-- Display the total count of filtered users -->
-			{filter ? 'query matches' : 'total users'}: {filteredUsers.length}
+			<div>{filter ? 'query matches' : 'total users'}: {filteredUsers.length}</div>
+
+			<div class="flex items-center gap-2">
+				<Button
+					size="sm"
+					variant={sortOption === 'all' ? 'default' : 'ghost'}
+					on:click={() => (sortOption = 'all')}
+					class="flex items-center gap-2"
+				>
+					<div>all</div>
+					<Icon icon="material-symbols:background-grid-small" class="h-5 w-5" />
+				</Button>
+
+				<Button
+					size="sm"
+					variant={sortOption === 'following' ? 'default' : 'ghost'}
+					on:click={() => (sortOption = 'following')}
+					class="flex items-center gap-2"
+				>
+					<div>following</div>
+					<Icon icon="mingcute:user-follow-fill" class="h-5 w-5" />
+				</Button>
+			</div>
 		</div>
 	</div>
 

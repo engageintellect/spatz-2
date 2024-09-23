@@ -204,10 +204,10 @@
 
 			<div class="animate-item w-full">
 				<div class="">
-					<div class="flex items-end justify-between gap-5 border-b">
+					<div class="flex items-end justify-between gap-2 border-b">
 						<div class="mb-2 text-xl font-thin">posts: {emptyMentioningPostsCount}</div>
 
-						<div class="mb-2 flex items-end justify-end gap-3">
+						<div class="mb-2 flex items-end justify-end gap-2">
 							<Button
 								size="sm"
 								variant={sortOption === 'date' ? 'default' : 'ghost'}
