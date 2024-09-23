@@ -204,14 +204,15 @@
 
 			<div class="animate-item w-full">
 				<div class="">
-					<div class="flex items-end justify-between gap-2 border-b">
-						<div class="mb-2 text-xl font-thin">posts: {emptyMentioningPostsCount}</div>
+					<div class="flex items-center justify-between gap-2 border-b pb-2">
+						<div class="text-xl font-thin">posts: {emptyMentioningPostsCount}</div>
 
-						<div class="mb-2 flex items-end justify-end gap-2">
+						<div class="flex items-end justify-end gap-2">
 							<Button
 								size="sm"
 								variant={sortOption === 'date' ? 'default' : 'ghost'}
 								on:click={() => (sortOption = 'date')}
+								class="text-xs transition-all duration-300"
 							>
 								new
 								<Icon icon="mdi:fire" class="ml-1 h-4 w-4" />
@@ -220,6 +221,7 @@
 								size="sm"
 								variant={sortOption === 'likes' ? 'default' : 'ghost'}
 								on:click={() => (sortOption = 'likes')}
+								class="text-xs transition-all duration-300"
 							>
 								likes
 								<Icon icon="mdi:heart" class="ml-1 h-4 w-4" />
@@ -229,6 +231,7 @@
 								size="sm"
 								variant={sortOption === 'following' ? 'default' : 'ghost'}
 								on:click={() => (sortOption = 'following')}
+								class="text-xs transition-all duration-300"
 							>
 								feed
 								<Icon icon="material-symbols:rss-feed" class="ml-1 h-4 w-4" />
