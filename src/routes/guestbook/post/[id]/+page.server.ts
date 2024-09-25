@@ -2,13 +2,7 @@ import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
 import { error, fail } from '@sveltejs/kit';
 import { validateData } from '$lib/utils';
-import {
-	createGuestBookPostSchema,
-	createPostCommentSchema,
-	likeGuestBookPostSchema,
-	deleteGuestBookPostSchema,
-	deletePostCommentSchema
-} from '$lib/schema';
+import { createPostCommentSchema, deletePostCommentSchema } from '$lib/schema';
 
 interface CustomError {
 	status: number;
@@ -78,61 +72,6 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 };
 
 export const actions: Actions = {
-	createPost: async ({ request, locals }) => {
-		const { formData, errors } = await validateData(
-			await request.formData(),
-			createGuestBookPostSchema
-		);
-		if (errors) {
-			return fail(400, {
-				data: formData,
-				errors: errors.fieldErrors
-			});
-		}
-		try {
-			await locals.pb.collection('posts').create(formData);
-		} catch (err) {
-			const customError = err as CustomError;
-			console.log('Error: ', 'error creating post: ' + customError.message);
-			throw error(customError.status, customError.message);
-		}
-		return { success: true };
-	},
-
-	likePost: async ({ request, locals }) => {
-		try {
-			const { formData } = await validateData(await request.formData(), likeGuestBookPostSchema);
-			const post = await locals.pb.collection('posts').getOne(formData.postId, { expand: 'likes' });
-
-			const userIndex = post.likes.indexOf(formData.currentUserId);
-			if (userIndex !== -1) {
-				post.likes.splice(userIndex, 1);
-			} else {
-				post.likes.push(formData.currentUserId);
-			}
-
-			try {
-				await locals.pb.collection('posts').update(post.id, { likes: post.likes });
-			} catch (err) {
-				const customError = err as CustomError;
-				console.log('Error: ', 'error liking/unliking post: ' + customError.message);
-				throw error(customError.status, customError.message);
-			}
-			// Fetch the updated post
-			const updatedPost = await locals.pb
-				.collection('posts')
-				.getOne(formData.postId, { expand: 'likes' });
-
-			return {
-				success: true,
-				post: updatedPost
-			};
-		} catch (err) {
-			console.error('Error processing likePost:', err);
-			throw error(500, 'An unknown error occurred');
-		}
-	},
-
 	createPostComment: async ({ request, locals }) => {
 		const { formData, errors } = await validateData(
 			await request.formData(),
@@ -168,35 +107,6 @@ export const actions: Actions = {
 			const customError = err as CustomError;
 			console.log('Error: ', 'error creating comment: ' + customError.message);
 			throw error(customError.status, customError.message);
-		}
-	},
-
-	deletePost: async ({ request, locals }) => {
-		try {
-			// Parse and validate the postId
-			const formData = await request.formData();
-			const postId = formData.get('postId') as string;
-			deleteGuestBookPostSchema.parse({ postId });
-
-			// Fetch the post to ensure it exists
-			const post = await locals.pb.collection('posts').getOne(postId);
-
-			// Ensure the user is authorized to delete the post
-			if (post.author !== locals.pb.authStore.model?.id) {
-				throw error(403, 'Unauthorized');
-			}
-
-			// Perform the delete operation
-			await locals.pb.collection('posts').delete(postId);
-
-			return {
-				success: true
-			};
-		} catch (err) {
-			console.error('Error deleting post:', err);
-			return {
-				error: 'Error deleting post'
-			};
 		}
 	},
 

@@ -186,7 +186,7 @@
 
 			<div class="pb-10">
 				<PostInputArea
-					action="?/createPost"
+					action={`/guestbook?/createPost`}
 					userId={$currentUser.id}
 					avatar={$currentUser?.avatar
 						? getImageURL($currentUser?.collectionId, $currentUser?.id, $currentUser?.avatar)

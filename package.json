@@ -41,6 +41,7 @@
 		"@ai-sdk/svelte": "^0.0.35",
 		"@iconify/svelte": "^4.0.2",
 		"@stripe/stripe-js": "^4.3.0",
+		"@unovis/svelte": "1.4.3-beta.0",
 		"ai": "^3.2.34",
 		"bad-words": "^4.0.0",
 		"bits-ui": "^0.21.12",
@@ -65,6 +66,7 @@
 		"sveltekit-superforms": "^2.16.0",
 		"tailwind-merge": "^2.4.0",
 		"tailwind-variants": "^0.2.1",
+		"vaul-svelte": "^0.3.2",
 		"zod": "^3.23.8"
 	},
 	"type": "module"

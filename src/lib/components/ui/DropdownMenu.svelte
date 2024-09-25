@@ -118,7 +118,7 @@
 			<DropdownMenu.Item>
 				<a href={`/users`} class="flex w-full w-full items-center">
 					<Icon icon="mdi:users" class="mr-2 h-4 w-4" />
-					<span>Users</span>
+					<span>User Directory</span>
 				</a>
 			</DropdownMenu.Item>
 

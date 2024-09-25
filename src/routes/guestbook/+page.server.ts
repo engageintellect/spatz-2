@@ -104,37 +104,6 @@ export const actions: Actions = {
 		}
 	},
 
-	createPostComment: async ({ request, locals }) => {
-		const { formData, errors } = await validateData(
-			await request.formData(),
-			createPostCommentSchema
-		);
-		if (errors) {
-			return fail(400, {
-				data: formData,
-				errors: errors.fieldErrors
-			});
-		}
-
-		try {
-			// Create the comment
-			const comment = await locals.pb.collection('comments').create(formData);
-
-			// Get the associated post
-			const post = await locals.pb.collection('posts').getOne(formData.post);
-
-			// Update the post's comments array to include the new comment ID
-			const updatedComments = [...post.comments, comment.id];
-			await locals.pb.collection('posts').update(post.id, { comments: updatedComments });
-
-			return { success: true };
-		} catch (err) {
-			const customError = err as CustomError;
-			console.log('Error: ', 'error creating comment: ' + customError.message);
-			throw error(customError.status, customError.message);
-		}
-	},
-
 	deletePost: async ({ request, locals }) => {
 		try {
 			// Parse and validate the postId

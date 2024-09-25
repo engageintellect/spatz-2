@@ -121,7 +121,7 @@
 									}
 								};
 							}}
-							action="?/likePost"
+							action={`/guestbook?/likePost`}
 							method="POST"
 						>
 							<input type="hidden" name="postId" value={id} />
@@ -200,7 +200,7 @@
 														isDeleting = false;
 													};
 												}}
-												action="?/deletePost"
+												action={`/guestbook?/deletePost`}
 												method="POST"
 											>
 												<input type="hidden" name="postId" value={id} />
