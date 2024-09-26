@@ -205,7 +205,7 @@
 			<div class="animate-item w-full">
 				<div class="">
 					<div class="flex items-center justify-between gap-2 border-b pb-2">
-						<div class="text-xl font-thin">posts: {emptyMentioningPostsCount}</div>
+						<div class="text-xl font-thin">posts: {sortedPosts.length}</div>
 
 						<div class="flex items-end justify-end gap-2">
 							<Button
