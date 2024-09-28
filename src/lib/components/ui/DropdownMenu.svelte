@@ -135,7 +135,15 @@
 					<span>PocketBase</span>
 				</a>
 			</DropdownMenu.Item>
+
+			<DropdownMenu.Item>
+				<a href={`/pricing`} class="flex w-full w-full items-center">
+					<Icon icon="carbon:pricing-container" class="mr-2 h-4 w-4" />
+					<span>Pricing</span>
+				</a>
+			</DropdownMenu.Item>
 		</DropdownMenu.Group>
+
 		<DropdownMenu.Separator />
 		<!-- <DropdownMenu.Label>Support</DropdownMenu.Label> -->
 		<DropdownMenu.Item>

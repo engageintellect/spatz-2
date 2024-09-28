@@ -269,3 +269,10 @@ export const deleteGuestBookPostSchema = z.object({
 export const deletePostCommentSchema = z.object({
 	post: z.string()
 });
+
+export const checkoutSchema = z.object({
+	name: z.string().min(1, 'Name is required'),
+	email: z.string().email('Invalid email')
+});
+
+export type CheckoutSchema = z.infer<typeof checkoutSchema>;
