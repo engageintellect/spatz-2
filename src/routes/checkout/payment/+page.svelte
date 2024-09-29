@@ -1,82 +1,47 @@
 <script lang="ts">
-	import { PUBLIC_STRIPE_KEY } from '$env/static/public';
+	import { loadStripe, type Stripe } from '@stripe/stripe-js';
 	import { onMount } from 'svelte';
-	import { loadStripe } from '@stripe/stripe-js';
-	import { Elements, PaymentElement } from 'svelte-stripe';
+	import { PUBLIC_STRIPE_KEY } from '$env/static/public';
 	import { Button } from '$lib/components/ui/button/index.js';
 
-	let returnUrl = 'http://localhost:5173';
+	let stripePromise: Promise<Stripe | null> | undefined;
 
-	// data from server
-	export let data;
+	let priceId = 'price_1Q3QwrE4bCkGAYMh3D3CniKP'; // Set this to your subscription price ID.
+	let customerId = 'cus_QhkTWvcvYYhVwF'; // Get this from your application logic.
 
-	// destructure server data
-	$: ({ clientSecret } = data);
-
-	const appearance = {
-		theme: 'flat'
-	};
-
-	// Stripe instance
-	let stripe: any;
-
-	// Stripe Elements instance
-	let elements: any;
-
-	// when component mounts
-	onMount(async () => {
-		// load the Stripe client
-		stripe = await loadStripe(PUBLIC_STRIPE_KEY);
+	onMount(() => {
+		// Load Stripe on mount
+		stripePromise = loadStripe(PUBLIC_STRIPE_KEY);
 	});
 
-	// handle form submission
-	async function submit() {
-		if (!stripe || !elements) {
-			console.error('Stripe or Elements is not loaded');
+	async function handleSubscribe() {
+		const stripe = await stripePromise;
+		if (!stripe) {
+			console.error('Stripe failed to load');
 			return;
 		}
 
-		// ask Stripe to confirm the payment
-		const { error } = await stripe.confirmPayment({
-			// pass instance that was used to create the Payment Element
-			elements,
-
-			// specify where to send the user when payment succeeds
-			confirmParams: {
-				return_url: returnUrl
+		try {
+			const response = await fetch('/api/subscribe', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ priceId, customerId })
+			});
+			const { sessionId } = await response.json();
+			if (sessionId) {
+				await stripe.redirectToCheckout({ sessionId });
 			}
-		});
-
-		if (error) {
-			// handle error
-			console.error('Payment confirmation error:', error);
+		} catch (err) {
+			console.error('An error occurred:', err);
 		}
 	}
 </script>
 
-<div class="mx-auto max-w-2xl p-2 md:p-5">
-	<h1>Payment</h1>
+<div class="subscription-card">
+	<main class="mx-auto max-w-lg rounded-lg border p-5 shadow-md transition-all duration-300">
+		<h1 class="text-4xl font-bold">Subscribe</h1>
+		<p class="mt-4 text-lg">Choose your subscription plan to enjoy all our premium features.</p>
 
-	{#if stripe}
-		<form on:submit|preventDefault={submit}>
-			<!-- container for Stripe components -->
-			<Elements
-				{stripe}
-				{clientSecret}
-				theme="flat"
-				labels="floating"
-				variables={{ colorPrimary: '#7c4dff' }}
-				bind:elements
-			>
-				<!-- display payment related fields -->
-				<PaymentElement />
-			</Elements>
-
-			<div class="w-full max-w-md">
-				<Button class="w-full">Pay</Button>
-			</div>
-		</form>
-	{:else}
-		Loading Stripe...
-	{/if}
+		<Button on:click={handleSubscribe} class="mt-5">Subscribe Now</Button>
+	</main>
 </div>
