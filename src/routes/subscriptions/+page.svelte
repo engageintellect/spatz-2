@@ -21,7 +21,7 @@
 			productId: any;
 		}>;
 		products: any;
-		existingSubs: any;
+		existingSubscriptions: any;
 	};
 
 	onMount(() => {
@@ -37,9 +37,20 @@
 
 	<h1 class="animate-item text-center text-5xl font-bold lowercase">subscriptions</h1>
 
-	<p class="animate-item mt-4 text-center text-lg text-muted-foreground">
-		Choose the plan that best suits your needs. No hidden fees, no surprises.
-	</p>
+	{#if data.existingSubscriptions.length > 0}
+		<div class="animate-item mt-4 text-center text-lg text-muted-foreground">
+			You are currently subscribed to {data?.existingSubscriptions[0]?.plan?.interval}ly plan.
+		</div>
+		<div class="animate-item mt-4 text-center text-sm text-muted-foreground">
+			Your subscription will renew on {new Date(
+				data.existingSubscriptions.current_period_end * 1000
+			).toLocaleDateString()}.
+		</div>
+	{:else}
+		<p class="animate-item mt-4 text-center text-lg text-muted-foreground">
+			Choose the plan that best suits your needs. No hidden fees, no surprises.
+		</p>
+	{/if}
 
 	<!-- Pricing Options -->
 	<div class="animate-item mt-10 grid gap-5 sm:grid-cols-1 md:grid-cols-3">

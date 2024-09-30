@@ -23,16 +23,20 @@ export const load: PageServerLoad = async ({ locals }) => {
 		limit: 1
 	});
 
+	let existingSubscriptions;
+
 	if (user.data.length > 0) {
-		console.log(
-			'Existing subscription IDs:',
-			subs.data.filter((sub) => sub.customer === user.data[0].id).map((sub) => sub.id)
-		);
+		existingSubscriptions = subs.data
+			.filter((sub) => sub.customer === user.data[0].id)
+			.map((sub) => sub);
 	}
+
+	console.log('existingSubscriptions:', existingSubscriptions);
 
 	return {
 		pbSubscriptions: pbSubscriptions,
-		products: products
+		products: products,
+		existingSubscriptions: existingSubscriptions
 	};
 };
 
@@ -76,12 +80,6 @@ export const actions: Actions = {
 						email
 					});
 					customerId = customer.id;
-
-					// Update the user's record in PocketBase with the new Stripe customer ID
-					//await locals.pb.collection('users').update(user.id, {
-					//	stripeId: customerId,
-					//	subscribed: planType
-					//});
 				}
 			} catch (err) {
 				console.error('Error finding or creating Stripe customer:', err);
