@@ -137,9 +137,9 @@
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item>
-				<a href={`/pricing`} class="flex w-full w-full items-center">
+				<a href={`/subscriptions`} class="flex w-full w-full items-center">
 					<Icon icon="carbon:pricing-container" class="mr-2 h-4 w-4" />
-					<span>Pricing</span>
+					<span>Subscriptions</span>
 				</a>
 			</DropdownMenu.Item>
 		</DropdownMenu.Group>

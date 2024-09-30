@@ -14,7 +14,7 @@
 		<ul class="mt-2 list-disc pl-10">
 			<li>User Authentication</li>
 			<li>Databases & Content Management</li>
-			<li>Stripe Payments</li>
+			<li>Stripe Payments & Subscriptions</li>
 			<li>Admin Dashboards</li>
 			<li>User Settings & Profile panels</li>
 			<li>Themes & Styling</li>

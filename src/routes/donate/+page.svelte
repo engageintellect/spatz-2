@@ -85,7 +85,9 @@
 </script>
 
 <div class="donate-card">
-	<main class="mx-auto max-w-lg rounded-lg border p-5 shadow-md transition-all duration-300">
+	<main
+		class="mx-auto max-w-lg rounded-lg p-2 shadow-md transition-all duration-300 md:border md:p-5"
+	>
 		<h1 class="text-5xl font-bold">donate</h1>
 
 		<div class="mt-10">

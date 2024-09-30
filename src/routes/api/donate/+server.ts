@@ -1,9 +1,15 @@
 import type { RequestHandler } from './$types';
 import Stripe from 'stripe';
-import { SECRET_STRIPE_KEY } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { PUBLIC_BASE_URL } from '$env/static/public';
 
-const stripe = new Stripe(SECRET_STRIPE_KEY, {
+if (import.meta.env.MODE === 'development') {
+	console.log('Running in development mode');
+} else {
+	console.log('Running in production mode');
+}
+
+const stripe = new Stripe(env.SECRET_STRIPE_KEY, {
 	apiVersion: '2024-06-20'
 });
 

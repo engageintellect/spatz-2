@@ -24,7 +24,7 @@
 			<Icon icon="mdi:home" class="h-5 w-5" />
 			<div>go home</div>
 		</Button>
-		<Button href="/pricing" variant="success" class="flex w-full items-center gap-2">
+		<Button href="/subscriptions" variant="success" class="flex w-full items-center gap-2">
 			<div>subscriptions</div>
 			<Icon icon="mdi:arrow-right" class="h-5 w-5" />
 		</Button>

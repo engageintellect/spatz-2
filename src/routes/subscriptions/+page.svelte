@@ -3,16 +3,26 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 	import { animateMainStagger } from '$lib/animations';
-	import { currentUser } from '$lib/stores/user.js';
 	import { loadStripe, type Stripe } from '@stripe/stripe-js';
-	import { PUBLIC_STRIPE_KEY } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 
 	let stripePromise: Promise<Stripe | null> | undefined;
-
-	stripePromise = loadStripe(PUBLIC_STRIPE_KEY);
+	stripePromise = loadStripe(env.PUBLIC_STRIPE_KEY);
 
 	let hidden = true;
-	export let data;
+	export let data: {
+		pbSubscriptions: Array<{
+			cardTitle: string;
+			cardDescription: string;
+			price: number;
+			type: string;
+			cardData: string[];
+			priceId: string;
+			productId: any;
+		}>;
+		products: any;
+		existingSubs: any;
+	};
 
 	onMount(() => {
 		hidden = false;
@@ -24,14 +34,16 @@
 	class={`${hidden ? 'opacity-0' : ''} animate-item mx-auto max-w-4xl rounded-lg bg-background p-2 shadow-md md:border md:p-5`}
 >
 	<!-- Pricing Header -->
-	<h1 class="animate-item text-center text-5xl font-bold lowercase">pricing plans</h1>
+
+	<h1 class="animate-item text-center text-5xl font-bold lowercase">subscriptions</h1>
+
 	<p class="animate-item mt-4 text-center text-lg text-muted-foreground">
 		Choose the plan that best suits your needs. No hidden fees, no surprises.
 	</p>
 
 	<!-- Pricing Options -->
 	<div class="animate-item mt-10 grid gap-5 sm:grid-cols-1 md:grid-cols-3">
-		{#each data.subscriptionPlans as plan}
+		{#each data.pbSubscriptions as plan}
 			<div
 				class="flex flex-col justify-between rounded-lg border p-5 transition-shadow hover:shadow"
 			>
@@ -53,13 +65,14 @@
 				<div class="pt-5">
 					<form method="POST">
 						<input type="hidden" name="priceId" value={plan.priceId} />
+						<input type="hidden" name="planType" value={plan.type} />
 						<Button
 							type="submit"
 							variant={`${plan.type === 'month' ? 'success' : 'default'}`}
 							class="flex w-full items-center justify-center gap-2"
 						>
-							<div>Choose <span class="capitalize">{plan.type}ly</span></div></Button
-						>
+							<div>Choose <span class="capitalize">{plan.type}ly</span></div>
+						</Button>
 					</form>
 				</div>
 			</div>
