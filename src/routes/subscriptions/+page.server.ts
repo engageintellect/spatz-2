@@ -45,7 +45,6 @@ export const actions: Actions = {
 		// Get form data
 		const formData = await request.formData();
 		const priceId = formData.get('priceId') as string;
-		const planType = formData.get('planType') as string;
 
 		if (!priceId) {
 			return fail(400, { error: 'Price ID is missing.' });
