@@ -208,7 +208,7 @@
 			{#each filteredUsers as user}
 				<a href={`/users/${user.id}`} class="user-wrapper group/userCard">
 					<div
-						class={`rounded-lg border p-3 shadow transition-all duration-300 md:hover:border-foreground`}
+						class={`rounded-lg border p-3 shadow transition-all duration-300 md:hover:border-muted-foreground`}
 					>
 						<div class="flex flex-row items-center gap-2">
 							<div>

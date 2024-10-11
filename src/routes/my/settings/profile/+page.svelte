@@ -147,13 +147,13 @@
 					disabled={loading}
 				>
 					<Icon icon="material-symbols:sync" class={`${loading ? 'animate-spin' : ''} h-5 w-5`} />
-					<div>update profile</div>
+					<div>update</div>
 				</Button>
 
 				<div class="w-full md:w-fit">
 					<a href={`/users/${$currentUser.id}`} class="w-full">
 						<Button variant="outline" class="flex w-full items-center gap-2 lowercase md:w-fit">
-							<div>go to profile</div>
+							<div>profile</div>
 							<Icon icon="mdi:arrow-right" class={`${loading ? 'animate-spin' : ''} h-5 w-5`} />
 						</Button>
 					</a>

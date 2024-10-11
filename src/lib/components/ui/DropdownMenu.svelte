@@ -83,6 +83,18 @@
 
 			<DropdownMenu.Item>
 				<a
+					href="/my/settings/subscription"
+					data-sveltekit-preload-data="hover"
+					class="flex w-full items-center"
+				>
+					<Icon icon="weui:done2-filled" class="mr-2 h-4 w-4" />
+					<span>Billing</span>
+				</a>
+				<!-- <DropdownMenu.Shortcut>⌘S</DropdownMenu.Shortcut> -->
+			</DropdownMenu.Item>
+
+			<DropdownMenu.Item>
+				<a
 					href="/my/settings/security"
 					data-sveltekit-preload-data="hover"
 					class="flex w-full items-center"

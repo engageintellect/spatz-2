@@ -122,9 +122,15 @@
 
 				<div class="flex w-full gap-2 rounded-lg duration-300">
 					<div class="animate-avatar flex flex-col">
-						<div class="h-12 w-12 md:h-16 md:w-16">
-							<img src={avatar} class="h-full w-full rounded-full object-cover" alt="user avatar" />
-						</div>
+						<a href={`/users/${userId}`}>
+							<div class="h-12 w-12 md:h-16 md:w-16">
+								<img
+									src={avatar}
+									class="h-full w-full rounded-full object-cover"
+									alt="user avatar"
+								/>
+							</div>
+						</a>
 					</div>
 
 					<textarea

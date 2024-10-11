@@ -10,6 +10,7 @@
 	import FeaturesFeed from '$lib/components/ui/FeaturesFeed.svelte';
 	import GettingStarted from '$lib/components/marketing/GettingStarted.svelte';
 	import Contribute from '$lib/components/marketing/Contribute.svelte';
+	import { animateMainStagger } from '$lib/animations';
 
 	let stars = 0,
 		issues = 0,
@@ -24,55 +25,34 @@
 	};
 
 	onMount(async () => {
+		animateMainStagger();
 		await getStars();
-		gsap.registerPlugin(ScrollTrigger);
 		await tick(); // Wait for DOM updates
-		applyAnimations();
 	});
-
-	async function applyAnimations() {
-		await tick(); // Ensure the DOM is fully updated
-		gsap.utils.toArray<HTMLElement>('.fade-in').forEach((element: HTMLElement) => {
-			gsap.fromTo(
-				element,
-				{ opacity: 0 },
-				{
-					opacity: 1,
-					y: -20,
-					duration: 0.5,
-					scrollTrigger: {
-						trigger: element,
-						start: 'top 90%',
-						end: 'bottom top'
-					}
-				}
-			);
-		});
-	}
 </script>
 
-<div class="mx-auto w-full max-w-2xl px-2 md:px-0">
+<div class="animate-item mx-auto w-full max-w-2xl px-2 md:px-0">
 	<div class="flex flex-col gap-16 md:gap-16">
-		<div class="fade-in">
+		<div class="animate-item">
 			<Hero />
 		</div>
-		<div class="fade-in">
+		<div class="animate-item">
 			<Stats {stars} {issues} {forks} />
 		</div>
-		<div class="fade-in">
+		<div class="animate-item">
 			<SignGuestbookButton />
 		</div>
-		<div class="fade-in">
+		<div class="animate-item">
 			<About />
 		</div>
-		<div class="fade-in">
+		<div class="animate-item">
 			<FeaturesFeed />
 		</div>
-		<div class="fade-in">
+		<div class="animate-item">
 			<GettingStarted />
 		</div>
 
-		<div class="fade-in">
+		<div class="animate-item">
 			<Contribute />
 		</div>
 	</div>

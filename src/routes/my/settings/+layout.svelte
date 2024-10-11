@@ -15,6 +15,13 @@
 			href: '/my/settings/account',
 			icon: 'mdi:settings'
 		},
+
+		{
+			title: 'Billing',
+			href: '/my/settings/subscription',
+			icon: 'weui:done2-filled'
+		},
+
 		{
 			title: 'Security',
 			href: '/my/settings/security',
@@ -38,13 +45,13 @@
 			<li class="">
 				<a href={navItem.href} class="text-lg">
 					<Button
-						class="flex w-full items-center gap-2"
+						class="flex w-full items-center justify-between gap-2"
 						variant={`${$page.url.pathname === navItem.href ? 'default' : 'outline'}`}
 					>
-						<Icon icon={navItem.icon} class="h-4 w-4" />
 						<div>
 							{navItem.title}
 						</div>
+						<Icon icon={navItem.icon} class="h-4 w-4" />
 					</Button>
 				</a>
 			</li>

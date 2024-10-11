@@ -38,17 +38,16 @@
 	<h1 class="animate-item text-center text-5xl font-bold lowercase">subscriptions</h1>
 
 	{#if data.existingSubscriptions.length > 0}
-		<div class="animate-item mt-4 text-center text-lg text-muted-foreground">
-			You are currently subscribed to {data?.existingSubscriptions[0]?.plan?.interval}ly plan.
-		</div>
-		<div class="animate-item mt-4 text-center text-sm text-muted-foreground">
-			Your subscription will renew on {new Date(
-				data.existingSubscriptions.current_period_end * 1000
-			).toLocaleDateString()}.
+		<div class="mt-5 flex flex-col items-center justify-between gap-5">
+			<div class="animate-item text-center text-lg text-muted-foreground">
+				You are currently subscribed to {data?.existingSubscriptions[0]?.plan?.interval}ly plan.
+			</div>
+
+			<Button href="/my/settings/subscription" class="animate-item">manage subscription</Button>
 		</div>
 	{:else}
 		<p class="animate-item mt-4 text-center text-lg text-muted-foreground">
-			Choose the plan that best suits your needs. No hidden fees, no surprises.
+			Choose the plan that best suits your needs. No hidden fees, no surprises. Cancel at any time.
 		</p>
 	{/if}
 
