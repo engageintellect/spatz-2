@@ -32,7 +32,7 @@
 </script>
 
 <div class="animate-item mx-auto w-full max-w-2xl px-2 md:px-0">
-	<div class="flex flex-col gap-16 md:gap-16">
+	<div class="mb-10 flex flex-col gap-16 md:gap-16">
 		<div class="animate-item">
 			<Hero />
 		</div>
