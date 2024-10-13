@@ -101,10 +101,10 @@ export const actions: Actions = {
 		try {
 			const portalSession = await stripe.billingPortal.sessions.create({
 				customer: customerId,
-				return_url: `${PUBLIC_BASE_URL}/account`
+				return_url: `${PUBLIC_BASE_URL}/my/settings/subscription`
 			});
 
-			console.log('portalSession:', portalSession);
+			//console.log('portalSession:', portalSession);
 
 			// Return the URL to the client
 			return {

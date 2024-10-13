@@ -1,15 +1,21 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { enhance } from '$app/forms';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 	import { animateMainStagger } from '$lib/animations';
 	import { loadStripe, type Stripe } from '@stripe/stripe-js';
 	import { env } from '$env/dynamic/public';
+	import { goto } from '$app/navigation';
+	import { applyAction } from '$app/forms';
+	import { toast } from 'svelte-sonner';
 
 	let stripePromise: Promise<Stripe | null> | undefined;
 	stripePromise = loadStripe(env.PUBLIC_STRIPE_KEY);
 
 	let hidden = true;
+	let errorMessage: string = ''; // Declare errorMessage with an initial empty string
+
 	export let data: {
 		pbSubscriptions: Array<{
 			cardTitle: string;
@@ -34,15 +40,18 @@
 	class={`${hidden ? 'opacity-0' : ''} animate-item mx-auto max-w-4xl rounded-lg bg-background p-2 shadow-md md:border md:p-5`}
 >
 	<!-- Pricing Header -->
-
 	<h1 class="animate-item text-center text-5xl font-bold lowercase">subscriptions</h1>
+
+	<!-- Error Message Display -->
+	{#if errorMessage}
+		<div class="animate-item mt-4 text-center text-red-500">{errorMessage}</div>
+	{/if}
 
 	{#if data.existingSubscriptions.length > 0}
 		<div class="mt-5 flex flex-col items-center justify-between gap-5">
 			<div class="animate-item text-center text-lg text-muted-foreground">
 				You are currently subscribed to {data?.existingSubscriptions[0]?.plan?.interval}ly plan.
 			</div>
-
 			<Button href="/my/settings/subscription" class="animate-item">manage subscription</Button>
 		</div>
 	{:else}
@@ -65,7 +74,7 @@
 					</div>
 					<ul class="mt-4 text-sm text-muted-foreground">
 						{#each plan.cardData as item}
-							<li class="items center flex">
+							<li class="flex items-center">
 								<Icon icon="mdi:check" class="mr-2 h-5 w-5 text-green-500" />
 								{item}
 							</li>
@@ -73,7 +82,26 @@
 					</ul>
 				</div>
 				<div class="pt-5">
-					<form method="POST">
+					<form
+						use:enhance={({ formElement, formData, action, cancel }) => {
+							return async ({ result }) => {
+								if (result.type === 'failure') {
+									toast.error('Subscription already exist', {
+										action: {
+											label: 'Manage',
+											onClick: () => goto('/my/settings/subscription')
+										}
+									});
+									goto('/my/settings/subscription');
+								} else {
+									//console.log('before result:', result);
+									await applyAction(result);
+									//console.log('after result:', result);
+								}
+							};
+						}}
+						method="POST"
+					>
 						<input type="hidden" name="priceId" value={plan.priceId} />
 						<input type="hidden" name="planType" value={plan.type} />
 						<Button

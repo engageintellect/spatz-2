@@ -31,7 +31,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 			.map((sub) => sub);
 	}
 
-	console.log('existingSubscriptions:', existingSubscriptions);
+	//console.log('existingSubscriptions:', existingSubscriptions);
 
 	return {
 		pbSubscriptions: pbSubscriptions,
@@ -94,55 +94,62 @@ export const actions: Actions = {
 			customer: customerId,
 			status: 'all'
 		});
-		console.log('subscriptions:', subs);
+		//console.log('subscriptions:', subs);
 
 		//console.log('pb stripe id', locals?.pb?.authStore?.model);
-		const hasSubscriptions = subs.data.filter((sub) => sub.customer === customerId);
+		const hasSubscriptions = subs.data.filter(
+			(sub) => sub.customer === customerId && sub.status !== 'incomplete_expired'
+		);
 
-		console.log('has subscriptions:', hasSubscriptions);
+		//console.log('has subscriptions:', hasSubscriptions.length);
 
-		const subscription = await stripe.subscriptions.create({
-			customer: customerId,
-			items: [
-				{
-					price: priceId
-				}
-			],
-			payment_behavior: 'default_incomplete',
-			payment_settings: {
-				save_default_payment_method: 'on_subscription'
-			},
-			expand: ['latest_invoice.payment_intent']
-		});
+		if (hasSubscriptions.length < 1) {
+			const subscription = await stripe.subscriptions.create({
+				customer: customerId,
+				items: [
+					{
+						price: priceId
+					}
+				],
+				payment_behavior: 'default_incomplete',
+				payment_settings: {
+					save_default_payment_method: 'on_subscription'
+				},
+				expand: ['latest_invoice.payment_intent']
+			});
 
-		const latestInvoice = subscription.latest_invoice;
+			const latestInvoice = subscription.latest_invoice;
 
-		let clientSecret = null;
+			let clientSecret = null;
 
-		// Ensure latest_invoice and payment_intent exist, and payment_intent is an object
-		if (
-			latestInvoice &&
-			typeof latestInvoice === 'object' &&
-			latestInvoice.payment_intent &&
-			typeof latestInvoice.payment_intent === 'object'
-		) {
-			clientSecret = latestInvoice.payment_intent.client_secret;
+			// Ensure latest_invoice and payment_intent exist, and payment_intent is an object
+			if (
+				latestInvoice &&
+				typeof latestInvoice === 'object' &&
+				latestInvoice.payment_intent &&
+				typeof latestInvoice.payment_intent === 'object'
+			) {
+				clientSecret = latestInvoice.payment_intent.client_secret;
+			}
+
+			const session = await stripe.checkout.sessions.create({
+				payment_method_types: ['card'],
+				customer: customerId,
+				line_items: [
+					{
+						price: priceId,
+						quantity: 1
+					}
+				],
+				mode: 'subscription',
+				success_url: `${PUBLIC_BASE_URL}/checkout/success`,
+				cancel_url: `${PUBLIC_BASE_URL}/checkout/cancel`
+			});
+
+			throw redirect(303, session.url ?? '/');
+		} else {
+			//console.log('You already have an active subscription.');
+			return fail(400, { error: 'You already have an active subscription.' });
 		}
-
-		const session = await stripe.checkout.sessions.create({
-			payment_method_types: ['card'],
-			customer: customerId,
-			line_items: [
-				{
-					price: priceId,
-					quantity: 1
-				}
-			],
-			mode: 'subscription',
-			success_url: `${PUBLIC_BASE_URL}/checkout/success`,
-			cancel_url: `${PUBLIC_BASE_URL}/checkout/cancel`
-		});
-
-		throw redirect(303, session.url ?? '/');
 	}
 };

@@ -5,6 +5,7 @@
 	import { toast } from 'svelte-sonner';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { currentUser } from '$lib/stores/user';
+	import { goto } from '$app/navigation';
 
 	let isSubmitting = false;
 
@@ -47,60 +48,48 @@
 					</span>.
 				</div>
 
-				<div class="animate-item flex w-fit items-center gap-2 rounded-lg border p-2">
-					<div class="flex flex-col rounded-lg bg-success p-2">
-						{new Date(subscription.current_period_start * 1000).toLocaleDateString()}
+				<div>
+					<div class="animate-item">
+						Subscription status: <span class="font-bold text-success">{subscription.status}</span>
 					</div>
 
-					<Icon icon="mdi:arrow-right" class="h-5 w-5" />
+					<!--
 
-					<div class="flex flex-col rounded-lg bg-destructive p-2">
-						{new Date(subscription.current_period_end * 1000).toLocaleDateString()}
+					<div>
+						Plan status:
+						<span class="font-bold text-success">{JSON.stringify(subscription.plan.active)}</span>
+</div>
+-->
+				</div>
+
+				<div class="flex flex-col">
+					<div class="animate-item">Subscription duration:</div>
+
+					<div class="animate-item flex w-fit items-center gap-2 rounded-lg border p-2">
+						<div class="flex flex-col rounded-lg bg-success p-2 text-sm">
+							{new Date(subscription.current_period_start * 1000).toLocaleDateString()}
+						</div>
+
+						<Icon icon="mdi:arrow-right" class="h-5 w-5" />
+
+						<div class="flex flex-col rounded-lg bg-destructive p-2 text-sm">
+							{new Date(subscription.current_period_end * 1000).toLocaleDateString()}
+						</div>
 					</div>
 				</div>
-
-				<div class="animate-item">
-					Subscription status: <span class="font-bold text-success">{subscription.status}</span>
-				</div>
-
+				<!--
 				{#if subscription.plan.active}
-					<div class="animate-item text-success">Your subscription is active.</div>
+					<div class="animate-item text-success">Your plan is active.</div>
 				{:else}
-					<div class="animate-item text-destructive">Your subscription is not active.</div>
-				{/if}
+					<div class="animate-item text-destructive">Your plan is not active.</div>
+        {/if}
+        -->
 			{/each}
 		</div>
 	{/if}
 
 	{#if data.existingSubscriptions.length > 0}
-		<div class="animate-item flex items-center gap-2 pt-5">
-			<form
-				class="w-full"
-				method="POST"
-				action="?/cancelSubscription"
-				on:submit={() => (loading = true)}
-				use:enhance={(result) => {
-					console.log('result:', result);
-					loading = false;
-					toast.success('Subscription cancelled successfully.', {});
-					invalidateAll();
-				}}
-			>
-				<input type="hidden" name="subId" value={data.existingSubscriptions[0].id} />
-
-				<div class="flex items-center gap-2">
-					<Button
-						class="flex w-full items-center gap-2"
-						variant="destructive"
-						type="submit"
-						disabled={loading}
-					>
-						<div>cancel</div>
-						<Icon icon="mdi:close" class="h-5 w-5" />
-					</Button>
-				</div>
-			</form>
-
+		<div class="animate-item mt-10 flex flex-col gap-2 md:flex-row">
 			<!-- +page.svelte -->
 
 			<form
@@ -110,23 +99,65 @@
 					isSubmitting = true;
 
 					return async ({ result, update }) => {
-						console.log('Registration result:', result.data.redirectUrl);
+						//console.log('Registration result:', result.data.redirectUrl);
 						await update();
 						window.location.href = result.data.redirectUrl;
 						isSubmitting = false;
 					};
 				}}
 				method="POST"
+				class="w-full"
 			>
-				<Button class="w-full" variant="default" type="submit">Manage Subscription</Button>
+				<Button
+					class="flex w-full items-center justify-between gap-2"
+					variant="default"
+					type="submit"
+				>
+					<div>edit my subscription</div>
+					<Icon icon="material-symbols:manage-accounts-rounded" class="h-5 w-5" />
+				</Button>
 			</form>
+
+			{#if data.existingSubscriptions[0].status === 'incomplete'}
+				<form
+					class="w-full"
+					method="POST"
+					action="?/cancelSubscription"
+					on:submit={() => (loading = true)}
+					use:enhance={(result) => {
+						console.log('result:', result);
+						loading = false;
+						toast.success('Subscription cancelled successfully.', {});
+						invalidateAll();
+					}}
+				>
+					<input type="hidden" name="subId" value={data.existingSubscriptions[0].id} />
+
+					<div class="flex w-full items-center gap-2">
+						<Button
+							class="flex w-full items-center justify-between gap-2"
+							variant="destructive"
+							type="submit"
+							disabled={loading}
+						>
+							<div>cancel subscription</div>
+							<Icon icon="mdi:close" class="h-5 w-5" />
+						</Button>
+					</div>
+				</form>
+			{/if}
 		</div>
 	{:else}
 		<div class="mt-5 flex flex-col gap-5">
 			<div>no current subscription</div>
 			<div class="animate-item flex items-center gap-2">
-				<Button variant="success" href="/subscriptions" class="flex w-fit items-center gap-2">
-					<div>view subscriptions</div>
+				<Button
+					size="sm"
+					variant="success"
+					href="/subscriptions"
+					class="flex w-fit items-center gap-2"
+				>
+					<div>view subscription plans</div>
 					<Icon icon="mdi:arrow-right" class="h-5 w-5" />
 				</Button>
 			</div>
