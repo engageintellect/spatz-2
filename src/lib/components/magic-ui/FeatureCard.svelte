@@ -27,5 +27,5 @@
 			</figcaption>
 		</div>
 	</div>
-	<blockquote class="mt-2 text-sm">{body}</blockquote>
+	<blockquote class="mt-2 text-sm text-muted-foreground">{body}</blockquote>
 </a>

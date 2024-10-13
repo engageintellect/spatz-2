@@ -197,7 +197,7 @@
 					errors={form?.errors?.content}
 					disabled={loading}
 					placeholder={'type your post here...'}
-					toastSuccess="Post submission success!"
+					toastSuccess={`Post created by @${$currentUser?.username}!`}
 					toastError="Failed to submit post"
 				/>
 			</div>

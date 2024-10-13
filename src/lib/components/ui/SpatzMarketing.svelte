@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { PUBLIC_BASE_URL } from '$env/static/public';
 	import { onMount, tick } from 'svelte';
-	import { gsap } from 'gsap';
-	import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 	import SignGuestbookButton from '$lib/components/ui/SignGuestbookButton.svelte';
 	import Hero from '$lib/components/marketing/Hero.svelte';
 	import Stats from '$lib/components/marketing/Stats.svelte';
