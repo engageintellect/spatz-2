@@ -16,7 +16,7 @@
 	class={`${hidden ? 'opacity-0' : ''} animate-item mx-auto max-w-lg rounded-lg p-2 md:border md:p-5 md:shadow`}
 >
 	<h1 class="animate-item text-3xl font-bold">payment success</h1>
-	<p class="animate-item mt-4 text-lg">
+	<p class="animate-item mt-5 text-lg">
 		Thank you for your subscription! Your payment was successful.
 	</p>
 	<div class="animate-item mt-5 flex items-center justify-between gap-2">

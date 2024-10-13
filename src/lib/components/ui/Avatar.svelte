@@ -6,7 +6,7 @@
 
 <Avatar.Root class="">
 	<Avatar.Image
-		class="transition-transform duration-200 ease-in-out hover:scale-105"
+		class="transition-transform duration-300 ease-in-out hover:scale-105"
 		src={$currentUser?.avatar
 			? getImageURL($currentUser?.collectionId, $currentUser?.id, $currentUser?.avatar)
 			: `https://ui-avatars.com/api/?name=${$currentUser?.email}`}

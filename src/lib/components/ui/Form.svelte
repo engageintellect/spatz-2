@@ -238,7 +238,7 @@
 		</Form.Field>
 
 		<Form.Button disabled={isSubmitting} size="lg" class="group/sendButton mt-5 w-full">
-			<div class="flex items-center gap-2 text-xl">
+			<div class="flex items-center gap-2">
 				<div class="lowercase">Send</div>
 				<Icon
 					icon={`${isSubmitting ? 'mingcute:loading-fill' : 'mdi:arrow-right'}`}
@@ -247,7 +247,7 @@
 			</div>
 		</Form.Button>
 
-		<p class="mt-5 text-center text-sm text-muted-foreground">
+		<p class="mt-5 text-center text-xs text-muted-foreground">
 			By clicking continue, you agree to our
 			<a href="/terms" class="underline underline-offset-4 hover:text-primary">
 				Terms of Service

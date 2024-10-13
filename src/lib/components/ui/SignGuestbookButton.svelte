@@ -6,7 +6,7 @@
 <div class="flex w-full justify-center gap-2 px-10">
 	<a href="/guestbook" class="group/signGuestbook w-full">
 		<ShineBorder
-			class="text-center text-lg lowercase shadow transition-all duration-300 md:hover:shadow-lg"
+			class="text-center text-lg lowercase shadow transition-all duration-300 md:hover:shadow-md"
 			color={['#14b8a6', '#00000000']}
 		>
 			<div

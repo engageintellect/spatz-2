@@ -65,7 +65,7 @@
 				<div class="flex flex-col">
 					<div class="animate-item">Subscription duration:</div>
 
-					<div class="animate-item flex w-fit items-center gap-2 rounded-lg border p-2">
+					<div class="animate-item mt-2 flex w-fit items-center gap-2 rounded-lg border p-2">
 						<div class="flex flex-col rounded-lg bg-success p-2 text-sm">
 							{new Date(subscription.current_period_start * 1000).toLocaleDateString()}
 						</div>
@@ -109,11 +109,11 @@
 				class="w-full"
 			>
 				<Button
-					class="flex w-full items-center justify-between gap-2"
+					class="flex w-fit items-center justify-between gap-2"
 					variant="default"
 					type="submit"
 				>
-					<div>edit my subscription</div>
+					<div>edit subscription settings</div>
 					<Icon icon="material-symbols:manage-accounts-rounded" class="h-5 w-5" />
 				</Button>
 			</form>

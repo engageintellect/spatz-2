@@ -44,18 +44,24 @@
 
 	<!-- Error Message Display -->
 	{#if errorMessage}
-		<div class="animate-item mt-4 text-center text-red-500">{errorMessage}</div>
+		<div class="animate-item mt-5 text-center text-red-500">{errorMessage}</div>
 	{/if}
 
-	{#if data.existingSubscriptions.length > 0}
+	{#if data.existingSubscriptions && data.existingSubscriptions.length > 0}
 		<div class="mt-5 flex flex-col items-center justify-between gap-5">
 			<div class="animate-item text-center text-lg text-muted-foreground">
 				You are currently subscribed to {data?.existingSubscriptions[0]?.plan?.interval}ly plan.
 			</div>
-			<Button href="/my/settings/subscription" class="animate-item">manage subscription</Button>
+			<Button
+				href="/my/settings/subscription"
+				class="animate-item flex items-center justify-between gap-2"
+			>
+				<div>manage subscription</div>
+				<Icon icon="eos-icons:subscriptions-created" class="h-4 w-4" />
+			</Button>
 		</div>
 	{:else}
-		<p class="animate-item mt-4 text-center text-lg text-muted-foreground">
+		<p class="animate-item mt-5 text-center text-muted-foreground">
 			Choose the plan that best suits your needs. No hidden fees, no surprises. Cancel at any time.
 		</p>
 	{/if}
@@ -69,10 +75,10 @@
 				<div>
 					<h2 class="text-2xl font-bold">{plan.cardTitle}</h2>
 					<p class="mt-2 text-muted-foreground">{plan.cardDescription}</p>
-					<div class="mt-4 text-4xl font-bold">
+					<div class="mt-5 text-4xl font-bold">
 						${plan.price}<span class="text-xl">/{plan.type}</span>
 					</div>
-					<ul class="mt-4 text-sm text-muted-foreground">
+					<ul class="mt-5 text-sm text-muted-foreground">
 						{#each plan.cardData as item}
 							<li class="flex items-center">
 								<Icon icon="mdi:check" class="mr-2 h-5 w-5 text-green-500" />

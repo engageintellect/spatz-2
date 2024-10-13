@@ -103,7 +103,7 @@
 			</div>
 
 			<div class="">
-				<div class="animate-subtitle mt-5 text-xl font-thin text-foreground/70 lg:text-2xl">
+				<div class="animate-subtitle mt-5 text-xl font-thin text-muted-foreground lg:text-2xl">
 					<div class="font-base text-orange-500">The ultimate Sveltekit boilerplate</div>
 					<div>this time with svelte-animations, superforms, stripe, and shadcn.</div>
 				</div>

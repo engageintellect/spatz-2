@@ -47,7 +47,7 @@
 		</a>
 	</div>
 
-	<div class="my-5">
+	<div class="my-5 text-muted-foreground">
 		<p>
 			spatz comes in two pieces, a web app (Sveltekit) and a backend (PocketBase). You can run the
 			client the using Vercel, Netflify, Docker, or however you usually run a Sveltekit app. The

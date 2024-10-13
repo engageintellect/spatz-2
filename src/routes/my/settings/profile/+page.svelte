@@ -63,12 +63,12 @@
 			<!-- </label> -->
 			<label
 				for="avatar"
-				class="avatar group mb-5 w-32 rounded-full transition-shadow duration-300 hover:cursor-pointer md:hover:shadow-lg"
+				class="avatar group mb-5 h-32 w-32 rounded-full transition-shadow duration-300 hover:cursor-pointer md:hover:shadow-lg"
 			>
-				<div class="relative mb-5 w-32 rounded-full">
+				<div class="relative mb-5 h-32 w-32 rounded-full">
 					{#if data.user?.avatar}
 						<img
-							class="rounded-full border shadow"
+							class="h-32 w-32 rounded-full border shadow"
 							src={data.user?.avatar
 								? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar)
 								: `https://ui-avatars.com/api/?name=${data.user?.email}`}

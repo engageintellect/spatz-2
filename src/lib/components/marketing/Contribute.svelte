@@ -15,7 +15,7 @@
 				<div class="flex flex-col md:flex-row">
 					<div>
 						<p class="mt-2 text-xl text-primary">Contributions are welcome and appreciated!</p>
-						<p class="mt-2 text-foreground/70">
+						<p class="mt-2 text-muted-foreground">
 							If you have any ideas for improvements, please fork the repository and submit a pull
 							request.
 						</p>
