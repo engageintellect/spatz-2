@@ -111,7 +111,7 @@
 
 			<div class="animate-buttons mx-auto mt-10 flex w-full items-center gap-2 md:max-w-lg">
 				<a href="/auth/register" class="group/bookingsButton w-full">
-					<Button size="default" class="flex w-full items-center gap-2">
+					<Button size="lg" class="flex w-full items-center gap-2">
 						<div class="text-lg lowercase">get started</div>
 						<Icon
 							icon="material-symbols:rocket-launch"
@@ -121,7 +121,7 @@
 				</a>
 
 				<a href="/auth/login" class="group/bookingsButton w-full">
-					<Button size="default" variant="outline" class="flex w-full items-center gap-2">
+					<Button size="lg" variant="outline" class="flex w-full items-center gap-2">
 						<div class="text-lg lowercase">login</div>
 						<Icon
 							icon="mdi:arrow-right"

@@ -11,7 +11,7 @@
 <a
 	href={url}
 	class={cn(
-		'relative w-64 cursor-pointer overflow-hidden rounded-2xl border p-4 shadow transition-all duration-200 hover:shadow-lg'
+		'relative w-64 cursor-pointer overflow-hidden rounded-2xl border p-4 transition-all duration-200 hover:-translate-y-[1px] hover:shadow'
 		// light styles
 		// 'border-gray-950/[.1]',
 		// dark styles
