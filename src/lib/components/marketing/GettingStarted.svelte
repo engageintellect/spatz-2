@@ -75,7 +75,7 @@
 								$ git clone https://github.com/engageintellect/spatz
 							</button>
 						</div>
-						<div class="">2. Copy .env.example and replace values with your own</div>
+						<div class="mt-5">2. Copy .env.example and replace values with your own</div>
 						<div class="relative overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
 							<button
 								type="button"
@@ -85,7 +85,7 @@
 								$ cp .env.example .env.local
 							</button>
 						</div>
-						<div class="">3. Install dependencies and run dev server</div>
+						<div class="mt-5">3. Install dependencies and run dev server</div>
 
 						<div class="relative overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
 							<button
@@ -117,7 +117,7 @@
 							class="mx-1 border-b border-info text-info">pocketbase release</a
 						>page to download the latest version of pocketbase.
 					</p>
-					<p class="mt-2">Run the below commands to get started.</p>
+					<p class="mt-5">1. Run the below commands to get started.</p>
 					<div>
 						<div class="relative my-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
 							<button
@@ -133,7 +133,7 @@
 							</button>
 						</div>
 
-						<p class="mt-2">Here is an example:</p>
+						<p class="mt-5">2. Here is an example:</p>
 						<div class="relative my-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
 							<button
 								type="button"
@@ -148,7 +148,7 @@
 							</button>
 						</div>
 
-						<p class="mt-2">Then unzip the file:</p>
+						<p class="mt-5">3. Then unzip the file:</p>
 						<div class="relative my-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
 							<button
 								type="button"
@@ -160,7 +160,7 @@
 						</div>
 					</div>
 
-					<p class="mt-2">Then run the following command:</p>
+					<p class="mt-5">4. Then run the following command:</p>
 					<div class="relative my-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
 						<button
 							type="button"

@@ -113,7 +113,7 @@
 	class={` ${heroHidden ? 'opacity-0' : ''} relative mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-5 rounded-lg py-40 transition-all duration-300 md:flex-row md:gap-0`}
 >
 	<ParticleGrid
-		color={`${theme === 'light' ? '#f5f5f5' : '#262626'}`}
+		color={`${theme === 'light' ? '#e5e5e5' : '#262626'}`}
 		className="absolute inset-0 z-0 particle-grid"
 		refresh={true}
 		quantity={150}
