@@ -24,7 +24,9 @@
 <nav class={`nav sticky top-0 -z-[-1] border-b bg-background p-2 ${navHidden ? 'opacity-0' : ''}`}>
 	<div class="mx-auto flex w-full max-w-5xl items-center justify-between">
 		<a href="/" class="nav-logo" aria-label="Home">
-			<div class="px-2 text-2xl font-bold">{siteInfo.name}</div>
+			<div class="px-2 text-2xl font-bold transition-all duration-300 md:hover:scale-[102%]">
+				{siteInfo.name}
+			</div>
 		</a>
 
 		<div class="buttons flex items-center gap-2">

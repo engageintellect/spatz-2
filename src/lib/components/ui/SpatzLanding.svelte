@@ -3,6 +3,7 @@
 	import AboutCard from '$lib/components/landing-page/AboutCard.svelte';
 	import Hero from '$lib/components/landing-page/Hero.svelte';
 	import Quote from '$lib/components/landing-page/Quote.svelte';
+	import GlobeSection from '$lib/components/ui/GlobeSection.svelte';
 	import SkillsCard from '$lib/components/landing-page/SkillsCard.svelte';
 	export let formData;
 </script>

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onDestroy, onMount, tick } from 'svelte';
 	import Particles from '$lib/components/magic-ui/Particles.svelte';
+	import Globe from '$lib/components/magic-ui/Globe.svelte';
+	import GlobeSection from '../ui/GlobeSection.svelte';
 
 	let quote: string;
 
@@ -70,20 +72,18 @@
 	});
 </script>
 
-<div
-	class="quote-animation relative mx-auto flex h-full min-h-[525px] w-full justify-center p-5 py-40"
->
+<div class="quote-animation relative mx-auto flex h-full min-h-[525px] w-full justify-center pt-40">
 	<Particles
 		className="particles-animation absolute inset-0 h-full z-0 particle-grid"
 		color={`${theme === 'light' ? '#e5e5e5' : '#525252'}`}
 	/>
 	<div class="w-full max-w-lg text-2xl md:text-3xl">
-		<div class="font-thin italic leading-normal">
+		<div class="px-2 font-thin italic leading-normal md:px-0">
 			<div>
 				{#if quote}
 					{#each quote.split('\n') as line, index (line)}
 						<span
-							class={`block ${line.trim().startsWith('-') && index === quote.split('\n').length - 1 ? 'mt-10 text-right' : ''}`}
+							class={`block ${line.trim().startsWith('-') && index === quote.split('\n').length - 1 ? 'mb-5 mt-10 text-right' : ''}`}
 							>{line.trim()}</span
 						>
 					{/each}
@@ -91,6 +91,8 @@
 					Loading...
 				{/if}
 			</div>
+
+			<GlobeSection />
 			<!-- <div class="mt-10 text-right">— Jitka Zavadilova</div> -->
 		</div>
 	</div>
