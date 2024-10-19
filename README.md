@@ -25,7 +25,7 @@ spatz-2 uses svelte-superforms, shadcn-svelte, stripe payments, and svelte-anima
 - User Authentication.
 - User Profile and Settings on client.
 - Admin Dashboard in Pocketbase.
-- Stripe Payments.
+- Stripe Payments & Subscriptions.
 - Dark/Light Mode Themes.
 - Iconifty Icons.
 - GSAP Animations.
