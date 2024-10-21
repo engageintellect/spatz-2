@@ -173,7 +173,7 @@
 <ScrollIndicator />
 
 <div class="mx-auto w-full max-w-lg transition-all duration-300">
-	<div class="">
+	<div class="animate-item">
 		<h1 class="flex items-center text-7xl font-bold text-primary">
 			<span class="title-guest">guest</span>
 			<span class="title-book font-thin text-primary/50">book</span>
@@ -184,7 +184,7 @@
 		<div class="form-control gap-0">
 			<input type="hidden" name="author" value={data?.user?.id} />
 
-			<div class="pb-10">
+			<div class="animate-item pb-10">
 				<PostInputArea
 					action={`/guestbook?/createPost`}
 					userId={$currentUser.id}
