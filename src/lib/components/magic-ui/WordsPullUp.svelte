@@ -2,8 +2,17 @@
 	import { cn } from '$lib/utils';
 	import { Motion } from 'svelte-motion';
 
-	export let words = 'Pull Up';
-	export let wrapperFramerProps = {
+
+	interface Props {
+		words?: string;
+		wrapperFramerProps?: any;
+		framerProps?: any;
+		class?: any;
+	}
+
+	let {
+		words = 'Pull Up',
+		wrapperFramerProps = {
 		hidden: { opacity: 0 },
 		show: {
 			opacity: 1,
@@ -11,14 +20,14 @@
 				staggerChildren: 0.5
 			}
 		}
-	};
-	export let framerProps = {
+	},
+		framerProps = {
 		hidden: { y: 20, opacity: 0 },
 		show: { y: 0, opacity: 1 }
-	};
-
-	let className: any = '';
-	export { className as class };
+	},
+		class: className = ''
+	}: Props = $props();
+	
 
 	let wordSplit = words.split(' ');
 </script>

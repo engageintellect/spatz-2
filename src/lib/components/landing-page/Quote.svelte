@@ -4,7 +4,7 @@
 	import Globe from '$lib/components/magic-ui/Globe.svelte';
 	import GlobeSection from '../ui/GlobeSection.svelte';
 
-	let quote: string;
+	let quote: string = $state();
 
 	const fetchQuote = async () => {
 		const response = await fetch('/api/fortune');
@@ -12,7 +12,7 @@
 		quote = data;
 	};
 
-	let theme: any;
+	let theme: any = $state();
 
 	let gsapInstance: any;
 	let ScrollTriggerInstance: any;

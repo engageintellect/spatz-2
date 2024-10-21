@@ -7,7 +7,7 @@
 	import DropdownMenu from '$lib/components/ui/DropdownMenu.svelte';
 	import { siteInfo } from '$lib/data.js';
 
-	let navHidden = true;
+	let navHidden = $state(true);
 	onMount(() => {
 		gsap
 			.timeline({

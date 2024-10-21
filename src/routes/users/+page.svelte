@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { getImageURL } from '$lib/utils';
 	import { onMount, tick, onDestroy } from 'svelte';
 	import { lazyLoad } from '$lib/lazyLoad'; // Import the lazy load function
@@ -13,19 +15,25 @@
 	import { gsap } from 'gsap';
 	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
 
-	export let data: any;
+	interface Props {
+		data: any;
+	}
 
-	let hidden = true;
+	let { data }: Props = $props();
 
-	let filter = ''; // Add a filter variable
-	let showScrollToTop = false;
+	let hidden = $state(true);
 
-	$: $currentUser = data.user;
+	let filter = $state(''); // Add a filter variable
+	let showScrollToTop = $state(false);
 
-	let sortOption = 'all'; // Default sort option
+	run(() => {
+		$currentUser = data.user;
+	});
+
+	let sortOption = $state('all'); // Default sort option
 
 	// Reactive block to handle filtering users based on filter text and sort option
-	$: filteredUsers = (() => {
+	let filteredUsers = $derived((() => {
 		let result = data.users.filter((user: any) =>
 			user.username.toLowerCase().includes(filter.toLowerCase())
 		);
@@ -33,7 +41,7 @@
 			result = result.filter((user: any) => $currentUser.following.includes(user.id));
 		}
 		return result;
-	})();
+	})());
 
 	const handleScroll = () => {
 		const shouldShow = window.scrollY > 100;

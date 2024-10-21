@@ -4,7 +4,7 @@
 	import Icon from '@iconify/svelte';
 	import { animateMainStagger } from '$lib/animations';
 
-	let hidden = true;
+	let hidden = $state(true);
 
 	onMount(() => {
 		hidden = false;

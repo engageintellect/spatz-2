@@ -6,15 +6,27 @@
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { toast } from 'svelte-sonner';
 
-	export let currentUser;
-	export let userId;
-	export let username;
-	export let commentId;
-	export let avatar;
-	export let createdDate;
-	export let comment;
-	let dialogOpen = false;
-	let isDeleting = false;
+	interface Props {
+		currentUser: any;
+		userId: any;
+		username: any;
+		commentId: any;
+		avatar: any;
+		createdDate: any;
+		comment: any;
+	}
+
+	let {
+		currentUser,
+		userId,
+		username,
+		commentId,
+		avatar,
+		createdDate,
+		comment
+	}: Props = $props();
+	let dialogOpen = $state(false);
+	let isDeleting = $state(false);
 	let deleteLoading = false;
 </script>
 

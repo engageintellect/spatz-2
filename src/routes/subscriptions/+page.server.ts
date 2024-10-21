@@ -64,15 +64,15 @@ export const actions: Actions = {
 		if (!customerId) {
 			try {
 				// Search for an existing Stripe customer by email
-				const customers = await stripe.customers.list({
+				const customer = await stripe.customers.list({
 					email,
 					limit: 1
 				});
 
-				//console.log('customers:', customers);
+				//console.log('customer:', customer);
 
-				if (customers.data.length > 0) {
-					customerId = customers.data[0].id;
+				if (customer.data.length > 0) {
+					customerId = customer.data[0].id;
 				} else {
 					// Create a new customer in Stripe
 					const customer = await stripe.customers.create({
@@ -101,9 +101,10 @@ export const actions: Actions = {
 			(sub) => sub.customer === customerId && sub.status !== 'incomplete_expired'
 		);
 
-		//console.log('has subscriptions:', hasSubscriptions.length);
+		//console.log('has subscriptions:', hasSubscriptions);
+		console.log('has subscriptions:', hasSubscriptions);
 
-		if (hasSubscriptions.length < 1) {
+		if (hasSubscriptions.length < 1 || hasSubscriptions[0].status === 'canceled') {
 			const subscription = await stripe.subscriptions.create({
 				customer: customerId,
 				items: [
@@ -148,7 +149,7 @@ export const actions: Actions = {
 
 			throw redirect(303, session.url ?? '/');
 		} else {
-			//console.log('You already have an active subscription.');
+			console.log('User already has an active subscription.');
 			return fail(400, { error: 'You already have an active subscription.' });
 		}
 	}

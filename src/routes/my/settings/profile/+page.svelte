@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { invalidateAll } from '$app/navigation';
 	import { enhance, applyAction } from '$app/forms';
 	import { getImageURL } from '$lib/utils';
@@ -8,13 +10,15 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { currentUser } from '$lib/stores/user';
 
-	$: currentUser.set(data.user);
 
-	export let data;
-	export let form;
-	let loading: any;
+	interface Props {
+		data: any;
+		form: any;
+	}
 
-	$: loading = false;
+	let { data, form }: Props = $props();
+	let loading: any = $state();
+
 	const showPreview = (event: any) => {
 		const target = event.target;
 		const files = target.files;
@@ -46,6 +50,12 @@
 			loading = false;
 		};
 	};
+	run(() => {
+		currentUser.set(data.user);
+	});
+	run(() => {
+		loading = false;
+	});
 </script>
 
 <div class="flex h-full w-full flex-col">
@@ -102,7 +112,7 @@
 				value=""
 				accept="image/*"
 				hidden
-				on:change={showPreview}
+				onchange={showPreview}
 				disabled={loading}
 			/>
 			{#if form?.errors?.avatar}

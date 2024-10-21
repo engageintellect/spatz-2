@@ -4,6 +4,11 @@
 	import { onMount } from 'svelte';
 	import { animateMainStagger } from '$lib/animations';
 	import Icon from '@iconify/svelte';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 	const navigation = [
 		{
 			title: 'Profile',
@@ -58,6 +63,6 @@
 		{/each}
 	</ul>
 	<div class="animate-item w-full max-w-lg px-2">
-		<slot />
+		{@render children?.()}
 	</div>
 </div>

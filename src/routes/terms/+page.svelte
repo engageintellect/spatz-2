@@ -1,6 +1,10 @@
 <script lang="ts">
-	export let data;
 	import { siteInfo } from '$lib/data';
+	interface Props {
+		data: any;
+	}
+
+	let { data }: Props = $props();
 </script>
 
 <svelte:head>

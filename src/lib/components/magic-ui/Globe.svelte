@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { onMount } from 'svelte';
 	import createGlobe from 'cobe';
 	import { spring } from 'svelte/motion';
@@ -10,15 +12,21 @@
 		precision: 0.005
 	});
 
-	let className = '';
-	export { className as class };
-	let pointerInteracting: any = null;
-	let pointerInteractionMovement = 0;
-	let canvas: HTMLCanvasElement;
+	interface Props {
+		class?: string;
+	}
+
+	let { class: className = '' }: Props = $props();
+	
+	let pointerInteracting: any = $state(null);
+	let pointerInteractionMovement = $state(0);
+	let canvas: HTMLCanvasElement = $state();
 
 	let phi = 0;
-	let width = 0;
-	$: console.log(width, 'X');
+	let width = $state(0);
+	run(() => {
+		console.log(width, 'X');
+	});
 	let onResize = () => {
 		width = canvas.offsetWidth;
 	};
@@ -87,19 +95,19 @@
 	<canvas
 		class="h-full w-full [contain:layout_paint_size]"
 		bind:this={canvas}
-		on:pointerdown={(e) => {
+		onpointerdown={(e) => {
 			pointerInteracting = e.clientX - pointerInteractionMovement;
 			canvas.style.cursor = 'grabbing';
 		}}
-		on:pointerup={() => {
+		onpointerup={() => {
 			pointerInteracting = null;
 			canvas.style.cursor = 'grab';
 		}}
-		on:pointerout={() => {
+		onpointerout={() => {
 			pointerInteracting = null;
 			canvas.style.cursor = 'grab';
 		}}
-		on:mousemove={(e) => {
+		onmousemove={(e) => {
 			if (pointerInteracting !== null) {
 				console.log('working');
 				const delta = e.clientX - pointerInteracting;

@@ -11,6 +11,7 @@
 	import { toast } from '$lib/stores/toast';
 
 	export let data: PageData;
+
 	$: currentUser.set(data.user);
 
 	// START VIEW TRANSITIONS API

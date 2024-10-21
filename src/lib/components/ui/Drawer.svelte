@@ -3,24 +3,33 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 
-	export let title = 'Move Goal';
-	export let description = 'Set your daily activity goal.';
+	let {
+		trigger,
+		content,
+		title,
+		description
+	}: {
+		trigger: () => any;
+		content: () => any;
+		title: () => any;
+		description: () => any;
+	} = $props();
 </script>
 
 <Drawer.Root>
 	<Drawer.Trigger asChild let:builder>
 		<Button builders={[builder]} variant="link" size="sm" class="p-0 text-xs font-thin">
-			<slot name="trigger" />
+			{@render trigger()}
 		</Button>
 	</Drawer.Trigger>
 	<Drawer.Content>
 		<div class="mx-auto w-full max-w-sm">
 			<Drawer.Header>
-				<Drawer.Title>{title}</Drawer.Title>
-				<Drawer.Description>{description}</Drawer.Description>
+				<Drawer.Title>{@render title()}</Drawer.Title>
+				<Drawer.Description>{@render description()}</Drawer.Description>
 			</Drawer.Header>
 
-			<slot name="content" />
+			{@render content()}
 			<div class="p-4 pb-0">
 				<div class="flex items-center justify-center space-x-2"></div>
 			</div>

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { enhance, applyAction } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import Input from '$lib/components/ui/Input.svelte';
@@ -6,11 +8,17 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 
-	export let form;
-	export let data;
-	let loading: any;
+	interface Props {
+		form: any;
+		data: any;
+	}
 
-	$: loading = false;
+	let { form, data }: Props = $props();
+	let loading: any = $state();
+
+	run(() => {
+		loading = false;
+	});
 
 	const submitUpdateEmail = () => {
 		loading = true;

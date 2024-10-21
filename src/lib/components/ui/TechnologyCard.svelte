@@ -2,10 +2,19 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import LazyImage from '$lib/components/ui/LazyImage.svelte';
 
-	export let name: string;
-	export let description: string;
-	export let img: string;
-	export let comingSoon: boolean;
+	interface Props {
+		name: string;
+		description: string;
+		img: string;
+		comingSoon: boolean;
+	}
+
+	let {
+		name,
+		description,
+		img,
+		comingSoon
+	}: Props = $props();
 </script>
 
 <Card.Root

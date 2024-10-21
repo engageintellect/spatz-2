@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { enhance } from '$app/forms';
 	import Icon from '@iconify/svelte';
 	import { toast } from 'svelte-sonner';
@@ -8,29 +10,47 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { formatFriendlyDate, timeSince } from '$lib/utils';
 
-	export let postAuthor;
-	export let postAuthorId;
-	export let postContent;
-	export let comments;
-	export let postDate;
-	export let avatar;
-	export let likes; // actual likes array from parent
-	export let id;
-	export let currentUser;
+	interface Props {
+		postAuthor: any;
+		postAuthorId: any;
+		postContent: any;
+		comments: any;
+		postDate: any;
+		avatar: any;
+		likes: any;
+		id: any;
+		currentUser: any;
+	}
 
-	let isDeleting = false;
+	let {
+		postAuthor,
+		postAuthorId,
+		postContent,
+		comments,
+		postDate,
+		avatar,
+		likes,
+		id,
+		currentUser
+	}: Props = $props();
+
+	let isDeleting = $state(false);
 	let deleteLoading = false;
-	let dialogOpen = false;
+	let dialogOpen = $state(false);
 
-	let isLiked = false;
-	let optimisticLikes: number;
-	let hasOptimisticallyUpdated = false; // Track if the user has clicked the like button
-	let isLocked = false; // Lock to prevent premature syncing
+	let isLiked = $state(false);
+	let optimisticLikes: number = $state();
+	let hasOptimisticallyUpdated = $state(false); // Track if the user has clicked the like button
+	let isLocked = $state(false); // Lock to prevent premature syncing
 
 	// Remove the onMount block and use a reactive statement
 	// Set `isLiked` whenever `likes` or `currentUser` changes
-	$: isLiked = likes.includes(currentUser.id);
-	$: optimisticLikes = likes.length; // Set the actual number of likes reactively
+	run(() => {
+		isLiked = likes.includes(currentUser.id);
+	});
+	run(() => {
+		optimisticLikes = likes.length;
+	}); // Set the actual number of likes reactively
 
 	// Set initial likes count and liked state on mount
 	onMount(() => {
@@ -39,9 +59,11 @@
 	});
 
 	// Sync with parent data only if not locked and no optimistic update
-	$: if (!hasOptimisticallyUpdated && !isLocked && likes.length !== optimisticLikes) {
-		optimisticLikes = likes.length; // Sync with actual likes only if no optimistic update and not locked
-	}
+	run(() => {
+		if (!hasOptimisticallyUpdated && !isLocked && likes.length !== optimisticLikes) {
+			optimisticLikes = likes.length; // Sync with actual likes only if no optimistic update and not locked
+		}
+	});
 
 	// Toggle liked state and update the number of likes optimistically
 	const toggleLiked = () => {
@@ -140,7 +162,7 @@
 						<div class="font-thin">{optimisticLikes ?? 0}</div>
 					</div>
 
-					<button class="font-thin" on:click={() => goto(`/guestbook/post/${id}`)}>
+					<button class="font-thin" onclick={() => goto(`/guestbook/post/${id}`)}>
 						<div class="flex items-center gap-1">
 							<Icon icon="mdi:comment-outline" class="h-5 w-5" />
 							<div>{comments.length}</div>

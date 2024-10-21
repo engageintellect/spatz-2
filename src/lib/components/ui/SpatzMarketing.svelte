@@ -10,9 +10,9 @@
 	import Contribute from '$lib/components/marketing/Contribute.svelte';
 	import { animateMainStagger } from '$lib/animations';
 
-	let stars = 0,
-		issues = 0,
-		forks = 0;
+	let stars = $state(0),
+		issues = $state(0),
+		forks = $state(0);
 
 	const getStars = async () => {
 		const res = await fetch(`${PUBLIC_BASE_URL}/api/repo-data`);

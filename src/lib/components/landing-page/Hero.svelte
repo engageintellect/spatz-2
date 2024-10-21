@@ -13,7 +13,7 @@
 		}
 	}
 
-	let heroHidden = true;
+	let heroHidden = $state(true);
 
 	onMount(() => {
 		gsap
@@ -155,7 +155,7 @@
 	</div>
 	<div id="anchorLink" class="group/scrollDownButton mt-5 hidden w-full justify-center md:flex">
 		<button
-			on:click={scrollToAnchor}
+			onclick={scrollToAnchor}
 			class="transition-all duration-300 md:group-hover/scrollDownButton:scale-[102%]"
 			aria-label="Scroll Down"
 		>

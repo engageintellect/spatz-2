@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { getImageURL } from '$lib/utils';
 	import { onMount } from 'svelte';
 	import { currentUser } from '$lib/stores/user';
@@ -9,21 +11,24 @@
 	import Icon from '@iconify/svelte';
 	import { Badge } from '$lib/components/ui/badge/index.js';
 
-	export let data: {
+
+	run(() => {
+		currentUser.set(data.user);
+	});
+
+	let loading = false;
+	let isSubmitting = false;
+	let showCommentsForm = $state(false);
+
+	interface Props {
+		data: {
 		user: App.User;
 		posts: App.Post[];
 		post: App.Post;
 		mentioning: App.Post[];
 		respondingTo: App.Post[];
 	};
-
-	$: currentUser.set(data.user);
-
-	let loading = false;
-	let isSubmitting = false;
-	let showCommentsForm = false;
-
-	export let form: {
+		form: {
 		data: {
 			content?: string;
 			post?: string;
@@ -32,6 +37,9 @@
 			content?: string[];
 		};
 	};
+	}
+
+	let { data, form }: Props = $props();
 
 	onMount(() => {
 		if (data.post.mentionedBy.length === 0) {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	let scrollProgress = 0;
+	let scrollProgress = $state(0);
 
 	const handleScroll = () => {
 		const scrollTop = window.scrollY;

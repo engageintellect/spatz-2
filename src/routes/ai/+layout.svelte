@@ -4,6 +4,11 @@
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	const navigation = [
 		{
@@ -63,7 +68,7 @@
 		</div>
 	</ul>
 	<div class="w-full px-2">
-		<slot />
+		{@render children?.()}
 	</div>
 </div>
 

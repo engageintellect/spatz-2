@@ -4,7 +4,7 @@
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 
-	let showButton = false;
+	let showButton = $state(false);
 
 	function checkScroll() {
 		showButton = window.scrollY > 100;

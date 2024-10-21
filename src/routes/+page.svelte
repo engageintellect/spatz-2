@@ -1,10 +1,14 @@
 <script lang="ts">
 	import type { PageData } from './$types.js';
 	import SpatzLanding from '$lib/components/ui/SpatzLanding.svelte';
-	export let data: PageData;
 	import { siteInfo } from '$lib/data.js';
 	import { currentUser } from '$lib/stores/user.js';
 	import SpatzMarketing from '$lib/components/ui/SpatzMarketing.svelte';
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 </script>
 
 <svelte:head>

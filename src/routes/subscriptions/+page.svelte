@@ -4,14 +4,9 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 	import { animateMainStagger } from '$lib/animations';
-	import { loadStripe, type Stripe } from '@stripe/stripe-js';
-	import { env } from '$env/dynamic/public';
 	import { goto } from '$app/navigation';
 	import { applyAction } from '$app/forms';
 	import { toast } from 'svelte-sonner';
-
-	let stripePromise: Promise<Stripe | null> | undefined;
-	stripePromise = loadStripe(env.PUBLIC_STRIPE_KEY);
 
 	let hidden = true;
 	let errorMessage: string = ''; // Declare errorMessage with an initial empty string
@@ -50,7 +45,9 @@
 	{#if data.existingSubscriptions && data.existingSubscriptions.length > 0}
 		<div class="mt-5 flex flex-col items-center justify-between gap-5">
 			<div class="animate-item text-center text-lg text-muted-foreground">
-				You are currently subscribed to {data?.existingSubscriptions[0]?.plan?.interval}ly plan.
+				You are currently subscribed to the <span class="text-foreground"
+					>{data?.existingSubscriptions[0]?.plan?.interval}ly</span
+				> plan.
 			</div>
 			<Button
 				href="/my/settings/subscription"
@@ -89,8 +86,9 @@
 				</div>
 				<div class="pt-5">
 					<form
-						use:enhance={({ formElement, formData, action, cancel }) => {
+						use:enhance={() => {
 							return async ({ result }) => {
+								console.log('result:', result);
 								if (result.type === 'failure') {
 									toast.error('Subscription already exist', {
 										action: {

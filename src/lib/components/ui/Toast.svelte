@@ -1,12 +1,23 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
 	import { fade, slide } from 'svelte/transition';
-	export let message = 'New message arrived.';
-	export let type = 'success';
-	export let x = 'center';
-	export let y = 'top';
-	export let show = false;
-	export let icon = 'carbon:notification';
+	interface Props {
+		message?: string;
+		type?: string;
+		x?: string;
+		y?: string;
+		show?: boolean;
+		icon?: string;
+	}
+
+	let {
+		message = 'New message arrived.',
+		type = 'success',
+		x = 'center',
+		y = 'top',
+		show = false,
+		icon = 'carbon:notification'
+	}: Props = $props();
 </script>
 
 {#if show}

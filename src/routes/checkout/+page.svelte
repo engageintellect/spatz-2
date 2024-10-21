@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { checkoutSchema, type CheckoutSchema } from '$lib/schema';
 	import { superForm, type SuperValidated } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
@@ -11,10 +13,16 @@
 	import { siteInfo } from '$lib/data.js';
 	import { currentUser } from '$lib/stores/user';
 
-	export let data: { form: any; user: any };
+	interface Props {
+		data: { form: any; user: any };
+	}
 
-	$: currentUser.set(data.user);
-	let isSubmitting = false;
+	let { data }: Props = $props();
+
+	run(() => {
+		currentUser.set(data.user);
+	});
+	let isSubmitting = $state(false);
 
 	const form = superForm(data.form, {
 		validators: zodClient(checkoutSchema)

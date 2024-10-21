@@ -2,11 +2,20 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 
-	export let src: string;
-	export let imgClass: string = '';
-	export let alt: string = '';
-	export let loading: string = 'lazy'; // default to lazy, but allow override
-	let image: HTMLImageElement;
+	interface Props {
+		src: string;
+		imgClass?: string;
+		alt?: string;
+		loading?: string;
+	}
+
+	let {
+		src,
+		imgClass = '',
+		alt = '',
+		loading = 'lazy'
+	}: Props = $props();
+	let image: HTMLImageElement = $state();
 
 	// Function to handle image loading
 	const loadImage = () => {

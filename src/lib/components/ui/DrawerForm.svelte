@@ -63,7 +63,7 @@
 	const x = (d: { goal: number; id: number }) => d.id;
 	const y = (d: { goal: number; id: number }) => d.goal;
 
-	let goal = 350;
+	let goal = $state(350);
 
 	function handleClick(adjustment: number) {
 		goal = Math.max(200, Math.min(400, goal + adjustment));

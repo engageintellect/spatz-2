@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { onMount, onDestroy, tick } from 'svelte';
 	import { page } from '$app/stores';
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
@@ -15,28 +17,33 @@
 
 	let isSubmitting = false;
 
-	export let data: {
-		user: App.User;
-		posts: App.Post[];
-		post: App.Post;
-	};
-
-	export let form: {
+	interface Props {
 		data: {
-			content?: string;
-			post?: string;
+			user: App.User;
+			posts: App.Post[];
+			post: App.Post;
 		};
-		errors: {
-			content?: string[];
+		form: {
+			data: {
+				content?: string;
+				post?: string;
+			};
+			errors: {
+				content?: string[];
+			};
 		};
-	};
+	}
+
+	let { data, form }: Props = $props();
 
 	let loading = false;
 
-	$: currentUser.set(data.user);
+	run(() => {
+		currentUser.set(data.user);
+	});
 
-	let showScrollToTop = false;
-	let sortOption = 'date'; // Default sort option
+	let showScrollToTop = $state(false);
+	let sortOption = $state('date'); // Default sort option
 
 	function sortByDate(posts: App.Post[]) {
 		return posts.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
@@ -55,22 +62,26 @@
 		return posts.filter((post) => $currentUser.following.includes(post.author));
 	}
 
-	$: emptyMentioningPostsCount = data.posts.filter((post) => post.mentioning.length === 0).length;
+	let emptyMentioningPostsCount = $derived(
+		data.posts.filter((post) => post.mentioning.length === 0).length
+	);
 
-	$: sortedPosts = (() => {
-		let posts = [...data.posts]; // Create a copy of posts to avoid mutation
-		switch (sortOption) {
-			case 'following':
-				return sortByFollowing(posts);
-			case 'likes':
-				return sortByLikes(posts);
-			case 'user':
-				return sortByCurrentUser(posts);
-			case 'date':
-			default:
-				return sortByDate(posts);
-		}
-	})();
+	let sortedPosts = $derived(
+		(() => {
+			let posts = [...data.posts]; // Create a copy of posts to avoid mutation
+			switch (sortOption) {
+				case 'following':
+					return sortByFollowing(posts);
+				case 'likes':
+					return sortByLikes(posts);
+				case 'user':
+					return sortByCurrentUser(posts);
+				case 'date':
+				default:
+					return sortByDate(posts);
+			}
+		})()
+	);
 
 	const handleScroll = () => {
 		const shouldShow = window.scrollY > 100;
@@ -173,7 +184,7 @@
 <ScrollIndicator />
 
 <div class="mx-auto w-full max-w-lg transition-all duration-300">
-	<div class="">
+	<div class="animate-item">
 		<h1 class="flex items-center text-7xl font-bold text-primary">
 			<span class="title-guest">guest</span>
 			<span class="title-book font-thin text-primary/50">book</span>

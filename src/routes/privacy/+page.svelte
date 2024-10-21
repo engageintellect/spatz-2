@@ -1,6 +1,7 @@
 <script>
-	export let data;
 	import { siteInfo } from '$lib/data';
+	/** @type {{data: any}} */
+	let { data } = $props();
 </script>
 
 <svelte:head>

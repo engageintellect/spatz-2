@@ -202,7 +202,7 @@
 				class="flex w-full py-2"
 				method="POST"
 				action="/auth/logout"
-				on:submit={handleLogout}
+				onsubmit={handleLogout}
 				aria-label="Logout"
 			>
 				<button type="submit" class="flex w-full items-center">

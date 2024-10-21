@@ -1,12 +1,25 @@
 <script lang="ts">
-	export let value: string = '';
-	export let placeholder: string = '';
-	export let id: any;
-	export let type = 'text';
-	export let disabled = false;
-	export let required = false;
-	export let errors: any;
-	export let autoFocus = false;
+	interface Props {
+		value?: string;
+		placeholder?: string;
+		id: any;
+		type?: string;
+		disabled?: boolean;
+		required?: boolean;
+		errors: any;
+		autoFocus?: boolean;
+	}
+
+	let {
+		value = '',
+		placeholder = '',
+		id,
+		type = 'text',
+		disabled = false,
+		required = false,
+		errors,
+		autoFocus = false
+	}: Props = $props();
 </script>
 
 <div class="mb-2 w-full">

@@ -6,7 +6,7 @@
 	import * as Command from '$lib/components/ui/command/index.js';
 	import { goto } from '$app/navigation';
 
-	let open = false;
+	let open = $state(false);
 
 	onMount(() => {
 		function handleKeydown(e: KeyboardEvent) {

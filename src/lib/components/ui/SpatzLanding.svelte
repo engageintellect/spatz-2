@@ -5,7 +5,11 @@
 	import Quote from '$lib/components/landing-page/Quote.svelte';
 	import GlobeSection from '$lib/components/ui/GlobeSection.svelte';
 	import SkillsCard from '$lib/components/landing-page/SkillsCard.svelte';
-	export let formData;
+	interface Props {
+		formData: any;
+	}
+
+	let { formData }: Props = $props();
 </script>
 
 <div>
