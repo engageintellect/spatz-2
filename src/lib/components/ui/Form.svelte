@@ -11,50 +11,36 @@
 	import { onDestroy, onMount, tick } from 'svelte';
 	import * as Select from '$lib/components/ui/select';
 
-	// Props interface
-	interface Props {
-		action?: string;
-		data: SuperValidated<Infer<FormSchema>>;
-	}
+	export let action: string = '';
 
-	// Destructure props
-	let { action = '', data }: Props = $props();
-	let isSubmitting = $state(false);
+	export let data: SuperValidated<Infer<FormSchema>>;
+	let isSubmitting = false;
 
-	// Initialize the form with superForm and validators
+	$: selectedType = $formData.type
+		? {
+				label: $formData.type,
+				value: $formData.type
+			}
+		: undefined;
+
+	$: selectedPriority = $formData.priority
+		? {
+				label: $formData.priority,
+				value: $formData.priority
+			}
+		: undefined;
+
 	const form = superForm(data, {
 		validators: zodClient(formSchema)
 	});
 
-	// Access fields inside formData
 	const { form: formData } = form;
 
-	// Access the `type` and `priority` fields through `formData.type.value`
-	let selectedType = $derived(
-		formData?.type?.value
-			? {
-					label: formData.type.value,
-					value: formData.type.value
-				}
-			: undefined
-	);
-
-	let selectedPriority = $derived(
-		formData?.priority?.value
-			? {
-					label: formData.priority.value,
-					value: formData.priority.value
-				}
-			: undefined
-	);
-
-	// GSAP animations setup
 	let gsapInstance: any;
 	let ScrollTriggerInstance: any;
 
-	// Initialize animations once the DOM is ready
 	const initializeAnimations = async () => {
-		await tick(); // Ensure the DOM is updated
+		await tick(); // Wait for the DOM to update
 
 		gsapInstance.from('.contact-header', {
 			duration: 1,
@@ -89,7 +75,6 @@
 		});
 	};
 
-	// Set up GSAP and ScrollTrigger on component mount
 	onMount(() => {
 		if (typeof window !== 'undefined') {
 			import('gsap').then(({ gsap }) => {
@@ -104,7 +89,6 @@
 		}
 	});
 
-	// Clean up on destroy
 	onDestroy(() => {
 		if (typeof window !== 'undefined' && ScrollTriggerInstance) {
 			ScrollTriggerInstance.getAll().forEach((trigger: any) => trigger.kill());

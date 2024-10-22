@@ -7,7 +7,8 @@
 		children?: import('svelte').Snippet;
 	}
 
-	let { settings = {
+	let {
+		settings = {
 			before: {
 				opacity: 0,
 				y: 10
@@ -18,9 +19,11 @@
 				duration: 3,
 				ease: 'power4.out'
 			}
-		} || {}, children }: Props = $props();
+		} || {},
+		children
+	}: Props = $props();
 
-	let element: HTMLDivElement = $state();
+	let element: any = $state();
 
 	onMount(() => {
 		gsap.fromTo(element, settings.before, settings.after);

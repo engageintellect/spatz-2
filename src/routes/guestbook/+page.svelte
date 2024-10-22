@@ -38,7 +38,7 @@
 
 	let loading = false;
 
-	run(() => {
+	$effect(() => {
 		currentUser.set(data.user);
 	});
 
@@ -66,22 +66,20 @@
 		data.posts.filter((post) => post.mentioning.length === 0).length
 	);
 
-	let sortedPosts = $derived(
-		(() => {
-			let posts = [...data.posts]; // Create a copy of posts to avoid mutation
-			switch (sortOption) {
-				case 'following':
-					return sortByFollowing(posts);
-				case 'likes':
-					return sortByLikes(posts);
-				case 'user':
-					return sortByCurrentUser(posts);
-				case 'date':
-				default:
-					return sortByDate(posts);
-			}
-		})()
-	);
+	let sortedPosts = $derived.by(() => {
+		let posts = [...data.posts]; // Create a copy of posts to avoid mutation
+		switch (sortOption) {
+			case 'following':
+				return sortByFollowing(posts);
+			case 'likes':
+				return sortByLikes(posts);
+			case 'user':
+				return sortByCurrentUser(posts);
+			case 'date':
+			default:
+				return sortByDate(posts);
+		}
+	});
 
 	const handleScroll = () => {
 		const shouldShow = window.scrollY > 100;
@@ -195,7 +193,7 @@
 		<div class="form-control gap-0">
 			<input type="hidden" name="author" value={data?.user?.id} />
 
-			<div class="pb-10">
+			<div class="animate-item pb-10">
 				<PostInputArea
 					action={`/guestbook?/createPost`}
 					userId={$currentUser.id}
@@ -254,7 +252,7 @@
 						{#if sortedPosts.length > 0}
 							{#each sortedPosts as post}
 								{#if post.mentioning.length === 0}
-									<div class="post-wrapper border-b">
+									<div class="border-b">
 										<Post
 											postAuthorId={post.author}
 											comments={post.mentionedBy}

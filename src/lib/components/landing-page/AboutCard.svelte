@@ -9,8 +9,8 @@
 
 	let gsapInstance: any;
 	let ScrollTriggerInstance: any;
-	let imageContainer: HTMLDivElement = $state();
-	let section1Container: HTMLDivElement = $state();
+	let imageContainer: any = $state();
+	let section1Container: any = $state();
 
 	let heroHidden = $state(true);
 	const initializeAnimations = () => {

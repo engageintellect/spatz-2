@@ -69,7 +69,7 @@
 			on:click={() => window.history.back()}
 			size="sm"
 			variant="outline"
-			class="group/backButton backButton animate-item flex items-center gap-2"
+			class="group/backButton backButton flex items-center gap-2"
 		>
 			<Icon
 				icon="mdi:arrow-left"

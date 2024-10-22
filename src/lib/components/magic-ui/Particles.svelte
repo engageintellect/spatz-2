@@ -27,9 +27,9 @@
 		color
 	}: Props = $props();
 
-	let canvasRef: HTMLCanvasElement = $state();
-	let canvasContainerRef: HTMLDivElement = $state();
-	let context: CanvasRenderingContext2D | null = null;
+	let canvasRef: any = $state();
+	let canvasContainerRef: any = $state();
+	let context: any | null = null;
 	let circles: any[] = [];
 	let mouse = { x: 0, y: 0 };
 	let canvasSize = { w: 0, h: 0 };
