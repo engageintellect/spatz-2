@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { onMount, tick } from 'svelte';
 
 	interface Props {
@@ -27,8 +25,8 @@
 		vy = 0
 	}: Props = $props();
 
-	let canvasRef: HTMLCanvasElement = $state();
-	let canvasContainerRef: HTMLDivElement = $state();
+	let canvasRef: any = $state();
+	let canvasContainerRef: any = $state();
 	let context: CanvasRenderingContext2D | null = null;
 	let circles: any[] = [];
 	let mouse = { x: 0, y: 0 };
@@ -103,7 +101,7 @@
 		}
 	}
 
-	function drawCircle(circle, update = false) {
+	function drawCircle(circle: any, update = false) {
 		if (context) {
 			const { x, y, translateX, translateY, size, alpha } = circle;
 			context.translate(translateX, translateY);
@@ -127,12 +125,12 @@
 		}
 	}
 
-	function remapValue(value, start1, end1, start2, end2) {
+	function remapValue(value: any, start1: any, end1: any, start2: any, end2: any) {
 		let remapped = ((value - start1) * (end2 - start2)) / (end1 - start1) + start2;
 		return remapped > 0 ? remapped : 0;
 	}
 
-	function drawLine(circle1, circle2) {
+	function drawLine(circle1: any, circle2: any) {
 		if (context) {
 			context.beginPath();
 			context.moveTo(circle1.x + circle1.translateX, circle1.y + circle1.translateY);
@@ -231,7 +229,7 @@
 
 	updateColor();
 
-	run(() => {
+	$effect(() => {
 		if (canvasRef) {
 			drawParticles();
 		}

@@ -9,7 +9,7 @@
 	import QRCode from 'qrcode';
 
 	let stripePromise: Promise<Stripe | null> | undefined;
-	let amount: number = $state();
+	let amount: any = $state();
 	let btcQrCode: string = $state(''); // Stores the generated QR code
 
 	const prices = [1, 5, 10, 20, 50, 100];

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { getImageURL } from '$lib/utils';
 	import { onMount } from 'svelte';
 	import { currentUser } from '$lib/stores/user';
@@ -11,37 +9,33 @@
 	import Icon from '@iconify/svelte';
 	import { Badge } from '$lib/components/ui/badge/index.js';
 
-
-	run(() => {
-		currentUser.set(data.user);
-	});
-
 	let loading = false;
 	let isSubmitting = false;
 	let showCommentsForm = $state(false);
 
 	interface Props {
 		data: {
-		user: App.User;
-		posts: App.Post[];
-		post: App.Post;
-		mentioning: App.Post[];
-		respondingTo: App.Post[];
-	};
+			user: App.User;
+			posts: App.Post[];
+			post: App.Post;
+			mentioning: App.Post[];
+			respondingTo: App.Post[];
+		};
 		form: {
-		data: {
-			content?: string;
-			post?: string;
+			data: {
+				content?: string;
+				post?: string;
+			};
+			errors: {
+				content?: string[];
+			};
 		};
-		errors: {
-			content?: string[];
-		};
-	};
 	}
 
 	let { data, form }: Props = $props();
 
 	onMount(() => {
+		currentUser.set(data.user);
 		if (data.post.mentionedBy.length === 0) {
 			showCommentsForm = true;
 		}

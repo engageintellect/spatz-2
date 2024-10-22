@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { onMount, onDestroy, tick } from 'svelte';
 	import { page } from '$app/stores';
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
@@ -14,8 +12,6 @@
 	import { lazyLoad } from '$lib/lazyLoad';
 	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
 	import { animateMainStagger } from '$lib/animations';
-
-	let isSubmitting = false;
 
 	interface Props {
 		data: {
@@ -36,7 +32,8 @@
 
 	let { data, form }: Props = $props();
 
-	let loading = false;
+	let loading: boolean = $state(false);
+	let isSubmitting: boolean = $state(false);
 
 	$effect(() => {
 		currentUser.set(data.user);

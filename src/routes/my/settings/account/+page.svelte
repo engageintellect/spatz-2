@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { enhance, applyAction } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import Input from '$lib/components/ui/Input.svelte';
@@ -14,11 +12,7 @@
 	}
 
 	let { form, data }: Props = $props();
-	let loading: any = $state();
-
-	run(() => {
-		loading = false;
-	});
+	let loading: boolean = $state(false);
 
 	const submitUpdateEmail = () => {
 		loading = true;

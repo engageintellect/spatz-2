@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { invalidateAll } from '$app/navigation';
 	import { enhance, applyAction } from '$app/forms';
 	import { getImageURL } from '$lib/utils';
@@ -9,7 +7,7 @@
 	import { toast } from 'svelte-sonner';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { currentUser } from '$lib/stores/user';
-
+	import { onMount } from 'svelte';
 
 	interface Props {
 		data: any;
@@ -18,6 +16,7 @@
 
 	let { data, form }: Props = $props();
 	let loading: any = $state();
+	let hidden: boolean = $state(true);
 
 	const showPreview = (event: any) => {
 		const target = event.target;
@@ -50,15 +49,14 @@
 			loading = false;
 		};
 	};
-	run(() => {
+	onMount(() => {
 		currentUser.set(data.user);
-	});
-	run(() => {
 		loading = false;
+		hidden = false;
 	});
 </script>
 
-<div class="flex h-full w-full flex-col">
+<div class={`${hidden ? 'opacity-0' : ''} flex h-full w-full flex-col`}>
 	<form
 		action="?/updateProfile"
 		method="POST"

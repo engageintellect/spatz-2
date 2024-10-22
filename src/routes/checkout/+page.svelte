@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { checkoutSchema, type CheckoutSchema } from '$lib/schema';
 	import { superForm, type SuperValidated } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
@@ -19,9 +17,6 @@
 
 	let { data }: Props = $props();
 
-	run(() => {
-		currentUser.set(data.user);
-	});
 	let isSubmitting = $state(false);
 
 	const form = superForm(data.form, {
@@ -70,6 +65,7 @@
 	};
 
 	onMount(() => {
+		currentUser.set(data.user);
 		if (typeof window !== 'undefined') {
 			import('gsap').then(({ gsap }) => {
 				import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {

@@ -1,10 +1,8 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { enhance } from '$app/forms';
 	import Icon from '@iconify/svelte';
 	import { toast } from 'svelte-sonner';
-	import { onMount, tick } from 'svelte';
+	import { tick } from 'svelte';
 	import { goto } from '$app/navigation';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -39,27 +37,20 @@
 	let dialogOpen = $state(false);
 
 	let isLiked = $state(false);
-	let optimisticLikes: number = $state();
+	let optimisticLikes: number = $state(0);
 	let hasOptimisticallyUpdated = $state(false); // Track if the user has clicked the like button
 	let isLocked = $state(false); // Lock to prevent premature syncing
 
 	// Remove the onMount block and use a reactive statement
-	// Set `isLiked` whenever `likes` or `currentUser` changes
-	run(() => {
-		isLiked = likes.includes(currentUser.id);
-	});
-	run(() => {
-		optimisticLikes = likes.length;
-	}); // Set the actual number of likes reactively
 
 	// Set initial likes count and liked state on mount
-	onMount(() => {
+	$effect(() => {
 		isLiked = likes.includes(currentUser.id);
 		optimisticLikes = likes.length; // Set the actual number of likes on mount
 	});
 
 	// Sync with parent data only if not locked and no optimistic update
-	run(() => {
+	$effect(() => {
 		if (!hasOptimisticallyUpdated && !isLocked && likes.length !== optimisticLikes) {
 			optimisticLikes = likes.length; // Sync with actual likes only if no optimistic update and not locked
 		}

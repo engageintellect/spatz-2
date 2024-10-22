@@ -10,6 +10,8 @@
 	import Contribute from '$lib/components/marketing/Contribute.svelte';
 	import { animateMainStagger } from '$lib/animations';
 
+	let hidden = $state(true);
+
 	let stars = $state(0),
 		issues = $state(0),
 		forks = $state(0);
@@ -23,13 +25,14 @@
 	};
 
 	onMount(async () => {
+		hidden = false;
 		animateMainStagger();
 		await getStars();
 		await tick(); // Wait for DOM updates
 	});
 </script>
 
-<div class="animate-item mx-auto w-full max-w-2xl px-2 md:px-0">
+<div class={`${hidden ? 'opacity-0' : ''} animate-item mx-auto w-full max-w-2xl px-2 md:px-0`}>
 	<div class="mb-10 flex flex-col gap-16 md:gap-16">
 		<div class="">
 			<Hero />

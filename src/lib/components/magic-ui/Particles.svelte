@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { onMount } from 'svelte';
 
 	interface Props {
@@ -198,7 +196,7 @@
 		};
 	});
 
-	run(() => {
+	$effect(() => {
 		if (canvasRef) {
 			drawParticles();
 			//   animate();

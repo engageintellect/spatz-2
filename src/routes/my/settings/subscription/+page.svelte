@@ -70,13 +70,15 @@
 					<div class="animate-item">Subscription duration:</div>
 
 					<div class="animate-item mt-2 flex w-fit items-center gap-2 rounded-lg border p-2">
-						<div class="flex flex-col rounded-lg bg-success p-2 text-sm">
+						<div class="flex flex-col rounded-lg bg-success p-2 text-sm text-success-foreground">
 							{new Date(subscription.current_period_start * 1000).toLocaleDateString()}
 						</div>
 
 						<Icon icon="mdi:arrow-right" class="h-5 w-5" />
 
-						<div class="flex flex-col rounded-lg bg-destructive p-2 text-sm">
+						<div
+							class="flex flex-col rounded-lg bg-destructive p-2 text-sm text-destructive-foreground"
+						>
 							{new Date(subscription.current_period_end * 1000).toLocaleDateString()}
 						</div>
 					</div>

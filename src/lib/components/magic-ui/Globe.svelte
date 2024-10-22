@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { onMount } from 'svelte';
 	import createGlobe from 'cobe';
 	import { spring } from 'svelte/motion';
@@ -17,14 +15,14 @@
 	}
 
 	let { class: className = '' }: Props = $props();
-	
+
 	let pointerInteracting: any = $state(null);
 	let pointerInteractionMovement = $state(0);
-	let canvas: HTMLCanvasElement = $state();
+	let canvas: any = $state();
 
 	let phi = 0;
 	let width = $state(0);
-	run(() => {
+	$effect(() => {
 		console.log(width, 'X');
 	});
 	let onResize = () => {
