@@ -9,6 +9,9 @@
 	import Avatar from '$lib/components/ui/Avatar.svelte';
 	import { PUBLIC_POCKETBASE_ADMIN } from '$env/static/public';
 	import { currentUser } from '$lib/stores/user';
+	import { Badge } from '$lib/components/ui/badge/index.js';
+
+	export let notifications: any;
 
 	function handleLogout() {
 		pb.authStore.clear();
@@ -58,6 +61,23 @@
 		<!-- <DropdownMenu.Label>Settings</DropdownMenu.Label> -->
 
 		<DropdownMenu.Group>
+			<DropdownMenu.Item>
+				<a
+					href={`/notifications/${$currentUser.id}`}
+					data-sveltekit-preload-data="hover"
+					class="flex w-full items-center"
+				>
+					<Icon icon="material-symbols:notifications" class="mr-2 h-4 w-4" />
+					<span>Notifications</span>
+				</a>
+
+				{#if notifications > 0}
+					<DropdownMenu.Shortcut
+						><Badge variant="default">{notifications}</Badge></DropdownMenu.Shortcut
+					>
+				{/if}
+			</DropdownMenu.Item>
+
 			<DropdownMenu.Item>
 				<a
 					href="/my/settings/profile"

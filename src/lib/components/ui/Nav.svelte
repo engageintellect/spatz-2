@@ -6,6 +6,9 @@
 	import { currentUser } from '$lib/stores/user';
 	import DropdownMenu from '$lib/components/ui/DropdownMenu.svelte';
 	import { siteInfo } from '$lib/data.js';
+	import Icon from '@iconify/svelte';
+
+	const { notifications } = $props();
 
 	let navHidden = $state(true);
 	onMount(() => {
@@ -32,7 +35,7 @@
 		<div class="buttons flex items-center gap-2">
 			{#if $currentUser}
 				<ThemeToggle />
-				<DropdownMenu />
+				<DropdownMenu {notifications} />
 			{:else}
 				<div class="flex items-center gap-2">
 					<a href="/auth/login">

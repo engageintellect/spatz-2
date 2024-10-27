@@ -68,6 +68,16 @@ export const actions: Actions = {
 				currentUser.following = currentUser.following.filter((id: any) => id !== user.id);
 			} else {
 				currentUser.following.push(user.id);
+
+				const data = {
+					title: 'New Follower',
+					message: 'Followed you',
+					user: user.id,
+					referencedPost: '',
+					referencedUser: currentUser.id
+				};
+
+				await locals.pb.collection('notifications').create(data);
 			}
 
 			await locals.pb

@@ -105,10 +105,16 @@
 				<div class="animate-subtitle mt-5 text-xl font-thin text-muted-foreground lg:text-2xl">
 					<div class="font-base text-orange-500">The ultimate Sveltekit boilerplate</div>
 					<div>this time with svelte-animations, superforms, stripe, and shadcn.</div>
+					<div class="mt-2 text-sm font-thin text-muted-foreground">
+						an updated version of <a
+							href="https://spatz.engage-dev.com"
+							class="text-foreground underline">spatz</a
+						>
+					</div>
 				</div>
 			</div>
 
-			<div class="animate-buttons mx-auto mt-10 flex w-full items-center gap-2 md:max-w-lg">
+			<div class="animate-buttons mx-auto mt-5 flex w-full items-center gap-2 md:max-w-lg">
 				<a href="/auth/register" class="group/bookingsButton w-full">
 					<Button size="lg" class="flex w-full items-center gap-2">
 						<div class="text-lg lowercase">get started</div>
