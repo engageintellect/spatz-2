@@ -33,7 +33,17 @@
 <DropdownMenu.Root>
 	<DropdownMenu.Trigger asChild let:builder>
 		<Button builders={[builder]} class="rounded-full p-0">
-			<Avatar />
+			<div class="relative">
+				<Avatar />
+
+				{#if notifications > 0}
+					<div class="absolute bottom-0 right-0 rounded-full text-xs">
+						<Badge size="sm" variant="destructive" class="px-1 py-0 text-xs text-white"
+							>{notifications}</Badge
+						>
+					</div>
+				{/if}
+			</div>
 		</Button>
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Content class="mt-3 w-fit min-w-52 max-w-64 bg-background" align="end">
@@ -73,7 +83,9 @@
 
 				{#if notifications > 0}
 					<DropdownMenu.Shortcut
-						><Badge variant="default">{notifications}</Badge></DropdownMenu.Shortcut
+						><Badge size="sm" variant="destructive" class=" text-xs text-white"
+							>{notifications}</Badge
+						></DropdownMenu.Shortcut
 					>
 				{/if}
 			</DropdownMenu.Item>

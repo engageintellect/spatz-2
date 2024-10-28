@@ -2,8 +2,6 @@
 	import { enhance } from '$app/forms';
 	import Icon from '@iconify/svelte';
 	import { toast } from 'svelte-sonner';
-	import { tick } from 'svelte';
-	import { goto } from '$app/navigation';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { formatFriendlyDate, timeSince } from '$lib/utils';
@@ -53,7 +51,7 @@
 							alt="user-avatar"
 						/>
 						<div
-							class={`absolute -bottom-1 right-0 flex h-5 w-5 items-center justify-center rounded-full border border-2 border-background ${
+							class={`absolute -bottom-1 right-0 flex h-6 w-6 items-center justify-center rounded-full border border-2 border-background ${
 								notificationContent.toLowerCase().includes('follow')
 									? 'bg-info text-white'
 									: 'bg-destructive text-white'
@@ -63,7 +61,7 @@
 								icon={notificationContent.toLowerCase().includes('follow')
 									? `mdi:account`
 									: `mdi:heart`}
-								class="h-3.5 w-3.5"
+								class="h-4 w-4"
 							/>
 						</div>
 					</div>
