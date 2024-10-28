@@ -56,11 +56,11 @@
 				{#each data.notifications as notification}
 					{#if notification.user === data.userProfile.id}
 						<Notification
+							notificationReferencedPost={notification.referencedPost}
 							notificationOwner={notification.user}
 							notificationAuthor={notification.referencedUser}
 							notificationAuthorUsername={notification.username}
 							notificationContent={notification.message}
-							comments={notification.user}
 							postDate={notification.created}
 							avatar={notification.userAvatar
 								? getImageURL(
@@ -69,7 +69,6 @@
 										notification.userAvatar
 									)
 								: `https://ui-avatars.com/api/?name=${notification.user}&background=random`}
-							likes={notification.user}
 							id={notification.id}
 							currentUser={$currentUser}
 						/>

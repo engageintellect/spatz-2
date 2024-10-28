@@ -9,27 +9,25 @@
 	import { formatFriendlyDate, timeSince } from '$lib/utils';
 
 	interface Props {
+		notificationReferencedPost: any;
 		notificationOwner: any;
 		notificationAuthor: any;
 		notificationAuthorUsername: any;
 		notificationContent: any;
-		comments: any;
 		postDate: any;
 		avatar: any;
-		likes: any;
 		id: any;
 		currentUser: any;
 	}
 
 	let {
+		notificationReferencedPost,
 		notificationOwner,
 		notificationAuthor,
 		notificationAuthorUsername,
 		notificationContent,
-		comments,
 		postDate,
 		avatar,
-		likes,
 		id,
 		currentUser
 	}: Props = $props();
@@ -38,37 +36,7 @@
 	let deleteLoading = false;
 	let dialogOpen = $state(false);
 
-	let isLiked = $state(false);
-	let optimisticLikes: number = $state(0);
-	let hasOptimisticallyUpdated = $state(false); // Track if the user has clicked the like button
-	let isLocked = $state(false); // Lock to prevent premature syncing
-
 	// Remove the onMount block and use a reactive statement
-
-	// Set initial likes count and liked state on mount
-	$effect(() => {
-		isLiked = likes.includes(currentUser.id);
-		optimisticLikes = likes.length; // Set the actual number of likes on mount
-	});
-
-	// Sync with parent data only if not locked and no optimistic update
-	$effect(() => {
-		if (!hasOptimisticallyUpdated && !isLocked && likes.length !== optimisticLikes) {
-			optimisticLikes = likes.length; // Sync with actual likes only if no optimistic update and not locked
-		}
-	});
-
-	// Toggle liked state and update the number of likes optimistically
-	const toggleLiked = () => {
-		isLiked = !isLiked;
-		if (isLiked) {
-			optimisticLikes += 1;
-		} else {
-			optimisticLikes = Math.max(optimisticLikes - 1, 0); // Ensure optimisticLikes doesn't go below 0
-		}
-		hasOptimisticallyUpdated = true; // Mark as updated optimistically
-		isLocked = true; // Lock to prevent syncing with parent during submission
-	};
 </script>
 
 <div
@@ -78,12 +46,26 @@
 		<div class="flex items-start gap-2">
 			<div>
 				<a href={`/users/${notificationAuthor}`}>
-					<div class="h-10 w-10 md:h-12 md:w-12">
+					<div class="relative h-10 w-10 md:h-12 md:w-12">
 						<img
 							src={avatar}
 							class="mt-1 h-full w-full rounded-full border object-cover shadow"
 							alt="user-avatar"
 						/>
+						<div
+							class={`absolute -bottom-1 right-0 flex h-5 w-5 items-center justify-center rounded-full border border-2 border-background ${
+								notificationContent.toLowerCase().includes('follow')
+									? 'bg-info text-white'
+									: 'bg-destructive text-white'
+							}`}
+						>
+							<Icon
+								icon={notificationContent.toLowerCase().includes('follow')
+									? `mdi:account`
+									: `mdi:heart`}
+								class="h-3.5 w-3.5"
+							/>
+						</div>
 					</div>
 				</a>
 			</div>
@@ -97,7 +79,11 @@
 					</div>
 				</div>
 
-				<a href={`/guestbook/post/${id}`}>
+				<a
+					href={notificationReferencedPost
+						? `/guestbook/post/${notificationReferencedPost}`
+						: `/users/${notificationAuthor}`}
+				>
 					<div class="pb-2 pr-5 pt-1 font-thin">{@html notificationContent}</div>
 				</a>
 

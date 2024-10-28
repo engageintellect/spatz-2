@@ -80,6 +80,13 @@ export const actions: Actions = {
 				post.likes.splice(userIndex, 1);
 			} else {
 				post.likes.push(formData.currentUserId);
+				await locals.pb.collection('notifications').create({
+					user: post.author,
+					referencedUser: formData.currentUserId,
+					referencedPost: post.id,
+					title: 'New Like',
+					message: 'Liked your post'
+				});
 			}
 
 			try {

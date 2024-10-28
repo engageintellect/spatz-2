@@ -1,7 +1,7 @@
 import type { PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
-import { fail } from '@sveltejs/kit';
+import { fail, error } from '@sveltejs/kit';
 import { validateData } from '$lib/utils';
 import { deleteNotificationSchema, followUserSchema } from '$lib/schema';
 
@@ -46,7 +46,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		sort: '-created'
 	});
 
-	console.log('notifications:', notifications);
+	//console.log('notifications:', notifications);
 
 	const transformedNotifications = notifications.map((notification) => {
 		return {
@@ -83,7 +83,6 @@ export const actions: Actions = {
 
 			// Ensure the notification exists
 			const notification = await locals.pb.collection('notifications').getOne(notificationId);
-			console.log('hello there');
 
 			// Ensure the user is authorized to delete the post
 			if (notification.user !== locals.pb.authStore.model?.id) {
