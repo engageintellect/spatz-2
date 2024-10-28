@@ -71,7 +71,7 @@
 
 <div class="text-elipsis relative cursor-pointer overflow-x-hidden transition-all duration-300">
 	<div class="card-body p-3 px-1 transition-all duration-300">
-		<div class="flex items-start gap-2">
+		<div class="flex items-start gap-3">
 			<div>
 				<a href={`/users/${postAuthorId}`}>
 					<div class="h-10 w-10 md:h-12 md:w-12">
@@ -142,7 +142,9 @@
 
 							<button type="submit" class="flex items-center">
 								<Icon
-									icon={isLiked ? 'ph:heart-fill' : 'ph:heart'}
+									icon={isLiked
+										? 'material-symbols:favorite-rounded'
+										: 'material-symbols:favorite-outline-rounded'}
 									class={`h-5 w-5 ${isLiked ? 'text-destructive' : ''}`}
 								/>
 								<span class="sr-only">Like</span>

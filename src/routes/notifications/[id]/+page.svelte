@@ -46,7 +46,7 @@
 		</Button>
 	</div>
 
-	<main class="mx-auto mt-10 max-w-lg rounded-lg">
+	<main class="mx-auto max-w-lg rounded-lg">
 		{#if data.userPosts.length > 0}
 			<div class="animate-item mb-2 mt-10 text-xl font-thin">
 				{data.userProfile.username} has {data.notifications.length} notifications:

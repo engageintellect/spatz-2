@@ -230,7 +230,7 @@
 								class="text-xs transition-all duration-300"
 							>
 								likes
-								<Icon icon="mdi:heart" class="ml-1 h-4 w-4" />
+								<Icon icon="material-symbols:favorite-rounded" class="ml-1 h-4 w-4" />
 							</Button>
 
 							<Button

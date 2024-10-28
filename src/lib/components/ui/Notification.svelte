@@ -41,7 +41,7 @@
 	class="text-elipsis relative cursor-pointer overflow-x-hidden border-b transition-all duration-300"
 >
 	<div class="card-body p-3 px-1 transition-all duration-300">
-		<div class="flex items-start gap-2">
+		<div class="flex items-start gap-3">
 			<div>
 				<a href={`/users/${notificationAuthor}`}>
 					<div class="relative h-10 w-10 md:h-12 md:w-12">
@@ -51,7 +51,7 @@
 							alt="user-avatar"
 						/>
 						<div
-							class={`absolute -bottom-1 right-0 flex h-6 w-6 items-center justify-center rounded-full border border-2 border-background ${
+							class={`absolute -bottom-1 right-0 flex h-5 w-5 items-center justify-center rounded-full border border-2 border-background md:h-6 md:w-6 ${
 								notificationContent.toLowerCase().includes('follow')
 									? 'bg-info text-white'
 									: 'bg-destructive text-white'
@@ -60,8 +60,8 @@
 							<Icon
 								icon={notificationContent.toLowerCase().includes('follow')
 									? `mdi:account`
-									: `mdi:heart`}
-								class="h-4 w-4"
+									: `material-symbols:favorite-rounded`}
+								class="h-3 w-3 md:h-4 md:w-4"
 							/>
 						</div>
 					</div>
