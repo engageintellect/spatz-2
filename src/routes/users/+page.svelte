@@ -163,7 +163,7 @@
 
 	<div class={`animate-item`}>
 		<div class="bg-base-100 mx-auto h-full w-full">
-			<h1 class="flex items-center gap-2 text-7xl font-bold text-primary">
+			<h1 class="flex items-center gap-2 text-6xl font-bold text-primary">
 				<span class="animate-user">user</span>
 				<span class="animate-db font-thin text-primary/50">db</span>
 			</h1>

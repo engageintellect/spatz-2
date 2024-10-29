@@ -48,7 +48,8 @@
 
 	<main class="mx-auto max-w-lg rounded-lg">
 		{#if data.userPosts.length > 0}
-			<div class="animate-item mb-2 mt-10 text-xl font-thin">
+			<div class="animate-item text-6xl">notifications</div>
+			<div class="animate-item mb-2 mt-5 text-xl font-thin text-muted-foreground">
 				{data.userProfile.username} has {data.notifications.length} notifications:
 			</div>
 

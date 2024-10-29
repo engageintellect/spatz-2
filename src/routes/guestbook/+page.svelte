@@ -180,7 +180,7 @@
 
 <div class="mx-auto w-full max-w-lg transition-all duration-300">
 	<div class="animate-item">
-		<h1 class="flex items-center text-7xl font-bold text-primary">
+		<h1 class="flex items-center text-6xl font-bold text-primary">
 			<span class="title-guest">guest</span>
 			<span class="title-book font-thin text-primary/50">book</span>
 		</h1>
