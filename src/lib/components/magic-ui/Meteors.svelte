@@ -2,8 +2,12 @@
 	import { cn } from '$lib/utils';
 	import { onMount } from 'svelte';
 
-	export let number = 10;
-	let meteorStyles: any = [];
+	interface Props {
+		number?: number;
+	}
+
+	let { number = 10 }: Props = $props();
+	let meteorStyles: any = $state([]);
 	let changeMeteors = (num: number) => {
 		meteorStyles = [];
 		const styles = [...new Array(num)].map(() => ({

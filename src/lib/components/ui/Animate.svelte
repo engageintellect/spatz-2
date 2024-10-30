@@ -2,8 +2,13 @@
 	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
 
-	export let settings =
-		{
+	interface Props {
+		settings?: any;
+		children?: import('svelte').Snippet;
+	}
+
+	let {
+		settings = {
 			before: {
 				opacity: 0,
 				y: 10
@@ -14,9 +19,11 @@
 				duration: 3,
 				ease: 'power4.out'
 			}
-		} || {};
+		} || {},
+		children
+	}: Props = $props();
 
-	let element: HTMLDivElement;
+	let element: any = $state();
 
 	onMount(() => {
 		gsap.fromTo(element, settings.before, settings.after);
@@ -24,5 +31,5 @@
 </script>
 
 <div bind:this={element}>
-	<slot />
+	{@render children?.()}
 </div>

@@ -129,42 +129,25 @@
 
 				<!-- Display the optimistic follower count -->
 				<div class="mt-5 flex items-center gap-5 text-sm font-thin text-foreground/70">
-					<Drawer
-						title="followers"
-						description={`${data.userProfile.username} has ${data.userFollowers.length} ${data.userFollowers.length === 1 ? 'follower' : 'followers'}`}
-					>
-						<div slot="trigger">
+					<Drawer>
+						{#snippet title()}
+							followers
+						{/snippet}
+
+						{#snippet description()}
+							{`${data.userProfile.username} has ${data.userFollowers.length} ${data.userFollowers.length === 1 ? 'follower' : 'followers'}`}
+						{/snippet}
+
+						{#snippet trigger()}
 							<div>
 								{optimisticFollowers}
 								{optimisticFollowers === 1 ? ' follower' : ' followers'}
 							</div>
-						</div>
-						<div class="flex h-full max-h-96 flex-col gap-2 overflow-scroll p-5" slot="content">
-							{#each data.userFollowers as follower}
-								<a href={`/users/${follower.id}`} class="flex items-center gap-2">
-									<img
-										src={follower.avatar
-											? getImageURL(follower.collectionId, follower.id, follower.avatar)
-											: `https://ui-avatars.com/api/?name=${follower.username}&background=random`}
-										alt={follower.username}
-										class="h-10 w-10 rounded-full object-cover"
-									/>
-									<div class="text-sm font-thin">{follower.username}</div>
-								</a>
-							{/each}
-						</div>
-					</Drawer>
+						{/snippet}
 
-					<Drawer
-						title="following"
-						description={`${data.userProfile.username} is following ${data.userFollowers.length} ${data.userFollowers.length === 1 ? 'user' : 'users'}`}
-					>
-						<div slot="trigger">
-							<div>{data.userProfile.following.length} following</div>
-						</div>
-						<div class="flex h-full max-h-96 flex-col gap-2 overflow-scroll p-5" slot="content">
-							{#each data.users as follower}
-								{#if data.userProfile.following.includes(follower.id)}
+						{#snippet content()}
+							<div class="flex h-full max-h-96 flex-col gap-2 overflow-scroll p-5">
+								{#each data.userFollowers as follower}
 									<a href={`/users/${follower.id}`} class="flex items-center gap-2">
 										<img
 											src={follower.avatar
@@ -173,11 +156,46 @@
 											alt={follower.username}
 											class="h-10 w-10 rounded-full object-cover"
 										/>
-										<div class="text-sm font-thin lowercase">{follower.username}</div>
+										<div class="text-sm font-thin">{follower.username}</div>
 									</a>
-								{/if}
-							{/each}
-						</div>
+								{/each}
+							</div>
+						{/snippet}
+					</Drawer>
+
+					<Drawer>
+						{#snippet title()}
+							following
+						{/snippet}
+
+						{#snippet description()}
+							{`${data.userProfile.username} is following ${data.userFollowers.length} ${data.userFollowers.length === 1 ? 'user' : 'users'}`}
+						{/snippet}
+
+						{#snippet trigger()}
+							<div>
+								{data.userProfile.following.length} following
+							</div>
+						{/snippet}
+
+						{#snippet content()}
+							<div class="flex h-full max-h-96 flex-col gap-2 overflow-scroll p-5">
+								{#each data.users as follower}
+									{#if data.userProfile.following.includes(follower.id)}
+										<a href={`/users/${follower.id}`} class="flex items-center gap-2">
+											<img
+												src={follower.avatar
+													? getImageURL(follower.collectionId, follower.id, follower.avatar)
+													: `https://ui-avatars.com/api/?name=${follower.username}&background=random`}
+												alt={follower.username}
+												class="h-10 w-10 rounded-full object-cover"
+											/>
+											<div class="text-sm font-thin lowercase">{follower.username}</div>
+										</a>
+									{/if}
+								{/each}
+							</div>
+						{/snippet}
 					</Drawer>
 				</div>
 			</div>

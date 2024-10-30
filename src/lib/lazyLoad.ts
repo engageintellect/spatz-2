@@ -15,8 +15,8 @@ export function lazyLoad(node: HTMLElement) {
 					// Apply the GSAP animation
 					gsap.fromTo(
 						node,
-						{ opacity: 0, y: 50 }, // Start state
-						{ opacity: 1, scale: 1, y: 0, duration: 1, ease: 'power4.out' } // End state
+						{ opacity: 0, y: 100 }, // Start state
+						{ opacity: 1, scale: 1, y: 0, duration: 0.25, ease: 'power4.out' } // End state
 					);
 
 					observer.unobserve(node);

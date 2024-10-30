@@ -11,10 +11,13 @@
 	import { siteInfo } from '$lib/data.js';
 	import { currentUser } from '$lib/stores/user';
 
-	export let data: { form: any; user: any };
+	interface Props {
+		data: { form: any; user: any };
+	}
 
-	$: currentUser.set(data.user);
-	let isSubmitting = false;
+	let { data }: Props = $props();
+
+	let isSubmitting = $state(false);
 
 	const form = superForm(data.form, {
 		validators: zodClient(checkoutSchema)
@@ -62,6 +65,7 @@
 	};
 
 	onMount(() => {
+		currentUser.set(data.user);
 		if (typeof window !== 'undefined') {
 			import('gsap').then(({ gsap }) => {
 				import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {

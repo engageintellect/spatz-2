@@ -3,15 +3,20 @@
 	import { onMount } from 'svelte';
 	import { spring, tweened } from 'svelte/motion';
 	import { cn } from '$lib/utils';
-	export let value = 100;
-	export let initial = 0;
-	export let duration = 2000;
 	let num = tweened(initial, {
 		duration: duration,
 		easing: cubicOut
 	});
-	let className: any = '';
-	export { className as class };
+	interface Props { [key: string]: any }
+
+	let {
+		value = 100,
+		initial = 0,
+		duration = 2000,
+		class: className = '',
+		...rest
+	}: Props = $props();
+	
 	onMount(() => {
 		num.set(value);
 	});
@@ -19,7 +24,7 @@
 
 <div
 	class={cn('inline-block  tracking-normal text-black dark:text-white', className)}
-	{...$$restProps}
+	{...rest}
 >
 	{$num.toFixed(0)}
 </div>

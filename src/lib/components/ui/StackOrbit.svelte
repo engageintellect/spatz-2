@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
 	import OrbitingCircles from '$lib/components/magic-ui/OrbitingCircles.svelte';
-	let className: any = '';
-	export { className as class };
+	
 	import Icon from '@iconify/svelte';
+	interface Props {
+		class?: any;
+	}
+
+	let { class: className = '' }: Props = $props();
 </script>
 
 <div class={cn('relative flex h-full w-full items-center justify-center', className)}>

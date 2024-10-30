@@ -1,8 +1,12 @@
 <script lang="ts">
 	import type { PageData } from './$types.js';
-	export let data: PageData;
 	import Form from '$lib/components/ui/Form.svelte';
 	import { siteInfo } from '$lib/data.js';
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 </script>
 
 <svelte:head>

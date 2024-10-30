@@ -2,7 +2,11 @@
 	import Input from '$lib/components/ui/Input.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
-	export let form;
+	interface Props {
+		form: any;
+	}
+
+	let { form }: Props = $props();
 </script>
 
 <div class="flex h-full w-full flex-col">

@@ -13,27 +13,35 @@
 	import { gsap } from 'gsap';
 	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
 
-	export let data: any;
+	interface Props {
+		data: any;
+	}
 
-	let hidden = true;
+	let { data }: Props = $props();
 
-	let filter = ''; // Add a filter variable
-	let showScrollToTop = false;
+	let hidden = $state(true);
 
-	$: $currentUser = data.user;
+	let filter = $state(''); // Add a filter variable
+	let showScrollToTop = $state(false);
 
-	let sortOption = 'all'; // Default sort option
+	$effect(() => {
+		$currentUser = data.user;
+	});
+
+	let sortOption = $state('all'); // Default sort option
 
 	// Reactive block to handle filtering users based on filter text and sort option
-	$: filteredUsers = (() => {
-		let result = data.users.filter((user: any) =>
-			user.username.toLowerCase().includes(filter.toLowerCase())
-		);
-		if (sortOption === 'following') {
-			result = result.filter((user: any) => $currentUser.following.includes(user.id));
-		}
-		return result;
-	})();
+	let filteredUsers = $derived(
+		(() => {
+			let result = data.users.filter((user: any) =>
+				user.username.toLowerCase().includes(filter.toLowerCase())
+			);
+			if (sortOption === 'following') {
+				result = result.filter((user: any) => $currentUser.following.includes(user.id));
+			}
+			return result;
+		})()
+	);
 
 	const handleScroll = () => {
 		const shouldShow = window.scrollY > 100;
@@ -155,7 +163,7 @@
 
 	<div class={`animate-item`}>
 		<div class="bg-base-100 mx-auto h-full w-full">
-			<h1 class="flex items-center gap-2 text-7xl font-bold text-primary">
+			<h1 class="flex items-center gap-2 text-6xl font-bold text-primary">
 				<span class="animate-user">user</span>
 				<span class="animate-db font-thin text-primary/50">db</span>
 			</h1>

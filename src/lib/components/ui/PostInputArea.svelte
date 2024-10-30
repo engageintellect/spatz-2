@@ -1,19 +1,4 @@
 <script lang="ts">
-	export let value = '';
-	export let avatar;
-	export let userId;
-	export let toastSuccess;
-	export let toastError;
-	export let action;
-	export let placeholder = '';
-	export let id: any;
-	export let disabled = false;
-	export let required = false;
-	export let errors: any;
-	export let isSubmitting = false;
-	export let recordId: string | undefined = undefined; // Type can be string or undefined
-	export let postId: string | undefined = undefined; // Type can be string or undefined
-
 	import { toast } from 'svelte-sonner';
 	import { enhance, applyAction } from '$app/forms';
 	import { onMount, tick } from 'svelte';
@@ -22,8 +7,42 @@
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 
+	interface Props {
+		value?: string;
+		avatar: any;
+		userId: any;
+		toastSuccess: any;
+		toastError: any;
+		action: any;
+		placeholder?: string;
+		id: any;
+		disabled?: boolean;
+		required?: boolean;
+		errors: any;
+		isSubmitting?: boolean;
+		recordId?: string | undefined;
+		postId?: string | undefined;
+	}
+
+	let {
+		value = $bindable(''),
+		avatar,
+		userId,
+		toastSuccess,
+		toastError,
+		action,
+		placeholder = '',
+		id,
+		disabled = false,
+		required = false,
+		errors,
+		isSubmitting = $bindable(false),
+		recordId = undefined,
+		postId = undefined
+	}: Props = $props();
+
 	let loading = false;
-	let formElement: HTMLFormElement;
+	let formElement: HTMLFormElement | null = null; // Initialize with null to allow safe assignment
 
 	onMount(() => {
 		gsap.fromTo(
@@ -58,7 +77,10 @@
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.key === 'Enter' && !event.shiftKey) {
 			event.preventDefault(); // Prevent adding a new line
-			formElement.requestSubmit(); // Trigger form submission
+			// Ensure formElement exists before submitting
+			if (formElement) {
+				formElement.requestSubmit(); // Trigger form submission
+			}
 		}
 	}
 </script>
@@ -123,9 +145,7 @@
 				<div class="flex w-full gap-2 rounded-lg duration-300">
 					<div class="animate-avatar flex flex-col">
 						<a href={`/users/${userId}`}>
-							<div
-								class="transition-scale h-12 w-12 duration-300 hover:scale-[102%] md:h-16 md:w-16"
-							>
+							<div class="transition-scale h-12 w-12 duration-300 hover:scale-105 md:h-16 md:w-16">
 								<img
 									src={avatar}
 									class="h-full w-full rounded-full object-cover"
@@ -143,8 +163,8 @@
 						{id}
 						name={id}
 						bind:value
-						on:input={autoResize}
-						on:keydown={handleKeydown}
+						oninput={autoResize}
+						onkeydown={handleKeydown}
 						style="min-height: 3rem; max-height: 120px;"
 					></textarea>
 

@@ -69,7 +69,7 @@
 							<button
 								type="button"
 								class="w-full text-left"
-								on:click={() =>
+								onclick={() =>
 									copyToClipboard('git clone https://github.com/engageintellect/spatz')}
 							>
 								$ git clone https://github.com/engageintellect/spatz
@@ -80,7 +80,7 @@
 							<button
 								type="button"
 								class="w-full text-left"
-								on:click={() => copyToClipboard('cp .env.example .env.local')}
+								onclick={() => copyToClipboard('cp .env.example .env.local')}
 							>
 								$ cp .env.example .env.local
 							</button>
@@ -91,7 +91,7 @@
 							<button
 								type="button"
 								class="w-full text-left"
-								on:click={() => copyToClipboard('pnpm i && pnpm run dev --host')}
+								onclick={() => copyToClipboard('pnpm i && pnpm run dev --host')}
 							>
 								<div class="flex flex-col gap-2">
 									<div>$ pnpm i && pnpm run dev --host</div>
@@ -123,7 +123,7 @@
 							<button
 								type="button"
 								class="w-full whitespace-nowrap text-left"
-								on:click={() =>
+								onclick={() =>
 									copyToClipboard(
 										'wget https://github.com/pocketbase/pocketbase/releases/download/v0.22.9/pocketbase_0.22.9_linux_amd64.zip'
 									)}
@@ -138,7 +138,7 @@
 							<button
 								type="button"
 								class="w-full whitespace-nowrap text-left"
-								on:click={() =>
+								onclick={() =>
 									copyToClipboard(
 										'wget https://github.com/pocketbase/pocketbase/releases/download/v0.22.9/pocketbase_0.22.9_linux_amd64.zip'
 									)}
@@ -153,7 +153,7 @@
 							<button
 								type="button"
 								class="w-full text-left"
-								on:click={() => copyToClipboard('unzip pocketbase_0.22.9_linux_amd64.zip')}
+								onclick={() => copyToClipboard('unzip pocketbase_0.22.9_linux_amd64.zip')}
 							>
 								$ unzip pocketbase_0.22.9_linux_amd64.zip
 							</button>
@@ -165,7 +165,7 @@
 						<button
 							type="button"
 							class="w-full text-left"
-							on:click={() => copyToClipboard('./pocketbase serve --http="0.0.0.0:8090"')}
+							onclick={() => copyToClipboard('./pocketbase serve --http="0.0.0.0:8090"')}
 						>
 							$ ./pocketbase serve --http="0.0.0.0:8090"
 						</button>

@@ -10,8 +10,8 @@
 	import { siteInfo } from '$lib/data';
 	import { goBack } from '$lib/utils';
 
-	let showModal = false;
-	let modalImageSrc = '';
+	let showModal = $state(false);
+	let modalImageSrc = $state('');
 
 	function openModal(src: any) {
 		modalImageSrc = src;
@@ -40,7 +40,7 @@
 		});
 	});
 
-	let searchFiler = '';
+	let searchFiler = $state('');
 </script>
 
 <svelte:head>

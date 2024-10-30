@@ -1,7 +1,6 @@
 <script lang="ts">
 	import heroImage from '$lib/assets/images/svelteHero.png?enhanced';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import Icon from '@iconify/svelte';
 	import WordsPullUp from '$lib/components/magic-ui/WordsPullUp.svelte';
@@ -13,9 +12,9 @@
 		}
 	}
 
-	let heroHidden = true;
+	let heroHidden = $state(true);
 
-	onMount(() => {
+	$effect(() => {
 		gsap
 			.timeline({
 				onStart: () => {
@@ -106,10 +105,16 @@
 				<div class="animate-subtitle mt-5 text-xl font-thin text-muted-foreground lg:text-2xl">
 					<div class="font-base text-orange-500">The ultimate Sveltekit boilerplate</div>
 					<div>this time with svelte-animations, superforms, stripe, and shadcn.</div>
+					<div class="mt-2 text-sm font-thin text-muted-foreground">
+						an updated version of <a
+							href="https://spatz.engage-dev.com"
+							class="text-foreground underline">spatz</a
+						>
+					</div>
 				</div>
 			</div>
 
-			<div class="animate-buttons mx-auto mt-10 flex w-full items-center gap-2 md:max-w-lg">
+			<div class="animate-buttons mx-auto mt-5 flex w-full items-center gap-2 md:max-w-lg">
 				<a href="/auth/register" class="group/bookingsButton w-full">
 					<Button size="lg" class="flex w-full items-center gap-2">
 						<div class="text-lg lowercase">get started</div>
@@ -155,7 +160,7 @@
 	</div>
 	<div id="anchorLink" class="group/scrollDownButton mt-5 hidden w-full justify-center md:flex">
 		<button
-			on:click={scrollToAnchor}
+			onclick={scrollToAnchor}
 			class="transition-all duration-300 md:group-hover/scrollDownButton:scale-[102%]"
 			aria-label="Scroll Down"
 		>

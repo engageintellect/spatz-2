@@ -7,14 +7,17 @@
 	import { toast } from 'svelte-sonner';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { currentUser } from '$lib/stores/user';
+	import { onMount } from 'svelte';
 
-	$: currentUser.set(data.user);
+	interface Props {
+		data: any;
+		form: any;
+	}
 
-	export let data;
-	export let form;
-	let loading: any;
+	let { data, form }: Props = $props();
+	let loading: any = $state();
+	let hidden: boolean = $state(true);
 
-	$: loading = false;
 	const showPreview = (event: any) => {
 		const target = event.target;
 		const files = target.files;
@@ -46,9 +49,14 @@
 			loading = false;
 		};
 	};
+	onMount(() => {
+		currentUser.set(data.user);
+		loading = false;
+		hidden = false;
+	});
 </script>
 
-<div class="flex h-full w-full flex-col">
+<div class={`${hidden ? 'opacity-0' : ''} flex h-full w-full flex-col`}>
 	<form
 		action="?/updateProfile"
 		method="POST"
@@ -102,7 +110,7 @@
 				value=""
 				accept="image/*"
 				hidden
-				on:change={showPreview}
+				onchange={showPreview}
 				disabled={loading}
 			/>
 			{#if form?.errors?.avatar}

@@ -106,6 +106,7 @@ pnpm i && pnpm run dev --host
 │   ├── /users
 │   │   └── /[id]
 │   ├── /technologies
+│   ├── /subscriptions
 │   ├── /terms
 │   ├── /ai
 │   │   ├── /chat
@@ -116,11 +117,15 @@ pnpm i && pnpm run dev --host
 │   ├── /donate
 │   │   ├── /cancel (redirect when cancelling stripe payment)
 │   │   └── /success (redirect after successful stripe payment)
+│   ├── /checkout
+│   │   ├── /payment (redirect when cancelling stripe payment)
+│   │   ├── /cancel (redirect when cancelling stripe payment)
+│   │   └── /success (redirect after successful stripe payment)
 │   ├── /api
 │   │   ├── /repo-data (fetch github repository stars)
 │   │   ├── /fortune (fetch random tech founder quote)
 │   │   ├── /chat (OpenAI streaming API)
-│   │   ├── /donate (for stripe payments)
+│   │   └── /donate (for stripe payments)
 │   │__ /auth (Pocketbase auth)
 │   │   ├── /login
 │   │   ├── /register
@@ -129,6 +134,7 @@ pnpm i && pnpm run dev --host
 │   └── /my (user-specific routes)
 │       ├── /profile
 │       ├── /account
+│       ├── /billing (for subscriptions)
 │       └── /settings
 /pocketbase
 ├── pb_schema.json

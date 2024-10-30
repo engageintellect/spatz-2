@@ -1,12 +1,16 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { gsap } from 'gsap';
-	export let imageSrc: string;
-	export let onClose: () => void;
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
+	interface Props {
+		imageSrc: string;
+		onClose: () => void;
+	}
 
-	let modalElement: any;
+	let { imageSrc, onClose }: Props = $props();
+
+	let modalElement: any = $state();
 
 	function closeModal() {
 		gsap.to(modalElement, {
@@ -42,10 +46,10 @@
 >
 	<div
 		class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 p-5"
-		on:click={closeModal}
+		onclick={closeModal}
 		role="button"
 		tabindex="0"
-		on:keydown={(e) => e.key === 'Enter' && closeModal()}
+		onkeydown={(e) => e.key === 'Enter' && closeModal()}
 	>
 		<div
 			bind:this={modalElement}

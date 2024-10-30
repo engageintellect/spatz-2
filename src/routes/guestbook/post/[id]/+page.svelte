@@ -9,31 +9,33 @@
 	import Icon from '@iconify/svelte';
 	import { Badge } from '$lib/components/ui/badge/index.js';
 
-	export let data: {
-		user: App.User;
-		posts: App.Post[];
-		post: App.Post;
-		mentioning: App.Post[];
-		respondingTo: App.Post[];
-	};
-
-	$: currentUser.set(data.user);
-
 	let loading = false;
 	let isSubmitting = false;
-	let showCommentsForm = false;
+	let showCommentsForm = $state(false);
 
-	export let form: {
+	interface Props {
 		data: {
-			content?: string;
-			post?: string;
+			user: App.User;
+			posts: App.Post[];
+			post: App.Post;
+			mentioning: App.Post[];
+			respondingTo: App.Post[];
 		};
-		errors: {
-			content?: string[];
+		form: {
+			data: {
+				content?: string;
+				post?: string;
+			};
+			errors: {
+				content?: string[];
+			};
 		};
-	};
+	}
+
+	let { data, form }: Props = $props();
 
 	onMount(() => {
+		currentUser.set(data.user);
 		if (data.post.mentionedBy.length === 0) {
 			showCommentsForm = true;
 		}

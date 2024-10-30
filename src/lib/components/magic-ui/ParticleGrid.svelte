@@ -1,18 +1,32 @@
 <script lang="ts">
-	import { onMount, afterUpdate } from 'svelte';
+	import { onMount, tick } from 'svelte';
 
-	export let className: string = '';
-	export let quantity: number = 100;
-	export let staticity: number = 50;
-	export let ease: number = 50;
-	export let size: number = 0.4;
-	export let refresh: boolean = true;
-	export let color: string = '#fff';
-	export let vx: number = 0;
-	export let vy: number = 0;
+	interface Props {
+		className?: string;
+		quantity?: number;
+		staticity?: number;
+		ease?: number;
+		size?: number;
+		refresh?: boolean;
+		color?: string;
+		vx?: number;
+		vy?: number;
+	}
 
-	let canvasRef: HTMLCanvasElement;
-	let canvasContainerRef: HTMLDivElement;
+	let {
+		className = '',
+		quantity = 100,
+		staticity = 50,
+		ease = 50,
+		size = 0.4,
+		refresh = true,
+		color = '#fff',
+		vx = 0,
+		vy = 0
+	}: Props = $props();
+
+	let canvasRef: any = $state();
+	let canvasContainerRef: any = $state();
 	let context: CanvasRenderingContext2D | null = null;
 	let circles: any[] = [];
 	let mouse = { x: 0, y: 0 };
@@ -87,7 +101,7 @@
 		}
 	}
 
-	function drawCircle(circle, update = false) {
+	function drawCircle(circle: any, update = false) {
 		if (context) {
 			const { x, y, translateX, translateY, size, alpha } = circle;
 			context.translate(translateX, translateY);
@@ -111,12 +125,12 @@
 		}
 	}
 
-	function remapValue(value, start1, end1, start2, end2) {
+	function remapValue(value: any, start1: any, end1: any, start2: any, end2: any) {
 		let remapped = ((value - start1) * (end2 - start2)) / (end1 - start1) + start2;
 		return remapped > 0 ? remapped : 0;
 	}
 
-	function drawLine(circle1, circle2) {
+	function drawLine(circle1: any, circle2: any) {
 		if (context) {
 			context.beginPath();
 			context.moveTo(circle1.x + circle1.translateX, circle1.y + circle1.translateY);
@@ -211,15 +225,15 @@
 		};
 	});
 
-	afterUpdate(() => {
-		updateColor();
-	});
+	tick();
 
-	$: {
+	updateColor();
+
+	$effect(() => {
 		if (canvasRef) {
 			drawParticles();
 		}
-	}
+	});
 </script>
 
 <div class={className} bind:this={canvasContainerRef} aria-hidden="true">

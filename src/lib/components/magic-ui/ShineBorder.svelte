@@ -3,12 +3,24 @@
 
 	type TColorProp = string | string[];
 
-	export let borderRadius: number = 8;
-	export let borderWidth: number = 1;
-	export let duration: number = 14;
-	export let color: TColorProp = ['#4FF9FF'];
-	let className: string = '';
-	export { className as class };
+	interface Props {
+		borderRadius?: number;
+		borderWidth?: number;
+		duration?: number;
+		color?: TColorProp;
+		class?: string;
+		children?: import('svelte').Snippet;
+	}
+
+	let {
+		borderRadius = 8,
+		borderWidth = 1,
+		duration = 14,
+		color = ['#4FF9FF'],
+		class: className = '',
+		children
+	}: Props = $props();
+	
 </script>
 
 <div
@@ -35,5 +47,5 @@
 		class="before:bg-shine-size before:absolute before:inset-0 before:aspect-square before:size-full before:rounded-[var(--border-radius)] before:p-[var(--border-width)] before:will-change-[background-position] before:content-[''] before:![-webkit-mask-composite:xor] before:[background-image:var(--background-radial-gradient)] before:[background-size:300%_300%] before:![mask-composite:exclude] before:[mask:var(--mask-linear-gradient)] motion-safe:before:animate-[shine-pulse_var(--shine-pulse-duration)_infinite_linear]"
 	></div>
 	<!-- This is Default Slot -->
-	<slot>Default</slot>
+	{#if children}{@render children()}{:else}Default{/if}
 </div>

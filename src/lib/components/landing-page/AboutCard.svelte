@@ -5,14 +5,14 @@
 
 	import { onDestroy, onMount, tick } from 'svelte';
 
-	let theme: any;
+	let theme: any = $state();
 
 	let gsapInstance: any;
 	let ScrollTriggerInstance: any;
-	let imageContainer: HTMLDivElement;
-	let section1Container: HTMLDivElement;
+	let imageContainer: any = $state();
+	let section1Container: any = $state();
 
-	let heroHidden = true;
+	let heroHidden = $state(true);
 	const initializeAnimations = () => {
 		tick();
 		heroHidden = false;

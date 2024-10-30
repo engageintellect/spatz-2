@@ -2,10 +2,19 @@
 	import Icon from '@iconify/svelte';
 	import { cn } from '$lib/utils';
 
-	export let icon: string;
-	export let title: string;
-	export let body: string;
-	export let url: string;
+	interface Props {
+		icon: string;
+		title: string;
+		body: string;
+		url: string;
+	}
+
+	let {
+		icon,
+		title,
+		body,
+		url
+	}: Props = $props();
 </script>
 
 <a
@@ -21,7 +30,7 @@
 	<div class="flex flex-col">
 		<div class="flex items-center gap-2">
 			<Icon class="h-6 w-6 text-gray-500" {icon} />
-			<!-- svelte-ignore a11y-structure -->
+			<!-- svelte-ignore a11y_figcaption_parent -->
 			<figcaption class="text-sm font-medium dark:text-white">
 				{title}
 			</figcaption>

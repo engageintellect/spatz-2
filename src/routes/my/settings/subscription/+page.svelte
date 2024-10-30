@@ -1,34 +1,38 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { invalidateAll } from '$app/navigation';
 	import { enhance } from '$app/forms';
 	import Icon from '@iconify/svelte';
 	import { toast } from 'svelte-sonner';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { currentUser } from '$lib/stores/user';
-	import { goto } from '$app/navigation';
 
-	let isSubmitting = false;
+	let isSubmitting = $state(false);
 
-	$: currentUser.set(data.user);
+	interface Props {
+		data: {
+			user: any;
+			existingSubscriptions: Array<{
+				id: string;
+				status: string;
+				plan: { id: string; amount: number; currency: string; interval: string };
+				current_period_start: number;
+				current_period_end: number;
+				created: number;
+				customer: string;
+				latest_invoice: string;
+			}>;
+		};
+		form: any;
+	}
 
-	export let data: {
-		user: any;
-		existingSubscriptions: Array<{
-			id: string;
-			status: string;
-			plan: { id: string; amount: number; currency: string; interval: string };
-			current_period_start: number;
-			current_period_end: number;
-			created: number;
-			customer: string;
-			latest_invoice: string;
-		}>;
-	};
+	let { data, form }: Props = $props();
+	let loading: any = $state();
 
-	export let form: any;
-	let loading: any;
-
-	$: loading = false;
+	onMount(() => {
+		currentUser.set(data.user);
+		loading = false;
+	});
 </script>
 
 <div class="flex h-full w-full flex-col">
@@ -66,13 +70,15 @@
 					<div class="animate-item">Subscription duration:</div>
 
 					<div class="animate-item mt-2 flex w-fit items-center gap-2 rounded-lg border p-2">
-						<div class="flex flex-col rounded-lg bg-success p-2 text-sm">
+						<div class="flex flex-col rounded-lg bg-success p-2 text-sm text-success-foreground">
 							{new Date(subscription.current_period_start * 1000).toLocaleDateString()}
 						</div>
 
 						<Icon icon="mdi:arrow-right" class="h-5 w-5" />
 
-						<div class="flex flex-col rounded-lg bg-destructive p-2 text-sm">
+						<div
+							class="flex flex-col rounded-lg bg-destructive p-2 text-sm text-destructive-foreground"
+						>
 							{new Date(subscription.current_period_end * 1000).toLocaleDateString()}
 						</div>
 					</div>
@@ -99,9 +105,17 @@
 					isSubmitting = true;
 
 					return async ({ result, update }) => {
-						//console.log('Registration result:', result.data.redirectUrl);
-						await update();
-						window.location.href = result.data.redirectUrl;
+						if (result.type === 'redirect') {
+							// Handle redirect
+							window.location.href = result.location;
+						} else if (result && 'data' in result && result.data?.redirectUrl) {
+							// Ensure data and redirectUrl exist
+							await update();
+							window.location.href = result.data.redirectUrl as string; // Type assertion to ensure TypeScript knows it's a string
+						} else {
+							// Handle unexpected result types or missing data
+							console.error('Unexpected result:', result);
+						}
 						isSubmitting = false;
 					};
 				}}
@@ -109,7 +123,7 @@
 				class="w-full"
 			>
 				<Button
-					class="flex w-fit items-center justify-between gap-2"
+					class="flex w-full items-center justify-between gap-2"
 					variant="default"
 					type="submit"
 				>
@@ -123,7 +137,7 @@
 					class="w-full"
 					method="POST"
 					action="?/cancelSubscription"
-					on:submit={() => (loading = true)}
+					onsubmit={() => (loading = true)}
 					use:enhance={(result) => {
 						console.log('result:', result);
 						loading = false;

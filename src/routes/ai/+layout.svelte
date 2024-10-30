@@ -4,6 +4,11 @@
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	const navigation = [
 		{
@@ -39,7 +44,7 @@
 </script>
 
 <div class="bg-base-100 mx-auto h-full w-full max-w-2xl">
-	<a href="/ai" class="px-2 text-7xl md:px-0">ai</a>
+	<a href="/ai" class="px-2 text-6xl md:px-0">ai</a>
 </div>
 <div
 	class="mx-auto flex h-full w-full max-w-2xl flex-col gap-5 rounded-lg md:flex-row md:gap-10 md:border md:p-5 md:shadow-lg"
@@ -63,7 +68,7 @@
 		</div>
 	</ul>
 	<div class="w-full px-2">
-		<slot />
+		{@render children?.()}
 	</div>
 </div>
 

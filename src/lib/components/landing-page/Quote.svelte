@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { onDestroy, onMount, tick } from 'svelte';
 	import Particles from '$lib/components/magic-ui/Particles.svelte';
-	import Globe from '$lib/components/magic-ui/Globe.svelte';
 	import GlobeSection from '../ui/GlobeSection.svelte';
 
-	let quote: string;
+	let quote: any = $state();
 
 	const fetchQuote = async () => {
 		const response = await fetch('/api/fortune');
@@ -12,7 +11,7 @@
 		quote = data;
 	};
 
-	let theme: any;
+	let theme: any = $state();
 
 	let gsapInstance: any;
 	let ScrollTriggerInstance: any;

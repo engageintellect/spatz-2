@@ -4,7 +4,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 
-	let hidden = true;
+	let hidden = $state(true);
 
 	onMount(() => {
 		hidden = false;

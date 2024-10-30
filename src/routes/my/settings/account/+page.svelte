@@ -6,11 +6,13 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 
-	export let form;
-	export let data;
-	let loading: any;
+	interface Props {
+		form: any;
+		data: any;
+	}
 
-	$: loading = false;
+	let { form, data }: Props = $props();
+	let loading: boolean = $state(false);
 
 	const submitUpdateEmail = () => {
 		loading = true;

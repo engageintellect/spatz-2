@@ -9,8 +9,8 @@
 	import QRCode from 'qrcode';
 
 	let stripePromise: Promise<Stripe | null> | undefined;
-	let amount: number;
-	let btcQrCode: string = ''; // Stores the generated QR code
+	let amount: any = $state();
+	let btcQrCode: string = $state(''); // Stores the generated QR code
 
 	const prices = [1, 5, 10, 20, 50, 100];
 
@@ -88,7 +88,7 @@
 	<main
 		class="mx-auto max-w-lg rounded-lg p-2 shadow-md transition-all duration-300 md:border md:p-5"
 	>
-		<h1 class="text-5xl font-bold">donate</h1>
+		<h1 class="text-6xl font-bold">donate</h1>
 
 		<div class="mt-10">
 			<p>{@html donationMessage(amount)}</p>

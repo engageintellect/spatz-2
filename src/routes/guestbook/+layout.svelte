@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	let loading = false;
 	function goBack() {
@@ -26,5 +31,5 @@
 		</Button>
 	</div>
 
-	<slot />
+	{@render children?.()}
 </div>

@@ -9,6 +9,9 @@
 	import Avatar from '$lib/components/ui/Avatar.svelte';
 	import { PUBLIC_POCKETBASE_ADMIN } from '$env/static/public';
 	import { currentUser } from '$lib/stores/user';
+	import { Badge } from '$lib/components/ui/badge/index.js';
+
+	export let notifications: any;
 
 	function handleLogout() {
 		pb.authStore.clear();
@@ -24,13 +27,42 @@
 			stagger: 0.1,
 			duration: 2.25
 		});
+
+		gsap.fromTo(
+			'.dropdown-menu-notifications',
+			{
+				// Starting state
+				opacity: 0,
+				y: -50 // Optional: adjust y-position for slide-in effect
+			},
+			{
+				// Ending state
+				opacity: 1,
+				y: 0, // Return to original position
+				delay: 1,
+				stagger: 0.1,
+				duration: 0.25
+			}
+		);
 	});
 </script>
 
 <DropdownMenu.Root>
 	<DropdownMenu.Trigger asChild let:builder>
 		<Button builders={[builder]} class="rounded-full p-0">
-			<Avatar />
+			<div class="relative">
+				<Avatar />
+
+				{#if notifications > 0}
+					<div
+						class="dropdown-menu-notifications absolute -bottom-1 right-0 rounded-full border border-2 border-background text-xs"
+					>
+						<Badge size="sm" variant="destructive" class="px-1 py-0 text-xs text-white"
+							>{notifications}</Badge
+						>
+					</div>
+				{/if}
+			</div>
 		</Button>
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Content class="mt-3 w-fit min-w-52 max-w-64 bg-background" align="end">
@@ -58,6 +90,25 @@
 		<!-- <DropdownMenu.Label>Settings</DropdownMenu.Label> -->
 
 		<DropdownMenu.Group>
+			<DropdownMenu.Item>
+				<a
+					href={`/notifications/${$currentUser.id}`}
+					data-sveltekit-preload-data="hover"
+					class="flex w-full items-center"
+				>
+					<Icon icon="material-symbols:notifications" class="mr-2 h-4 w-4" />
+					<span>Notifications</span>
+				</a>
+
+				{#if notifications > 0}
+					<DropdownMenu.Shortcut
+						><Badge size="sm" variant="destructive" class=" text-xs text-white"
+							>{notifications}</Badge
+						></DropdownMenu.Shortcut
+					>
+				{/if}
+			</DropdownMenu.Item>
+
 			<DropdownMenu.Item>
 				<a
 					href="/my/settings/profile"
@@ -202,7 +253,7 @@
 				class="flex w-full py-2"
 				method="POST"
 				action="/auth/logout"
-				on:submit={handleLogout}
+				onsubmit={handleLogout}
 				aria-label="Logout"
 			>
 				<button type="submit" class="flex w-full items-center">

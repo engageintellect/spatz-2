@@ -1,8 +1,5 @@
 <script lang="ts">
 	import { PUBLIC_REPOSITORY_URL } from '$env/static/public';
-	export let stars;
-	export let issues;
-	export let forks;
 	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
 	import Animate from '$lib/components/ui/Animate.svelte';
@@ -10,6 +7,13 @@
 	import BlurIn from '$lib/components/magic-ui/BlurIn.svelte';
 
 	import Icon from '@iconify/svelte';
+	interface Props {
+		stars: any;
+		issues: any;
+		forks: any;
+	}
+
+	let { stars, issues, forks }: Props = $props();
 	onMount(() => {
 		// Animate "stack" on mount
 

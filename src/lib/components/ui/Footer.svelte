@@ -5,7 +5,7 @@
 	const currentYear = new Date().getFullYear();
 	import { siteInfo } from '$lib/data';
 
-	let showFooter = false;
+	let showFooter = $state(false);
 
 	onMount(() => {
 		setTimeout(() => {
