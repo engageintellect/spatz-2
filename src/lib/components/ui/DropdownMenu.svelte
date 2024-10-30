@@ -27,6 +27,23 @@
 			stagger: 0.1,
 			duration: 2.25
 		});
+
+		gsap.fromTo(
+			'.dropdown-menu-notifications',
+			{
+				// Starting state
+				opacity: 0,
+				y: -50 // Optional: adjust y-position for slide-in effect
+			},
+			{
+				// Ending state
+				opacity: 1,
+				y: 0, // Return to original position
+				delay: 1,
+				stagger: 0.1,
+				duration: 0.25
+			}
+		);
 	});
 </script>
 
@@ -37,7 +54,9 @@
 				<Avatar />
 
 				{#if notifications > 0}
-					<div class="absolute bottom-0 right-0 rounded-full text-xs">
+					<div
+						class="dropdown-menu-notifications absolute -bottom-1 right-0 rounded-full border border-2 border-background text-xs"
+					>
 						<Badge size="sm" variant="destructive" class="px-1 py-0 text-xs text-white"
 							>{notifications}</Badge
 						>

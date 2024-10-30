@@ -1,9 +1,8 @@
 import type { PageServerLoad } from './$types';
-import { redirect } from '@sveltejs/kit';
+import { redirect, error, fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
-import { fail, error } from '@sveltejs/kit';
 import { validateData } from '$lib/utils';
-import { deleteNotificationSchema, followUserSchema } from '$lib/schema';
+import { deleteNotificationSchema } from '$lib/schema';
 
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const { id } = params;
@@ -11,99 +10,106 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		throw redirect(303, '/auth/login');
 	}
 
-	const user = await locals.pb.collection('users').getOne(id, {});
+	try {
+		console.log('Starting user data fetch...');
 
-	// GET POSTS
-	const posts = await locals.pb.collection('posts').getFullList({
-		filter: `author = "${id}"`, // Use single equals sign (=) and properly quote the id
-		sort: '-created'
-	});
+		const [userResult, postsResult, followersResult, notificationsResult] =
+			await Promise.allSettled([
+				locals.pb.collection('users').getOne(id, { autoCancel: false }),
+				locals.pb
+					.collection('posts')
+					.getFullList({ filter: `author = "${id}"`, sort: '-created', autoCancel: false }),
+				locals.pb
+					.collection('users')
+					.getFullList({ filter: `following ~ "${id}"`, autoCancel: false }),
+				locals.pb
+					.collection('notifications')
+					.getFullList({ filter: `user ~ "${id}"`, sort: '-created', autoCancel: false })
+			]);
 
-	// GET USERS
-	const users = await locals.pb.collection('users').getFullList({
-		sort: '-created'
-	});
+		if (userResult.status === 'rejected') throw error(500, 'User data failed to load');
+		const user = userResult.value;
 
-	// TRANSFORM POSTS
-	const transformedPosts = posts.map((post) => {
-		// Replace the comment IDs with the actual comment objects and include author details
-		// Add author's username and avatar to each post
-		return {
+		const posts = postsResult.status === 'fulfilled' ? postsResult.value : [];
+		const followers = followersResult.status === 'fulfilled' ? followersResult.value : [];
+		const notifications =
+			notificationsResult.status === 'fulfilled' ? notificationsResult.value : [];
+
+		const transformedPosts = posts.map((post) => ({
 			...post,
-			username: users.find((user) => user.id === post.author)?.username,
-			avatar: users.find((user) => user.id === post.author)?.avatar
-		};
-	});
+			username: user.username,
+			avatar: user.avatar
+		}));
 
-	// GET USER FOLLOWERS
-	const followers = await locals.pb.collection('users').getFullList({
-		filter: `following ~ "${id}"`
-	});
-
-	// TRANSFORM USER NOTIFICATIONS
-	const notifications = await locals.pb.collection('notifications').getFullList({
-		filter: `user ~ "${id}"`,
-		sort: '-created'
-	});
-
-	//console.log('notifications:', notifications);
-
-	const transformedNotifications = notifications.map((notification) => {
-		return {
+		const transformedNotifications = notifications.map((notification) => ({
 			...notification,
-			username: users.find((user) => user.id === notification.referencedUser)?.username,
-			userAvatar: users.find((user) => user.id === notification.referencedUser)?.avatar
+			username: followers.find((follower) => follower.id === notification.referencedUser)?.username,
+			userAvatar: followers.find((follower) => follower.id === notification.referencedUser)?.avatar
+		}));
+
+		return {
+			userProfile: user,
+			userPosts: transformedPosts,
+			userFollowers: followers,
+			notifications: transformedNotifications
 		};
-	});
-
-	//console.log('userprofile', user);
-	//console.log('transformedNotifications:', transformedNotifications);
-
-	return {
-		userProfile: user,
-		userPosts: transformedPosts,
-		userFollowers: followers,
-		notifications: transformedNotifications,
-		users: users
-	};
+	} catch (err) {
+		console.error('Error loading data:', err);
+		throw error(500, 'Failed to load user profile data');
+	}
 };
 
-// Define the actions
 export const actions: Actions = {
 	deleteNotification: async ({ request, locals }) => {
 		try {
-			// Parse and validate the postId
 			const { formData, errors } = await validateData(
 				await request.formData(),
 				deleteNotificationSchema
 			);
+			if (errors) return fail(400, { errors });
 
 			const notificationId = formData.notificationId as string;
 			deleteNotificationSchema.parse({ notificationId });
 
-			// Ensure the notification exists
-			const notification = await locals.pb.collection('notifications').getOne(notificationId);
+			const notification = await locals.pb
+				.collection('notifications')
+				.getOne(notificationId, { autoCancel: false });
+			if (notification.user !== locals.pb.authStore.model?.id) throw error(403, 'Unauthorized');
 
-			// Ensure the user is authorized to delete the post
-			if (notification.user !== locals.pb.authStore.model?.id) {
-				throw error(403, 'Unauthorized');
+			await locals.pb.collection('notifications').delete(notificationId, { autoCancel: false });
+			return { success: true };
+		} catch (err) {
+			console.error('Error in deleteNotification action:', err);
+			return fail(500, { error: 'Error deleting notification' });
+		}
+	},
+
+	deleteAllNotifications: async ({ locals }) => {
+		try {
+			console.log('Fetching all notifications for the current user...');
+			const currentUserId = locals.pb.authStore.model?.id;
+
+			if (!currentUserId) throw error(403, 'User not authenticated');
+
+			// Fetch all notifications for the current user
+			const userNotifications = await locals.pb.collection('notifications').getFullList({
+				filter: `user = "${currentUserId}"`,
+				autoCancel: false
+			});
+
+			console.log(`Found ${userNotifications.length} notifications to delete.`);
+
+			// Delete each notification in a loop
+			for (const notification of userNotifications) {
+				await locals.pb.collection('notifications').delete(notification.id, { autoCancel: false });
+				console.log(`Deleted notification with ID: ${notification.id}`);
 			}
 
-			// Recursive function to delete a post and all posts mentioning it
-			const deleteNotification = async (notificationId: string) => {
-				await locals.pb.collection('notifications').delete(notificationId);
-			};
-
-			await deleteNotification(notificationId);
-
-			return {
-				success: true
-			};
+			console.log('All notifications deleted.');
+			return { success: true };
 		} catch (err) {
-			console.error('Error deleting post:', err);
-			return {
-				error: 'Error deleting post'
-			};
+			console.error('Error in deleteAllNotifications action:', err);
+			return fail(500, { error: 'Error deleting all notifications' });
 		}
 	}
 };
