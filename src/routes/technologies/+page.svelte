@@ -50,7 +50,7 @@
 
 <div>
 	<div class="flex items-center justify-between gap-5">
-		<Button on:click={goBack} variant="outline" class="flex items-center gap-2">
+		<Button onclick={goBack} variant="outline" class="flex items-center gap-2">
 			<Icon icon="mdi:arrow-left" class="" />
 			<div class="lowercase">Back</div>
 		</Button>

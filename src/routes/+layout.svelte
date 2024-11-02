@@ -9,6 +9,8 @@
 	import type { PageData } from './$types';
 	import { currentUser } from '$lib/stores/user';
 	import { toast } from '$lib/stores/toast';
+	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+	import AppSidebar from '$lib/components/ui/AppSidebar.svelte';
 
 	export let data: PageData;
 
@@ -38,22 +40,26 @@
 
 {#if $currentUser}
 	<Command />
+
+	<Sidebar.Provider>
+		<div class="z-[999]"></div>
+		<div class="flex min-h-[calc(100svh)] w-full flex-col md:min-h-screen">
+			<Nav notifications={data.globalNotifications.length} />
+
+			<main class="mx-auto my-2 w-full max-w-5xl flex-grow overflow-x-clip px-2 md:my-5">
+				<slot />
+			</main>
+			<Footer />
+		</div>
+		<AppSidebar notifications={data.globalNotifications.length} />
+	</Sidebar.Provider>
+{:else}
+	<div class="flex min-h-[calc(100svh)] w-full flex-col md:min-h-screen">
+		<Nav notifications={data.globalNotifications.length} />
+
+		<main class="mx-auto my-2 w-full max-w-5xl flex-grow overflow-x-clip px-2 md:my-5">
+			<slot />
+		</main>
+		<Footer />
+	</div>
 {/if}
-
-<div class="flex min-h-[calc(100svh)] flex-col md:min-h-screen">
-	<Nav notifications={data.globalNotifications.length} />
-	<main class="mx-auto my-2 w-full max-w-5xl flex-grow overflow-x-clip px-2 md:my-5">
-		<slot />
-	</main>
-	<Footer />
-</div>
-
-<style>
-	html,
-	body {
-		height: 100%;
-		margin: 0;
-		padding: 0;
-		overflow-x: hidden;
-	}
-</style>

@@ -40,7 +40,7 @@
 <div class={` ${hidden ? 'opacity-0' : ''} mx-auto max-w-2xl`}>
 	<div class="flex justify-between">
 		<Button
-			on:click={() => window.history.back()}
+			onclick={() => window.history.back()}
 			size="sm"
 			variant="outline"
 			class="group/backButton backButton flex items-center gap-2"
@@ -71,7 +71,7 @@
 									<Button
 										variant="destructive"
 										size="sm"
-										on:click={() => (dialogOpen = true)}
+										onclick={() => (dialogOpen = true)}
 										class="group/deleteButton transition-scale flex scale-[0.80] items-center gap-2 duration-300 active:scale-[0.78]"
 									>
 										<div>clear all</div>
@@ -103,6 +103,7 @@
 													}
 
 													await update();
+													dialogOpen = false;
 
 													isDeleting = false;
 												};
@@ -111,17 +112,14 @@
 											method="POST"
 										>
 											<div class="mt-5 flex items-center justify-between gap-2">
-												<Button
-													type="submit"
-													variant="destructive"
-													on:click={() => (dialogOpen = false)}
-													class="w-full text-white">delete</Button
+												<Button type="submit" variant="destructive" class="w-full text-white"
+													>delete</Button
 												>
 
 												<Button
 													variant="default"
 													type="button"
-													on:click={() => (dialogOpen = false)}
+													onclick={() => (dialogOpen = false)}
 													class="w-full">cancel</Button
 												>
 											</div>

@@ -149,7 +149,7 @@
 
 <div class={`${hidden ? 'opacity-0' : ''} mx-auto max-w-2xl`}>
 	<Button
-		on:click={() => window.history.back()}
+		onclick={() => window.history.back()}
 		size="sm"
 		variant="outline"
 		class="group/backButton backButton flex items-center gap-2"
@@ -191,7 +191,7 @@
 					<Button
 						size="sm"
 						variant={sortOption === 'all' ? 'default' : 'ghost'}
-						on:click={() => (sortOption = 'all')}
+						onclick={() => (sortOption = 'all')}
 						class="flex items-center gap-2 text-xs transition-all duration-300"
 					>
 						<div>all</div>
@@ -201,7 +201,7 @@
 					<Button
 						size="sm"
 						variant={sortOption === 'following' ? 'default' : 'ghost'}
-						on:click={() => (sortOption = 'following')}
+						onclick={() => (sortOption = 'following')}
 						class="flex items-center gap-2 text-xs transition-all duration-300"
 					>
 						<div>following</div>
@@ -216,7 +216,7 @@
 			{#each filteredUsers as user}
 				<a href={`/users/${user.id}`} class="user-wrapper group/userCard">
 					<div
-						class={`rounded-lg border p-3 shadow transition-all duration-300 md:hover:border-muted-foreground`}
+						class={`rounded-lg border p-3 transition-all duration-300 md:hover:border-muted-foreground/50`}
 					>
 						<div class="flex flex-row items-center gap-2">
 							<div>

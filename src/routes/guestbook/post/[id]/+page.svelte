@@ -141,7 +141,7 @@
 			<span class="text-xl font-thin">comments: {data.post.mentionedBy.length}</span>
 		</div>
 
-		<Button variant="ghost" size="sm" on:click={() => (showCommentsForm = !showCommentsForm)}>
+		<Button variant="ghost" size="sm" onclick={() => (showCommentsForm = !showCommentsForm)}>
 			{#if showCommentsForm}
 				<div class="flex items-center gap-1">
 					<span>hide input</span>

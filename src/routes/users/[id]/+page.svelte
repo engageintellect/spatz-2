@@ -66,7 +66,7 @@
 <div class={` ${hidden ? 'opacity-0' : ''} mx-auto max-w-2xl`}>
 	<div class="flex justify-between">
 		<Button
-			on:click={() => window.history.back()}
+			onclick={() => window.history.back()}
 			size="sm"
 			variant="outline"
 			class="group/backButton backButton flex items-center gap-2"

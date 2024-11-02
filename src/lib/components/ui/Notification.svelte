@@ -94,7 +94,7 @@
 										<Button
 											variant="ghost"
 											size="sm"
-											on:click={() => (dialogOpen = true)}
+											onclick={() => (dialogOpen = true)}
 											class="group/deleteButton flex scale-[0.75] items-center active:scale-[0.70]"
 										>
 											<Icon
@@ -124,6 +124,7 @@
 															toast.error('Failed to delete notification.', {});
 														}
 
+														dialogOpen = false;
 														await update();
 
 														isDeleting = false;
@@ -141,17 +142,14 @@
 												/>
 
 												<div class="mt-5 flex items-center justify-between gap-2">
-													<Button
-														type="submit"
-														variant="destructive"
-														on:click={() => (dialogOpen = false)}
-														class="w-full text-white">delete</Button
+													<Button type="submit" variant="destructive" class="w-full text-white"
+														>delete</Button
 													>
 
 													<Button
 														variant="default"
 														type="button"
-														on:click={() => (dialogOpen = false)}
+														onclick={() => (dialogOpen = false)}
 														class="w-full">cancel</Button
 													>
 												</div>

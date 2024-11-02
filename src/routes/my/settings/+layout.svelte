@@ -39,7 +39,7 @@
 	});
 </script>
 
-<div class="animate-item mx-auto h-full w-full max-w-2xl">
+<div class="animate-item mx-auto w-full max-w-2xl">
 	<!-- <div class="text-7xl">settings</div> -->
 </div>
 <div

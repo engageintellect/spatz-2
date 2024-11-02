@@ -101,7 +101,7 @@
 					placeholder="Enter amount"
 					min="1"
 				/>
-				<Button on:click={handleDonate} class="group/donateButton">
+				<Button onclick={handleDonate} class="group/donateButton">
 					<div class="flex items-center gap-2">
 						<span>Donate</span>
 						<Icon
@@ -118,7 +118,7 @@
 				<Button
 					variant="success"
 					class="donate-button transition-transform md:hover:scale-105"
-					on:click={() => (amount = price)}
+					onclick={() => (amount = price)}
 				>
 					$ {price}
 				</Button>

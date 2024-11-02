@@ -61,6 +61,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 
 export const actions: Actions = {
 	deleteNotification: async ({ request, locals }) => {
+		console.log('Deleting notification...');
 		try {
 			const { formData, errors } = await validateData(
 				await request.formData(),

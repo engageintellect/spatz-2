@@ -217,7 +217,7 @@
 							<Button
 								size="sm"
 								variant={sortOption === 'date' ? 'default' : 'ghost'}
-								on:click={() => (sortOption = 'date')}
+								onclick={() => (sortOption = 'date')}
 								class="text-xs transition-all duration-300"
 							>
 								new
@@ -226,7 +226,7 @@
 							<Button
 								size="sm"
 								variant={sortOption === 'likes' ? 'default' : 'ghost'}
-								on:click={() => (sortOption = 'likes')}
+								onclick={() => (sortOption = 'likes')}
 								class="text-xs transition-all duration-300"
 							>
 								likes
@@ -236,7 +236,7 @@
 							<Button
 								size="sm"
 								variant={sortOption === 'following' ? 'default' : 'ghost'}
-								on:click={() => (sortOption = 'following')}
+								onclick={() => (sortOption = 'following')}
 								class="text-xs transition-all duration-300"
 							>
 								feed
