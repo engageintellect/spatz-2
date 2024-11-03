@@ -1,4 +1,4 @@
-<script lang="ts" module>
+<script lang="ts" context="module">
 	import { tv, type VariantProps } from 'tailwind-variants';
 
 	export const sidebarMenuButtonVariants = tv({

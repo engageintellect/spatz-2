@@ -172,7 +172,7 @@
 		<!-- Add an input field to filter by username -->
 		<div class="sticky top-[57px] z-50 mb-5 bg-background pt-5">
 			<div
-				class="animate-input mb-5 flex items-center rounded-lg border bg-background bg-background px-2 focus-within:ring-1 focus-within:ring-foreground focus-within:ring-offset-1"
+				class="animate-input mb-5 flex items-center rounded-lg border bg-background bg-background px-2 focus-within:ring-0 focus-within:ring-offset-1"
 			>
 				<Icon icon={`material-symbols:search`} class="h-7 w-7" />
 				<Input

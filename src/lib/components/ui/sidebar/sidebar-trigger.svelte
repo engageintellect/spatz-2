@@ -15,7 +15,7 @@
 		class: className,
 		onclick,
 		...restProps
-	}: ComponentProps<typeof Button> & {
+	}: any & {
 		onclick?: (e: MouseEvent) => void;
 	} = $props();
 </script>
@@ -36,7 +36,7 @@
 		<Button class="rounded-full p-0">
 			<div class="relative">
 				<Avatar />
-				{#if 10 > 9}
+				{#if notifications > 0}
 					<div
 						class="dropdown-menu-notifications absolute -bottom-1 right-0 rounded-full border border-2 border-background text-xs"
 					>
@@ -47,6 +47,12 @@
 				{/if}
 			</div>
 		</Button>
+
+		<!--
+		<Button variant="ghost">
+			<Icon icon="mynaui:sidebar" class="h-7 w-7" />
+		</Button>
+-->
 	{:else}
 		<Button variant="ghost">
 			<Icon icon="mynaui:sidebar" class="h-7 w-7" />

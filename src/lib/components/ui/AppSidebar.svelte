@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_POCKETBASE_ADMIN } from '$env/static/public';
-	import { PUBLIC_REPOSITORY_URL } from '$env/static/public';
+	import { PUBLIC_POCKETBASE_ADMIN, PUBLIC_REPOSITORY_URL } from '$env/static/public';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import Icon from '@iconify/svelte';
 	import { currentUser } from '$lib/stores/user';
@@ -8,111 +7,49 @@
 	import { Badge } from '$lib/components/ui/badge/index.js';
 	import { pb } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	const { notifications }: any = $props();
 
 	function handleLogout() {
 		pb.authStore.clear();
-		// Clear AI chat messages
-		// chatMessages.set([]);
 		localStorage.removeItem('chatMessages');
 		goto('/');
 	}
-	// Menu items.
+
+	// Menu items
 	const user = [
 		{
 			title: 'Notifications',
 			url: `/notifications/${$currentUser.id}`,
 			icon: 'material-symbols:notifications'
 		},
-		{
-			title: 'Profile',
-			url: '/my/settings/profile',
-			icon: 'mdi:account'
-		},
-
-		{
-			title: 'Account',
-			url: '/my/settings/account',
-			icon: 'mdi:settings'
-		},
-
-		{
-			title: 'Billing',
-			url: '/my/settings/subscription',
-			icon: 'weui:done2-filled'
-		},
-
-		{
-			title: 'Security',
-			url: '/my/settings/security',
-			icon: 'material-symbols:lock-outline'
-		}
+		{ title: 'Profile', url: '/my/settings/profile', icon: 'mdi:account' },
+		{ title: 'Account', url: '/my/settings/account', icon: 'mdi:settings' },
+		{ title: 'Billing', url: '/my/settings/subscription', icon: 'weui:done2-filled' },
+		{ title: 'Security', url: '/my/settings/security', icon: 'material-symbols:lock-outline' }
 	];
 
 	const app = [
-		{
-			title: 'Guestbook',
-			url: '/guestbook',
-			icon: 'ion:chatbox-outline'
-		},
-
-		{
-			title: 'User Directory',
-			url: '/users',
-			icon: 'mdi:account-group-outline'
-		},
-
-		{
-			title: 'AI',
-			url: '/ai',
-			icon: 'tabler:brain'
-		},
-
-		{
-			title: 'PocketBase',
-			url: PUBLIC_POCKETBASE_ADMIN,
-			icon: 'tabler:brain'
-		},
-
-		{
-			title: 'Subscriptions',
-			url: '/subscriptions',
-			icon: 'carbon:pricing-container'
-		}
+		{ title: 'Guestbook', url: '/guestbook', icon: 'ion:chatbox-outline' },
+		{ title: 'User Directory', url: '/users', icon: 'mdi:account-group-outline' },
+		{ title: 'AI', url: '/ai', icon: 'tabler:brain' },
+		{ title: 'PocketBase', url: PUBLIC_POCKETBASE_ADMIN, icon: 'tabler:brain' },
+		{ title: 'Subscriptions', url: '/subscriptions', icon: 'carbon:pricing-container' }
 	];
 
 	const repo = [
-		{
-			title: 'Repository',
-			url: PUBLIC_REPOSITORY_URL,
-			icon: 'mdi:github'
-		},
-
-		{
-			title: 'Submit Bug',
-			url: `${PUBLIC_REPOSITORY_URL}/issues/new/choose/`,
-			icon: 'mdi:bug'
-		},
-
-		{
-			title: 'Donate',
-			url: '/donate',
-			icon: 'mdi:money'
-		},
-
-		{
-			title: 'Docs',
-			url: `${PUBLIC_REPOSITORY_URL}/blob/main/README.md`,
-			icon: 'mdi:github'
-		},
-
-		{
-			title: 'Contact',
-			url: `/contact`,
-			icon: 'material-symbols:android-contacts'
-		}
+		{ title: 'Repository', url: PUBLIC_REPOSITORY_URL, icon: 'mdi:github' },
+		{ title: 'Submit Bug', url: `${PUBLIC_REPOSITORY_URL}/issues/new/choose/`, icon: 'mdi:bug' },
+		{ title: 'Donate', url: '/donate', icon: 'mdi:money' },
+		{ title: 'Docs', url: `${PUBLIC_REPOSITORY_URL}/blob/main/README.md`, icon: 'mdi:github' },
+		{ title: 'Contact', url: '/contact', icon: 'material-symbols:android-contacts' }
 	];
+
+	// Helper function to apply active class
+	function getClass(url: string) {
+		return $page.url.pathname === url ? 'bg-secondary' : '';
+	}
 </script>
 
 <Sidebar.Root>
@@ -124,15 +61,14 @@
 						<a href={`/users/${$currentUser.id}`} data-sveltekit-preload-data="hover">
 							<Avatar />
 						</a>
-
 						{#if notifications > 0}
 							<a href={`/notifications/${$currentUser.id}`} data-sveltekit-preload-data="hover">
 								<div
 									class="dropdown-menu-notifications absolute -bottom-1 right-0 rounded-full border border-2 border-background text-xs"
 								>
-									<Badge size="sm" variant="destructive" class="px-1 py-0 text-xs text-white"
-										>{notifications}</Badge
-									>
+									<Badge size="sm" variant="destructive" class="px-1 py-0 text-xs text-white">
+										{notifications}
+									</Badge>
 								</div>
 							</a>
 						{/if}
@@ -151,18 +87,28 @@
 			</div>
 		</div>
 	</Sidebar.Header>
+
 	<Sidebar.Content>
 		<Sidebar.Group>
 			<Sidebar.GroupLabel>User</Sidebar.GroupLabel>
 			<Sidebar.GroupContent>
 				<Sidebar.Menu>
 					{#each user as item (item.title)}
-						<Sidebar.MenuItem>
+						<Sidebar.MenuItem class={getClass(item.url)}>
 							<Sidebar.MenuButton>
 								{#snippet child({ props })}
 									<a href={item.url} {...props}>
 										<Icon icon={item.icon} class="" />
 										<span>{item.title}</span>
+										{#if item.title === 'Notifications'}
+											<Badge
+												size="sm"
+												variant="destructive"
+												class="rounded-full text-xs text-white"
+											>
+												{notifications}
+											</Badge>
+										{/if}
 									</a>
 								{/snippet}
 							</Sidebar.MenuButton>
@@ -177,7 +123,7 @@
 			<Sidebar.GroupContent>
 				<Sidebar.Menu>
 					{#each app as item (item.title)}
-						<Sidebar.MenuItem>
+						<Sidebar.MenuItem class={getClass(item.url)}>
 							<Sidebar.MenuButton>
 								{#snippet child({ props })}
 									<a href={item.url} {...props}>
@@ -197,7 +143,7 @@
 			<Sidebar.GroupContent>
 				<Sidebar.Menu>
 					{#each repo as item (item.title)}
-						<Sidebar.MenuItem>
+						<Sidebar.MenuItem class={getClass(item.url)}>
 							<Sidebar.MenuButton>
 								{#snippet child({ props })}
 									<a href={item.url} {...props}>
