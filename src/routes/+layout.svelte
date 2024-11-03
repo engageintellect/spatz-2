@@ -42,7 +42,7 @@
 	<Command />
 
 	<Sidebar.Provider>
-		<div class="z-[999]"></div>
+		<AppSidebar notifications={data.globalNotifications.length} />
 		<div class="flex min-h-[calc(100svh)] w-full flex-col md:min-h-screen">
 			<Nav notifications={data.globalNotifications.length} />
 
@@ -51,7 +51,6 @@
 			</main>
 			<Footer />
 		</div>
-		<AppSidebar notifications={data.globalNotifications.length} />
 	</Sidebar.Provider>
 {:else}
 	<div class="flex min-h-[calc(100svh)] w-full flex-col md:min-h-screen">

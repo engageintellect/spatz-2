@@ -2,11 +2,11 @@
 	import * as Form from '$lib/components/ui/form/index.js';
 	import * as Select from '$lib/components/ui/select/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
+	import { Textarea } from '$lib/components/ui/textarea';
 	import { formSchema, type FormSchema } from '$lib/schema';
 	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { enhance, applyAction } from '$app/forms';
-	import { Textarea } from '$lib/components/ui/textarea';
 	import { toast } from 'svelte-sonner';
 	import Icon from '@iconify/svelte';
 
@@ -19,7 +19,7 @@
 		validators: zodClient(formSchema)
 	});
 
-	const { form: formData } = form;
+	let { form: formData } = form;
 </script>
 
 <div class="flex w-full items-center justify-center">
@@ -45,13 +45,12 @@
 			if (isSubmitting) return cancel(); // Prevent multiple submissions
 			isSubmitting = true;
 
-			return async ({ result, update }) => {
+			return async ({ result }) => {
 				if (result.type === 'success') {
 					toast.success('Form Submitted Successfully!', {
 						description: "We'll get back to you as soon as possible, typically within 24 hours."
 					});
 				} else {
-					console.log('THIS IS RESULT', result);
 					toast.error('Failed to Submit Form', {
 						description: 'Please check your input and try again.'
 					});
@@ -65,20 +64,16 @@
 	>
 		<div class="mb-2 flex items-center gap-2 md:gap-5">
 			<Form.Field {form} name="firstName" class="w-full">
-				<Form.Control>
-					{#snippet children({ props }: any)}
-						<Form.Label>First Name</Form.Label>
-						<Input {...props} bind:value={$formData.firstName} />
-					{/snippet}
+				<Form.Control let:attrs>
+					<Form.Label>First Name</Form.Label>
+					<Input {...attrs} bind:value={$formData.firstName} />
 				</Form.Control>
 			</Form.Field>
 
 			<Form.Field {form} name="lastName" class="w-full">
-				<Form.Control>
-					{#snippet children({ props }: any)}
-						<Form.Label>Last Name</Form.Label>
-						<Input {...props} bind:value={$formData.lastName} />
-					{/snippet}
+				<Form.Control let:attrs>
+					<Form.Label>Last Name</Form.Label>
+					<Input {...attrs} bind:value={$formData.lastName} />
 				</Form.Control>
 			</Form.Field>
 		</div>
@@ -93,50 +88,44 @@
 		</div>
 
 		<Form.Field {form} name="email">
-			<Form.Control>
-				{#snippet children({ props }: any)}
-					<Form.Label>Email</Form.Label>
-					<Input {...props} bind:value={$formData.email} />
-				{/snippet}
+			<Form.Control let:attrs>
+				<Form.Label>Email</Form.Label>
+				<Input {...attrs} bind:value={$formData.email} />
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>
 
 		<div class="mb-2 flex items-center gap-2 md:gap-5">
 			<Form.Field {form} name={'type'} class="w-full">
-				<Form.Control>
-					{#snippet children({ props }: any)}
-						<Form.Label>Type</Form.Label>
-						<Select.Root type="single" bind:value={$formData.type}>
-							<Select.Trigger {...props}>
-								{$formData.type}
-							</Select.Trigger>
-							<Select.Content>
-								{#each ['Issue', 'Feedback', 'General Question'] as item}
-									<Select.Item label={item} value={item}>{item}</Select.Item>
-								{/each}
-							</Select.Content>
-						</Select.Root>
-					{/snippet}
+				<Form.Control let:attrs>
+					<Form.Label>Type</Form.Label>
+					<Select.Root name="type" type="single" bind:value={$formData.type}>
+						<Select.Trigger {...attrs}>
+							{$formData.type}
+						</Select.Trigger>
+						<Select.Content>
+							{#each ['Issue', 'Feedback', 'General Question'] as item}
+								<Select.Item label={item} value={item}>{item}</Select.Item>
+							{/each}
+						</Select.Content>
+					</Select.Root>
 				</Form.Control>
 			</Form.Field>
 
 			<Form.Field {form} name={'priority'} class="w-full">
-				<Form.Control>
-					{#snippet children({ props }: any)}
-						<Form.Label>Priority</Form.Label>
-						<Select.Root type="single" bind:value={$formData.priority}>
-							<Select.Trigger {...props}>
-								{$formData.priority}
-							</Select.Trigger>
+				<Form.Control let:attrs>
+					<Form.Label>Priority</Form.Label>
+					<Select.Root name="priority" type="single" bind:value={$formData.priority}>
+						<Select.Trigger {...attrs}>
+							{$formData.priority}
+						</Select.Trigger>
 
-							<Select.Content>
-								{#each ['0', '1', '2', '3'] as item}
-									<Select.Item label={item} value={item}>{item}</Select.Item>
-								{/each}
-							</Select.Content>
-						</Select.Root>
-					{/snippet}
+						<Select.Content>
+							{#each ['0', '1', '2', '3'] as item}
+								<Select.Item label={item} value={item}>{item}</Select.Item>
+							{/each}
+						</Select.Content>
+					</Select.Root>
 				</Form.Control>
 			</Form.Field>
 		</div>
@@ -151,11 +140,9 @@
 		</div>
 
 		<Form.Field {form} name="message">
-			<Form.Control>
-				{#snippet children({ props }: any)}
-					<Form.Label>Message</Form.Label>
-					<Textarea {...props} bind:value={$formData.message} />
-				{/snippet}
+			<Form.Control let:attrs>
+				<Form.Label>Message</Form.Label>
+				<Textarea {...attrs} bind:value={$formData.message} />
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>

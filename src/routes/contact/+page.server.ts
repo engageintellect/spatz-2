@@ -1,4 +1,4 @@
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 import { fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
@@ -22,15 +22,16 @@ import {
 
 export const actions: Actions = {
 	default: (async (event) => {
-		console.log('message:', 'hello there world');
+		console.log('message:', 'submitting form...');
+		//console.log('event:', event);
 		const form = await superValidate(event, zod(formSchema));
-		console.log('Form result:', form);
+		//console.log('Form result:', form);
 		if (!form.valid) {
 			return fail(400, {
 				form
 			});
 		}
-		console.log('form:', form);
+		//console.log('form:', form);
 
 		// Prepare the payload for the Google Form
 		const payload = new URLSearchParams({
