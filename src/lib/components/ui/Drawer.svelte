@@ -17,8 +17,8 @@
 </script>
 
 <Drawer.Root>
-	<Drawer.Trigger asChild let:builder>
-		<Button builders={[builder]} variant="link" size="sm" class="p-0 text-xs font-thin">
+	<Drawer.Trigger>
+		<Button variant="link" size="sm" class="p-0 text-xs font-thin">
 			{@render trigger()}
 		</Button>
 	</Drawer.Trigger>
@@ -28,10 +28,8 @@
 				<Drawer.Title>{@render title()}</Drawer.Title>
 				<Drawer.Description>{@render description()}</Drawer.Description>
 			</Drawer.Header>
-
-			{@render content()}
-			<div class="p-4 pb-0">
-				<div class="flex items-center justify-center space-x-2"></div>
+			<div class="pb-0">
+				{@render content()}
 			</div>
 			<Drawer.Footer>
 				<Drawer.Close>

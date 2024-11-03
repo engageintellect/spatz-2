@@ -5,12 +5,11 @@
 	import Icon from '@iconify/svelte';
 	import { currentUser } from '$lib/stores/user';
 	import Avatar from '$lib/components/ui/Avatar.svelte';
-	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
 	import { pb } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
 
-	const { notifications } = $props();
+	const { notifications }: any = $props();
 
 	function handleLogout() {
 		pb.authStore.clear();
@@ -120,31 +119,35 @@
 	<Sidebar.Header class="">
 		<div class="rounded bg-secondary p-2">
 			<div class="p-2">
-				<a
-					href={`/users/${$currentUser.id}`}
-					data-sveltekit-preload-data="hover"
-					class="flex w-full items-start gap-2"
-				>
+				<div class="flex w-full items-start gap-2">
 					<div class="relative">
-						<Avatar />
+						<a href={`/users/${$currentUser.id}`} data-sveltekit-preload-data="hover">
+							<Avatar />
+						</a>
 
-						{#if 10 > 9}
-							<div
-								class="dropdown-menu-notifications absolute -bottom-1 right-0 rounded-full border border-2 border-background text-xs"
-							>
-								<Badge size="sm" variant="destructive" class="px-1 py-0 text-xs text-white"
-									>{notifications}</Badge
+						{#if notifications > 0}
+							<a href={`/notifications/${$currentUser.id}`} data-sveltekit-preload-data="hover">
+								<div
+									class="dropdown-menu-notifications absolute -bottom-1 right-0 rounded-full border border-2 border-background text-xs"
 								>
-							</div>
+									<Badge size="sm" variant="destructive" class="px-1 py-0 text-xs text-white"
+										>{notifications}</Badge
+									>
+								</div>
+							</a>
 						{/if}
 					</div>
 					<div class="truncate">
-						<h3 class="overflow-hidden text-ellipsis text-base">@{$currentUser.username}</h3>
-						<p class="overflow-hidden text-ellipsis text-xs font-thin text-foreground/70">
-							{$currentUser.email}
-						</p>
+						<a href={`/users/${$currentUser.id}`} data-sveltekit-preload-data="hover">
+							<h3 class="overflow-hidden text-ellipsis text-base">@{$currentUser.username}</h3>
+						</a>
+						<a href={`/users/${$currentUser.id}`} data-sveltekit-preload-data="hover">
+							<p class="overflow-hidden text-ellipsis text-xs font-thin text-foreground/70">
+								{$currentUser.email}
+							</p>
+						</a>
 					</div>
-				</a>
+				</div>
 			</div>
 		</div>
 	</Sidebar.Header>

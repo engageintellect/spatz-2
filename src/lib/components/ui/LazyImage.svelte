@@ -9,13 +9,8 @@
 		loading?: string;
 	}
 
-	let {
-		src,
-		imgClass = '',
-		alt = '',
-		loading = 'lazy'
-	}: Props = $props();
-	let image: HTMLImageElement = $state();
+	let { src, imgClass = '', alt = '', loading = 'lazy' }: Props = $props();
+	let image: any = $state();
 
 	// Function to handle image loading
 	const loadImage = () => {
