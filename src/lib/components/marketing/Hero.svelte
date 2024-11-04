@@ -40,22 +40,20 @@
 
 	<div class="my-5 flex flex-col gap-2 md:my-10">
 		<p class=" text-xs text-muted-foreground">
-			Press
 			<kbd
 				class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100"
 			>
 				<span class="text-xs">⌘</span>j
 			</kbd>
-			to open the command palette.
+			<span class="pl-1"> to open the command palette. </span>
 		</p>
 		<p class=" text-xs text-muted-foreground">
-			Press
 			<kbd
 				class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100"
 			>
 				<span class="text-xs">⌘</span>b
 			</kbd>
-			to open the sidebar.
+			<span class="pl-1"> to open the sidebar. </span>
 		</p>
 	</div>
 	<div class="mt-2 grid w-full grid-cols-2 gap-2 md:grid-cols-3">
