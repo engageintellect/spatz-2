@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { cn } from '$lib/utils.js';
-	import type { ComponentProps } from 'svelte';
-	import { currentUser } from '$lib/stores/user';
 	import { Badge } from '$lib/components/ui/badge/index.js';
 	import Avatar from '../Avatar.svelte';
 	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
@@ -18,6 +16,8 @@
 	}: any & {
 		onclick?: (e: MouseEvent) => void;
 	} = $props();
+
+	console.log('sidebar', sidebar.isMobile);
 </script>
 
 <Button
@@ -32,7 +32,7 @@
 	class={cn('h-7 w-7', className)}
 	{...restProps}
 >
-	{#if sidebar.state == 'collapsed'}
+	{#if sidebar.state == 'collapsed' || sidebar.isMobile}
 		<Button class="rounded-full p-0">
 			<div class="relative">
 				<Avatar />
