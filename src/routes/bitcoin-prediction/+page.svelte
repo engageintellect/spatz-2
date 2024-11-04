@@ -26,8 +26,8 @@
 	</Button>
 </div>
 <div class="mx-auto max-w-lg p-2">
-	<div class=" flex flex-col gap-10">
-		<div class="animate-item text-6xl">bitcoin model</div>
+	<div class=" mb-20 flex flex-col gap-10">
+		<div class="animate-item text-6xl">btc predict</div>
 
 		{#if !$currentUser.subscribed}
 			<div class="animate-item">
@@ -37,7 +37,8 @@
 			<div class="animate-item flex-flex-col">
 				<div class=" text-2xl font-bold">about:</div>
 				<p class="text-muted-foreground">
-					Prediction accuracy is calculated by past correct predictions till today.
+					'btc predict' is a machine learning model that predicts the direction that the price of
+					Bitcoin will move and close at during the following day.
 				</p>
 			</div>
 
@@ -47,7 +48,7 @@
 					Prediction accuracy is calculated by past correct predictions till today.
 				</p>
 
-				<div class="animate-item text-7xl font-bold">
+				<div class="animate-item mt-5 text-6xl font-bold">
 					<NumberTicker value={Number(data.predictions.predictionAccuracy.replace('%', ''))} />
 					<span> % </span>
 				</div>
@@ -61,8 +62,8 @@
 					</p>
 				</div>
 
-				<div class="animate-item flex items-center gap-5">
-					<div class="text-7xl">
+				<div class="animate-item mt-5 flex items-center gap-2">
+					<div class="text-6xl">
 						{data.predictions.predictions[data.predictions.predictions.length - 1].Prediction}
 					</div>
 
@@ -74,9 +75,42 @@
 								: 'mdi:arrow-up'}
 							class={data.predictions.predictions[data.predictions.predictions.length - 1]
 								.Prediction === 'DOWN'
-								? 'text-7xl text-destructive'
-								: 'text-7xl text-success'}
+								? 'text-6xl text-destructive'
+								: 'text-6xl text-success'}
 						/>
+					</div>
+				</div>
+			</div>
+
+			<div class="">
+				<div class="animate-item flex-flex-col">
+					<div class=" text-2xl font-bold">history:</div>
+					<p class="text-muted-foreground">
+						Prediction history is calculated by past correct predictions till today.
+					</p>
+				</div>
+
+				<div class="animate-item mt-5 flex items-center gap-2">
+					<div class="grid w-full grid-cols-3 gap-2">
+						{#each data.predictions.predictions.reverse() as prediction}
+							<div
+								class={`w-full rounded-lg border p-2 ${prediction.Prediction === 'DOWN' ? 'bg-destructive' : 'bg-success'}`}
+							>
+								<div>
+									{prediction.Date}
+								</div>
+								<div>
+									{prediction.Open_Price}
+								</div>
+								<div>
+									{prediction.Close_Price}
+								</div>
+
+								<div>
+									{prediction.Prediction}
+								</div>
+							</div>
+						{/each}
 					</div>
 				</div>
 			</div>
