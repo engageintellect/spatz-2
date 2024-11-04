@@ -34,6 +34,7 @@
 		{ title: 'Guestbook', url: '/guestbook', icon: 'ion:chatbox-outline' },
 		{ title: 'User Directory', url: '/users', icon: 'mdi:account-group-outline' },
 		{ title: 'AI', url: '/ai', icon: 'tabler:brain' },
+		{ title: 'Bitcoin Predition', url: '/bitcoin-prediction', icon: 'akar-icons:bitcoin-fill' },
 		{ title: 'PocketBase', url: PUBLIC_POCKETBASE_ADMIN, icon: 'tabler:brain' },
 		{ title: 'Subscriptions', url: '/subscriptions', icon: 'carbon:pricing-container' }
 	];
