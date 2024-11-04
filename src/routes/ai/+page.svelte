@@ -3,7 +3,7 @@
 	import { gsap } from 'gsap';
 	import robot from '$lib/assets/images/robot14-nobg.png';
 
-	let imgRef: HTMLImageElement = $state();
+	let imgRef: any = $state();
 
 	onMount(() => {
 		gsap.from(imgRef, {

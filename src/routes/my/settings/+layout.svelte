@@ -43,7 +43,7 @@
 	<!-- <div class="text-7xl">settings</div> -->
 </div>
 <div
-	class="animate-item mx-auto flex h-full w-full max-w-2xl gap-5 rounded-lg md:border md:p-5 md:shadow-lg"
+	class="animate-item mx-auto flex h-fit w-full max-w-2xl gap-5 rounded-lg md:border md:p-5 md:shadow-lg"
 >
 	<ul class="flex w-40 flex-col gap-1">
 		{#each navigation as navItem}

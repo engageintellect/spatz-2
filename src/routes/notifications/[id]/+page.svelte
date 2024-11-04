@@ -3,7 +3,7 @@
 	import Icon from '@iconify/svelte';
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
 	import { getImageURL } from '$lib/utils.js';
-	import { onMount, tick } from 'svelte';
+	import { onMount } from 'svelte';
 	import { currentUser } from '$lib/stores/user';
 	import { animateMainStagger } from '$lib/animations';
 	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
