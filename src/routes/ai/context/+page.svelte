@@ -112,7 +112,7 @@
 	{/if}
 
 	<div class="sticky top-[57px] z-10 w-full border-b backdrop-blur-sm">
-		<form class="w-full bg-background py-2" on:submit={handleSubmit}>
+		<form class="w-full bg-background py-2" onsubmit={handleSubmit}>
 			<input
 				placeholder="Enter your custom context..."
 				bind:value={customContext}
@@ -134,7 +134,7 @@
 						</div>
 					</Button>
 					{#if $messages.length > 0}
-						<Button type="button" variant="destructive" on:click={clearChat}>
+						<Button type="button" variant="destructive" onclick={clearChat}>
 							<div class="flex items-center gap-2">
 								<Icon icon="mdi:delete" class="h-5 w-5" />
 							</div>
@@ -198,7 +198,7 @@
 						</div>
 						<div class="chat-footer opacity-50">
 							<div class="mt-1 flex items-center gap-2">
-								<button on:click={() => copyToClipboard(message.content)} class="">
+								<button onclick={() => copyToClipboard(message.content)} class="">
 									<div class="flex items-center gap-1">
 										<Icon icon="mdi-content-copy" class="h-4 w-4" />
 										<div class="text-xs">copy</div>

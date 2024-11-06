@@ -3,26 +3,30 @@
 	import * as Select from '$lib/components/ui/select/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Textarea } from '$lib/components/ui/textarea';
-	import { formSchema, type FormSchema } from '$lib/schema';
-	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
+	import { formSchema } from '$lib/schema';
+	import { superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { enhance, applyAction } from '$app/forms';
 	import { toast } from 'svelte-sonner';
 	import Icon from '@iconify/svelte';
+	import { animateMainStagger } from '$lib/animations';
 
-	export let action: string = '';
+	let { action, data }: any = $props();
 
-	export let data: SuperValidated<Infer<FormSchema>>;
-	let isSubmitting = false;
+	let isSubmitting: boolean = $state(false);
 
 	const form = superForm(data, {
 		validators: zodClient(formSchema)
 	});
 
 	let { form: formData } = form;
+
+	$effect(() => {
+		animateMainStagger();
+	});
 </script>
 
-<div class="flex w-full items-center justify-center">
+<div class="animate-item flex w-full items-center justify-center">
 	<div class="w-full max-w-md">
 		<div class="contact-header flex flex-col items-start gap-2">
 			<div class="flex items-center gap-5">
@@ -36,7 +40,7 @@
 	</div>
 </div>
 
-<div class="mx-auto w-full max-w-md">
+<div class="animate-item mx-auto w-full max-w-md">
 	<form
 		method="POST"
 		{action}

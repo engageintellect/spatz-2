@@ -9,6 +9,9 @@
 	import { animateMainStagger } from '$lib/animations';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { currentUser } from '$lib/stores/user.js';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
+
+	let sidebar = useSidebar(); // Initialize the sidebar
 
 	import { gsap } from 'gsap';
 	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
@@ -161,7 +164,9 @@
 		<span class="text-sm">back</span>
 	</Button>
 
-	<div class={`animate-item`}>
+	<div
+		class={`${sidebar.state === 'expanded' ? 'lg:border lg:p-5' : 'md:border md:p-5'} animate-item mt-5 rounded-lg shadow`}
+	>
 		<div class="bg-base-100 mx-auto h-full w-full">
 			<h1 class="flex items-center gap-2 text-6xl font-bold text-primary">
 				<span class="animate-user">user</span>

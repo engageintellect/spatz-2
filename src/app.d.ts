@@ -25,6 +25,7 @@ declare global {
 			avatar?: string;
 			username?: string;
 			likes: string[];
+			verified?: boolean;
 			expand: {
 				author: {
 					username: string;

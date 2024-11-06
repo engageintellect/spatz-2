@@ -287,6 +287,7 @@
 							likes={post.likes}
 							id={post.id}
 							currentUser={$currentUser}
+							isVerified={post.verified}
 						/>
 					</div>
 				{/each}

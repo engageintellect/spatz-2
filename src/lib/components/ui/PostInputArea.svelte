@@ -124,7 +124,7 @@
 			};
 		}}
 	>
-		<div class="px-2 md:px-0">
+		<div class="">
 			<input type="hidden" name="author" value={userId} />
 			<input type="hidden" name="recordId" value={recordId} />
 			<input type="hidden" name="post" value={postId} />
@@ -156,7 +156,7 @@
 					</div>
 
 					<textarea
-						class="animate-textarea w-full resize-none rounded-lg bg-background text-lg font-thin focus-within:outline-none"
+						class="animate-textarea w-full resize-none rounded-lg bg-background p-2 text-lg font-thin focus-within:outline-none"
 						{placeholder}
 						{required}
 						{disabled}

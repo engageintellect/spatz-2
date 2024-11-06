@@ -7,9 +7,11 @@
 	import { goto } from '$app/navigation';
 	import { applyAction } from '$app/forms';
 	import { toast } from 'svelte-sonner';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
 
 	let hidden = true;
 	let errorMessage: string = ''; // Declare errorMessage with an initial empty string
+	let sidebar = useSidebar(); // Use the useSidebar hook to get the sidebar state
 
 	export let data: {
 		pbSubscriptions: Array<{
@@ -32,7 +34,7 @@
 </script>
 
 <main
-	class={`${hidden ? 'opacity-0' : ''} animate-item mx-auto max-w-4xl rounded-lg bg-background p-2 shadow-md md:border md:p-5`}
+	class={`${hidden ? 'opacity-0' : ''} ${sidebar.state === 'expanded' ? 'lg:border lg:p-5' : ' md:border md:p-5'} animate-item mx-auto max-w-5xl rounded-lg bg-background p-2 shadow-md`}
 >
 	<!-- Pricing Header -->
 	<h1 class="animate-item text-center text-5xl font-bold lowercase">subscriptions</h1>
@@ -64,7 +66,9 @@
 	{/if}
 
 	<!-- Pricing Options -->
-	<div class="animate-item mt-10 grid gap-5 sm:grid-cols-1 md:grid-cols-3">
+	<div
+		class={`${sidebar.state === 'expanded' ? 'lg:grid-cols-3' : 'md:grid-cols-3'} animate-item mt-10 grid gap-5 sm:grid-cols-1`}
+	>
 		{#each data.pbSubscriptions as plan}
 			<div
 				class="flex flex-col justify-between rounded-lg border p-5 transition-shadow hover:shadow"

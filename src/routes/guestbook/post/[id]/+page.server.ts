@@ -44,7 +44,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	const transformedPost = {
 		...post,
 		username: users.find((user) => user.id === post.author)?.username,
-		avatar: users.find((user) => user.id === post.author)?.avatar
+		avatar: users.find((user) => user.id === post.author)?.avatar,
+		verified: users.find((user) => user.id === post.author)?.verified
 	};
 
 	let respondingTo = [];

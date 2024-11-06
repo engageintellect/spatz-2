@@ -11,6 +11,9 @@
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { toast } from 'svelte-sonner';
 	import { enhance } from '$app/forms';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
+
+	let sidebar = useSidebar(); // Initialize the sidebar
 
 	let dialogOpen = false;
 	let isDeleting = false;
@@ -53,11 +56,13 @@
 		</Button>
 	</div>
 
-	<main class="mx-auto max-w-lg rounded-lg">
+	<main
+		class={`${sidebar.state === 'expanded' ? 'lg:border lg:p-5' : 'md:border md:p-5'} animate-item mx-auto max-w-2xl rounded-lg md:mt-5`}
+	>
 		{#if data.userPosts.length > 0}
 			<div class="animate-item text-6xl">notifications</div>
 
-			<div class="animate-item mt-5 flex items-center justify-between gap-2 border-b pb-2">
+			<div class="animate-item mt-5 flex items-center justify-between gap-2 pb-2">
 				<div class="text-xl font-thin">
 					<span class="text-muted-foreground">new notifications:</span>
 					{data.notifications.length}

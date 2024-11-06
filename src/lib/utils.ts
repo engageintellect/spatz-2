@@ -49,6 +49,17 @@ export function formatFriendlyDate(dateString: string): string {
 	return new Intl.DateTimeFormat('en-US', options).format(date);
 }
 
+export function formatFloatToPrice(amount: number): string {
+	const formattedAmount = amount.toLocaleString('en-US', {
+		style: 'currency',
+		currency: 'USD',
+		minimumFractionDigits: 0,
+		maximumFractionDigits: 0
+	});
+
+	return formattedAmount;
+}
+
 export function timeSince(dateString: string): string {
 	const date = new Date(dateString);
 	const now = new Date();

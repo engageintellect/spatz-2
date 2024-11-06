@@ -2,9 +2,13 @@
 	const { data }: any = $props();
 	import { currentUser } from '$lib/stores/user';
 	import { animateMainStagger } from '$lib/animations';
+	import { formatFloatToPrice } from '$lib/utils';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
 	import NumberTicker from '$lib/components/ui/NumberTicker.svelte';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
+
+	let sidebar = useSidebar(); // Initialize the sidebar
 
 	$effect(() => {
 		animateMainStagger();
@@ -25,9 +29,13 @@
 		<span class="text-sm">back</span>
 	</Button>
 </div>
-<div class="mx-auto max-w-lg p-2">
-	<div class=" mb-20 flex flex-col gap-10">
-		<div class="animate-item text-6xl">btc predict</div>
+<div
+	class={`${sidebar.state === 'expanded' ? 'lg:mt-5 lg:border lg:p-5' : 'md:mt-5 md:border md:p-5'} animate-item mx-auto mt-5 max-w-2xl rounded-lg`}
+>
+	<div class="mb-20 flex flex-col gap-10">
+		<div class="animate-item text-6xl">
+			<span class="font-bold">btc</span> <span class="font-thin">predict</span>
+		</div>
 
 		{#if !$currentUser.subscribed}
 			<div class="animate-item">
@@ -94,16 +102,16 @@
 					<div class="grid w-full grid-cols-3 gap-2">
 						{#each data.predictions.predictions.reverse() as prediction}
 							<div
-								class={`w-full rounded-lg border p-2 ${prediction.Prediction === 'DOWN' ? 'bg-destructive' : 'bg-success'}`}
+								class={`w-full rounded-lg border p-2 text-sm ${prediction.Prediction === 'DOWN' ? 'bg-destructive' : 'bg-success'}`}
 							>
 								<div>
 									{prediction.Date}
 								</div>
 								<div>
-									{prediction.Open_Price}
+									open: {formatFloatToPrice(prediction.Open_Price)}
 								</div>
 								<div>
-									{prediction.Close_Price}
+									close: {formatFloatToPrice(prediction.Close_Price)}
 								</div>
 
 								<div>
