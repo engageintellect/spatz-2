@@ -5,8 +5,12 @@
 	import { tick } from 'svelte';
 	import { goto } from '$app/navigation';
 	import * as Dialog from '$lib/components/ui/dialog';
+	import { fade } from 'svelte/transition';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { formatFriendlyDate, timeSince } from '$lib/utils';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
+
+	let sidebar = useSidebar(); // Initialize the sidebar
 
 	interface Props {
 		postAuthor: any;
@@ -18,6 +22,7 @@
 		likes: any;
 		id: any;
 		currentUser: any;
+		isVerified: boolean;
 	}
 
 	let {
@@ -29,7 +34,8 @@
 		avatar,
 		likes,
 		id,
-		currentUser
+		currentUser,
+		isVerified
 	}: Props = $props();
 
 	let isDeleting = $state(false);
@@ -69,7 +75,9 @@
 	};
 </script>
 
-<div class="text-elipsis relative cursor-pointer overflow-x-hidden transition-all duration-300">
+<div
+	class={`${sidebar.state === 'expanded' ? '' : ''} text-elipsis relative cursor-pointer overflow-x-hidden transition-all duration-300`}
+>
 	<div class="card-body p-3 px-1 transition-all duration-300">
 		<div class="flex items-start gap-3">
 			<div>
@@ -77,7 +85,7 @@
 					<div class="h-10 w-10 md:h-12 md:w-12">
 						<img
 							src={avatar}
-							class="mt-1 h-full w-full rounded-full border object-cover shadow"
+							class="mt-1 h-full w-full rounded-full object-cover"
 							alt="user-avatar"
 						/>
 					</div>
@@ -88,6 +96,10 @@
 					<a href={`/users/${postAuthorId}`} class="text-base lowercase text-primary"
 						>{postAuthor}</a
 					>
+
+					{#if isVerified === true}
+						<Icon icon="material-symbols:verified" class="h-4 w-4 text-info text-info" />
+					{/if}
 					<div class="text-xs text-foreground/70">
 						{timeSince(formatFriendlyDate(postDate))}
 					</div>
@@ -178,7 +190,7 @@
 										<Button
 											variant="ghost"
 											size="sm"
-											on:click={() => (dialogOpen = true)}
+											onclick={() => (dialogOpen = true)}
 											class="group/deleteButton flex scale-[0.75] items-center active:scale-[0.70]"
 										>
 											<Icon
@@ -201,6 +213,7 @@
 
 													return async ({ result, update }) => {
 														if (result.type === 'success') {
+															dialogOpen = false;
 															toast('Post deleted successfully.', {});
 														} else {
 															toast.error('Failed to delete post.', {});
@@ -227,17 +240,14 @@
 												/>
 
 												<div class="mt-5 flex items-center justify-between gap-2">
-													<Button
-														type="submit"
-														variant="destructive"
-														on:click={() => (dialogOpen = false)}
-														class="w-full text-white">delete</Button
+													<Button type="submit" variant="destructive" class="w-full text-white"
+														>delete</Button
 													>
 
 													<Button
 														variant="default"
 														type="button"
-														on:click={() => (dialogOpen = false)}
+														onclick={() => (dialogOpen = false)}
 														class="w-full">cancel</Button
 													>
 												</div>

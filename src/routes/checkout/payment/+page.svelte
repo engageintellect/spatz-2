@@ -42,6 +42,6 @@
 		<h1 class="text-4xl font-bold">Subscribe</h1>
 		<p class="mt-5 text-lg">Choose your subscription plan to enjoy all our premium features.</p>
 
-		<Button on:click={handleSubscribe} class="mt-5">Subscribe Now</Button>
+		<Button onclick={handleSubscribe} class="mt-5">Subscribe Now</Button>
 	</main>
 </div>

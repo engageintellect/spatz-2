@@ -16,15 +16,7 @@
 		comment: any;
 	}
 
-	let {
-		currentUser,
-		userId,
-		username,
-		commentId,
-		avatar,
-		createdDate,
-		comment
-	}: Props = $props();
+	let { currentUser, userId, username, commentId, avatar, createdDate, comment }: Props = $props();
 	let dialogOpen = $state(false);
 	let isDeleting = $state(false);
 	let deleteLoading = false;
@@ -59,7 +51,7 @@
 						<Button
 							variant="ghost"
 							size="sm"
-							on:click={() => (dialogOpen = true)}
+							onclick={() => (dialogOpen = true)}
 							class="group/deleteButton flex scale-[0.75] items-center active:scale-[0.70] "
 						>
 							<Icon
@@ -107,14 +99,14 @@
 									<Button
 										type="submit"
 										variant="destructive"
-										on:click={() => (dialogOpen = false)}
+										onclick={() => (dialogOpen = false)}
 										class="w-full text-white">delete</Button
 									>
 
 									<Button
 										variant="default"
 										type="button"
-										on:click={() => (dialogOpen = false)}
+										onclick={() => (dialogOpen = false)}
 										class="w-full">cancel</Button
 									>
 								</div>

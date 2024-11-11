@@ -2,6 +2,9 @@
 	import { PUBLIC_REPOSITORY_URL } from '$env/static/public';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js';
+
+	let sidebar = useSidebar();
 </script>
 
 <div class="mb-2">
@@ -12,7 +15,9 @@
 	<div class="">
 		<div class="card rounded-lg border shadow">
 			<div class="card-body p-5">
-				<div class="flex flex-col md:flex-row">
+				<div
+					class={`${sidebar.state === 'expanded' ? 'lg:flex-row' : 'md:flex-row'} flex flex-col`}
+				>
 					<div>
 						<p class="mt-2 text-xl text-primary">Contributions are welcome and appreciated!</p>
 						<p class="mt-2 text-muted-foreground">

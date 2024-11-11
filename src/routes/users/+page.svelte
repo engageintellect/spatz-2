@@ -9,6 +9,9 @@
 	import { animateMainStagger } from '$lib/animations';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { currentUser } from '$lib/stores/user.js';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
+
+	let sidebar = useSidebar(); // Initialize the sidebar
 
 	import { gsap } from 'gsap';
 	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
@@ -149,7 +152,7 @@
 
 <div class={`${hidden ? 'opacity-0' : ''} mx-auto max-w-2xl`}>
 	<Button
-		on:click={() => window.history.back()}
+		onclick={() => window.history.back()}
 		size="sm"
 		variant="outline"
 		class="group/backButton backButton flex items-center gap-2"
@@ -161,7 +164,9 @@
 		<span class="text-sm">back</span>
 	</Button>
 
-	<div class={`animate-item`}>
+	<div
+		class={`${sidebar.state === 'expanded' ? 'lg:border lg:p-5' : 'md:border md:p-5'} animate-item mt-5 rounded-lg shadow`}
+	>
 		<div class="bg-base-100 mx-auto h-full w-full">
 			<h1 class="flex items-center gap-2 text-6xl font-bold text-primary">
 				<span class="animate-user">user</span>
@@ -172,7 +177,7 @@
 		<!-- Add an input field to filter by username -->
 		<div class="sticky top-[57px] z-50 mb-5 bg-background pt-5">
 			<div
-				class="animate-input mb-5 flex items-center rounded-lg border bg-background bg-background px-2 focus-within:ring-1 focus-within:ring-foreground focus-within:ring-offset-1"
+				class="animate-input mb-5 flex items-center rounded-lg border bg-background bg-background px-2 focus-within:ring-0 focus-within:ring-offset-1"
 			>
 				<Icon icon={`material-symbols:search`} class="h-7 w-7" />
 				<Input
@@ -185,13 +190,16 @@
 
 			<div class=" flex items-center justify-between border-b pb-2 text-xl font-thin">
 				<!-- Display the total count of filtered users -->
-				<div>{filter ? 'query matches' : 'total users'}: {filteredUsers.length}</div>
+				<div class="text-muted-foreground">
+					{filter ? 'query matches' : 'total users'}:
+					<span class="text-foreground">{filteredUsers.length}</span>
+				</div>
 
 				<div class="flex items-center gap-2">
 					<Button
 						size="sm"
 						variant={sortOption === 'all' ? 'default' : 'ghost'}
-						on:click={() => (sortOption = 'all')}
+						onclick={() => (sortOption = 'all')}
 						class="flex items-center gap-2 text-xs transition-all duration-300"
 					>
 						<div>all</div>
@@ -201,7 +209,7 @@
 					<Button
 						size="sm"
 						variant={sortOption === 'following' ? 'default' : 'ghost'}
-						on:click={() => (sortOption = 'following')}
+						onclick={() => (sortOption = 'following')}
 						class="flex items-center gap-2 text-xs transition-all duration-300"
 					>
 						<div>following</div>
@@ -216,7 +224,7 @@
 			{#each filteredUsers as user}
 				<a href={`/users/${user.id}`} class="user-wrapper group/userCard">
 					<div
-						class={`rounded-lg border p-3 shadow transition-all duration-300 md:hover:border-muted-foreground`}
+						class={`rounded-lg border p-3 transition-all duration-300 md:hover:border-muted-foreground/50`}
 					>
 						<div class="flex flex-row items-center gap-2">
 							<div>

@@ -119,7 +119,7 @@
 				</Button>
 				{#if $messages.length > 0}
 					<div in:fade={{ duration: 300 }}>
-						<Button type="button" variant="destructive" class="" on:click={clearChat}>
+						<Button type="button" variant="destructive" class="" onclick={clearChat}>
 							<div class="flex items-center gap-2">
 								<Icon icon="mdi:delete" class="h-5 w-5" />
 							</div>

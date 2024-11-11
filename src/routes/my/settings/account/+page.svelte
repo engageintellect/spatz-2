@@ -98,7 +98,12 @@
 				disabled={loading}
 				errors={form?.errors?.email}
 			/>
-			<Button class="flex items-center gap-2 lowercase" type="submit" disabled={loading}>
+			<Button
+				variant="success"
+				class="flex items-center gap-2 lowercase"
+				type="submit"
+				disabled={loading}
+			>
 				<Icon icon="material-symbols:sync" class={`${loading ? 'animate-spin' : ''}h-5 w-5`} />
 				<div>update email</div>
 			</Button>
@@ -123,7 +128,12 @@
 				disabled={loading}
 			/>
 
-			<Button class="flex items-center gap-2 lowercase" type="submit" disabled={loading}>
+			<Button
+				variant="success"
+				class="flex items-center gap-2 lowercase"
+				type="submit"
+				disabled={loading}
+			>
 				<Icon
 					icon={`${loading ? 'material-symbols:sync' : 'material-symbols:save'}`}
 					class={`${loading ? 'animate-spin' : ''}h-5 w-5`}

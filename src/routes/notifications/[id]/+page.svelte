@@ -3,7 +3,7 @@
 	import Icon from '@iconify/svelte';
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
 	import { getImageURL } from '$lib/utils.js';
-	import { onMount, tick } from 'svelte';
+	import { onMount } from 'svelte';
 	import { currentUser } from '$lib/stores/user';
 	import { animateMainStagger } from '$lib/animations';
 	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
@@ -11,6 +11,9 @@
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { toast } from 'svelte-sonner';
 	import { enhance } from '$app/forms';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
+
+	let sidebar = useSidebar(); // Initialize the sidebar
 
 	let dialogOpen = false;
 	let isDeleting = false;
@@ -40,7 +43,7 @@
 <div class={` ${hidden ? 'opacity-0' : ''} mx-auto max-w-2xl`}>
 	<div class="flex justify-between">
 		<Button
-			on:click={() => window.history.back()}
+			onclick={() => window.history.back()}
 			size="sm"
 			variant="outline"
 			class="group/backButton backButton flex items-center gap-2"
@@ -53,11 +56,13 @@
 		</Button>
 	</div>
 
-	<main class="mx-auto max-w-lg rounded-lg">
+	<main
+		class={`${sidebar.state === 'expanded' ? 'lg:border lg:p-5' : 'md:border md:p-5'} animate-item mx-auto max-w-2xl rounded-lg md:mt-5`}
+	>
 		{#if data.userPosts.length > 0}
 			<div class="animate-item text-6xl">notifications</div>
 
-			<div class="animate-item mt-5 flex items-center justify-between gap-2 border-b pb-2">
+			<div class="animate-item mt-5 flex items-center justify-between gap-2 pb-2">
 				<div class="text-xl font-thin">
 					<span class="text-muted-foreground">new notifications:</span>
 					{data.notifications.length}
@@ -71,7 +76,7 @@
 									<Button
 										variant="destructive"
 										size="sm"
-										on:click={() => (dialogOpen = true)}
+										onclick={() => (dialogOpen = true)}
 										class="group/deleteButton transition-scale flex scale-[0.80] items-center gap-2 duration-300 active:scale-[0.78]"
 									>
 										<div>clear all</div>
@@ -103,6 +108,7 @@
 													}
 
 													await update();
+													dialogOpen = false;
 
 													isDeleting = false;
 												};
@@ -111,17 +117,14 @@
 											method="POST"
 										>
 											<div class="mt-5 flex items-center justify-between gap-2">
-												<Button
-													type="submit"
-													variant="destructive"
-													on:click={() => (dialogOpen = false)}
-													class="w-full text-white">delete</Button
+												<Button type="submit" variant="destructive" class="w-full text-white"
+													>delete</Button
 												>
 
 												<Button
 													variant="default"
 													type="button"
-													on:click={() => (dialogOpen = false)}
+													onclick={() => (dialogOpen = false)}
 													class="w-full">cancel</Button
 												>
 											</div>

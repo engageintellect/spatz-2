@@ -16,7 +16,7 @@
 <div>
 	<div class="mx-auto max-w-2xl">
 		<Button
-			on:click={goBack}
+			onclick={goBack}
 			size="sm"
 			variant="outline"
 			type="submit"

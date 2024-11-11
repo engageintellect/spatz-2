@@ -4,6 +4,8 @@
 	import ScrollToTopButton from '$lib/components/ui/ScrollToTopButton.svelte';
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
+	import { animateMainStagger } from '$lib/animations';
+
 	interface Props {
 		children?: import('svelte').Snippet;
 	}
@@ -34,6 +36,7 @@
 	];
 
 	onMount(() => {
+		animateMainStagger();
 		gsap.from('.nav-item', {
 			opacity: 0,
 			x: 10,
@@ -43,16 +46,16 @@
 	});
 </script>
 
-<div class="bg-base-100 mx-auto h-full w-full max-w-2xl">
+<div class="animate-item bg-base-100 mx-auto w-full max-w-2xl">
 	<a href="/ai" class="px-2 text-6xl md:px-0">ai</a>
 </div>
 <div
-	class="mx-auto flex h-full w-full max-w-2xl flex-col gap-5 rounded-lg md:flex-row md:gap-10 md:border md:p-5 md:shadow-lg"
+	class="animate-item mx-auto mt-5 flex w-full max-w-2xl flex-col gap-5 rounded-lg md:flex-row md:gap-10 md:border md:p-5 md:shadow-lg"
 >
 	<ul
 		class="md:rounded-box sticky flex h-full w-full flex-nowrap gap-2 overflow-auto bg-background px-2 md:top-16 md:w-40 md:px-0"
 	>
-		<div class="flex w-full flex-row gap-1 md:flex-col">
+		<div class="animate-item flex w-full flex-row gap-1 md:flex-col">
 			{#each navigation as navItem}
 				<li class="nav-item">
 					<a href={navItem.href} class="text-lg">
@@ -67,7 +70,7 @@
 			{/each}
 		</div>
 	</ul>
-	<div class="w-full px-2">
+	<div class="animate-item w-full px-2">
 		{@render children?.()}
 	</div>
 </div>

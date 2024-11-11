@@ -167,7 +167,7 @@
 			<div class="animate-item flex items-center gap-2">
 				<Button
 					size="sm"
-					variant="success"
+					variant="info"
 					href="/subscriptions"
 					class="flex w-fit items-center gap-2"
 				>

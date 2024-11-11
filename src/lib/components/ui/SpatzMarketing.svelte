@@ -9,8 +9,10 @@
 	import GettingStarted from '$lib/components/marketing/GettingStarted.svelte';
 	import Contribute from '$lib/components/marketing/Contribute.svelte';
 	import { animateMainStagger } from '$lib/animations';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js';
 
 	let hidden = $state(true);
+	let sidebar = useSidebar();
 
 	let stars = $state(0),
 		issues = $state(0),
@@ -46,7 +48,10 @@
 		<div class="animate-item">
 			<About />
 		</div>
-		<div class="animate-item">
+
+		<div
+			class={`${sidebar.state === 'expanded' ? 'sm:hidden lg:block' : '' && sidebar.isMobile} animate-item`}
+		>
 			<FeaturesFeed />
 		</div>
 		<div class="animate-item">

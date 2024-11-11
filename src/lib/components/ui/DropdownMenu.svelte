@@ -48,22 +48,19 @@
 </script>
 
 <DropdownMenu.Root>
-	<DropdownMenu.Trigger asChild let:builder>
-		<Button builders={[builder]} class="rounded-full p-0">
-			<div class="relative">
-				<Avatar />
-
-				{#if notifications > 0}
-					<div
-						class="dropdown-menu-notifications absolute -bottom-1 right-0 rounded-full border border-2 border-background text-xs"
+	<DropdownMenu.Trigger>
+		<div class="relative">
+			<Avatar />
+			{#if notifications > 0}
+				<div
+					class="dropdown-menu-notifications absolute -bottom-1 right-0 rounded-full border border-2 border-background text-xs"
+				>
+					<Badge size="sm" variant="destructive" class="px-1 py-0 text-xs text-white"
+						>{notifications}</Badge
 					>
-						<Badge size="sm" variant="destructive" class="px-1 py-0 text-xs text-white"
-							>{notifications}</Badge
-						>
-					</div>
-				{/if}
-			</div>
-		</Button>
+				</div>
+			{/if}
+		</div>
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Content class="mt-3 w-fit min-w-52 max-w-64 bg-background" align="end">
 		<DropdownMenu.Label class=" p-0">

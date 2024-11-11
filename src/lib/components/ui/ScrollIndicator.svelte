@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
 
 	let scrollProgress = $state(0);
 	let layoutOffset = $state(0);
 	let layoutWidth = $state(0);
 
 	// Access the sidebar state
+	const sidebar = useSidebar();
 
 	const handleScroll = () => {
 		const scrollTop = window.scrollY;
@@ -33,6 +35,17 @@
 			window.removeEventListener('scroll', handleScroll);
 			window.removeEventListener('resize', updateLayoutDimensions);
 		};
+	});
+
+	// Use $effect to reactively update layout dimensions when sidebar state changes
+	$effect(() => {
+		if (sidebar.state === 'expanded' || sidebar.state === 'collapsed') {
+			// adding delay
+			setTimeout(() => {
+				updateLayoutDimensions();
+			}, 300);
+			updateLayoutDimensions();
+		}
 	});
 </script>
 

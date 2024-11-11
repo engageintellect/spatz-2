@@ -10,6 +10,7 @@
 	import { toast } from 'svelte-sonner';
 	import { onDestroy, onMount, tick } from 'svelte';
 	import { siteInfo } from '$lib/data.js';
+
 	interface Props {
 		data: any;
 	}

@@ -18,7 +18,6 @@
 		class: className = '',
 		children
 	}: Props = $props();
-	
 </script>
 
 <div

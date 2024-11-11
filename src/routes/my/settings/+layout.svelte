@@ -4,6 +4,10 @@
 	import { onMount } from 'svelte';
 	import { animateMainStagger } from '$lib/animations';
 	import Icon from '@iconify/svelte';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js';
+
+	let sidebar = useSidebar();
+
 	interface Props {
 		children?: import('svelte').Snippet;
 	}
@@ -39,19 +43,19 @@
 	});
 </script>
 
-<div class="animate-item mx-auto h-full w-full max-w-2xl">
+<div class="animate-item mx-auto w-full max-w-2xl">
 	<!-- <div class="text-7xl">settings</div> -->
 </div>
 <div
-	class="animate-item mx-auto flex h-full w-full max-w-2xl gap-5 rounded-lg md:border md:p-5 md:shadow-lg"
+	class={`${sidebar.state === 'expanded' ? 'lg:border lg:p-5 lg:shadow-lg' : 'md:border md:p-5 md:shadow-lg'} animate-item mx-auto flex h-fit w-full max-w-2xl gap-5 rounded-lg`}
 >
 	<ul class="flex w-40 flex-col gap-1">
 		{#each navigation as navItem}
 			<li class="">
 				<a href={navItem.href} class="text-lg">
 					<Button
-						class="flex w-full items-center justify-between gap-2"
-						variant={`${$page.url.pathname === navItem.href ? 'default' : 'outline'}`}
+						variant={`${$page.url.pathname === navItem.href ? 'outline' : 'outline'}`}
+						class={`flex w-full items-center justify-between gap-2 ${$page.url.pathname === navItem.href ? 'bg-secondary' : ''}`}
 					>
 						<div>
 							{navItem.title}

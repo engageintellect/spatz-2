@@ -24,7 +24,7 @@
 
 {#if showButton}
 	<div transition:fade={{ duration: 200 }} class="fixed bottom-3 p-2">
-		<Button on:click={scrollToTop} class="flex items-center gap-2 shadow-lg">
+		<Button onclick={scrollToTop} class="flex items-center gap-2 shadow-lg">
 			<div class="uppercase">scroll to top</div>
 			<Icon icon="mdi-arrow-up" class="h-5 w-5" />
 		</Button>

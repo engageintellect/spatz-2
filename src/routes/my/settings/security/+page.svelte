@@ -39,7 +39,7 @@
 			<div class="">
 				<a href="/auth/reset-password">forgot password?</a>
 				<div class="mt-2 w-full max-w-lg">
-					<Button class="flex items-center gap-2 lowercase" type="submit">
+					<Button variant="success" class="flex items-center gap-2 lowercase" type="submit">
 						<Icon icon="material-symbols:sync" class="h-5 w-5" />
 						<div>update password</div>
 					</Button>

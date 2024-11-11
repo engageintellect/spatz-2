@@ -38,16 +38,24 @@
 		</div>
 	</h1>
 
-	<p class="my-5 text-sm text-muted-foreground">
-		Press
-		<kbd
-			class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100"
-		>
-			<span class="text-xs">⌘</span>J
-		</kbd>
-		to open the command palette
-	</p>
-
+	<div class="my-5 flex flex-col gap-2 md:my-10">
+		<p class=" text-xs text-muted-foreground">
+			<kbd
+				class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100"
+			>
+				<span class="text-xs">⌘</span>j
+			</kbd>
+			<span class="pl-1"> to open the command palette. </span>
+		</p>
+		<p class=" text-xs text-muted-foreground">
+			<kbd
+				class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100"
+			>
+				<span class="text-xs">⌘</span>b
+			</kbd>
+			<span class="pl-1"> to open the sidebar. </span>
+		</p>
+	</div>
 	<div class="mt-2 grid w-full grid-cols-2 gap-2 md:grid-cols-3">
 		<a
 			href="https://github.com/new?template_name=spatz-2&template_owner=engageintellect"

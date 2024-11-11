@@ -40,7 +40,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 			...post,
 			userId: users.find((user) => user.id === post.author),
 			username: users.find((user) => user.id === post.author)?.username,
-			avatar: users.find((user) => user.id === post.author)?.avatar
+			avatar: users.find((user) => user.id === post.author)?.avatar,
+			verified: users.find((user) => user.id === post.author)?.verified
 		};
 	});
 

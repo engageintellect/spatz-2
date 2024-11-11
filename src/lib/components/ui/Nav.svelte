@@ -4,9 +4,9 @@
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { currentUser } from '$lib/stores/user';
-	import DropdownMenu from '$lib/components/ui/DropdownMenu.svelte';
 	import { siteInfo } from '$lib/data.js';
-	import Icon from '@iconify/svelte';
+	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+	import DropdownMenu from './DropdownMenu.svelte';
 
 	const { notifications } = $props();
 
@@ -32,10 +32,11 @@
 			</div>
 		</a>
 
-		<div class="buttons flex items-center gap-2">
+		<div class="buttons flex items-center gap-5 pr-2">
 			{#if $currentUser}
 				<ThemeToggle />
-				<DropdownMenu {notifications} />
+				<Sidebar.Trigger {notifications} />
+				<!-- <DropdownMenu {notifications} /> -->
 			{:else}
 				<div class="flex items-center gap-2">
 					<a href="/auth/login">

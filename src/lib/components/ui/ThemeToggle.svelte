@@ -6,7 +6,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 </script>
 
-<Button on:click={toggleMode} variant="ghost" size="icon">
+<Button onclick={toggleMode} variant="ghost" size="icon">
 	<Sun
 		class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
 	/>

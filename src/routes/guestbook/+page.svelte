@@ -12,6 +12,9 @@
 	import { lazyLoad } from '$lib/lazyLoad';
 	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
 	import { animateMainStagger } from '$lib/animations';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
+
+	let sidebar = useSidebar(); // Initialize the sidebar
 
 	interface Props {
 		data: {
@@ -32,6 +35,7 @@
 
 	let { data, form }: Props = $props();
 
+	let hidden: boolean = $state(true);
 	let loading: boolean = $state(false);
 	let isSubmitting: boolean = $state(false);
 
@@ -101,6 +105,7 @@
 	};
 
 	onMount(async () => {
+		hidden = false;
 		await tick(); // Ensure the DOM is fully updated
 		window.addEventListener('scroll', handleScroll);
 		animateMainStagger();
@@ -178,8 +183,12 @@
 
 <ScrollIndicator />
 
-<div class="mx-auto w-full max-w-lg transition-all duration-300">
-	<div class="animate-item">
+<div
+	class={`${sidebar.state === 'expanded' ? 'lg:border' : 'md:border'} animate-item mx-auto mb-20 mt-5 w-full max-w-2xl rounded-lg`}
+>
+	<div
+		class={`${hidden ? 'opacity-0' : ''} ${sidebar.state === 'expanded' ? 'lg:p-5' : 'md:p-5'} w-full max-w-lg`}
+	>
 		<h1 class="flex items-center text-6xl font-bold text-primary">
 			<span class="title-guest">guest</span>
 			<span class="title-book font-thin text-primary/50">book</span>
@@ -190,7 +199,7 @@
 		<div class="form-control gap-0">
 			<input type="hidden" name="author" value={data?.user?.id} />
 
-			<div class="animate-item pb-10">
+			<div class={`${sidebar.state === 'expanded' ? 'lg:px-5' : 'md:px-5'} animate-item pb-10`}>
 				<PostInputArea
 					action={`/guestbook?/createPost`}
 					userId={$currentUser.id}
@@ -210,14 +219,18 @@
 
 			<div class="animate-item w-full">
 				<div class="">
-					<div class="flex items-center justify-between gap-2 border-b pb-2">
-						<div class="text-xl font-thin">posts: {sortedPosts.length}</div>
+					<div
+						class={`${sidebar.state === 'expanded' ? 'lg:px-5' : 'md:px-5'} flex items-center justify-between gap-2 pb-2`}
+					>
+						<div class="text-xl font-thin text-muted-foreground">
+							posts: <span class="text-foreground">{sortedPosts.length}</span>
+						</div>
 
 						<div class="flex items-end justify-end gap-2">
 							<Button
 								size="sm"
 								variant={sortOption === 'date' ? 'default' : 'ghost'}
-								on:click={() => (sortOption = 'date')}
+								onclick={() => (sortOption = 'date')}
 								class="text-xs transition-all duration-300"
 							>
 								new
@@ -226,7 +239,7 @@
 							<Button
 								size="sm"
 								variant={sortOption === 'likes' ? 'default' : 'ghost'}
-								on:click={() => (sortOption = 'likes')}
+								onclick={() => (sortOption = 'likes')}
 								class="text-xs transition-all duration-300"
 							>
 								likes
@@ -236,7 +249,7 @@
 							<Button
 								size="sm"
 								variant={sortOption === 'following' ? 'default' : 'ghost'}
-								on:click={() => (sortOption = 'following')}
+								onclick={() => (sortOption = 'following')}
 								class="text-xs transition-all duration-300"
 							>
 								feed
@@ -249,7 +262,7 @@
 						{#if sortedPosts.length > 0}
 							{#each sortedPosts as post}
 								{#if post.mentioning.length === 0}
-									<div class="border-b">
+									<div class={`${sidebar.state === 'expanded' ? 'lg:px-5' : 'md:px-5'} border-t`}>
 										<Post
 											postAuthorId={post.author}
 											comments={post.mentionedBy}
@@ -262,6 +275,7 @@
 											postContent={post.content}
 											likes={post.likes}
 											currentUser={$currentUser}
+											isVerified={post.verified || false}
 										></Post>
 									</div>
 								{/if}
@@ -276,10 +290,10 @@
 			</div>
 		</div>
 	</div>
-
-	{#if showScrollToTop === true}
-		<div class="flex justify-center">
-			<ScrollToTopButton />
-		</div>
-	{/if}
 </div>
+
+{#if showScrollToTop === true}
+	<div class="flex justify-center">
+		<ScrollToTopButton />
+	</div>
+{/if}

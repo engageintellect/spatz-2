@@ -66,7 +66,7 @@
 <div class={` ${hidden ? 'opacity-0' : ''} mx-auto max-w-2xl`}>
 	<div class="flex justify-between">
 		<Button
-			on:click={() => window.history.back()}
+			onclick={() => window.history.back()}
 			size="sm"
 			variant="outline"
 			class="group/backButton backButton flex items-center gap-2"
@@ -112,7 +112,14 @@
 			</div>
 
 			<div class="flex flex-col">
-				<div class="truncate text-2xl">{data.userProfile.username}</div>
+				<div class="flex items-center gap-2">
+					<div class="truncate text-2xl">{data.userProfile.username}</div>
+
+					{#if data.userProfile.verified === true}
+						<Icon icon="material-symbols:verified" class="h-5 w-5 text-info text-info" />
+					{/if}
+				</div>
+
 				<div class="font-thin text-foreground/70">{data.userProfile.job_title}</div>
 				<div class="mt-2 truncate text-xs">
 					joined: {timeSince(formatFriendlyDate(data.userProfile.created))}
@@ -264,8 +271,9 @@
 		{/if}
 
 		{#if data.userPosts.length > 0}
-			<div class="animate-item mb-2 mt-10 text-xl font-thin">
-				{data.userProfile.username} has {data.userPosts.length} posts:
+			<div class="animate-item mb-2 mt-10 text-xl font-thin text-muted-foreground">
+				{data.userProfile.username} has <span class="text-foreground">{data.userPosts.length}</span>
+				posts:
 			</div>
 
 			<div class="grid grid-cols-1 gap-2">
@@ -287,6 +295,7 @@
 							likes={post.likes}
 							id={post.id}
 							currentUser={$currentUser}
+							isVerified={post.verified}
 						/>
 					</div>
 				{/each}
