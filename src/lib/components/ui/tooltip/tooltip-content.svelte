@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Tooltip as TooltipPrimitive } from "bits-ui";
-	import { cn } from "$lib/utils.js";
+	import { Tooltip as TooltipPrimitive } from 'bits-ui';
+	import { cn } from '$lib/utils.js';
 
 	let {
 		ref = $bindable(null),
@@ -14,7 +14,7 @@
 	bind:ref
 	{sideOffset}
 	class={cn(
-		"bg-popover text-popover-foreground z-50 overflow-hidden rounded-md border px-3 py-1.5 text-sm shadow-md",
+		'z-50 overflow-hidden rounded-md border bg-background px-3 py-1.5 text-sm text-popover-foreground',
 		className
 	)}
 	{...restProps}

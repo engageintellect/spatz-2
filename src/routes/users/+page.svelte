@@ -190,7 +190,10 @@
 
 			<div class=" flex items-center justify-between border-b pb-2 text-xl font-thin">
 				<!-- Display the total count of filtered users -->
-				<div>{filter ? 'query matches' : 'total users'}: {filteredUsers.length}</div>
+				<div class="text-muted-foreground">
+					{filter ? 'query matches' : 'total users'}:
+					<span class="text-foreground">{filteredUsers.length}</span>
+				</div>
 
 				<div class="flex items-center gap-2">
 					<Button

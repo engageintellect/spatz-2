@@ -34,7 +34,7 @@
 </script>
 
 <main
-	class={`${hidden ? 'opacity-0' : ''} ${sidebar.state === 'expanded' ? 'lg:border lg:p-5' : ' md:border md:p-5'} animate-item mx-auto max-w-5xl rounded-lg bg-background p-2 shadow-md`}
+	class={`${hidden ? 'opacity-0' : ''} ${sidebar.state === 'expanded' ? 'xl:border xl:p-5 xl:shadow' : ' md:border md:p-5 md:shadow'} animate-item mx-auto max-w-5xl rounded-lg bg-background p-2`}
 >
 	<!-- Pricing Header -->
 	<h1 class="animate-item text-center text-5xl font-bold lowercase">subscriptions</h1>
@@ -46,11 +46,11 @@
 
 	{#if data.existingSubscriptions && data.existingSubscriptions.length > 0}
 		<div class="mt-5 flex flex-col items-center justify-between gap-5">
-			<div class="animate-item text-center text-lg text-muted-foreground">
+			<p class="animate-item mx-auto max-w-xl text-center text-lg text-muted-foreground">
 				You are currently subscribed to the <span class="text-foreground"
 					>{data?.existingSubscriptions[0]?.plan?.interval}ly</span
 				> plan.
-			</div>
+			</p>
 			<Button
 				href="/my/settings/subscription"
 				class="animate-item flex items-center justify-between gap-2"
@@ -60,14 +60,14 @@
 			</Button>
 		</div>
 	{:else}
-		<p class="animate-item mt-5 text-center text-muted-foreground">
+		<p class="animate-item mx-auto mt-5 w-full max-w-xl text-center text-muted-foreground">
 			Choose the plan that best suits your needs. No hidden fees, no surprises. Cancel at any time.
 		</p>
 	{/if}
 
 	<!-- Pricing Options -->
 	<div
-		class={`${sidebar.state === 'expanded' ? 'lg:grid-cols-3' : 'md:grid-cols-3'} animate-item mt-10 grid gap-5 sm:grid-cols-1`}
+		class={`${sidebar.state === 'expanded' ? 'sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3' : 'sm:grid-cols-2 md:grid-cols-3'} animate-item mt-10 grid gap-2 sm:grid-cols-1`}
 	>
 		{#each data.pbSubscriptions as plan}
 			<div

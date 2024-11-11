@@ -46,12 +46,12 @@
 		<div
 			class="relative my-2 flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background"
 		>
-			<Marquee pauseOnHover class="[--duration:20s]">
+			<Marquee vertical={false} pauseOnHover class="[--duration:20s]">
 				{#each firstRow as item}
 					<FeatureCard {...item} />
 				{/each}
 			</Marquee>
-			<Marquee reverse pauseOnHover class="[--duration:20s]">
+			<Marquee vertical={false} reverse pauseOnHover class="[--duration:20s]">
 				{#each secondRow as item}
 					<FeatureCard {...item} />
 				{/each}

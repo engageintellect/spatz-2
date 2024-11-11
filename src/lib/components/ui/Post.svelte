@@ -76,7 +76,7 @@
 </script>
 
 <div
-	class={`${sidebar.state === 'expanded' ? 'lg:px-5' : 'md:px-5'} text-elipsis relative cursor-pointer overflow-x-hidden transition-all duration-300`}
+	class={`${sidebar.state === 'expanded' ? '' : ''} text-elipsis relative cursor-pointer overflow-x-hidden transition-all duration-300`}
 >
 	<div class="card-body p-3 px-1 transition-all duration-300">
 		<div class="flex items-start gap-3">
@@ -85,7 +85,7 @@
 					<div class="h-10 w-10 md:h-12 md:w-12">
 						<img
 							src={avatar}
-							class="mt-1 h-full w-full rounded-full border object-cover shadow"
+							class="mt-1 h-full w-full rounded-full object-cover"
 							alt="user-avatar"
 						/>
 					</div>
@@ -98,7 +98,7 @@
 					>
 
 					{#if isVerified === true}
-						<Icon icon="material-symbols:verified" class="h-5 w-5 text-info text-info" />
+						<Icon icon="material-symbols:verified" class="h-4 w-4 text-info text-info" />
 					{/if}
 					<div class="text-xs text-foreground/70">
 						{timeSince(formatFriendlyDate(postDate))}

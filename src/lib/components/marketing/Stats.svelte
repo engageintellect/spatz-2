@@ -3,6 +3,9 @@
 	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
 	import Animate from '$lib/components/ui/Animate.svelte';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js';
+
+	let sidebar = useSidebar();
 
 	import BlurIn from '$lib/components/magic-ui/BlurIn.svelte';
 
@@ -88,7 +91,7 @@
 				<div class="stat-icon">
 					<Icon
 						icon="mdi:star"
-						class="h-8 w-8 text-yellow-500 transition-all duration-300 md:h-12 md:w-12 md:group-hover:scale-105"
+						class={`${sidebar.state === 'expanded' ? 'lg:h-12 lg:w-12' : 'md:h-12 md:w-12'} h-8 w-8 text-yellow-500 transition-all duration-300 md:group-hover:scale-105`}
 					/>
 				</div>
 			</div>
@@ -104,7 +107,7 @@
 				<div class="stat-icon">
 					<Icon
 						icon="octicon:issue-opened-24"
-						class=" h-8 w-8 text-sky-500 transition-all duration-300 md:h-12 md:w-12 md:group-hover:scale-105"
+						class={`${sidebar.state === 'expanded' ? 'lg:h-12 lg:w-12' : 'md:h-12 md:w-12'} h-8 w-8 text-info transition-all duration-300 md:group-hover:scale-105`}
 					/>
 				</div>
 			</div>
@@ -121,7 +124,7 @@
 				<div class="stat-icon">
 					<Icon
 						icon="carbon:fork"
-						class="h-8 w-8 text-purple-500 transition-all duration-300 md:h-12 md:w-12 md:group-hover:scale-105"
+						class={`${sidebar.state === 'expanded' ? 'lg:h-12 lg:w-12' : 'md:h-12 md:w-12'} h-8 w-8 text-purple-500 transition-all duration-300 md:group-hover:scale-105`}
 					/>
 				</div>
 			</div>

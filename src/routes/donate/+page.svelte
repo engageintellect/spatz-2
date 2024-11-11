@@ -6,7 +6,12 @@
 	import { Input } from '$lib/components/ui/input/index.js';
 	import Icon from '@iconify/svelte';
 	import { gsap } from 'gsap';
+
 	import QRCode from 'qrcode';
+
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js';
+
+	let sidebar = useSidebar();
 
 	let stripePromise: Promise<Stripe | null> | undefined;
 	let amount: any = $state();
@@ -86,7 +91,7 @@
 
 <div class="donate-card">
 	<main
-		class="mx-auto max-w-lg rounded-lg p-2 shadow-md transition-all duration-300 md:border md:p-5"
+		class={` ${sidebar.state === 'expanded' ? 'lg:border lg:p-5' : 'md:border md:p-5'} mx-auto max-w-lg rounded-lg p-2 shadow-md transition-all duration-300`}
 	>
 		<h1 class="text-6xl font-bold">donate</h1>
 

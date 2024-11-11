@@ -184,7 +184,7 @@
 <ScrollIndicator />
 
 <div
-	class={`${sidebar.state === 'expanded' ? 'lg:border' : 'md:border'} animate-item mx-auto mb-20 mt-5 w-full max-w-2xl rounded-lg shadow`}
+	class={`${sidebar.state === 'expanded' ? 'lg:border' : 'md:border'} animate-item mx-auto mb-20 mt-5 w-full max-w-2xl rounded-lg`}
 >
 	<div
 		class={`${hidden ? 'opacity-0' : ''} ${sidebar.state === 'expanded' ? 'lg:p-5' : 'md:p-5'} w-full max-w-lg`}
@@ -222,7 +222,9 @@
 					<div
 						class={`${sidebar.state === 'expanded' ? 'lg:px-5' : 'md:px-5'} flex items-center justify-between gap-2 pb-2`}
 					>
-						<div class="text-xl font-thin">posts: {sortedPosts.length}</div>
+						<div class="text-xl font-thin text-muted-foreground">
+							posts: <span class="text-foreground">{sortedPosts.length}</span>
+						</div>
 
 						<div class="flex items-end justify-end gap-2">
 							<Button
@@ -260,7 +262,7 @@
 						{#if sortedPosts.length > 0}
 							{#each sortedPosts as post}
 								{#if post.mentioning.length === 0}
-									<div class="border-t">
+									<div class={`${sidebar.state === 'expanded' ? 'lg:px-5' : 'md:px-5'} border-t`}>
 										<Post
 											postAuthorId={post.author}
 											comments={post.mentionedBy}

@@ -153,6 +153,7 @@
 					class="flex w-full items-center gap-2 lowercase md:w-fit"
 					type="submit"
 					disabled={loading}
+					variant="success"
 				>
 					<Icon icon="material-symbols:sync" class={`${loading ? 'animate-spin' : ''} h-5 w-5`} />
 					<div>update</div>
