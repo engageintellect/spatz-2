@@ -46,7 +46,7 @@
 		<div class="flex min-h-[calc(100svh)] w-full flex-col md:min-h-screen">
 			<Nav notifications={data.globalNotifications.length} />
 
-			<main class="mx-auto my-2 w-full max-w-5xl flex-grow overflow-x-clip px-2 md:my-5">
+			<main class={`mx-auto my-2 w-full max-w-5xl flex-grow overflow-x-clip px-2`}>
 				<slot />
 			</main>
 			<Footer />
