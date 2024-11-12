@@ -16,8 +16,6 @@
 	}: any & {
 		onclick?: (e: MouseEvent) => void;
 	} = $props();
-
-	console.log('sidebar', sidebar.isMobile);
 </script>
 
 <Button

@@ -6,15 +6,18 @@
 	import Toast from '$lib/components/ui/Toast.svelte';
 	import { ModeWatcher } from 'mode-watcher';
 	import { Toaster } from '$lib/components/ui/sonner';
-	import type { PageData } from './$types';
 	import { currentUser } from '$lib/stores/user';
 	import { toast } from '$lib/stores/toast';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import AppSidebar from '$lib/components/ui/AppSidebar.svelte';
 
-	export let data: PageData;
+	let open = $state(true);
 
-	$: currentUser.set(data.user);
+	let { data, children } = $props();
+
+	$effect(() => {
+		$currentUser = data.user;
+	});
 
 	// START VIEW TRANSITIONS API
 	import { onNavigate } from '$app/navigation';
@@ -41,13 +44,12 @@
 {#if $currentUser}
 	<Command />
 
-	<Sidebar.Provider>
+	<Sidebar.Provider {open}>
 		<AppSidebar notifications={data.globalNotifications.length} />
 		<div class="flex min-h-[calc(100svh)] w-full flex-col md:min-h-screen">
 			<Nav notifications={data.globalNotifications.length} />
-
 			<main class={`mx-auto my-2 w-full max-w-5xl flex-grow overflow-x-clip px-2`}>
-				<slot />
+				{@render children()}
 			</main>
 			<Footer />
 		</div>
@@ -57,7 +59,7 @@
 		<Nav notifications={data.globalNotifications.length} />
 
 		<main class="mx-auto my-2 w-full max-w-5xl flex-grow overflow-x-clip px-2 md:my-5">
-			<slot />
+			{@render children()}
 		</main>
 		<Footer />
 	</div>
