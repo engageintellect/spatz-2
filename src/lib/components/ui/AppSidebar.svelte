@@ -53,7 +53,7 @@
 	}
 </script>
 
-<Sidebar.Root>
+<Sidebar.Root class="z-50">
 	<Sidebar.Header class="">
 		<div class="rounded bg-secondary p-2">
 			<div class="p-2">
@@ -98,7 +98,7 @@
 						<Sidebar.MenuItem class={getClass(item.url)}>
 							<Sidebar.MenuButton>
 								{#snippet child({ props })}
-									<a href={item.url} {...props}>
+									<a data-sveltekit-preload-data="hover" href={item.url} {...props}>
 										<Icon icon={item.icon} class="" />
 										<span>{item.title}</span>
 										{#if item.title === 'Notifications'}
@@ -127,7 +127,7 @@
 						<Sidebar.MenuItem class={getClass(item.url)}>
 							<Sidebar.MenuButton>
 								{#snippet child({ props })}
-									<a href={item.url} {...props}>
+									<a data-sveltekit-preload-data="hover" href={item.url} {...props}>
 										<Icon icon={item.icon} class="" />
 										<span>{item.title}</span>
 									</a>
@@ -147,7 +147,7 @@
 						<Sidebar.MenuItem class={getClass(item.url)}>
 							<Sidebar.MenuButton>
 								{#snippet child({ props })}
-									<a href={item.url} {...props}>
+									<a data-sveltekit-preload-data="hover" href={item.url} {...props}>
 										<Icon icon={item.icon} class="" />
 										<span>{item.title}</span>
 									</a>

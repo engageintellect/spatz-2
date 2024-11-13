@@ -41,7 +41,9 @@
 	$effect(() => {
 		if (sidebar.state === 'expanded' || sidebar.state === 'collapsed') {
 			// adding delay
-
+			setTimeout(() => {
+				updateLayoutDimensions();
+			}, 300);
 			updateLayoutDimensions();
 		}
 	});
@@ -49,11 +51,10 @@
 
 <!-- Scroll progress bar -->
 <div
-	class=" fixed top-[57px] z-10 h-[1px] bg-foreground"
+	class="duration-50 fixed top-[55px] z-10 h-[1px] bg-foreground transition-all ease-out"
 	style="left: {layoutOffset}px; width: calc({layoutWidth}px * {scrollProgress / 100})"
 ></div>
 
-<!-- Example layout container -->
 <div class="layout-container mx-auto max-w-5xl">
 	<!-- Your layout content goes here -->
 </div>
