@@ -29,7 +29,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 			locals.pb.collection('notifications').getFullList({
 				filter: `user ~ "${id}"`,
 				sort: '-created',
-				autoCancel: false
+				autoCancel: false,
+				expand: 'commentId'
 			})
 		]);
 

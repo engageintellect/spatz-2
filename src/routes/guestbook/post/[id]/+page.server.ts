@@ -12,58 +12,57 @@ interface CustomError {
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const { id } = params;
 
+	// Fetch the post with expanded comments and author
 	const post = await locals.pb.collection('posts').getOne(id, { expand: 'comments,author' });
 
 	if (!post) {
-		return {
-			status: 404,
-			error: new Error('Post not found')
-		};
+		throw error(404, 'Post not found');
 	}
 
-	const users = await locals.pb.collection('users').getFullList({
-		sort: '-created'
-	});
+	// Fetch all users and posts once
+	const [users, posts] = await Promise.all([
+		locals.pb.collection('users').getFullList({ sort: '-created' }),
+		locals.pb.collection('posts').getFullList({ sort: '-created' })
+	]);
 
-	const posts = await locals.pb.collection('posts').getFullList({
-		sort: '-created'
-	});
+	// Create a map for users by their IDs for quick lookups
+	const usersMap = new Map(users.map((user) => [user.id, user]));
 
+	// Transform mentioning posts
 	const transformedMentioning = posts
 		.filter((mention) => mention.mentioning.includes(post.id))
-		.map((mention) => {
-			const author = users.find((user) => user.id === mention.author);
-			return {
-				...mention,
-				authorUsername: author?.username,
-				authorAvatar: author?.avatar,
-				comments: mention.comments
-			};
-		});
+		.map((mention) => ({
+			...mention,
+			authorUsername: usersMap.get(mention.author)?.username,
+			authorAvatar: usersMap.get(mention.author)?.avatar,
+			comments: mention.comments
+		}));
 
+	// Transform the current post
+	const author = usersMap.get(post.author);
 	const transformedPost = {
 		...post,
-		username: users.find((user) => user.id === post.author)?.username,
-		avatar: users.find((user) => user.id === post.author)?.avatar,
-		verified: users.find((user) => user.id === post.author)?.verified
+		username: author?.username,
+		avatar: author?.avatar,
+		verified: author?.verified
 	};
 
-	let respondingTo = [];
-	if (post.mentioning && post.mentioning.length > 0) {
-		respondingTo = await Promise.all(
-			post.mentioning.map(async (mentionId: string) => {
-				const mentionedPost = await locals.pb.collection('posts').getOne(mentionId, {
-					expand: 'author,comments'
-				});
-				const author = users.find((user) => user.id === mentionedPost.author);
-				return {
-					...mentionedPost,
-					authorUsername: author?.username,
-					authorAvatar: author?.avatar
-				};
-			})
-		);
-	}
+	// Fetch respondingTo posts if they exist
+	const respondingTo = post.mentioning?.length
+		? await Promise.all(
+				post.mentioning.map(async (mentionId: string) => {
+					const mentionedPost = await locals.pb.collection('posts').getOne(mentionId, {
+						expand: 'author,comments'
+					});
+					const mentionedAuthor = usersMap.get(mentionedPost.author);
+					return {
+						...mentionedPost,
+						authorUsername: mentionedAuthor?.username,
+						authorAvatar: mentionedAuthor?.avatar
+					};
+				})
+			)
+		: [];
 
 	return {
 		post: transformedPost,
@@ -78,6 +77,7 @@ export const actions: Actions = {
 			await request.formData(),
 			createPostCommentSchema
 		);
+
 		if (errors) {
 			return fail(400, {
 				data: formData,
@@ -86,34 +86,40 @@ export const actions: Actions = {
 		}
 
 		try {
-			// Create the comment
-			const mentioning = await locals.pb.collection('posts').create(formData);
+			const comment = await locals.pb.collection('posts').create(formData);
 
 			// Get the associated post
 			const post = await locals.pb.collection('posts').getOne(formData.post);
 
-			// Update the post's comments array to include the new comment ID
-			await locals.pb.collection('posts').update(mentioning.id, { mentioning: post.id });
+			// Update the post's mentioning and mentionedBy arrays
+			await locals.pb.collection('posts').update(comment.id, { mentioning: post.id });
 
 			const currentMentions = post.mentionedBy || [];
-
-			// Append the new mention ID
-			currentMentions.push(mentioning.id);
-
-			// Update the post with the new array
+			currentMentions.push(comment.id);
 			await locals.pb.collection('posts').update(post.id, { mentionedBy: currentMentions });
+
+			// Create a notification
+			if (post.author !== comment.author) {
+				await locals.pb.collection('notifications').create({
+					title: 'New Comment',
+					message: 'Commented on your post',
+					user: post.author,
+					referencedUser: comment.author,
+					referencedPost: post.id,
+					commentId: comment.id
+				});
+			}
 
 			return { success: true };
 		} catch (err) {
 			const customError = err as CustomError;
-			console.log('Error: ', 'error creating comment: ' + customError.message);
-			throw error(customError.status, customError.message);
+			console.error('Error creating comment:', customError.message);
+			throw error(customError.status || 500, customError.message || 'Unknown error');
 		}
 	},
 
 	deletePostComment: async ({ request, locals }) => {
 		try {
-			// Parse and validate the commentId and other fields
 			const formData = await request.formData();
 			const commentId = formData.get('commentId') as string;
 			const currentUserId = formData.get('currentUserId') as string;
@@ -122,28 +128,20 @@ export const actions: Actions = {
 				throw error(400, 'Comment ID or User ID is missing');
 			}
 
-			// Validate using schema
 			deletePostCommentSchema.parse({ post: commentId });
 
-			// Fetch the comment to ensure it exists
 			const comment = await locals.pb.collection('comments').getOne(commentId);
 
-			// Ensure the user is authorized to delete the comment
 			if (comment.author !== locals.pb.authStore.model?.id) {
 				throw error(403, 'Unauthorized');
 			}
 
-			// Perform the delete operation
 			await locals.pb.collection('comments').delete(commentId);
 
-			return {
-				success: true
-			};
+			return { success: true };
 		} catch (err) {
 			console.error('Error deleting comment:', err);
-			return {
-				error: 'Error deleting comment'
-			};
+			return fail(500, { error: 'Error deleting comment' });
 		}
 	}
 };

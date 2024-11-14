@@ -142,6 +142,7 @@
 					{#each data.notifications as notification}
 						{#if notification.user === data.userProfile.id}
 							<Notification
+								notificationComment={notification.expand?.commentId}
 								notificationReferencedPost={notification.referencedPost}
 								notificationOwner={notification.user}
 								notificationAuthor={notification.referencedUser}

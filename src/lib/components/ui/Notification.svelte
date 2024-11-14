@@ -7,6 +7,7 @@
 	import { formatFriendlyDate, timeSince } from '$lib/utils';
 
 	interface Props {
+		notificationComment: any;
 		notificationReferencedPost: any;
 		notificationOwner: any;
 		notificationAuthor: any;
@@ -19,6 +20,7 @@
 	}
 
 	let {
+		notificationComment,
 		notificationReferencedPost,
 		notificationOwner,
 		notificationAuthor,
@@ -34,7 +36,27 @@
 	let deleteLoading = false;
 	let dialogOpen = $state(false);
 
-	// Remove the onMount block and use a reactive statement
+	// Define a type for notification types
+	type NotificationType = 'follow' | 'like' | 'comment' | 'default';
+
+	// Define the map for icon and background colors
+	const notificationMap: Record<NotificationType, { icon: string; bgColor: string }> = {
+		follow: { icon: 'mdi:account', bgColor: 'bg-info text-white' },
+		like: { icon: 'material-symbols:favorite-rounded', bgColor: 'bg-destructive text-white' },
+		comment: { icon: 'mdi:reply', bgColor: 'bg-purple-500 text-white' },
+		default: { icon: 'mdi:bell-outline', bgColor: 'bg-info text-white' }
+	};
+
+	// Helper function to determine the notification type
+	const getNotificationType = (content: string): NotificationType => {
+		if (content.toLowerCase().includes('follow')) return 'follow';
+		if (content.toLowerCase().includes('like')) return 'like';
+		if (content.toLowerCase().includes('comment')) return 'comment';
+		return 'default';
+	};
+
+	const notificationType = getNotificationType(notificationContent);
+	const { icon, bgColor } = notificationMap[notificationType];
 </script>
 
 <div
@@ -51,116 +73,103 @@
 							alt="user-avatar"
 						/>
 						<div
-							class={`absolute -bottom-1 right-0 flex h-5 w-5 items-center justify-center rounded-full border border-2 border-background md:h-6 md:w-6 ${
-								notificationContent.toLowerCase().includes('follow')
-									? 'bg-info text-white'
-									: 'bg-destructive text-white'
-							}`}
+							class={`absolute -bottom-1 right-0 flex h-5 w-5 items-center justify-center rounded-full border border-background ${bgColor}`}
 						>
-							<Icon
-								icon={notificationContent.toLowerCase().includes('follow')
-									? `mdi:account`
-									: `material-symbols:favorite-rounded`}
-								class="h-3 w-3 md:h-4 md:w-4"
-							/>
+							<Icon {icon} class="h-3 w-3 md:h-4 md:w-4" />
 						</div>
 					</div>
 				</a>
 			</div>
 			<div class="w-full">
 				<div class="flex items-center gap-2">
-					<a href={`/users/${notificationAuthor}`} class="text-base lowercase text-primary"
-						>{notificationAuthorUsername}</a
-					>
+					<a href={`/users/${notificationAuthor}`} class="text-base lowercase text-primary">
+						{notificationAuthorUsername}
+					</a>
 					<div class="text-xs text-foreground/70">
 						{timeSince(formatFriendlyDate(postDate))}
 					</div>
 				</div>
 
 				<a
-					href={notificationReferencedPost
-						? `/guestbook/post/${notificationReferencedPost}`
-						: `/users/${notificationAuthor}`}
+					href={notificationComment?.id
+						? `/guestbook/post/${notificationComment.id}`
+						: notificationReferencedPost
+							? `/guestbook/post/${notificationReferencedPost}`
+							: `/users/${notificationAuthor}`}
 				>
-					<div class="pb-2 pr-5 pt-1 font-thin">{@html notificationContent}</div>
+					<div class="pb-2 pr-5 pt-1 text-sm font-thin">{@html notificationContent}</div>
+					{#if notificationComment}
+						<div class="text-muted-foreground">"{notificationComment.content}"</div>
+					{/if}
 				</a>
 
-				<div class=" flex items-center gap-5 bg-red-500">
-					{#if currentUser.id === notificationOwner}
-						<div class="absolute right-0 top-1 flex items-center gap-1">
-							<Dialog.Root bind:open={dialogOpen}>
-								<Dialog.Trigger>
-									<div>
-										<Button
-											variant="ghost"
-											size="sm"
-											onclick={() => (dialogOpen = true)}
-											class="group/deleteButton flex scale-[0.75] items-center active:scale-[0.70]"
+				{#if currentUser.id === notificationOwner}
+					<div class="absolute right-0 top-1 flex items-center gap-1">
+						<Dialog.Root bind:open={dialogOpen}>
+							<Dialog.Trigger>
+								<Button
+									variant="ghost"
+									size="sm"
+									onclick={() => (dialogOpen = true)}
+									class="group/deleteButton flex scale-[0.75] items-center active:scale-[0.70]"
+								>
+									<Icon
+										icon={'mdi:close'}
+										class={`h-5 w-5 transition-all duration-200 group-hover/deleteButton:scale-110 ${deleteLoading ? 'animate-deletePost' : ''}`}
+									/>
+									<span class="sr-only">Delete</span>
+								</Button>
+							</Dialog.Trigger>
+							<Dialog.Content>
+								<Dialog.Header>
+									<Dialog.Title>Are you sure?</Dialog.Title>
+									<Dialog.Description>
+										Are you sure you want to delete this notification? This action cannot be undone.
+										<form
+											use:enhance={({ cancel }) => {
+												if (isDeleting) return cancel();
+												isDeleting = true;
+
+												return async ({ result, update }) => {
+													console.log('Result:', result);
+													if (result.type === 'success') {
+														toast('Notification deleted successfully.', {});
+													} else {
+														toast.error('Failed to delete notification.', {});
+													}
+													dialogOpen = false;
+													await update();
+													isDeleting = false;
+												};
+											}}
+											action={`/notifications/[id]?/deleteNotification`}
+											method="POST"
 										>
-											<Icon
-												icon={'mdi:close'}
-												class={`h-5 w-5 transition-all duration-200 group-hover/deleteButton:scale-110 ${deleteLoading ? 'animate-deletePost' : ''}`}
+											<input type="hidden" name="notificationId" value={id} />
+											<input
+												type="hidden"
+												name="currentUserId"
+												value={currentUser.id}
+												disabled={deleteLoading}
 											/>
-											<span class="sr-only">Delete</span>
-										</Button>
-									</div>
-								</Dialog.Trigger>
-								<Dialog.Content>
-									<Dialog.Header>
-										<Dialog.Title>Are you sure?</Dialog.Title>
-										<Dialog.Description>
-											Are you sure you want to delete this notification? This action cannot be
-											undone.
-											<form
-												use:enhance={({ cancel }) => {
-													if (isDeleting) return cancel(); // Prevent multiple submissions
-													isDeleting = true;
-
-													return async ({ result, update }) => {
-														console.log('THIS IS RESULT', result);
-														if (result.type === 'success') {
-															toast('Notification deleted successfully.', {});
-														} else {
-															toast.error('Failed to delete notification.', {});
-														}
-
-														dialogOpen = false;
-														await update();
-
-														isDeleting = false;
-													};
-												}}
-												action={`/notifications/[id]?/deleteNotification`}
-												method="POST"
-											>
-												<input type="hidden" name="notificationId" value={id} />
-												<input
-													type="hidden"
-													name="currentUserId"
-													value={currentUser.id}
-													disabled={deleteLoading}
-												/>
-
-												<div class="mt-5 flex items-center justify-between gap-2">
-													<Button type="submit" variant="destructive" class="w-full text-white"
-														>delete</Button
-													>
-
-													<Button
-														variant="default"
-														type="button"
-														onclick={() => (dialogOpen = false)}
-														class="w-full">cancel</Button
-													>
-												</div>
-											</form>
-										</Dialog.Description>
-									</Dialog.Header>
-								</Dialog.Content>
-							</Dialog.Root>
-						</div>
-					{/if}
-				</div>
+											<div class="mt-5 flex items-center justify-between gap-2">
+												<Button type="submit" variant="destructive" class="w-full text-white"
+													>delete</Button
+												>
+												<Button
+													variant="default"
+													type="button"
+													onclick={() => (dialogOpen = false)}
+													class="w-full">cancel</Button
+												>
+											</div>
+										</form>
+									</Dialog.Description>
+								</Dialog.Header>
+							</Dialog.Content>
+						</Dialog.Root>
+					</div>
+				{/if}
 			</div>
 		</div>
 	</div>
