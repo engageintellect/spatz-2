@@ -73,13 +73,13 @@
 							<Tooltip.Provider delayDuration={200}>
 								<Tooltip.Root>
 									<Tooltip.Trigger
-										class={`h-8 w-full rounded p-2 text-sm ${prediction.Was_Correct === false ? 'bg-destructive hover:bg-red-300' : 'bg-success hover:bg-emerald-300'} ${buttonVariants({ variant: 'outline' })}`}
+										class={`h-8 w-full rounded p-2 text-sm ${prediction.wasCorrect === false ? 'bg-destructive hover:bg-red-300' : 'bg-success hover:bg-emerald-300'} ${buttonVariants({ variant: 'outline' })}`}
 									></Tooltip.Trigger>
 									<Tooltip.Content>
 										<div class="">
 											<div class="flex items-center gap-2">
 												<div class="">Date:</div>
-												<div class="font-bold">{prediction.Date}</div>
+												<div class="font-bold">{prediction.date}</div>
 											</div>
 
 											<div class="mt-2 text-sm">
@@ -87,14 +87,14 @@
 													<div class="">Open:</div>
 
 													<div class="font-bold">
-														{formatFloatToPrice(prediction.Open_Price)}
+														{formatFloatToPrice(prediction.openPrice)}
 													</div>
 												</div>
 												<div class="flex items-center gap-2">
 													<div class="">Close:</div>
 
 													<div class="font-bold">
-														{formatFloatToPrice(prediction.Close_Price)}
+														{formatFloatToPrice(prediction.closePrice)}
 													</div>
 												</div>
 											</div>
@@ -103,7 +103,7 @@
 												<div class="flex items-center gap-2">
 													<div>Prediction:</div>
 													<div class="font-bold">
-														{prediction.Prediction}
+														{prediction.prediction}
 													</div>
 												</div>
 
@@ -111,12 +111,12 @@
 													<div>Result:</div>
 
 													<div class="font-bold">
-														{prediction.Was_Correct ? 'Correct' : 'Incorrect'}
+														{prediction.wasCorrect ? 'Correct' : 'Incorrect'}
 													</div>
 
 													<Icon
-														icon={prediction.Was_Correct ? 'mdi:check' : 'mdi:close'}
-														class={`h-4 w-4 ${prediction.Was_Correct ? 'text-success' : 'text-destructive'}`}
+														icon={prediction.wasCorrect ? 'mdi:check' : 'mdi:close'}
+														class={`h-4 w-4 ${prediction.wasCorrect ? 'text-success' : 'text-destructive'}`}
 													/>
 												</div>
 											</div>
@@ -141,7 +141,7 @@
 				<div class="animate-item mt-5 flex items-center gap-2">
 					<Badge variant="outline" class="px-6 py-2">
 						<div class="text-5xl">
-							{data.predictions.predictions[data.predictions.predictions.length - 1].Prediction ===
+							{data.predictions.predictions[data.predictions.predictions.length - 1].prediction ===
 							'UP'
 								? 'BUY'
 								: 'SELL'}
@@ -150,11 +150,11 @@
 						<div>
 							<Icon
 								icon={data.predictions.predictions[data.predictions.predictions.length - 1]
-									.Prediction === 'DOWN'
+									.prediction === 'DOWN'
 									? 'mdi:arrow-down'
 									: 'mdi:arrow-up'}
 								class={data.predictions.predictions[data.predictions.predictions.length - 1]
-									.Prediction === 'DOWN'
+									.prediction === 'DOWN'
 									? 'text-5xl text-destructive'
 									: 'text-5xl text-success'}
 							/>
@@ -225,20 +225,20 @@
 					<div class="grid w-full grid-cols-3 gap-2">
 						{#each data.predictions.predictions.reverse() as prediction}
 							<div
-								class={`w-full rounded-lg border p-2 text-sm ${prediction.Prediction === 'DOWN' ? 'bg-destructive' : 'bg-success'}`}
+								class={`w-full rounded-lg border p-2 text-sm ${prediction.prediction === 'DOWN' ? 'bg-destructive' : 'bg-success'}`}
 							>
 								<div>
-									{prediction.Date}
+									{prediction.date}
 								</div>
 								<div>
-									open: {formatFloatToPrice(prediction.Open_Price)}
+									open: {formatFloatToPrice(prediction.openPrice)}
 								</div>
 								<div>
-									close: {formatFloatToPrice(prediction.Close_Price)}
+									close: {formatFloatToPrice(prediction.openPrice)}
 								</div>
 
 								<div>
-									{prediction.Prediction}
+									{prediction.prediction}
 								</div>
 							</div>
 						{/each}

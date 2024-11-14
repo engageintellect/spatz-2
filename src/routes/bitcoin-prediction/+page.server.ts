@@ -23,15 +23,15 @@ export const load: PageServerLoad = async ({ locals }) => {
 		if (index === 0) return { ...prediction, Was_Correct: null };
 
 		const prevPrediction = arr[index - 1];
-		const priceWentUp = prediction.Close_Price > prevPrediction.Close_Price;
-		const priceWentDown = prediction.Close_Price < prevPrediction.Close_Price;
+		const priceWentUp = prediction.closePrice > prevPrediction.closePrice;
+		const priceWentDown = prediction.closePrice < prevPrediction.closePrice;
 
 		// Determine if the previous prediction was correct
 		const wasCorrect =
-			(prevPrediction.Prediction === 'UP' && priceWentUp) ||
-			(prevPrediction.Prediction === 'DOWN' && priceWentDown);
+			(prevPrediction.prediction === 'UP' && priceWentUp) ||
+			(prevPrediction.prediction === 'DOWN' && priceWentDown);
 
-		return { ...prediction, Was_Correct: wasCorrect };
+		return { ...prediction, wasCorrect: wasCorrect };
 	});
 
 	// console.log('predictionsWithAccuracy:', predictionsWithAccuracy);
