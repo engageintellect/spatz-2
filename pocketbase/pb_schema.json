@@ -354,6 +354,22 @@
 					"maxSelect": 1,
 					"displayFields": null
 				}
+			},
+			{
+				"system": false,
+				"id": "rwixvxlt",
+				"name": "commentId",
+				"type": "relation",
+				"required": false,
+				"presentable": false,
+				"unique": false,
+				"options": {
+					"collectionId": "xdpgh3fikj0tetr",
+					"cascadeDelete": false,
+					"minSelect": null,
+					"maxSelect": 1,
+					"displayFields": null
+				}
 			}
 		],
 		"indexes": [],
