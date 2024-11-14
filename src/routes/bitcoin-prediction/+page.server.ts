@@ -18,23 +18,25 @@ export const load: PageServerLoad = async ({ locals }) => {
 	// Extract predictions and model accuracy
 
 	// Transform the predictions to include the new "Was_Correct" property
-	const predictionsWithAccuracy = data.predictions.map((prediction: any, index: any, arr: any) => {
-		// If there's no previous day, set Was_Correct to null
-		if (index === 0) return { ...prediction, Was_Correct: null };
+	const predictionsWithAccuracy = data.predictions.map(
+		(prediction: any, index: number, arr: any[]) => {
+			// For the last day, there's no next day to compare, so set Was_Correct to null
+			if (index === arr.length - 1) return { ...prediction, wasCorrect: null };
 
-		const prevPrediction = arr[index - 1];
-		const priceWentUp = prediction.closePrice > prevPrediction.closePrice;
-		const priceWentDown = prediction.closePrice < prevPrediction.closePrice;
+			const nextPrediction = arr[index + 1]; // Get the next day's prediction
+			const priceGoesUp = nextPrediction.closePrice > prediction.closePrice;
+			const priceGoesDown = nextPrediction.closePrice < prediction.closePrice;
 
-		// Determine if the previous prediction was correct
-		const wasCorrect =
-			(prevPrediction.prediction === 'UP' && priceWentUp) ||
-			(prevPrediction.prediction === 'DOWN' && priceWentDown);
+			// Determine if the current prediction was correct based on the next day's price
+			const wasCorrect =
+				(prediction.prediction === 'UP' && priceGoesUp) ||
+				(prediction.prediction === 'DOWN' && priceGoesDown);
 
-		return { ...prediction, wasCorrect: wasCorrect };
-	});
+			return { ...prediction, wasCorrect: wasCorrect };
+		}
+	);
 
-	// console.log('predictionsWithAccuracy:', predictionsWithAccuracy);
+	console.log('predictionsWithAccuracy:', predictionsWithAccuracy);
 
 	return {
 		predictions: data,

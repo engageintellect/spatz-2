@@ -128,6 +128,7 @@
 			likes={data.post.likes}
 			id={data.post.id}
 			currentUser={$currentUser}
+			isVerified={data.post.verified || false}
 		/>
 	</div>
 </div>

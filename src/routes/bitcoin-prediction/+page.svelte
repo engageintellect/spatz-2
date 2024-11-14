@@ -73,7 +73,7 @@
 							<Tooltip.Provider delayDuration={200}>
 								<Tooltip.Root>
 									<Tooltip.Trigger
-										class={`h-8 w-full rounded p-2 text-sm ${prediction.wasCorrect === false ? 'bg-destructive hover:bg-red-300' : 'bg-success hover:bg-emerald-300'} ${buttonVariants({ variant: 'outline' })}`}
+										class={`h-8 w-full rounded p-2 text-sm ${prediction.wasCorrect === null ? 'border border-muted-foreground/50 bg-background' : prediction.wasCorrect === false ? 'bg-destructive hover:bg-red-300' : 'bg-success hover:bg-emerald-300'} ${buttonVariants({ variant: 'outline' })}`}
 									></Tooltip.Trigger>
 									<Tooltip.Content>
 										<div class="">
@@ -111,12 +111,20 @@
 													<div>Result:</div>
 
 													<div class="font-bold">
-														{prediction.wasCorrect ? 'Correct' : 'Incorrect'}
+														{prediction.wasCorrect === null
+															? 'Pending...'
+															: prediction.wasCorrect
+																? 'Correct'
+																: 'Incorrect'}
 													</div>
 
 													<Icon
-														icon={prediction.wasCorrect ? 'mdi:check' : 'mdi:close'}
-														class={`h-4 w-4 ${prediction.wasCorrect ? 'text-success' : 'text-destructive'}`}
+														icon={prediction.wasCorrect === null
+															? 'mdi:clock'
+															: prediction.wasCorrect
+																? 'mdi:check'
+																: 'mdi:close'}
+														class={`h-4 w-4 ${prediction.wasCorrect === null ? 'text-foreground' : prediction.wasCorrect ? 'text-success' : 'text-destructive'}`}
 													/>
 												</div>
 											</div>
