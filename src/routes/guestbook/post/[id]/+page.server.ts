@@ -102,7 +102,7 @@ export const actions: Actions = {
 			if (post.author !== comment.author) {
 				await locals.pb.collection('notifications').create({
 					title: 'New Comment',
-					message: 'Commented on your post',
+					message: 'Replied to your post',
 					user: post.author,
 					referencedUser: comment.author,
 					referencedPost: post.id,

@@ -78,7 +78,7 @@
 <div
 	class={`${sidebar.state === 'expanded' ? '' : ''} text-elipsis relative cursor-pointer overflow-x-hidden transition-all duration-300`}
 >
-	<div class="card-body p-3 px-1 transition-all duration-300">
+	<div class="py-3 transition-all duration-300">
 		<div class="flex items-start gap-3">
 			<div>
 				<a href={`/users/${postAuthorId}`}>

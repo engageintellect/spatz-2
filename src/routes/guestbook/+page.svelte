@@ -189,7 +189,7 @@
 	<div
 		class={`${hidden ? 'opacity-0' : ''} ${sidebar.state === 'expanded' ? 'lg:p-5' : 'md:p-5'} w-full max-w-lg`}
 	>
-		<h1 class="flex items-center text-6xl font-bold text-primary">
+		<h1 class="animate-item flex items-center text-6xl font-bold text-primary">
 			<span class="title-guest">guest</span>
 			<span class="title-book font-thin text-primary/50">book</span>
 		</h1>

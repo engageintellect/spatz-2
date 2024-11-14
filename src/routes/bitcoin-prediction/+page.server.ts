@@ -36,7 +36,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		}
 	);
 
-	console.log('predictionsWithAccuracy:', predictionsWithAccuracy);
+	//console.log('predictionsWithAccuracy:', predictionsWithAccuracy);
 
 	return {
 		predictions: data,
