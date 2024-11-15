@@ -33,7 +33,7 @@
 	</Button>
 </div>
 <div
-	class={`${sidebar.state === 'expanded' ? 'lg:mt-5 lg:border lg:p-5' : 'md:mt-5 md:border md:p-5'} animate-item mx-auto mt-5 max-w-2xl rounded-lg`}
+	class={`${sidebar.state === 'expanded' ? 'lg:mt-5 lg:border lg:p-5' : 'md:mt-5 md:border md:p-5'} animate-item mx-auto my-5 max-w-2xl rounded-lg`}
 >
 	<div class="mb-20 flex flex-col gap-10">
 		<div>
@@ -41,11 +41,19 @@
 				<span class="font-bold">btc</span> <span class="font-thin">predict</span>
 			</div>
 			<div class="animate-item mt-5 text-2xl text-muted-foreground">
-				{data.predictions.predictions[data.predictions.predictions.length - 1].Date}
+				{data.predictions.predictions[data.predictions.predictions.length - 1].date}
 			</div>
 		</div>
-
 		{#if !$currentUser.subscribed}
+			<div class="flex flex-col gap-5">
+				<div class="animate-item animate-item text-lg">
+					You must subscribe to view prediction models
+				</div>
+				<Button variant="success" class="animate-item w-fit" href="/subscriptions"
+					>Subscription Plans</Button
+				>
+			</div>
+		{:else}
 			<div class="animate-item flex-flex-col">
 				<div class=" text-2xl font-bold">about:</div>
 
@@ -71,45 +79,41 @@
 					<div class="mt-5 grid w-full grid-cols-12 gap-1">
 						{#each data.predictionsWithAccuracy.slice(-72) as prediction}
 							<Tooltip.Provider delayDuration={200}>
-								<Tooltip.Root>
+								<Tooltip.Root disableCloseOnTriggerClick>
 									<Tooltip.Trigger
-										class={`h-8 w-full rounded p-2 text-sm ${prediction.wasCorrect === null ? 'border border-muted-foreground/50 bg-background' : prediction.wasCorrect === false ? 'bg-destructive hover:bg-red-300' : 'bg-success hover:bg-emerald-300'} ${buttonVariants({ variant: 'outline' })}`}
+										class={`h-8 w-full rounded p-2 text-sm ${
+											prediction.wasCorrect === null
+												? 'animate-pulse border border-muted-foreground/50 bg-background'
+												: prediction.wasCorrect === false
+													? 'bg-destructive hover:bg-red-300'
+													: 'bg-success hover:bg-emerald-300'
+										} ${buttonVariants({ variant: 'outline' })}`}
 									></Tooltip.Trigger>
 									<Tooltip.Content>
-										<div class="">
+										<div>
 											<div class="flex items-center gap-2">
-												<div class="">Date:</div>
+												<div>Date:</div>
 												<div class="font-bold">{prediction.date}</div>
 											</div>
 
 											<div class="mt-2 text-sm">
 												<div class="flex items-center gap-2">
-													<div class="">Open:</div>
-
-													<div class="font-bold">
-														{formatFloatToPrice(prediction.openPrice)}
-													</div>
+													<div>Open:</div>
+													<div class="font-bold">{formatFloatToPrice(prediction.openPrice)}</div>
 												</div>
 												<div class="flex items-center gap-2">
-													<div class="">Close:</div>
-
-													<div class="font-bold">
-														{formatFloatToPrice(prediction.closePrice)}
-													</div>
+													<div>Close:</div>
+													<div class="font-bold">{formatFloatToPrice(prediction.closePrice)}</div>
 												</div>
 											</div>
 
 											<div class="mt-2 text-sm">
 												<div class="flex items-center gap-2">
 													<div>Prediction:</div>
-													<div class="font-bold">
-														{prediction.prediction}
-													</div>
+													<div class="font-bold">{prediction.prediction}</div>
 												</div>
-
 												<div class="flex items-center gap-2">
 													<div>Result:</div>
-
 													<div class="font-bold">
 														{prediction.wasCorrect === null
 															? 'Pending...'
@@ -117,14 +121,19 @@
 																? 'Correct'
 																: 'Incorrect'}
 													</div>
-
 													<Icon
 														icon={prediction.wasCorrect === null
 															? 'mdi:clock'
 															: prediction.wasCorrect
 																? 'mdi:check'
 																: 'mdi:close'}
-														class={`h-4 w-4 ${prediction.wasCorrect === null ? 'text-foreground' : prediction.wasCorrect ? 'text-success' : 'text-destructive'}`}
+														class={`h-4 w-4 ${
+															prediction.wasCorrect === null
+																? 'text-foreground'
+																: prediction.wasCorrect
+																	? 'text-success'
+																	: 'text-destructive'
+														}`}
 													/>
 												</div>
 											</div>
@@ -175,7 +184,7 @@
 				<div class="animate-item flex-flex-col">
 					<div class=" text-2xl font-bold">sentiment:</div>
 
-					<div class="mt-5 flex items-center gap-2">
+					<div class="flex w-fit items-center gap-2">
 						<div class="">
 							<div
 								class={`${data.sentiment.data[0].value > 50 ? 'text-destructive' : 'text-success'} flex items-center gap-2 text-2xl`}
@@ -252,11 +261,6 @@
 						{/each}
 					</div>
 				</div>
-			</div>
-		{:else}
-			<div>
-				<div class="animate-item animate-item text-2xl">subscribe to view predictions</div>
-				<Button class="animate-item" href="/subscriptions">Subscription Plans</Button>
 			</div>
 		{/if}
 	</div>

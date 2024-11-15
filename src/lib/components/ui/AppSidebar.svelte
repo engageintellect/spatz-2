@@ -75,8 +75,16 @@
 						{/if}
 					</div>
 					<div class="truncate">
-						<a href={`/users/${$currentUser.id}`} data-sveltekit-preload-data="hover">
+						<a
+							href={`/users/${$currentUser.id}`}
+							data-sveltekit-preload-data="hover"
+							class="flex items-center gap-1"
+						>
 							<h3 class="overflow-hidden text-ellipsis text-base">@{$currentUser.username}</h3>
+
+							{#if $currentUser.verified === true}
+								<Icon icon="material-symbols:verified" class="h-4 w-4 text-info text-info" />
+							{/if}
 						</a>
 						<a href={`/users/${$currentUser.id}`} data-sveltekit-preload-data="hover">
 							<p class="overflow-hidden text-ellipsis text-xs font-thin text-foreground/70">

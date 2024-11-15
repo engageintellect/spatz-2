@@ -112,7 +112,7 @@
 			</div>
 
 			<div class="flex flex-col">
-				<div class="flex items-center gap-2">
+				<div class="flex items-center gap-1">
 					<div class="truncate text-2xl">{data.userProfile.username}</div>
 
 					{#if data.userProfile.verified === true}

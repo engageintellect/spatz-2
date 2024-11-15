@@ -93,13 +93,15 @@
 			</div>
 			<div class="w-full">
 				<div class="flex items-center gap-2">
-					<a href={`/users/${postAuthorId}`} class="text-base lowercase text-primary"
-						>{postAuthor}</a
-					>
+					<div class="flex items-center gap-1">
+						<a href={`/users/${postAuthorId}`} class="text-base lowercase text-primary"
+							>{postAuthor}</a
+						>
 
-					{#if isVerified === true}
-						<Icon icon="material-symbols:verified" class="h-4 w-4 text-info text-info" />
-					{/if}
+						{#if isVerified === true}
+							<Icon icon="material-symbols:verified" class="h-4 w-4 text-info text-info" />
+						{/if}
+					</div>
 					<div class="text-xs text-foreground/70">
 						{timeSince(formatFriendlyDate(postDate))}
 					</div>
