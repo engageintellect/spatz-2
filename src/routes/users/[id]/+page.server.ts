@@ -1,53 +1,51 @@
-import type { PageServerLoad } from './$types';
-import { redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
-import { fail } from '@sveltejs/kit';
+import type { PageServerLoad, Actions } from './$types';
+import { redirect, fail } from '@sveltejs/kit';
 import { validateData } from '$lib/utils';
 import { followUserSchema } from '$lib/schema';
 
 export const load: PageServerLoad = async ({ params, locals }) => {
 	const { id } = params;
+
+	// Check if user is authenticated
 	if (!locals.pb.authStore.isValid) {
 		throw redirect(303, '/auth/login');
 	}
 
-	const user = await locals.pb.collection('users').getOne(id, {});
+	try {
+		// Fetch the user profile directly by ID
+		const userProfile = await locals.pb.collection('users').getOne(id);
 
-	// GET POSTS
-	const posts = await locals.pb.collection('posts').getFullList({
-		filter: `author = "${id}"`, // Use single equals sign (=) and properly quote the id
-		sort: '-created'
-	});
+		if (!userProfile) {
+			throw redirect(404, '/not-found');
+		}
 
-	// GET USERS
-	const users = await locals.pb.collection('users').getFullList({
-		sort: '-created'
-	});
+		// Fetch the user's posts
+		const posts = await locals.pb.collection('posts').getFullList({
+			filter: `author = "${id}"`,
+			sort: '-created'
+		});
 
-	// TRANSFORM POSTS
-	const transformedPosts = posts.map((post) => {
-		// Replace the comment IDs with the actual comment objects and include author details
-
-		// Add author's username and avatar to each post
-		return {
+		// Transform posts to include author details
+		const transformedPosts = posts.map((post) => ({
 			...post,
-			username: users.find((user) => user.id === post.author)?.username,
-			avatar: users.find((user) => user.id === post.author)?.avatar,
-			verified: users.find((user) => user.id === post.author)?.verified
+			username: userProfile.username,
+			avatar: userProfile.avatar,
+			verified: userProfile.verified
+		}));
+
+		// Fetch all users and filter followers
+		const allUsers = await locals.pb.collection('users').getFullList();
+		const followers = allUsers.filter((user) => user.following.includes(id));
+
+		return {
+			userProfile,
+			userPosts: transformedPosts,
+			userFollowers: followers
 		};
-	});
-
-	// GET USER FOLLOWERS
-	const followers = await locals.pb.collection('users').getFullList({
-		filter: `following ~ "${id}"`
-	});
-
-	return {
-		userProfile: user,
-		userPosts: transformedPosts,
-		userFollowers: followers,
-		users: users
-	};
+	} catch (err) {
+		console.error('Error loading data:', err);
+		throw redirect(500, '/error');
+	}
 };
 
 // Define the actions
@@ -61,38 +59,44 @@ export const actions: Actions = {
 			});
 		}
 
+		const userId = formData.userId as string;
+		const currentUserId = formData.currentUserId as string;
+
 		try {
-			const user = await locals.pb.collection('users').getOne(formData.userId);
-			const currentUser = await locals.pb.collection('users').getOne(formData.currentUserId);
+			// Fetch current user and target user
+			const [currentUser, user] = await Promise.all([
+				locals.pb.collection('users').getOne(currentUserId),
+				locals.pb.collection('users').getOne(userId)
+			]);
 
-			if (currentUser.following.includes(user.id)) {
-				currentUser.following = currentUser.following.filter((id: any) => id !== user.id);
+			// Check if user is already followed
+			const isFollowing = currentUser.following.includes(userId);
+
+			if (isFollowing) {
+				// Unfollow user
+				currentUser.following = currentUser.following.filter((id: any) => id !== userId);
 			} else {
-				currentUser.following.push(user.id);
+				// Follow user and create notification
+				currentUser.following.push(userId);
 
-				const data = {
+				await locals.pb.collection('notifications').create({
 					title: 'New Follower',
 					message: 'Followed you',
-					user: user.id,
+					user: userId,
 					referencedPost: '',
-					referencedUser: currentUser.id
-				};
-
-				await locals.pb.collection('notifications').create(data);
+					referencedUser: currentUserId
+				});
 			}
 
-			await locals.pb
-				.collection('users')
-				.update(currentUser.id, { following: currentUser.following });
+			// Update current user's following list
+			await locals.pb.collection('users').update(currentUserId, {
+				following: currentUser.following
+			});
 
-			return {
-				success: true
-			};
+			return { success: true };
 		} catch (err) {
-			console.error('Error following user:', err);
-			return {
-				error: 'Error following user'
-			};
+			console.error('Error following/unfollowing user:', err);
+			return fail(500, { error: 'Error following/unfollowing user' });
 		}
 	}
 };

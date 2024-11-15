@@ -5,7 +5,6 @@ import { error, fail } from '@sveltejs/kit';
 import { validateData } from '$lib/utils';
 import {
 	createGuestBookPostSchema,
-	createPostCommentSchema,
 	likeGuestBookPostSchema,
 	deleteGuestBookPostSchema
 } from '$lib/schema';
@@ -81,13 +80,16 @@ export const actions: Actions = {
 				post.likes.splice(userIndex, 1);
 			} else {
 				post.likes.push(formData.currentUserId);
-				await locals.pb.collection('notifications').create({
-					user: post.author,
-					referencedUser: formData.currentUserId,
-					referencedPost: post.id,
-					title: 'New Like',
-					message: 'Liked your post'
-				});
+
+				if (formData.currentUserId !== post.author) {
+					await locals.pb.collection('notifications').create({
+						user: post.author,
+						referencedUser: formData.currentUserId,
+						referencedPost: post.id,
+						title: 'New Like',
+						message: 'Liked your post'
+					});
+				}
 			}
 
 			try {
