@@ -44,7 +44,7 @@
 				{data.predictions.predictions[data.predictions.predictions.length - 1].date}
 			</div>
 		</div>
-		{#if !$currentUser.subscribed}
+		{#if $currentUser.subscribed}
 			<div class="flex flex-col gap-5">
 				<div class="animate-item animate-item text-lg">
 					You must subscribe to view prediction models
