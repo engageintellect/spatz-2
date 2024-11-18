@@ -5,7 +5,6 @@
 	import { tick } from 'svelte';
 	import { goto } from '$app/navigation';
 	import * as Dialog from '$lib/components/ui/dialog';
-	import { fade } from 'svelte/transition';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { formatFriendlyDate, timeSince } from '$lib/utils';
 	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
@@ -81,7 +80,7 @@
 	<div class="py-3 transition-all duration-300">
 		<div class="flex items-start gap-3">
 			<div>
-				<a href={`/users/${postAuthorId}`}>
+				<a data-sveltekit-preload-data href={`/users/${postAuthorId}`}>
 					<div class="h-10 w-10 md:h-12 md:w-12">
 						<img
 							src={avatar}
@@ -94,8 +93,10 @@
 			<div class="w-full">
 				<div class="flex items-center gap-2">
 					<div class="flex items-center gap-1">
-						<a href={`/users/${postAuthorId}`} class="text-base lowercase text-primary"
-							>{postAuthor}</a
+						<a
+							data-sveltekit-preload-data
+							href={`/users/${postAuthorId}`}
+							class="text-base lowercase text-primary">{postAuthor}</a
 						>
 
 						{#if isVerified === true}
@@ -107,7 +108,7 @@
 					</div>
 				</div>
 
-				<a href={`/guestbook/post/${id}`}>
+				<a data-sveltekit-preload-data href={`/guestbook/post/${id}`}>
 					<div class="pb-2 pr-5 pt-1 font-thin">{@html postContent}</div>
 				</a>
 
