@@ -72,7 +72,12 @@
 
 				<div class="animate-item mt-5 text-6xl font-bold">
 					<NumberTicker value={Number(data.predictions.predictionAccuracy.replace('%', ''))} />
+
 					<span> % </span>
+
+					<div class="mt-2 text-xl font-thin text-muted-foreground">
+						over the last {data.predictions.predictions.length} days.
+					</div>
 				</div>
 
 				<div class="animate-item flex items-center gap-2">

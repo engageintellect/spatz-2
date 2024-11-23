@@ -262,7 +262,9 @@
 						{#if sortedPosts.length > 0}
 							{#each sortedPosts as post}
 								{#if post.mentioning.length === 0}
-									<div class={`${sidebar.state === 'expanded' ? 'lg:px-5' : 'md:px-5'} border-t`}>
+									<div
+										class={`${sidebar.state === 'expanded' ? 'lg:px-5' : 'md:px-5'} post-wrapper border-t`}
+									>
 										<Post
 											postAuthorId={post.author}
 											comments={post.mentionedBy}
