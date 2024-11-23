@@ -81,7 +81,7 @@
 		<div class="flex items-start gap-3">
 			<div>
 				<a data-sveltekit-preload-data href={`/users/${postAuthorId}`}>
-					<div class="h-10 w-10 md:h-12 md:w-12">
+					<div class="h-10 w-10">
 						<img
 							src={avatar}
 							class="mt-1 h-full w-full rounded-full object-cover"
@@ -112,7 +112,7 @@
 					<div class="pb-2 pr-5 pt-1 font-thin">{@html postContent}</div>
 				</a>
 
-				<div class=" flex items-center gap-5">
+				<div class="flex items-center gap-5">
 					<div class="flex items-center gap-1">
 						<form
 							use:enhance={() => {

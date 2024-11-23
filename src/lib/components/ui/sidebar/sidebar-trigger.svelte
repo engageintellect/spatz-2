@@ -2,6 +2,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { cn } from '$lib/utils.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
+	import { fade } from 'svelte/transition';
 	import Avatar from '../Avatar.svelte';
 	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
 	import Icon from '@iconify/svelte';
@@ -31,20 +32,22 @@
 	{...restProps}
 >
 	{#if sidebar.state == 'collapsed' || sidebar.isMobile}
-		<Button class="rounded-full p-0">
-			<div class="relative">
-				<Avatar />
-				{#if notifications > 0}
-					<div
-						class="dropdown-menu-notifications absolute -bottom-1 right-0 rounded-full border border-2 border-background text-xs"
-					>
-						<Badge size="sm" variant="destructive" class="px-1 py-0 text-xs text-white"
-							>{notifications}</Badge
+		<div in:fade>
+			<Button size="icon" class="mt-1 rounded-full">
+				<div class="relative">
+					<Avatar />
+					{#if notifications > 0}
+						<div
+							class="dropdown-menu-notifications absolute -bottom-1 right-0 rounded-full border border-2 border-background text-xs"
 						>
-					</div>
-				{/if}
-			</div>
-		</Button>
+							<Badge size="sm" variant="destructive" class="px-1 py-0 text-xs text-white"
+								>{notifications}</Badge
+							>
+						</div>
+					{/if}
+				</div>
+			</Button>
+		</div>
 
 		<!--
 		<Button variant="ghost">
@@ -52,9 +55,11 @@
 		</Button>
 -->
 	{:else}
-		<Button variant="ghost">
-			<Icon icon="mynaui:sidebar" class="h-7 w-7" />
-		</Button>
+		<div in:fade>
+			<Button variant="ghost">
+				<Icon icon="mynaui:sidebar" class="h-7 w-7" />
+			</Button>
+		</div>
 	{/if}
 	<span class="sr-only">Toggle Sidebar</span>
 </Button>

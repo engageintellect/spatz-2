@@ -102,7 +102,7 @@ export const actions: Actions = {
 		);
 
 		//console.log('has subscriptions:', hasSubscriptions);
-		console.log('has subscriptions:', hasSubscriptions);
+		//console.log('has subscriptions:', hasSubscriptions);
 
 		if (hasSubscriptions.length < 1 || hasSubscriptions[0].status === 'canceled') {
 			const subscription = await stripe.subscriptions.create({
