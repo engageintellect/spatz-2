@@ -276,7 +276,7 @@
 				posts:
 			</div>
 
-			<div class="grid grid-cols-1 gap-2">
+			<div class="grid grid-cols-1">
 				{#each data.userPosts as post}
 					<div class="animate-item border-t">
 						<Post

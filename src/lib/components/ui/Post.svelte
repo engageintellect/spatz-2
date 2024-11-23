@@ -77,7 +77,7 @@
 <div
 	class={`${sidebar.state === 'expanded' ? '' : ''} text-elipsis relative cursor-pointer overflow-x-hidden transition-all duration-300`}
 >
-	<div class="py-3 transition-all duration-300">
+	<div class=" py-3 transition-all duration-300">
 		<div class="flex items-start gap-3">
 			<div>
 				<a data-sveltekit-preload-data href={`/users/${postAuthorId}`}>
@@ -109,7 +109,7 @@
 				</div>
 
 				<a data-sveltekit-preload-data href={`/guestbook/post/${id}`}>
-					<div class="pb-2 pr-5 pt-1 font-thin">{@html postContent}</div>
+					<div class="pb-3 pr-5 pt-1 font-thin">{@html postContent}</div>
 				</a>
 
 				<div class="flex items-center gap-5">
@@ -167,13 +167,13 @@
 						</form>
 
 						<!-- Display the actual likes count initially, then update optimistically -->
-						<div class="font-thin">{optimisticLikes ?? 0}</div>
+						<div class="text-sm font-thin">{optimisticLikes ?? 0}</div>
 					</div>
 
 					<button class="font-thin" onclick={() => goto(`/guestbook/post/${id}`)}>
 						<div class="flex items-center gap-1">
-							<Icon icon="mdi:comment-outline" class="h-5 w-5" />
-							<div>{comments.length}</div>
+							<Icon icon="iconamoon:comment-light" class="h-5 w-5" />
+							<div class="text-sm">{comments.length}</div>
 						</div>
 					</button>
 
