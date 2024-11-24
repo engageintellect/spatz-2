@@ -176,7 +176,7 @@
 						{/snippet}
 
 						{#snippet description()}
-							{`${data.userProfile.username} is following ${data.userFollowers.length} ${data.userFollowers.length === 1 ? 'user' : 'users'}`}
+							{`${data.userProfile.username} is following ${data.userProfile.following.length} ${data.userProfile.following.length === 1 ? 'user' : 'users'}`}
 						{/snippet}
 
 						{#snippet trigger()}
@@ -187,17 +187,17 @@
 
 						{#snippet content()}
 							<div class="flex h-full max-h-96 flex-col gap-2 overflow-scroll p-5">
-								{#each data.users as follower}
-									{#if data.userProfile.following.includes(follower.id)}
-										<a href={`/users/${follower.id}`} class="flex items-center gap-2">
+								{#each data.users as following}
+									{#if data.userProfile.following.includes(following.id)}
+										<a href={`/users/${following.id}`} class="flex items-center gap-2">
 											<img
-												src={follower.avatar
-													? getImageURL(follower.collectionId, follower.id, follower.avatar)
-													: `https://ui-avatars.com/api/?name=${follower.username}&background=random`}
-												alt={follower.username}
+												src={following.avatar
+													? getImageURL(following.collectionId, following.id, following.avatar)
+													: `https://ui-avatars.com/api/?name=${following.username}&background=random`}
+												alt={following.username}
 												class="h-10 w-10 rounded-full object-cover"
 											/>
-											<div class="text-sm font-thin lowercase">{follower.username}</div>
+											<div class="text-sm font-thin lowercase">{following.username}</div>
 										</a>
 									{/if}
 								{/each}

@@ -44,7 +44,7 @@
 		follow: { icon: 'mdi:account', bgColor: 'bg-info text-white' },
 		like: { icon: 'material-symbols:favorite-rounded', bgColor: 'bg-destructive text-white' },
 		comment: { icon: 'mdi:reply', bgColor: 'bg-purple-500 text-white' },
-		default: { icon: 'mdi:bell-outline', bgColor: 'bg-info text-white' }
+		default: { icon: 'material-symbols:notifications', bgColor: 'bg-info text-white' }
 	};
 
 	// Helper function to determine the notification type
@@ -73,9 +73,9 @@
 							alt="user-avatar"
 						/>
 						<div
-							class={`absolute -bottom-1 right-0 flex h-5 w-5 items-center justify-center rounded-full border border-background ${bgColor}`}
+							class={`absolute -bottom-1 right-0 flex h-5 w-5 items-center justify-center rounded-full border border-background md:h-6 md:w-6 ${bgColor}`}
 						>
-							<Icon {icon} class="h-3 w-3 md:h-4 md:w-4" />
+							<Icon {icon} class="h-3 w-3 md:h-3.5 md:w-3.5" />
 						</div>
 					</div>
 				</a>

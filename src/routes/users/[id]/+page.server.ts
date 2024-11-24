@@ -40,7 +40,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		return {
 			userProfile,
 			userPosts: transformedPosts,
-			userFollowers: followers
+			userFollowers: followers,
+			users: allUsers
 		};
 	} catch (err) {
 		console.error('Error loading data:', err);
