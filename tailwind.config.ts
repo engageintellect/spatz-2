@@ -179,7 +179,11 @@ const config: Config = {
 				'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
 			}
 		}
-	}
+	},
+
+	plugins: [
+		require('tailwind-scrollbar') // Add the scrollbar plugin here
+	]
 };
 
 export default config;

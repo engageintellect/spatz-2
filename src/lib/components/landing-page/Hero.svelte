@@ -90,7 +90,7 @@
 
 <div class={`mb-10 md:my-5 md:mb-20 ${heroHidden ? 'opacity-0' : ''}`}>
 	<div
-		class="flex w-full flex-col items-start gap-2 rounded-lg transition-all duration-300 md:flex-row md:gap-5"
+		class="flex w-full flex-col items-start gap-2 rounded-3xl transition-all duration-300 md:flex-row md:gap-5"
 	>
 		<div class="flex w-full flex-col rounded-l-lg p-2 md:max-w-lg md:p-10 md:p-5">
 			<div class="mx-auto flex w-full flex-col items-center gap-5">
@@ -146,7 +146,7 @@
 			></div>
 
 			<div
-				class="rounded-lg bg-gradient-to-b from-orange-500 to-yellow-500 md:rounded-none md:rounded-r-lg"
+				class="mt-5 rounded-3xl rounded-b-none bg-gradient-to-b from-orange-500 to-yellow-500 md:rounded-none md:rounded-r-3xl"
 			>
 				<div class="animate-photo">
 					<enhanced:img
