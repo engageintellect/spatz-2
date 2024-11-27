@@ -55,7 +55,7 @@
 			</div>
 		{:else}
 			<div class="animate-item flex-flex-col">
-				<div class=" text-2xl font-bold">about:</div>
+				<div class=" mb-2 text-3xl font-bold">about:</div>
 
 				<p class="text-muted-foreground">
 					'btc predict' is a machine learning model designed to forecast whether Bitcoin's price
@@ -65,15 +65,17 @@
 			</div>
 
 			<div class="animate-item flex-flex-col">
-				<div class=" text-2xl font-bold">prediction accuracy:</div>
+				<div class=" mb-2 text-3xl font-bold">prediction accuracy:</div>
 				<p class="text-muted-foreground">
 					Prediction accuracy is calculated by past correct predictions till today.
 				</p>
 
-				<div class="animate-item mt-5 text-6xl font-bold">
-					<NumberTicker value={Number(data.predictions.predictionAccuracy.replace('%', ''))} />
+				<div class="animate-item mt-5 text-7xl font-bold">
+					<div class="">
+						<NumberTicker value={Number(data.predictions.predictionAccuracy.replace('%', ''))} />
 
-					<span> % </span>
+						<span> % </span>
+					</div>
 
 					<div class="mt-2 text-xl font-thin text-muted-foreground">
 						over the last {data.predictions.predictions.length} days.
@@ -153,7 +155,7 @@
 
 			<div class="">
 				<div class="animate-item flex-flex-col">
-					<div class=" text-2xl font-bold">prediction:</div>
+					<div class=" mb-2 text-3xl font-bold">prediction:</div>
 					<p class="text-muted-foreground">
 						Tommorow's "Close Price" prediction direction is calculated by past correct predictions
 						till today.
@@ -187,7 +189,7 @@
 
 			<div class="">
 				<div class="animate-item flex-flex-col">
-					<div class=" text-2xl font-bold">sentiment:</div>
+					<div class=" mb-2 text-3xl font-bold">sentiment:</div>
 
 					<div class="flex w-fit items-center gap-2">
 						<div class="">
@@ -237,7 +239,7 @@
 
 			<div class="">
 				<div class="animate-item flex-flex-col">
-					<div class=" text-2xl font-bold">history:</div>
+					<div class=" mb-2 text-3xl font-bold">history:</div>
 					<p class="text-muted-foreground">
 						Prediction history is calculated by past correct predictions till today.
 					</p>

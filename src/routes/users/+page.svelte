@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getImageURL } from '$lib/utils';
+	import { formatFriendlyDate, timeSince, getImageURL } from '$lib/utils';
 	import { onMount, tick, onDestroy } from 'svelte';
 	import { lazyLoad } from '$lib/lazyLoad'; // Import the lazy load function
 	import { Input } from '$lib/components/ui/input/index.js'; // Import the Input component
@@ -239,7 +239,12 @@
 								</div>
 							</div>
 
-							<h1 class="truncate whitespace-nowrap text-sm">{user.username}</h1>
+							<div class="flex flex-col truncate">
+								<h1 class="truncate whitespace-nowrap text-sm">{user.username}</h1>
+								<h1 class="mt-1 truncate whitespace-nowrap text-[0.75rem] text-muted-foreground">
+									joined {timeSince(formatFriendlyDate(user.created))}
+								</h1>
+							</div>
 						</div>
 					</div>
 				</a>

@@ -120,12 +120,12 @@
 					{/if}
 				</div>
 
-				<div class="font-thin text-foreground/70">{data.userProfile.job_title}</div>
+				<div class="mt-1 font-thin text-foreground/70">{data.userProfile.job_title}</div>
 				<div class="mt-2 truncate text-xs">
 					joined: {timeSince(formatFriendlyDate(data.userProfile.created))}
 				</div>
 				{#if data.userProfile.website}
-					<div class="mt-2">
+					<div class="mt-5">
 						<a
 							href={data.userProfile.website}
 							class="text-sm font-thin text-foreground hover:underline"

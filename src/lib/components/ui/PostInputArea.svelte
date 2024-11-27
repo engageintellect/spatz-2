@@ -2,7 +2,7 @@
 	import { toast } from 'svelte-sonner';
 	import { enhance, applyAction } from '$app/forms';
 	import { onMount, tick } from 'svelte';
-	import { fade } from 'svelte/transition';
+	import { fade, slide } from 'svelte/transition';
 	import { gsap } from 'gsap';
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -131,7 +131,7 @@
 
 			<div class="mt-5">
 				{#if errors}
-					<div in:fade class="mb-2">
+					<div transition:slide class="mb-2">
 						<label for={id} class="label py-0">
 							{#each errors as error}
 								<span class="label-text-alt mb-2 text-destructive">
