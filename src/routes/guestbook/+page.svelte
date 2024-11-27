@@ -234,7 +234,10 @@
 								class="text-xs transition-all duration-300"
 							>
 								new
-								<Icon icon="mdi:fire" class="ml-1 h-4 w-4" />
+								<Icon
+									icon="mdi:fire"
+									class={`${sortOption === 'date' ? 'text-orange-500' : ''} ml-1 h-4 w-4`}
+								/>
 							</Button>
 							<Button
 								size="sm"
@@ -243,7 +246,10 @@
 								class="text-xs transition-all duration-300"
 							>
 								likes
-								<Icon icon="material-symbols:favorite-rounded" class="ml-1 h-4 w-4" />
+								<Icon
+									icon="material-symbols:favorite-rounded"
+									class={`${sortOption === 'likes' ? 'text-destructive' : ''} ml-1 h-4 w-4`}
+								/>
 							</Button>
 
 							<Button
@@ -253,7 +259,10 @@
 								class="text-xs transition-all duration-300"
 							>
 								feed
-								<Icon icon="material-symbols:rss-feed" class="ml-1 h-4 w-4" />
+								<Icon
+									icon="material-symbols:rss-feed"
+									class={`${sortOption === 'following' ? 'text-info' : ''} ml-1 h-4 w-4`}
+								/>
 							</Button>
 						</div>
 					</div>

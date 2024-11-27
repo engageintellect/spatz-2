@@ -203,7 +203,10 @@
 						class="flex items-center gap-2 text-xs transition-all duration-300"
 					>
 						<div>all</div>
-						<Icon icon="material-symbols:background-grid-small" class="h-4 w-4" />
+						<Icon
+							icon="material-symbols:background-grid-small"
+							class={`${sortOption === 'all' ? 'text-success' : ''} h-4 w-4`}
+						/>
 					</Button>
 
 					<Button
@@ -213,7 +216,10 @@
 						class="flex items-center gap-2 text-xs transition-all duration-300"
 					>
 						<div>following</div>
-						<Icon icon="mingcute:user-follow-fill" class="h-4 w-4" />
+						<Icon
+							icon="mingcute:user-follow-fill"
+							class={`${sortOption === 'following' ? 'text-info' : ''} h-4 w-4`}
+						/>
 					</Button>
 				</div>
 			</div>
@@ -230,7 +236,7 @@
 							<div>
 								<div class="h-10 w-10">
 									<img
-										class="transition-translate h-full w-full rounded-full border object-cover shadow duration-200 md:group-hover/userCard:scale-[102%]"
+										class="transition-translate h-full w-full rounded-full border object-cover duration-200 md:group-hover/userCard:scale-[102%]"
 										alt={user.username}
 										src={user?.avatar
 											? getImageURL(user?.collectionId, user?.id, user?.avatar)
