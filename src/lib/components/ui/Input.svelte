@@ -26,7 +26,7 @@
 	<input
 		class={type === 'file'
 			? 'file-input file-input-bordered w-full'
-			: 'w-full rounded border bg-background px-4 py-2'}
+			: 'w-full rounded border bg-background px-4 py-2 text-lg'}
 		{type}
 		{placeholder}
 		{required}
