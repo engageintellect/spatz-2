@@ -15,7 +15,7 @@
 			<li>User Authentication</li>
 			<li>Databases & Content Management</li>
 			<li>Stripe Payments & Subscriptions</li>
-			<li>Admin Dashboards</li>
+			<li>Admin Dashboards & Logging</li>
 			<li>User Settings & Profile panels</li>
 			<li>Themes & Styling</li>
 			<li>Forms & Form Validation</li>

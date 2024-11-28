@@ -20,7 +20,7 @@
 	/>
 </svelte:head>
 <div
-	class={`${sidebar.state === 'expanded' ? 'lg:flex-row lg:justify-center lg:border lg:shadow-lg' : 'md:flex-row md:justify-center md:border md:shadow-lg'} flex w-full flex-col justify-center gap-5 rounded-lg p-5`}
+	class={`${sidebar.state === 'expanded' ? 'lg:flex-row lg:justify-center lg:border lg:shadow-lg' : 'md:flex-row md:justify-center md:border md:shadow-lg'} animate-item flex w-full flex-col justify-center gap-5 rounded-lg p-5`}
 >
 	<Form data={data.form} action={'/contact?'} />
 </div>
