@@ -235,7 +235,7 @@
 	<div class="orbitText relative order-2 flex h-full w-full">
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
 			<div class="w-full text-3xl font-bold uppercase">build apps faster</div>
-			<div class="text-lg font-thin">
+			<div class="text-lg font-thin text-muted-foreground">
 				spatz is a complete, minimal toolkit for building modern web applications. It's designed to
 				be a flexible and efficient solution for developers who want to create high-quality,
 				performant applications with ease.
@@ -265,7 +265,7 @@
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
 			<div class="w-full text-3xl font-bold uppercase">Why spatz?</div>
 
-			<div class="text-lg">
+			<div class="text-lg font-thin text-muted-foreground">
 				Combining SvelteKit, PocketBase, OpenAI, TailwindCSS, and Zod makes a powerful tech stack.
 				This minimal setup leverages each technology's strengths for modern, efficient, and scalable
 				web applications.
@@ -291,7 +291,7 @@
 		<div class="z-20 flex w-full flex-col gap-5 p-2 md:p-5">
 			<div class="w-full text-3xl font-bold uppercase">Users & Data</div>
 
-			<div class="text-lg">
+			<div class="text-lg font-thin text-muted-foreground">
 				PocketBase makes for an ideal backend solution for rapidly building modern web applications
 				with minimal friction. It offers authentication, a high-performance database, an intuitive
 				admin panel, logging, and complex query support—all within a single file. This lightweight

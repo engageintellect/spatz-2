@@ -112,12 +112,14 @@
 	id="about"
 	class={` ${heroHidden ? 'opacity-0' : ''} relative mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-5 rounded-lg py-40 transition-all duration-300 md:flex-row md:gap-0`}
 >
-	<ParticleGrid
-		color={`${theme === 'light' ? '#e5e5e5' : '#262626'}`}
-		className="absolute inset-0 z-0 particle-grid"
-		refresh={true}
-		quantity={150}
-	/>
+	{#if theme}
+		<ParticleGrid
+			color={`${theme === 'dark' ? '#e5e5e5' : '#171717'}`}
+			className="absolute inset-0 z-0 particle-grid opacity-[15%]"
+			refresh={true}
+			quantity={150}
+		/>
+	{/if}
 
 	<div class="flex w-full flex-col-reverse gap-20 md:flex-row md:gap-0">
 		<div
