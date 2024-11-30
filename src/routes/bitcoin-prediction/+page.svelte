@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { formatFriendlyDate } from '$lib/utils';
 	const { data }: any = $props();
 	import { currentUser } from '$lib/stores/user';
 	import { animateMainStagger } from '$lib/animations';
@@ -35,7 +36,7 @@
 <div
 	class={`${sidebar.state === 'expanded' ? 'lg:mt-5 lg:border lg:p-5' : 'md:mt-5 md:border md:p-5'} animate-item mx-auto my-5 max-w-2xl rounded-lg`}
 >
-	<div class="mb-20 flex flex-col gap-10">
+	<div class="flex flex-col gap-10">
 		<div>
 			<div class="animate-item text-6xl">
 				<span class="font-bold">btc</span> <span class="font-thin">predict</span>
@@ -100,7 +101,7 @@
 										<div>
 											<div class="flex items-center gap-2">
 												<div>Date:</div>
-												<div class="font-bold">{prediction.date}</div>
+												<div class="font-bold">{formatFriendlyDate(prediction.date)}</div>
 											</div>
 
 											<div class="mt-2 text-sm">
@@ -251,19 +252,24 @@
 							<div
 								class={`w-full rounded-lg border p-2 text-sm ${prediction.prediction === 'DOWN' ? 'bg-destructive' : 'bg-success'}`}
 							>
-								<div>
-									{prediction.date}
-								</div>
-								<div>
-									open: {formatFloatToPrice(prediction.openPrice)}
-								</div>
-								<div>
-									close: {formatFloatToPrice(prediction.openPrice)}
+								<div class="text-xs">
+									{formatFriendlyDate(prediction.date)}
 								</div>
 
-								<div>
-									{prediction.prediction}
+								<div class="my-2 flex flex-col">
+									<div>
+										OPEN: {formatFloatToPrice(prediction.openPrice)}
+									</div>
+									<div>
+										CLOSE: {formatFloatToPrice(prediction.closePrice)}
+									</div>
 								</div>
+
+								<Badge variant="default" class="rounded">
+									<div class="font-bold">
+										{prediction.prediction === 'UP' ? 'BULLISH' : 'BEARISH'}
+									</div>
+								</Badge>
 							</div>
 						{/each}
 					</div>
