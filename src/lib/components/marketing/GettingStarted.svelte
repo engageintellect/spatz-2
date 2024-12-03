@@ -109,6 +109,7 @@
 		<Accordion.Item value="item-2">
 			<Accordion.Trigger class="text-lg font-bold lowercase">PocketBase Config</Accordion.Trigger>
 			<Accordion.Content>
+        <div class="mt-2"><strong>NOTE: I am currently using Pocketbase v0.22.9</strong> If you wish to use v0.23.0, proceed at your own risk.</div>
 				<div>
 					<!-- <h1 class="text-xl font-bold">Pocketbase Config</h1> -->
 					<p class="mt-2">
