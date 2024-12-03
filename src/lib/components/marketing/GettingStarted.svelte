@@ -109,7 +109,6 @@
 		<Accordion.Item value="item-2">
 			<Accordion.Trigger class="text-lg font-bold lowercase">PocketBase Config</Accordion.Trigger>
 			<Accordion.Content>
-        <div class="mt-2"><strong>NOTE: I am currently using Pocketbase v0.22.9</strong> If you wish to use v0.23.0, proceed at your own risk.</div>
 				<div>
 					<!-- <h1 class="text-xl font-bold">Pocketbase Config</h1> -->
 					<p class="mt-2">
@@ -117,6 +116,10 @@
 							href="https://github.com/pocketbase/pocketbase/releases"
 							class="mx-1 border-b border-info text-info">pocketbase release</a
 						>page to download the latest version of pocketbase.
+					</p>
+					<p class="mt-2">
+						<strong>NOTE: I am currently using Pocketbase v0.22.9</strong> If you wish to use v0.23.0,
+						proceed at your own risk.
 					</p>
 					<p class="mt-5">1. Run the below commands to get started.</p>
 					<div>
