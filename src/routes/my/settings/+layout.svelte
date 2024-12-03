@@ -43,11 +43,8 @@
 	});
 </script>
 
-<div class="animate-item mx-auto w-full max-w-2xl">
-	<!-- <div class="text-7xl">settings</div> -->
-</div>
 <div
-	class={`${sidebar.state === 'expanded' ? 'lg:border lg:p-5 lg:shadow-lg' : 'md:border md:p-5 md:shadow-lg'} animate-item mx-auto flex h-fit w-full max-w-2xl gap-5 rounded-lg`}
+	class={`${sidebar.state === 'expanded' ? 'lg:border lg:p-5 lg:shadow' : 'md:border md:p-5 md:shadow'} animate-item mx-auto flex h-fit w-full max-w-2xl gap-5 rounded-lg`}
 >
 	<ul class="flex w-40 flex-col gap-1">
 		{#each navigation as navItem}

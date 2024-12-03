@@ -165,7 +165,7 @@
 	</Button>
 
 	<div
-		class={`${sidebar.state === 'expanded' ? 'lg:border lg:p-5' : 'md:border md:p-5'} animate-item mt-5 rounded-lg shadow`}
+		class={`${sidebar.state === 'expanded' ? 'lg:border lg:p-5' : 'md:border md:p-5'} animate-item mt-5 rounded-lg`}
 	>
 		<div class="bg-base-100 mx-auto h-full w-full">
 			<h1 class="flex items-center gap-2 text-6xl font-bold text-primary">
