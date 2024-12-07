@@ -132,7 +132,7 @@ export const actions: Actions = {
 
 			const comment = await locals.pb.collection('comments').getOne(commentId);
 
-			if (comment.author !== locals.pb.authStore.model?.id) {
+			if (comment.author !== locals.pb.authStore.record?.id) {
 				throw error(403, 'Unauthorized');
 			}
 

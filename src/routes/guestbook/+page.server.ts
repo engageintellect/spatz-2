@@ -125,7 +125,7 @@ export const actions: Actions = {
 			const post = await locals.pb.collection('posts').getOne(postId);
 
 			// Ensure the user is authorized to delete the post
-			if (post.author !== locals.pb.authStore.model?.id) {
+			if (post.author !== locals.pb.authStore.record?.id) {
 				throw error(403, 'Unauthorized');
 			}
 

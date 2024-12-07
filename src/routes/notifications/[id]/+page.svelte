@@ -59,7 +59,7 @@
 	<main
 		class={`${sidebar.state === 'expanded' ? 'lg:border lg:p-5' : 'md:border md:p-5'} animate-item mx-auto max-w-2xl rounded-lg md:mt-5`}
 	>
-		{#if data.userPosts.length > 0}
+		{#if data.notifications.length > 0}
 			<div class="animate-item text-6xl">notifications</div>
 
 			<div class="animate-item mt-5 flex items-center justify-between gap-2 pb-2">

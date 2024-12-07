@@ -86,7 +86,7 @@
 				<div class="animate-item flex items-center gap-2">
 					<div class="mt-5 grid w-full grid-cols-12 gap-1">
 						{#each data.predictionsWithAccuracy.slice(-72) as prediction}
-							<Tooltip.Provider delayDuration={200}>
+							<Tooltip.Provider delayDuration={100}>
 								<Tooltip.Root disableCloseOnTriggerClick>
 									<Tooltip.Trigger
 										class={`h-8 w-full rounded p-2 text-sm ${

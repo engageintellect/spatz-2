@@ -75,7 +75,7 @@ export const actions: Actions = {
 				.collection('notifications')
 				.getOne(notificationId, { autoCancel: false });
 
-			if (notification.user !== locals.pb.authStore.model?.id) {
+			if (notification.user !== locals.pb.authStore.record?.id) {
 				throw error(403, 'Unauthorized');
 			}
 
@@ -89,7 +89,7 @@ export const actions: Actions = {
 
 	deleteAllNotifications: async ({ locals }) => {
 		try {
-			const currentUserId = locals.pb.authStore.model?.id;
+			const currentUserId = locals.pb.authStore.record?.id;
 			if (!currentUserId) throw error(403, 'User not authenticated');
 
 			// Fetch only the IDs of all notifications for the current user

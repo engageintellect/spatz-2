@@ -60,8 +60,8 @@ importers:
         specifier: ^1.27.1
         version: 1.48.1
       pocketbase:
-        specifier: ^0.21.3
-        version: 0.21.5
+        specifier: ^0.22
+        version: 0.22.1
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
@@ -2713,8 +2713,8 @@ packages:
     resolution: {integrity: sha512-40QW5YalBNfQo5yRYmiw7Yz6TKKVr3h6970B2YE+3fQpsWcrbj1PzJgxeJ19DRQjhMbKPIuMY8rFaXc8moolVw==}
     engines: {node: '>=10.13.0'}
 
-  pocketbase@0.21.5:
-    resolution: {integrity: sha512-bnI/uinnQps+ElSlzxkc4yvwuSFfKcoszDtXH/4QT2FhGq2mJVUvDlxn+rjRXVntUjPfmMG5LEPZ1eGqV6ssog==}
+  pocketbase@0.22.1:
+    resolution: {integrity: sha512-hnzpDcIx5kbkUJXz6IkiTox6R4nb706u4rPSMy2FYCaI2OqBnFxbY0qwWBSqx1ERz/Xi61Uguf17Gb9bWZ8+kw==}
 
   popmotion@11.0.5:
     resolution: {integrity: sha512-la8gPM1WYeFznb/JqF4GiTkRRPZsfaj2+kCxqQgr2MJylMmIKUwBfWW8Wa5fml/8gmtlD5yI01MP1QCZPWmppA==}
@@ -6039,7 +6039,7 @@ snapshots:
 
   pngjs@5.0.0: {}
 
-  pocketbase@0.21.5: {}
+  pocketbase@0.22.1: {}
 
   popmotion@11.0.5:
     dependencies:

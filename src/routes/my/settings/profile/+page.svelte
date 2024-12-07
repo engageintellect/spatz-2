@@ -8,6 +8,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { currentUser } from '$lib/stores/user';
 	import { onMount } from 'svelte';
+	import Avatar from '$lib/components/ui/Avatar.svelte';
 
 	interface Props {
 		data: any;
@@ -73,34 +74,27 @@
 				for="avatar"
 				class="avatar group mb-5 h-32 w-32 rounded-full transition-shadow duration-300 hover:cursor-pointer md:hover:shadow-lg"
 			>
-				<div class="relative mb-5 h-32 w-32 rounded-full">
-					{#if data.user?.avatar}
-						<img
-							class="h-32 w-32 rounded-full border shadow"
-							src={data.user?.avatar
-								? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar)
-								: `https://ui-avatars.com/api/?name=${data.user?.email}`}
-							alt="User avatar"
-							id="avatar-preview"
-						/>
+				<div class="relative mb-5 flex h-32 w-32 items-center justify-center rounded-full">
+					<img
+						class="flex h-32 w-32 items-center justify-center rounded-full border shadow"
+						src={data.user?.avatar
+							? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar)
+							: `https://ui-avatars.com/api/?name=${data.user?.username}&background=random`}
+						alt="User avatar"
+						id="avatar-preview"
+					/>
 
-						<label for="avatar" class=" absolute -bottom-0.5 -right-0.5 z-20 hover:cursor-pointer">
-							<div
-								class="flex h-10 w-10 items-center justify-center rounded-full border bg-secondary transition-transform duration-300 md:group-hover:scale-105"
-							>
-								{#if data.user?.avatar}
-									<Icon icon="mdi:pencil" class="h-5 w-5" />
-								{:else}
-									<Icon icon="mdi:plus" class="h-5 w-5" />
-								{/if}
-							</div>
-						</label>
-					{:else}
-						<Icon
-							icon="mdi-account-circle"
-							class="text-base-100 h-full w-full scale-110 rounded-full bg-primary"
-						/>
-					{/if}
+					<label for="avatar" class=" absolute -bottom-0.5 -right-0.5 z-20 hover:cursor-pointer">
+						<div
+							class="flex h-10 w-10 items-center justify-center rounded-full border bg-secondary transition-transform duration-300 md:group-hover:scale-105"
+						>
+							{#if data.user?.avatar}
+								<Icon icon="mdi:pencil" class="h-5 w-5" />
+							{:else}
+								<Icon icon="mdi:plus" class="h-5 w-5" />
+							{/if}
+						</div>
+					</label>
 				</div>
 			</label>
 			<input

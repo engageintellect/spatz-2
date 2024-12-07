@@ -9,32 +9,27 @@ export const load: LayoutServerLoad = async ({ locals }) => {
 	const subs = await stripe.subscriptions.list();
 
 	const user = await stripe.customers.list({
-		email: locals?.pb?.authStore?.model?.email,
+		email: locals?.pb?.authStore?.record?.email,
 		limit: 1
 	});
 
-	let existingSubscriptions: any;
-
+	let existingSubscriptions: any = [];
 	if (user.data.length > 0) {
-		existingSubscriptions = subs.data
-			.filter((sub) => sub.customer === user.data[0].id)
-			.map((sub) => sub);
+		existingSubscriptions = subs.data.filter((sub) => sub.customer === user.data[0].id);
 	}
 
-	if (locals.pb.authStore.isValid) {
-		if (existingSubscriptions.length > 0 && existingSubscriptions[0].status === 'active') {
-			await locals.pb
-				.collection('users')
-				.update(locals?.pb?.authStore?.model?.id, { subscribed: true });
-		} else {
-			await locals.pb
-				.collection('users')
-				.update(locals?.pb?.authStore?.model?.id, { subscribed: false });
-		}
+	const userId = locals?.pb?.authStore?.record?.id;
+
+	// Check if userId exists and auth is valid before proceeding
+	if (userId && locals.pb.authStore.isValid) {
+		const isSubscribed =
+			existingSubscriptions.length > 0 && existingSubscriptions[0].status === 'active';
+
+		await locals.pb.collection('users').update(userId, { subscribed: isSubscribed });
 	}
 
 	const notifications = await locals.pb.collection('notifications').getFullList({
-		filter: `user ~ "${locals?.pb?.authStore?.model?.id}"`,
+		filter: `user ~ "${locals?.pb?.authStore?.record?.id}"`,
 		sort: '-created'
 	});
 
