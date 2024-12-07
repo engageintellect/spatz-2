@@ -13,6 +13,7 @@
 	import ScrollIndicator from '$lib/components/ui/ScrollIndicator.svelte';
 	import { animateMainStagger } from '$lib/animations';
 	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
+	import { Badge } from '$lib/components/ui/badge';
 
 	let sidebar = useSidebar(); // Initialize the sidebar
 
@@ -205,7 +206,7 @@
 					userId={$currentUser.id}
 					avatar={$currentUser?.avatar
 						? getImageURL($currentUser?.collectionId, $currentUser?.id, $currentUser?.avatar)
-						: `https://ui-avatars.com/api/?name=${$currentUser?.email}&background=random`}
+						: `https://ui-avatars.com/api/?name=${$currentUser?.username}&background=random`}
 					{isSubmitting}
 					id="content"
 					value={form?.data?.content ?? ''}
@@ -292,9 +293,12 @@
 								{/if}
 							{/each}
 						{:else}
-							<div class="alert">
-								<div>No posts yet.</div>
-							</div>
+							<Badge
+								variant="outline"
+								class=" flex flex-col items-start rounded-lg p-5 md:mx-2 md:mt-2"
+							>
+								<div class="text-lg font-thin md:text-xl">No posts yet...</div>
+							</Badge>
 						{/if}
 					</div>
 				</div>

@@ -18,7 +18,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	event.locals.pb = pb;
-	event.locals.user = pb.authStore.model;
+	//console.log('pb', pb.authStore);
+	event.locals.user = pb.authStore.record;
 
 	const response = await resolve(event);
 

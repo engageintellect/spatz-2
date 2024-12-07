@@ -22,7 +22,7 @@ export const actions: Actions = {
 
 		try {
 			await locals.pb.collection('users').authWithPassword(form.data.email, form.data.password);
-			if (!locals.pb?.authStore?.model) {
+			if (!locals.pb?.authStore?.record) {
 				locals.pb.authStore.clear();
 				return {
 					notVerified: true

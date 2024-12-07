@@ -18,7 +18,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	});
 
 	const user = await stripe.customers.list({
-		email: locals?.pb?.authStore?.model?.email,
+		email: locals?.pb?.authStore?.record?.email,
 		limit: 1
 	});
 
@@ -73,7 +73,7 @@ export const actions: Actions = {
 			throw redirect(303, '/auth/login');
 		}
 
-		const user = locals.pb.authStore.model;
+		const user = locals.pb.authStore.record;
 		const email = user?.email;
 
 		if (!email) {

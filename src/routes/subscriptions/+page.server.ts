@@ -19,7 +19,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	});
 
 	const user = await stripe.customers.list({
-		email: locals?.pb?.authStore?.model?.email,
+		email: locals?.pb?.authStore?.record?.email,
 		limit: 1
 	});
 
@@ -51,7 +51,7 @@ export const actions: Actions = {
 		}
 
 		// Get the logged-in user's data
-		const user = locals.pb.authStore.model;
+		const user = locals.pb.authStore.record;
 		const email = user?.email;
 
 		if (!email) {
@@ -96,7 +96,7 @@ export const actions: Actions = {
 		});
 		//console.log('subscriptions:', subs);
 
-		//console.log('pb stripe id', locals?.pb?.authStore?.model);
+		//console.log('pb stripe id', locals?.pb?.authStore?.record);
 		const hasSubscriptions = subs.data.filter(
 			(sub) => sub.customer === customerId && sub.status !== 'incomplete_expired'
 		);
