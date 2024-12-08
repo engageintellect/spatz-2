@@ -53,6 +53,8 @@
 		"@unovis/svelte": "1.4.3-beta.0",
 		"ai": "^3.2.34",
 		"bad-words": "^4.0.0",
+		"chart.js": "^4.4.7",
+		"chartjs": "^0.3.24",
 		"cmdk-sv": "^0.0.18",
 		"cobe": "^0.6.3",
 		"embla-carousel-autoplay": "^8.1.6",
