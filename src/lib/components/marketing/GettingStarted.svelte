@@ -117,10 +117,7 @@
 							class="mx-1 border-b border-info text-info">pocketbase release</a
 						>page to download the latest version of pocketbase.
 					</p>
-					<p class="mt-2">
-						<strong>NOTE: I am currently using Pocketbase v0.22.9</strong> If you wish to use v0.23.0,
-						proceed at your own risk.
-					</p>
+
 					<p class="mt-5">1. Run the below commands to get started.</p>
 					<div>
 						<div class="relative my-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-white">
@@ -129,7 +126,7 @@
 								class="w-full whitespace-nowrap text-left"
 								onclick={() =>
 									copyToClipboard(
-										'wget https://github.com/pocketbase/pocketbase/releases/download/v0.22.9/pocketbase_0.22.9_linux_amd64.zip'
+										'wget https://github.com/pocketbase/pocketbase/releases/download/v0.23.4/pocketbase_0.23.4_linux_amd64.zip'
 									)}
 							>
 								$ wget
@@ -144,7 +141,7 @@
 								class="w-full whitespace-nowrap text-left"
 								onclick={() =>
 									copyToClipboard(
-										'wget https://github.com/pocketbase/pocketbase/releases/download/v0.22.9/pocketbase_0.22.9_linux_amd64.zip'
+										'wget https://github.com/pocketbase/pocketbase/releases/download/v0.23.4/pocketbase_0.22.9_linux_amd64.zip'
 									)}
 							>
 								$ wget

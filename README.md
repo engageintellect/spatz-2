@@ -41,7 +41,6 @@ spatz-2 uses svelte-superforms, shadcn-svelte, stripe payments, and svelte-anima
 ## Getting Started
 
 ### Pocketbase Setup
-** NOTE: I am currently using Pocketbase v0.22.9. ** If you wish to use v0.23.0, proceed at your own risk.
 
 1. Create a directory for your Pocketbase instance and navigate to it.
 
@@ -53,8 +52,8 @@ cd pb-spatz-2
 2. Download the latest release of Pocketbase, unzip it, and start the server.
 
 ```bash
-wget https://github.com/pocketbase/pocketbase/releases/download/v0.22.9/pocketbase_0.22.9_linux_amd64.zip
-unzip pocketbase_0.22.9_linux_amd64.zip
+wget https://github.com/pocketbase/pocketbase/releases/download/v0.23.4/pocketbase_0.24.4_linux_amd64.zip
+unzip pocketbase_0.24.3_linux_amd64.zip
 ./pocketbase serve --http="0.0.0.0:8090"
 ```
 
