@@ -11,96 +11,12 @@
 	import { buttonVariants } from '$lib/components/ui/button/index';
 	import * as Tooltip from '$lib/components/ui/tooltip/index';
 	import Badge from '$lib/components/ui/badge/badge.svelte';
+	import Chart from '$lib/components/ui/Chart.svelte';
 
 	let sidebar = useSidebar(); // Initialize the sidebar
 
 	$effect(() => {
 		animateMainStagger();
-	});
-
-	// Chart.js integration
-	let chartCanvas: HTMLCanvasElement | null = null;
-	let lineChart: any = null;
-
-	const getTailwindColor = (className: string): string => {
-		const tempDiv = document.createElement('div');
-		tempDiv.className = className;
-		document.body.appendChild(tempDiv);
-
-		// Get the computed style color
-		const color = getComputedStyle(tempDiv).color;
-
-		// Remove the temporary element
-		document.body.removeChild(tempDiv);
-
-		return color;
-	};
-
-	// Initialize the chart on mount
-	import('chart.js/auto').then(({ default: Chart }) => {
-		if (chartCanvas) {
-			const closePrices = data.predictionsWithAccuracy
-				.slice(-72)
-				.map((prediction: any) => prediction.closePrice);
-			const dates = data.predictionsWithAccuracy
-				.slice(-72)
-				.map((prediction: any) => formatFriendlyDate(prediction.date));
-
-			// Get colors dynamically from Tailwind classes
-			const borderColor = getTailwindColor('text-neutral-500');
-			const backgroundColor = getTailwindColor('text-neutral-300');
-
-			lineChart = new Chart(chartCanvas, {
-				type: 'line',
-				data: {
-					labels: dates,
-					datasets: [
-						{
-							label: 'Close Prices (USD)',
-							data: closePrices,
-							borderColor,
-							backgroundColor,
-							tension: 0.4,
-							fill: true
-						}
-					]
-				},
-				options: {
-					responsive: true,
-					plugins: {
-						legend: {
-							display: true,
-							position: 'top'
-						}
-					},
-					scales: {
-						x: {
-							title: {
-								display: true,
-								text: 'Date'
-							},
-							ticks: {
-								autoSkip: true,
-								maxTicksLimit: 12
-							}
-						},
-						y: {
-							title: {
-								display: true,
-								text: 'Close Price (USD)'
-							}
-						}
-					}
-				}
-			});
-		}
-	});
-
-	// Clean up chart instance on unmount
-	$effect(() => {
-		if (lineChart) {
-			lineChart.destroy();
-		}
 	});
 </script>
 
@@ -133,8 +49,10 @@
 
 		<!-- Chart Section -->
 		<div class="animate-item">
-			<h2 class="mb-5 text-3xl font-bold">Close Prices (Last 72 Days)</h2>
-			<canvas bind:this={chartCanvas} class="h-64 w-full"></canvas>
+			<h2 class="text-3xl font-bold">
+				BTC/USD <span class="text-sm font-thin text-muted-foreground">(last 72 days)</span>
+			</h2>
+			<Chart {data} />
 		</div>
 
 		{#if $currentUser.subscribed}
@@ -170,13 +88,21 @@
 						<span> % </span>
 					</div>
 
-					<div class="mt-2 text-xl font-thin text-muted-foreground">
-						over the last {data.predictions.predictions.length} days.
+					<div class="mt-2 text-sm font-thin text-muted-foreground">
+						accurate predictions over the last {data.predictions.predictions.length} days.
+					</div>
+
+					<div class="animate-item mt-5 flex items-center gap-1">
+						<div class="text-sm font-thin text-muted-foreground">
+							Here are predictions from the last 72 days.
+						</div>
+
+						<Icon icon="mdi:arrow-down" class="text-sm text-muted-foreground" />
 					</div>
 				</div>
 
 				<div class="animate-item flex items-center gap-2">
-					<div class="mt-5 grid w-full grid-cols-12 gap-1">
+					<div class="grid w-full grid-cols-12 gap-1">
 						{#each data.predictionsWithAccuracy.slice(-72) as prediction}
 							<Tooltip.Provider delayDuration={100}>
 								<Tooltip.Root disableCloseOnTriggerClick>

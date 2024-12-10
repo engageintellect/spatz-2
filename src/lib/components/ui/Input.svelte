@@ -22,7 +22,7 @@
 	}: Props = $props();
 </script>
 
-<div class="mb-2 w-full">
+<div class=" w-full">
 	<input
 		class={type === 'file'
 			? 'file-input file-input-bordered w-full'
