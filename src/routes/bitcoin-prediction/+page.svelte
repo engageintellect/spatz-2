@@ -47,14 +47,6 @@
 			</div>
 		</div>
 
-		<!-- Chart Section -->
-		<div class="animate-item">
-			<h2 class="text-3xl font-bold">
-				BTC/USD <span class="text-sm font-thin text-muted-foreground">(last 72 days)</span>
-			</h2>
-			<Chart {data} />
-		</div>
-
 		{#if $currentUser.subscribed}
 			<div class="flex flex-col gap-5">
 				<div class="animate-item animate-item text-lg">

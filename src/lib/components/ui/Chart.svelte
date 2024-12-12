@@ -3,6 +3,12 @@
 	// Chart.js integration
 	import type { Chart } from 'chart.js';
 
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js';
+
+	let sidebar: any = $state(useSidebar());
+
+	console.log('sidebar', sidebar.state);
+
 	let chartCanvas: HTMLCanvasElement | null = null;
 	let lineChart: Chart | null = null;
 
@@ -109,7 +115,6 @@
 	});
 </script>
 
-<canvas
-	bind:this={chartCanvas}
-	class="h-full max-h-72 w-full rounded-lg bg-gradient-to-b from-background to-secondary p-2"
-></canvas>
+TODO: Fix overflow bug when the sidebar opens/closes in tablet view
+
+<canvas bind:this={chartCanvas} class="h-full max-h-64 w-full rounded-lg p-2"></canvas>
