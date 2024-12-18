@@ -15,24 +15,24 @@
 	let { children }: Props = $props();
 	const navigation = [
 		{
-			title: 'Profile',
+			title: 'profile',
 			href: '/my/settings/profile',
 			icon: 'mdi:account'
 		},
 		{
-			title: 'Account',
+			title: 'account',
 			href: '/my/settings/account',
 			icon: 'mdi:settings'
 		},
 
 		{
-			title: 'Billing',
+			title: 'billing',
 			href: '/my/settings/subscription',
 			icon: 'weui:done2-filled'
 		},
 
 		{
-			title: 'Security',
+			title: 'security',
 			href: '/my/settings/security',
 			icon: 'material-symbols:lock-outline'
 		}

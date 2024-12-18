@@ -1,9 +1,8 @@
 import { writable } from 'svelte/store';
 
-export const toast = writable({
+export const alert = writable({
 	show: false,
-	title: '',
-	content: '',
+	message: '',
 	type: '',
 	icon: ''
 });

@@ -56,7 +56,7 @@
 -->
 	{:else}
 		<div in:fade>
-			<Button variant="ghost">
+			<Button size="icon" variant="ghost">
 				<Icon icon="mynaui:sidebar" class="h-7 w-7" />
 			</Button>
 		</div>

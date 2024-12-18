@@ -33,9 +33,14 @@ export const load: LayoutServerLoad = async ({ locals }) => {
 		sort: '-created'
 	});
 
+	const alerts = await locals.pb.collection('alerts').getFullList({
+		sort: '-created'
+	});
+
 	return {
 		user: locals.user,
 		globalNotifications: notifications,
-		form: await superValidate(zod(formSchema))
+		form: await superValidate(zod(formSchema)),
+		alerts: alerts
 	};
 };

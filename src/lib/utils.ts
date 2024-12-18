@@ -36,14 +36,7 @@ export const validateData = async (formData: any, schema: any) => {
 
 export function formatFriendlyDate(dateString: string): string {
 	const date = new Date(dateString);
-
-	// Extract the components of the date
-	const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
-	const day = date.getDate().toString().padStart(2, '0');
-	const year = date.getFullYear().toString().slice(-2); // Get the last two digits of the year
-
-	// Return the date in MM-DD-YY format
-	return `${month}-${day}-${year}`;
+	return date.toISOString();
 }
 
 export function formatFloatToPrice(amount: number): string {
