@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatFriendlyDate } from '$lib/utils';
+	import { formatFriendlyDate, formatPrettyDate } from '$lib/utils';
 	const { data }: any = $props();
 	import { currentUser } from '$lib/stores/user';
 	import { animateMainStagger } from '$lib/animations';
@@ -111,7 +111,7 @@
 										<div>
 											<div class="flex items-center gap-2">
 												<div>Date:</div>
-												<div class="font-bold">{formatFriendlyDate(prediction.date)}</div>
+												<div class="font-bold">{formatPrettyDate(prediction.date)}</div>
 											</div>
 
 											<div class="mt-2 text-sm">
@@ -263,7 +263,7 @@
 								class={`w-full rounded-lg border p-2 text-sm ${prediction.prediction === 'DOWN' ? 'bg-destructive' : 'bg-success'}`}
 							>
 								<div class="text-xs">
-									{formatFriendlyDate(prediction.date)}
+									{formatPrettyDate(prediction.date)}
 								</div>
 
 								<div class="my-2 flex flex-col">

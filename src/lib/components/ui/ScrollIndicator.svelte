@@ -62,11 +62,11 @@
 {#if loading}
 	<div
 		in:fade={{ duration: 500 }}
-		class={` fixed top-[55px] z-10 h-[1px] bg-foreground`}
+		class={`fixed top-[55px] z-10 h-[2px] w-full bg-foreground`}
 		style="left: {layoutOffset}px; width: calc({layoutWidth}px * {scrollProgress / 100})"
 	></div>
 
-	<div class="layout-container mx-auto max-w-5xl">
+	<div class="layout-container mx-auto w-full max-w-5xl">
 		<!-- Your layout content goes here -->
 	</div>
 {/if}

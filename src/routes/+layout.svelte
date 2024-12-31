@@ -24,7 +24,7 @@
 
 	$: currentUser.set(data.user);
 
-	console.log(data);
+	//console.log(data);
 
 	// START VIEW TRANSITIONS API
 	import { onNavigate } from '$app/navigation';
@@ -53,24 +53,26 @@
 		<AppSidebar notifications={data.globalNotifications.length} />
 		<div class="flex min-h-[calc(100svh)] w-full flex-col md:min-h-screen">
 			<Nav notifications={data.globalNotifications.length} />
-			{#if showAlert}
-				{#if data.alerts.length > 0}
-					<div transition:slide class=" flex w-full justify-between bg-secondary p-2">
-						<div class="mx-auto flex w-full max-w-5xl justify-between">
-							<div class="flex w-full flex-col">
-								<div class="text-sm">{data.alerts[0].title}</div>
-								<a href={data.alerts[0].url} class=" text-xs text-muted-foreground">
-									{data.alerts[0].content}
-								</a>
-							</div>
+			<div transition:slide>
+				{#if showAlert}
+					{#if data.alerts.length > 0}
+						<div class=" flex w-full justify-between border-b bg-secondary p-2">
+							<div class="mx-auto flex w-full max-w-5xl justify-between pr-1">
+								<div class="flex w-full flex-col px-2">
+									<div class="text-sm">{data.alerts[0].title}</div>
+									<a href={data.alerts[0].url} class=" text-xs text-muted-foreground">
+										{data.alerts[0].content}
+									</a>
+								</div>
 
-							<Button onclick={toggleAlert} size="icon" variant="ghost">
-								<Icon icon="mdi:close" class="h-5 w-5" />
-							</Button>
+								<Button onclick={toggleAlert} size="icon" variant="ghost">
+									<Icon icon="mdi:close" class="h-5 w-5" />
+								</Button>
+							</div>
 						</div>
-					</div>
+					{/if}
 				{/if}
-			{/if}
+			</div>
 			<main class={`mx-auto my-2 w-full max-w-5xl flex-grow overflow-x-clip px-2`}>
 				<slot />
 			</main>
