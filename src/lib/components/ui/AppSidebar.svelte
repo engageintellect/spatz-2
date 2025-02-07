@@ -63,11 +63,19 @@
 			<div class="p-2">
 				<div class="flex w-full items-start gap-2">
 					<div class="relative">
-						<a href={`/users/${$currentUser.id}`} data-sveltekit-preload-data="hover">
+						<a
+							onclick={() => setOpenMobile(false)}
+							href={`/users/${$currentUser.id}`}
+							data-sveltekit-preload-data="hover"
+						>
 							<Avatar />
 						</a>
 						{#if notifications > 0}
-							<a href={`/notifications/${$currentUser.id}`} data-sveltekit-preload-data="hover">
+							<a
+								onclick={() => setOpenMobile(false)}
+								href={`/notifications/${$currentUser.id}`}
+								data-sveltekit-preload-data="hover"
+							>
 								<div
 									class="dropdown-menu-notifications absolute -bottom-1 right-0 rounded-full border border-2 border-background text-xs"
 								>
@@ -80,6 +88,7 @@
 					</div>
 					<div class="truncate">
 						<a
+							onclick={() => setOpenMobile(false)}
 							href={`/users/${$currentUser.id}`}
 							data-sveltekit-preload-data="hover"
 							class="flex items-center gap-1"
@@ -90,7 +99,11 @@
 								<Icon icon="material-symbols:verified" class="h-4 w-4 text-info text-info" />
 							{/if}
 						</a>
-						<a href={`/users/${$currentUser.id}`} data-sveltekit-preload-data="hover">
+						<a
+							onclick={() => setOpenMobile(false)}
+							href={`/users/${$currentUser.id}`}
+							data-sveltekit-preload-data="hover"
+						>
 							<p class="overflow-hidden text-ellipsis text-xs font-thin text-foreground/70">
 								{$currentUser.email}
 							</p>
