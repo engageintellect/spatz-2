@@ -46,7 +46,7 @@
 			data-mobile="true"
 			class="text-sidebar-foreground w-[--sidebar-width] bg-background p-0 [&>button]:hidden"
 			style="--sidebar-width: {SIDEBAR_WIDTH_MOBILE};"
-			{side}
+			side={'right'}
 		>
 			<div class="flex h-full w-full flex-col">
 				{@render children?.()}
