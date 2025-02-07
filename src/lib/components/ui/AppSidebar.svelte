@@ -8,6 +8,8 @@
 	import { pb } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
+	import { Button } from '$lib/components/ui/button/index.js';
 
 	const { notifications }: any = $props();
 
@@ -51,6 +53,8 @@
 	function getClass(url: string) {
 		return $page.url.pathname === url ? 'bg-secondary' : '';
 	}
+
+	const { setOpenMobile } = useSidebar();
 </script>
 
 <Sidebar.Root class="z-50">
@@ -106,7 +110,12 @@
 						<Sidebar.MenuItem class={getClass(item.url)}>
 							<Sidebar.MenuButton>
 								{#snippet child({ props })}
-									<a data-sveltekit-preload-data="hover" href={item.url} {...props}>
+									<a
+										onclick={() => setOpenMobile(false)}
+										data-sveltekit-preload-data="hover"
+										href={item.url}
+										{...props}
+									>
 										<Icon icon={item.icon} class="" />
 										<span>{item.title}</span>
 										{#if item.title === 'Notifications'}
@@ -135,7 +144,12 @@
 						<Sidebar.MenuItem class={getClass(item.url)}>
 							<Sidebar.MenuButton>
 								{#snippet child({ props })}
-									<a data-sveltekit-preload-data="hover" href={item.url} {...props}>
+									<a
+										onclick={() => setOpenMobile(false)}
+										data-sveltekit-preload-data="hover"
+										href={item.url}
+										{...props}
+									>
 										<Icon icon={item.icon} class="" />
 										<span>{item.title}</span>
 									</a>
@@ -155,7 +169,12 @@
 						<Sidebar.MenuItem class={getClass(item.url)}>
 							<Sidebar.MenuButton>
 								{#snippet child({ props })}
-									<a data-sveltekit-preload-data="hover" href={item.url} {...props}>
+									<a
+										onclick={() => setOpenMobile(false)}
+										data-sveltekit-preload-data="hover"
+										href={item.url}
+										{...props}
+									>
 										<Icon icon={item.icon} class="" />
 										<span>{item.title}</span>
 									</a>

@@ -35,15 +35,33 @@ export const validateData = async (formData: any, schema: any) => {
 };
 
 export function formatFriendlyDate(dateString: string): string {
-	const date = new Date(dateString);
+	if (!dateString || typeof dateString !== 'string') {
+		console.error(`Invalid date input: ${dateString}`);
+		return 'Invalid Date';
+	}
 
-	// Extract the components of the date
-	const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
-	const day = date.getDate().toString().padStart(2, '0');
-	const year = date.getFullYear().toString().slice(-2); // Get the last two digits of the year
+	// Ensure ISO-8601 compliance (replace space with 'T' if needed)
+	let standardizedDate = dateString.trim().replace(' ', 'T');
 
-	// Return the date in MM-DD-YY format
-	return `${month}-${day}-${year}`;
+	// Ensure it ends in 'Z' if it includes time (to force UTC parsing)
+	if (
+		standardizedDate.match(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/) &&
+		!standardizedDate.endsWith('Z')
+	) {
+		standardizedDate += 'Z';
+	}
+
+	// Create Date object
+	const date = new Date(standardizedDate);
+
+	// Validate the date
+	if (isNaN(date.getTime())) {
+		console.error(`Invalid date: ${dateString}`);
+		return 'Invalid Date';
+	}
+
+	// Return as full ISO string
+	return date.toISOString(); // Example: "2024-08-08T00:00:00.000Z"
 }
 
 export function formatFloatToPrice(amount: number): string {
@@ -58,8 +76,17 @@ export function formatFloatToPrice(amount: number): string {
 }
 
 export function timeSince(dateString: string): string {
+	console.log(`Parsing date: ${dateString}`);
+
 	const date = new Date(dateString);
 	const now = new Date();
+
+	// Handle invalid date cases
+	if (isNaN(date.getTime())) {
+		console.error(`Invalid date in timeSince: ${dateString}`);
+		return 'Invalid Date';
+	}
+
 	const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
 	const intervals: { [key: string]: number } = {
