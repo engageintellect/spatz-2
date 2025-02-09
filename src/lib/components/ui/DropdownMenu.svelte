@@ -1,10 +1,7 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
-	import { pb } from '$lib/pocketbase';
-	import { goto } from '$app/navigation';
 	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
-	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import Avatar from '$lib/components/ui/Avatar.svelte';
 	import { PUBLIC_POCKETBASE_ADMIN } from '$env/static/public';
@@ -12,14 +9,6 @@
 	import { Badge } from '$lib/components/ui/badge/index.js';
 
 	export let notifications: any;
-
-	function handleLogout() {
-		pb.authStore.clear();
-		// Clear AI chat messages
-		// chatMessages.set([]);
-		localStorage.removeItem('chatMessages');
-		goto('/');
-	}
 
 	onMount(() => {
 		gsap.from('.dropdown-menu-item', {
@@ -246,13 +235,7 @@
 		</DropdownMenu.Item>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item>
-			<form
-				class="flex w-full py-2"
-				method="POST"
-				action="/auth/logout"
-				onsubmit={handleLogout}
-				aria-label="Logout"
-			>
+			<form class="flex w-full py-2" method="POST" action="/auth/logout" aria-label="Logout">
 				<button type="submit" class="flex w-full items-center">
 					<Icon icon="mdi:logout" class="mr-2 h-4 w-4" />
 					<span>Logout</span>

@@ -32,13 +32,6 @@
 		goto(url);
 		open = false;
 	};
-
-	function handleLogout() {
-		open = false;
-		pb.authStore.clear();
-		localStorage.removeItem('chatMessages');
-		goto('/');
-	}
 </script>
 
 <Command.Dialog bind:open class="h-full min-h-80">
@@ -62,9 +55,15 @@
 				<span>AI</span>
 			</Command.Item>
 
-			<Command.Item onSelect={() => handleLogout()}>
-				<Icon icon="mdi:logout" class="mr-2 h-4 w-4" />
-				<span>logout</span>
+			<Command.Item
+				onSelect={() => (document.getElementById('logout-form') as HTMLFormElement)?.submit()}
+			>
+				<form id="logout-form" class="hidden" method="POST" action="/auth/logout"></form>
+
+				<button type="submit" class="flex w-full items-center">
+					<Icon icon="mdi:logout" class="mr-2 h-4 w-4" />
+					<span>Logout</span>
+				</button>
 			</Command.Item>
 		</Command.Group>
 	</Command.List>
