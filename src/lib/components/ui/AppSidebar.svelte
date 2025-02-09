@@ -13,12 +13,6 @@
 
 	const { notifications }: any = $props();
 
-	function handleLogout() {
-		pb.authStore.clear();
-		localStorage.removeItem('chatMessages');
-		goto('/');
-	}
-
 	// Menu items
 	const user = [
 		{
@@ -202,13 +196,7 @@
 
 	<Sidebar.Footer class="border-t">
 		<div class="rounded p-2 hover:bg-secondary">
-			<form
-				class="flex w-full py-2"
-				method="POST"
-				action="/auth/logout"
-				onsubmit={handleLogout}
-				aria-label="Logout"
-			>
+			<form class="flex w-full py-2" method="POST" action="/auth/logout" aria-label="Logout">
 				<button type="submit" class="flex w-full items-center">
 					<Icon icon="mdi:logout" class="mr-2 h-4 w-4" />
 					<span>Logout</span>

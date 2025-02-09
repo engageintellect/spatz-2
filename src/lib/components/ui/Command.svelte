@@ -5,8 +5,10 @@
 	import { onMount } from 'svelte';
 	import * as Command from '$lib/components/ui/command/index.js';
 	import { goto } from '$app/navigation';
+	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
 
 	let open = $state(false);
+	const sidebar = useSidebar();
 
 	onMount(() => {
 		function handleKeydown(e: KeyboardEvent) {
