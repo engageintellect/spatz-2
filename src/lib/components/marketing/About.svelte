@@ -30,6 +30,11 @@
 
 			<div class="flex items-center gap-2">
 				<Icon icon="mdi-done" class="text-success" />
+				<li>OpenAI streaming API Integration</li>
+			</div>
+
+			<div class="flex items-center gap-2">
+				<Icon icon="mdi-done" class="text-success" />
 				<li>Admin Dashboards & Logging</li>
 			</div>
 

@@ -53,7 +53,7 @@
 			>
 				<span class="text-xs">⌘</span>b
 			</kbd>
-			<span class="pl-1"> to open the sidebar. </span>
+			<span class="pl-1"> to open & close the sidebar. </span>
 		</p>
 	</div>
 	<div class="mt-2 grid w-full grid-cols-2 gap-2 md:grid-cols-3">
