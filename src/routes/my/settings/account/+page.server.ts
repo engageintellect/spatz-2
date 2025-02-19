@@ -54,6 +54,7 @@ export const actions: Actions = {
 		try {
 			// Check if the username already exists
 			await locals.pb.collection('users').getFirstListItem(`username = "${formData.username}"`);
+			return fail(406, { data: formData, errors: ['User already exists'], userNameAlreadyExists: true });
 		} catch (err: any) {
 			// If the username doesn't exist (404), proceed with updating the username
 			if (err.status === 404) {
@@ -61,7 +62,7 @@ export const actions: Actions = {
 					// Update the username
 					const { username } = await locals.pb
 						.collection('users')
-						.update(locals?.user?.id, { username: formData.username });
+						.update(locals?.user?.id!, { username: formData.username });
 
 					// Ensure locals.user is defined
 					if (!locals.user) {
