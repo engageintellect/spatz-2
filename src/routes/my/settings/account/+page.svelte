@@ -28,7 +28,7 @@
 					});
 					setTimeout(() => toast.set({ show: false, message: '', type: '', icon: '' }), 2000);
 					break;
-				case 'error':
+				case 'failure':
 					await invalidateAll();
 					toast.set({
 						show: true,
@@ -60,7 +60,8 @@
 					setTimeout(() => toast.set({ show: false, message: '', type: '', icon: '' }), 2000);
 					await invalidateAll();
 					break;
-				case 'error':
+				case 'failure':
+					await invalidateAll();
 					toast.set({
 						show: true,
 						message: 'Profile update failed',
