@@ -152,6 +152,10 @@ You can search for icons on [Icones](https://icones.js.org/collection/all).
 
 Animations are provided by GSAP and are easy to implement. You can find the documentation [here](https://greensock.com/docs/v3/GSAP).
 
+### Tips
+
+If the payments don't work, check if there is a csp part in your svelte.config.js. You have to comment it out completely for Stripe to work.
+
 ## Contributing to spatz
 
 Contributions are welcomed, and appreciated. If you have a feature request, please add it as an issue or make a pull request.
