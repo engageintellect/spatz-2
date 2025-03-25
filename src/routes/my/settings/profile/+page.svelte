@@ -76,7 +76,7 @@
 			>
 				<div class="relative mb-5 flex h-32 w-32 items-center justify-center rounded-full">
 					<img
-						class="flex h-32 w-32 items-center justify-center rounded-full border shadow"
+						class="flex h-32 w-32 items-center justify-center rounded-full border object-cover shadow"
 						src={data.user?.avatar
 							? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar)
 							: `https://ui-avatars.com/api/?name=${data.user?.username}&background=random`}
