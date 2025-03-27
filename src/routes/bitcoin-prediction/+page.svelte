@@ -89,7 +89,7 @@
 							<Tooltip.Provider delayDuration={100}>
 								<Tooltip.Root disableCloseOnTriggerClick>
 									<Tooltip.Trigger
-										class={`h-8 w-full rounded p-2 text-sm ${
+										class={`h-8 w-full rounded text-sm ${
 											prediction.wasCorrect === null
 												? 'animate-pulse border border-muted-foreground/50 bg-background'
 												: prediction.wasCorrect === false
@@ -100,17 +100,32 @@
 									<Tooltip.Content>
 										<div>
 											<div class="flex items-center gap-2">
-												<div>Date:</div>
-												<div class="font-bold">{formatFriendlyDate(prediction.date)}</div>
+												<div>
+													<Icon
+														icon="material-symbols:calendar-month"
+														class="h-5 w-5 transition-all duration-300 md:group-hover/backButton:-translate-x-1"
+													/>
+												</div>
+												<div class="font-bold">{prediction.date}</div>
 											</div>
 
 											<div class="mt-2 text-sm">
 												<div class="flex items-center gap-2">
-													<div>Open:</div>
+													<div>
+														<Icon
+															icon="material-symbols:sunny-outline"
+															class="h-5 w-5 transition-all duration-300 md:group-hover/backButton:-translate-x-1"
+														/>
+													</div>
 													<div class="font-bold">{formatFloatToPrice(prediction.openPrice)}</div>
 												</div>
 												<div class="flex items-center gap-2">
-													<div>Close:</div>
+													<div>
+														<Icon
+															icon="material-symbols:dark-mode-outline"
+															class="h-5 w-5 transition-all duration-300 md:group-hover/backButton:-translate-x-1"
+														/>
+													</div>
 													<div class="font-bold">{formatFloatToPrice(prediction.closePrice)}</div>
 												</div>
 											</div>
@@ -253,7 +268,7 @@
 								class={`w-full rounded-lg border p-2 text-sm ${prediction.prediction === 'DOWN' ? 'bg-destructive' : 'bg-success'}`}
 							>
 								<div class="text-xs">
-									{formatFriendlyDate(prediction.date)}
+									{prediction.date}
 								</div>
 
 								<div class="my-2 flex flex-col">
