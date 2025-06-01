@@ -25,16 +25,8 @@
 			href: '/ai/context'
 		},
 		{
-			title: 'a',
-			href: '/ai/a'
-		},
-		{
-			title: 'b',
-			href: '/ai/b'
-		},
-		{
-			title: 'c',
-			href: '/ai/c'
+			title: 'image-gen',
+			href: '/ai/image-generation'
 		}
 	];
 
