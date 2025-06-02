@@ -26,7 +26,7 @@
 		},
 		{
 			title: 'image-gen',
-			href: '/ai/image-generation'
+			href: '/ai/image-gen'
 		}
 	];
 

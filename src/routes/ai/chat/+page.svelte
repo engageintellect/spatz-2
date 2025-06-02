@@ -130,18 +130,19 @@
 		</form>
 	</div>
 
-	<div>hello</div>
 	<div class="-z-10 w-full py-5 md:p-5">
 		<div class="flex w-full flex-col gap-5">
 			{#if $messages.length < 1}
-				<div>
-					This is a chatbot that uses the OpenAI API to generate responses. Ask me anything!
-				</div>
+				<div class="text-muted-foreground">
+					<div>
+						This is a chatbot that uses the OpenAI API to generate responses. Ask me anything!
+					</div>
 
-				<div>
-					The model is currently set to <strong>{PUBLIC_OPENAI_MODEL}</strong>. You can change the
-					model by setting the <code>PUBLIC_OPENAI_MODEL</code> environment variable in your
-					<code>.env</code> file.
+					<div>
+						The model is currently set to <strong>{PUBLIC_OPENAI_MODEL}</strong>. You can change the
+						model by setting the <code>PUBLIC_OPENAI_MODEL</code> environment variable in your
+						<code>.env</code> file.
+					</div>
 				</div>
 			{/if}
 			{#each $messages as message}
