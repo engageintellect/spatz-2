@@ -1,10 +1,7 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { generatedImage } from '$lib/stores/generatedImage';
 	import { toast } from '$lib/stores/toast';
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import { get } from 'svelte/store';
 
 	let prompt = '';
 	let imageUrl = '';
@@ -17,12 +14,6 @@
 		'A dragon made of clouds',
 		'A cyberpunk robot bartender'
 	];
-
-	onMount(() => {
-		const { prompt: savedPrompt, imageUrl: savedImageUrl } = get(generatedImage);
-		prompt = savedPrompt;
-		imageUrl = savedImageUrl;
-	});
 
 	async function generateImage() {
 		if (!prompt.trim()) return;
@@ -40,7 +31,6 @@
 			const data = await res.json();
 			if (data.data) {
 				imageUrl = data.data;
-				generatedImage.set({ prompt, imageUrl: data.data });
 			} else {
 				toast.set({
 					show: true,
@@ -109,7 +99,7 @@
 {#if imageUrl}
 	<div class="">
 		<img src={imageUrl} alt="AI Generated Image" class="max-w-full rounded-lg border" />
-		<Button variant="secondary" on:click={copyImageUrl}>
+		<Button class="" variant="secondary" on:click={copyImageUrl}>
 			<Icon icon="mdi-content-copy" class="mr-2 h-4 w-4" />
 			Copy Image URL
 		</Button>
