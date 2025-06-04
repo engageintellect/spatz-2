@@ -107,7 +107,9 @@
 		<p class="animate-pulse pt-5 text-sm text-muted-foreground">Generating image...</p>
 	{:else if !imageUrl}
 		<div class="animate-fade-in space-y-1 pt-5 text-sm text-muted-foreground">
-			<p>You're using <code>/api/image-gen</code>.</p>
+			<p>
+				You're using the <code class="text-foreground">dall-e-3</code> image-generation model.
+			</p>
 			<p>Try a prompt like:</p>
 			<ul class="list-inside list-disc pl-4">
 				{#each examplePrompts as example}
