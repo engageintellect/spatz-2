@@ -5,6 +5,7 @@
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { get } from 'svelte/store';
+	import { fade } from 'svelte/transition';
 
 	let prompt = '';
 	let imageUrl = '';
@@ -18,10 +19,24 @@
 		'A cyberpunk robot bartender'
 	];
 
-	onMount(() => {
+	onMount(async () => {
 		const { prompt: savedPrompt, imageUrl: savedImageUrl } = get(generatedImage);
 		prompt = savedPrompt;
-		imageUrl = savedImageUrl;
+
+		if (savedImageUrl) {
+			try {
+				const res = await fetch(savedImageUrl, { method: 'HEAD' });
+				if (res.ok) {
+					imageUrl = savedImageUrl;
+				} else {
+					// URL is stale/broken
+					generatedImage.set({ prompt: '', imageUrl: '' });
+				}
+			} catch (err) {
+				// Network issue or invalid URL
+				generatedImage.set({ prompt: '', imageUrl: '' });
+			}
+		}
 	});
 
 	async function generateImage() {
@@ -81,7 +96,14 @@
 </script>
 
 <section class="sticky top-[57px] z-10 mx-auto w-full max-w-2xl border-b backdrop-blur-sm">
-	<form on:submit|preventDefault={generateImage} class="mb-2 flex gap-2">
+	<div class="flex w-full flex-col">
+		<div in:fade={{ delay: 0, duration: 300 }} class="my-2 flex items-center gap-2 md:mt-0">
+			<Icon icon="simple-icons:openai" class="h-7 w-7" />
+			<h1 class="text-2xl font-thin">dall-e-3</h1>
+		</div>
+	</div>
+
+	<form on:submit|preventDefault={generateImage} class="my-2 flex gap-2">
 		<input
 			bind:value={prompt}
 			placeholder="Describe an image..."

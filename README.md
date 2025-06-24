@@ -100,42 +100,52 @@ pnpm i && pnpm run dev --host
 │   └── /ui (shared components)
 ├── /stores (global state)
 ├── /routes
+│   │
+│   ├── /notifications
+│   ├── /privacy
+│   ├── /subscriptions
+│   ├── /technologies
+│   ├── /terms
+│   │
 │   ├── /guestbook
 │   │   └── /post
 │   │       └── /[id]
 │   ├── /users
 │   │   └── /[id]
-│   ├── /technologies
-│   ├── /subscriptions
-│   ├── /terms
+│   │
 │   ├── /ai
 │   │   ├── /chat
 │   │   ├── /context
-│   │   ├── /a
-│   │   ├── /b
-│   │   └── /c
+│   │   ├── /image-gen
+│   │
 │   ├── /donate
 │   │   ├── /cancel (redirect when cancelling stripe payment)
 │   │   └── /success (redirect after successful stripe payment)
+│   │
 │   ├── /checkout
 │   │   ├── /payment (redirect when cancelling stripe payment)
 │   │   ├── /cancel (redirect when cancelling stripe payment)
 │   │   └── /success (redirect after successful stripe payment)
+│   │
 │   ├── /api
-│   │   ├── /repo-data (fetch github repository stars)
-│   │   ├── /fortune (fetch random tech founder quote)
 │   │   ├── /chat (OpenAI streaming API)
-│   │   └── /donate (for stripe payments)
+│   │   ├── /donate (for stripe payments)
+│   │   ├── /fortune (fetch random tech founder quote)
+│   │   ├── /image-gen (OpenAI DALL-E)
+│   │   ├── /repo-data
+│   │
 │   │__ /auth (Pocketbase auth)
 │   │   ├── /login
 │   │   ├── /register
 │   │   ├── /logout
 │   │   └── /reset-password
+│   │
 │   └── /my (user-specific routes)
-│       ├── /profile
-│       ├── /account
-│       ├── /billing (for subscriptions)
 │       └── /settings
+│           ├── /account
+│           ├── /profile
+│           ├── /security (for password management)
+│           └── /subscription (existing stripe subscriptions)
 /pocketbase
 ├── pb_schema.json
 /static
