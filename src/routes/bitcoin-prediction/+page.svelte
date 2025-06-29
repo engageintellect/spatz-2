@@ -58,16 +58,23 @@
 			<div class="animate-item flex-flex-col">
 				<div class=" mb-2 text-3xl font-bold">about:</div>
 
-				<p class="text-muted-foreground">
-					'btc predict' is a machine learning model designed to forecast whether Bitcoin's price
-					will rise or fall by the end of the next day. This can be useful for traders who want to
-					help form their daily bias.
+				<p class="leading-relaxed text-muted-foreground">
+					'btc predict' predicts whether Bitcoin’s price will go <strong>up</strong> or
+					<strong>down</strong>
+					tomorrow. It fetches daily historical BTC-USD data using <strong>yfinance</strong>,
+					processes it with <strong>pandas</strong> and <strong>numpy</strong>, and trains a
+					<strong>Random Forest Classifier</strong>
+					from <strong>scikit-learn</strong> on features like price change percentage and 7, 21, and
+					200-day moving averages. A <strong>cron job</strong> runs this process daily — fetching
+					the latest data, retraining the model, saving predictions, and updating candlestick charts
+					generated with <strong>mplfinance</strong> and <strong>matplotlib</strong>. All data and
+					predictions are stored in <strong>JSON</strong> files.
 				</p>
 			</div>
 
 			<div class="animate-item flex-flex-col">
 				<div class=" mb-2 text-3xl font-bold">prediction accuracy:</div>
-				<p class="text-muted-foreground">
+				<p class="leading-relaxed text-muted-foreground">
 					Prediction accuracy is calculated by past correct predictions till today.
 				</p>
 
@@ -91,14 +98,14 @@
 									<Tooltip.Trigger
 										class={`h-8 w-full rounded text-sm ${
 											prediction.wasCorrect === null
-												? 'animate-pulse border border-muted-foreground/50 bg-background'
+												? 'animate-pulse bg-yellow-300 hover:animate-none hover:bg-yellow-200'
 												: prediction.wasCorrect === false
 													? 'bg-destructive hover:bg-red-300'
 													: 'bg-success hover:bg-emerald-300'
 										} ${buttonVariants({ variant: 'outline' })}`}
 									></Tooltip.Trigger>
 									<Tooltip.Content>
-										<div>
+										<div class="flex flex-col gap-2 p-2">
 											<div class="flex items-center gap-2">
 												<div>
 													<Icon
@@ -172,7 +179,7 @@
 			<div class="">
 				<div class="animate-item flex-flex-col">
 					<div class=" mb-2 text-3xl font-bold">prediction:</div>
-					<p class="text-muted-foreground">
+					<p class="leading-relaxed text-muted-foreground">
 						Tommorow's "Close Price" prediction direction is calculated by past correct predictions
 						till today.
 					</p>
@@ -223,7 +230,7 @@
 						</div>
 					</div>
 
-					<div class="flex flex-col gap-2 text-muted-foreground">
+					<div class="flex flex-col gap-2 leading-relaxed text-muted-foreground">
 						<p>
 							The crypto market behaviour is very emotional. People tend to get greedy when the
 							market is rising which results in FOMO (Fear of missing out). Also, people often sell
@@ -256,7 +263,7 @@
 			<div class="">
 				<div class="animate-item flex-flex-col">
 					<div class=" mb-2 text-3xl font-bold">history:</div>
-					<p class="text-muted-foreground">
+					<p class="leading-relaxed text-muted-foreground">
 						Prediction history is calculated by past correct predictions till today.
 					</p>
 				</div>
