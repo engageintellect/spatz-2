@@ -109,7 +109,9 @@
 				</div>
 
 				<a data-sveltekit-preload-data href={`/guestbook/post/${id}`}>
-					<div class="pb-3 pr-5 pt-1 font-thin">{@html postContent}</div>
+					<div class="pb-3 pr-5 pt-1 font-thin leading-relaxed">
+						{@html postContent}
+					</div>
 				</a>
 
 				<div class="flex items-center gap-5">
