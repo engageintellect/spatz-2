@@ -104,7 +104,7 @@
 													: 'bg-success hover:bg-emerald-300'
 										} ${buttonVariants({ variant: 'outline' })}`}
 									></Tooltip.Trigger>
-									<Tooltip.Content>
+									<Tooltip.Content class="">
 										<div class="flex flex-col gap-2 p-2">
 											<div class="flex items-center gap-2">
 												<div>
