@@ -109,7 +109,7 @@
 					<div class="pt-3 text-lg">
 						this time with svelte-animations, superforms, stripe, and shadcn.
 					</div>
-					<div class="mt-3 text-sm font-thin text-muted-foreground">
+					<div class="mt-3 text-xs font-thin text-muted-foreground">
 						an updated version of <a
 							href="https://spatz.engage-dev.com"
 							class="text-foreground underline">spatz</a

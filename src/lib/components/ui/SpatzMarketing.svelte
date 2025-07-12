@@ -34,7 +34,9 @@
 	});
 </script>
 
-<div class={`${hidden ? 'opacity-0' : ''} animate-item mx-auto w-full max-w-2xl px-2 md:px-0`}>
+<div
+	class={`${hidden ? 'opacity-0' : ''} animate-item mx-auto w-full max-w-2xl px-2 leading-relaxed md:px-0`}
+>
 	<div class="mb-10 flex flex-col gap-16 md:gap-16">
 		<div class="">
 			<Hero />

@@ -11,7 +11,7 @@
 	let { formData }: Props = $props();
 </script>
 
-<div>
+<div class="leading-relaxed">
 	<Hero />
 	<AboutCard />
 	<SkillsCard />
