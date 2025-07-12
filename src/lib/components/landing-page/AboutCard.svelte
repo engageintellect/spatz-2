@@ -128,7 +128,7 @@
 		>
 			<div class="flex w-full max-w-sm flex-col gap-5 p-5 text-center md:max-w-sm">
 				<div class="text-lg font-thin italic text-foreground/80 md:text-xl">
-					"I made spatz to help connect all the dots when building new applications. This helps me
+					"I built spatz to help connect all the dots when building new applications. This helps me
 					build fast. I invite you to use and improve this project. Feedback and pull requests are
 					welcome, and appreciated."
 				</div>
@@ -139,7 +139,7 @@
 							class="group/readMoreButton flex w-full items-center gap-2 uppercase md:w-fit"
 							variant="outline"
 						>
-							<div class="lowercase">Homepage</div>
+							<div class="lowercase">My Homepage</div>
 							<Icon
 								icon="mdi:arrow-right"
 								class="h-5 w-5 transition-transform duration-300 lg:group-hover/readMoreButton:translate-x-1"

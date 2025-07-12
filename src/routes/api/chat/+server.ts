@@ -23,11 +23,11 @@ export const POST: RequestHandler = async ({ request }) => {
 		]),
 		temperature: 0.5,
 		async onFinish({ text, toolCalls, toolResults, usage, finishReason }) {
-			// console.log('Response Text:', text);
-			// console.log('Tool Calls:', toolCalls);
-			// console.log('Tool Results:', toolResults);
-			// console.log('Usage:', usage);
-			// console.log('Finish Reason:', finishReason);
+			console.log('Response Text:', text);
+			console.log('Tool Calls:', toolCalls);
+			console.log('Tool Results:', toolResults);
+			console.log('Usage:', usage);
+			console.log('Finish Reason:', finishReason);
 		}
 	});
 

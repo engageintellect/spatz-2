@@ -212,7 +212,7 @@
 					value={form?.data?.content ?? ''}
 					errors={form?.errors?.content}
 					disabled={loading}
-					placeholder={'type your post here...'}
+					placeholder={'type your post...'}
 					toastSuccess={`Post created by @${$currentUser?.username}!`}
 					toastError="Failed to submit post"
 				/>
@@ -273,7 +273,7 @@
 							{#each sortedPosts as post}
 								{#if post.mentioning.length === 0}
 									<div
-										class={`${sidebar.state === 'expanded' ? 'lg:px-5' : 'md:px-5'} post-wrapper border-t`}
+										class={`${sidebar.state === 'expanded' ? 'lg:px-5' : 'md:px-5'} post-wrapper border-t hover:bg-secondary`}
 									>
 										<Post
 											postAuthorId={post.author}

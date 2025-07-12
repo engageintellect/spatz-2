@@ -60,7 +60,7 @@
 </script>
 
 <div
-	class="text-elipsis relative cursor-pointer overflow-x-hidden border-t transition-all duration-300"
+	class="text-elipsis relative cursor-pointer overflow-x-hidden border-t transition-all duration-300 hover:bg-secondary"
 >
 	<div class="card-body p-3 px-1 transition-all duration-300">
 		<div class="flex items-start gap-3">

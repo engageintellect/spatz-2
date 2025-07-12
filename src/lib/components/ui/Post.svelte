@@ -75,9 +75,9 @@
 </script>
 
 <div
-	class={`${sidebar.state === 'expanded' ? '' : ''} text-elipsis relative cursor-pointer overflow-x-hidden transition-all duration-300`}
+	class={`${sidebar.state === 'expanded' ? '' : ''} text-elipsis relative cursor-pointer overflow-x-hidden transition-all duration-300 hover:scale-[101%]`}
 >
-	<div class=" py-3 transition-all duration-300">
+	<div class=" px-2 py-3 transition-all duration-300">
 		<div class="flex items-start gap-3">
 			<div>
 				<a data-sveltekit-preload-data href={`/users/${postAuthorId}`}>
@@ -109,7 +109,9 @@
 				</div>
 
 				<a data-sveltekit-preload-data href={`/guestbook/post/${id}`}>
-					<div class="pb-3 pr-5 pt-1 font-thin">{@html postContent}</div>
+					<div class="pb-3 pr-5 pt-1 font-thin leading-relaxed">
+						{@html postContent}
+					</div>
 				</a>
 
 				<div class="flex items-center gap-5">

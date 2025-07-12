@@ -137,7 +137,7 @@
 				{/if}
 			</div>
 
-			<div class="animate-item flex flex-col gap-2">
+			<div class="animate-item flex flex-col">
 				{#if data.notifications.length > 0}
 					{#each data.notifications as notification}
 						{#if notification.user === data.userProfile.id}

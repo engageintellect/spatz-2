@@ -103,9 +103,13 @@
 
 			<div class="">
 				<div class="animate-subtitle mt-5 text-xl font-thin text-muted-foreground lg:text-2xl">
-					<div class="font-base text-orange-500">The ultimate Sveltekit boilerplate</div>
-					<div>this time with svelte-animations, superforms, stripe, and shadcn.</div>
-					<div class="mt-5 text-sm font-thin text-muted-foreground">
+					<div class="font-base text-2xl text-orange-400">
+						The ultimate <span class="">"do-everything"</span> template for svelte & sveltekit.
+					</div>
+					<div class="pt-3 text-lg">
+						this time with svelte-animations, superforms, stripe, and shadcn.
+					</div>
+					<div class="mt-3 text-xs font-thin text-muted-foreground">
 						an updated version of <a
 							href="https://spatz.engage-dev.com"
 							class="text-foreground underline">spatz</a

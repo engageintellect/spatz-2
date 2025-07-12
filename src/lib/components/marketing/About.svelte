@@ -40,6 +40,11 @@
 
 			<div class="flex items-center gap-2">
 				<Icon icon="mdi-done" class="text-success" />
+				<li>OpenAI Integration</li>
+			</div>
+
+			<div class="flex items-center gap-2">
+				<Icon icon="mdi-done" class="text-success" />
 				<li>Themes & Styling</li>
 			</div>
 
