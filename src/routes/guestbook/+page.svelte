@@ -273,7 +273,7 @@
 							{#each sortedPosts as post}
 								{#if post.mentioning.length === 0}
 									<div
-										class={`${sidebar.state === 'expanded' ? 'lg:px-5' : 'md:px-5'} post-wrapper border-t hover:bg-secondary`}
+										class={`${sidebar.state === 'expanded' ? 'lg:px-5' : 'md:px-5'} post-wrapper border-t transition-all duration-200 hover:bg-secondary`}
 									>
 										<Post
 											postAuthorId={post.author}
