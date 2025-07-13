@@ -84,7 +84,7 @@
 				{
 					opacity: 1,
 					y: 0,
-					duration: 1,
+					duration: 0.5,
 					ease: 'power4.out'
 				}
 			);
@@ -115,7 +115,7 @@
 					opacity: 1,
 					delay: 0.25,
 					y: 0,
-					duration: 3,
+					duration: 1,
 					ease: 'power4.out'
 				}
 			);
@@ -229,9 +229,7 @@
 		<div class="animate-grid grid grid-cols-1 gap-2 px-1 pb-40 sm:grid-cols-2 md:grid-cols-3">
 			{#each filteredUsers as user}
 				<a href={`/users/${user.id}`} class="user-wrapper group/userCard">
-					<div
-						class={`rounded-lg border p-3 transition-all duration-300 md:hover:border-muted-foreground/50`}
-					>
+					<div class={`rounded-lg border p-3 transition-all duration-300 md:hover:bg-secondary`}>
 						<div class="flex flex-row items-center gap-2">
 							<div>
 								<div class="h-10 w-10">

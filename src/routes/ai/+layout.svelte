@@ -6,6 +6,7 @@
 	import { gsap } from 'gsap';
 	import { animateMainStagger } from '$lib/animations';
 	import { useSidebar } from '$lib/components/ui/sidebar/index.js';
+	import Icon from '@iconify/svelte';
 
 	let sidebar = useSidebar();
 
@@ -18,15 +19,18 @@
 	const navigation = [
 		{
 			title: 'chat',
-			href: '/ai/chat'
+			href: '/ai/chat',
+			icon: 'material-symbols:chat-bubble-rounded'
 		},
 		{
 			title: 'context',
-			href: '/ai/context'
+			href: '/ai/context',
+			icon: 'material-symbols:memory'
 		},
 		{
 			title: 'image-gen',
-			href: '/ai/image-gen'
+			href: '/ai/image-gen',
+			icon: 'material-symbols:add-photo-alternate-outline'
 		}
 	];
 
@@ -47,22 +51,25 @@
 	>
 </div>
 <div
-	class={`${sidebar.state === 'expanded' ? 'lg:flex-row lg:gap-10 lg:border lg:p-5 lg:shadow' : 'md:flex-row md:gap-10 md:border md:p-5 md:shadow'} animate-item mx-auto mt-5 flex w-full max-w-2xl flex-col gap-5 rounded-lg`}
+	class={`${sidebar.state === 'expanded' ? 'lg:flex-row lg:gap-10 lg:border lg:p-5 lg:shadow' : 'md:flex-row md:gap-5 md:border md:p-5 md:shadow'} animate-item mx-auto mt-5 flex w-full max-w-2xl flex-col gap-5 rounded-lg`}
 >
 	<ul
-		class={`${sidebar.state === 'expanded' ? 'lg:rounded-box lg:top-16 lg:w-40 lg:px-0' : 'md:rounded-box md:top-16 md:w-40 md:px-0'} sticky flex h-full w-full flex-nowrap gap-2 overflow-auto bg-background px-2`}
+		class={`${sidebar.state === 'expanded' ? 'lg:rounded-box lg:top-16 lg:w-52 lg:px-0' : 'md:rounded-box md:top-16 md:w-52 md:px-0'} sticky flex h-full w-full flex-nowrap gap-2 overflow-auto bg-background px-2`}
 	>
 		<div
 			class={`${sidebar.state === 'expanded' ? 'lg:flex-col' : 'md:flex-col'} flex w-full flex-row gap-1`}
 		>
 			{#each navigation as navItem}
-				<li class="nav-item">
-					<a href={navItem.href} class="text-lg">
+				<li class="nav-item w-full">
+					<a href={navItem.href} class="">
 						<Button
-							class="w-full"
+							class="flex w-full items-center justify-between"
 							variant={`${$page.url.pathname === navItem.href ? 'default' : 'outline'}`}
 						>
-							{navItem.title}
+							<div class="flex w-full items-center justify-between">
+								{navItem.title}
+								<Icon icon={navItem.icon} class="text-2xl"></Icon>
+							</div>
 						</Button>
 					</a>
 				</li>
