@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { generatedImage } from '$lib/stores/generatedImage';
+	import { agentResponse } from '$lib/stores/agentResponse';
 	import { toast } from '$lib/stores/toast';
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -8,7 +8,7 @@
 	import { fade } from 'svelte/transition';
 
 	let prompt = '';
-	let imageUrl = '';
+	let responseText = '';
 	let isLoading = false;
 
 	const examplePrompts = [
@@ -20,33 +20,26 @@
 	];
 
 	onMount(async () => {
-		const { prompt: savedPrompt, imageUrl: savedImageUrl } = get(generatedImage);
+		const { prompt: savedPrompt, response: savedResponse } = get(agentResponse);
 		prompt = savedPrompt;
 
-		if (savedImageUrl) {
+		if (savedResponse) {
 			try {
-				const res = await fetch(savedImageUrl, { method: 'HEAD' });
-				if (res.ok) {
-					imageUrl = savedImageUrl;
-				} else {
-					// URL is stale/broken
-					generatedImage.set({ prompt: '', imageUrl: '' });
-				}
+				responseText = savedResponse;
 			} catch (err) {
-				// Network issue or invalid URL
-				generatedImage.set({ prompt: '', imageUrl: '' });
+				responseText = '';
 			}
 		}
 	});
 
-	async function generateImage() {
+	async function askAgent() {
 		if (!prompt.trim()) return;
 
 		isLoading = true;
-		imageUrl = '';
+		responseText = '';
 
 		try {
-			const res = await fetch('/api/image-gen', {
+			const res = await fetch('/api/agent', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ prompt })
@@ -54,8 +47,8 @@
 
 			const data = await res.json();
 			if (data.data) {
-				imageUrl = data.data;
-				generatedImage.set({ prompt, imageUrl: data.data });
+				responseText = typeof data.data === 'string' ? data.data : JSON.stringify(data.data);
+				agentResponse.set({ prompt, response: responseText });
 			} else {
 				toast.set({
 					show: true,
@@ -76,11 +69,11 @@
 		}
 	}
 
-	function copyImageUrl() {
-		navigator.clipboard.writeText(imageUrl).then(() => {
+	function copyResponse() {
+		navigator.clipboard.writeText(responseText).then(() => {
 			toast.set({
 				show: true,
-				message: 'Image URL copied to clipboard',
+				message: 'Response copied to clipboard',
 				type: 'bg-background',
 				icon: 'material-symbols:content-copy-outline'
 			});
@@ -88,23 +81,27 @@
 		});
 	}
 
-	function clearImage() {
-		generatedImage.reset();
+	function clearResponse() {
+		agentResponse.reset();
 		prompt = '';
-		imageUrl = '';
+		responseText = '';
 	}
 </script>
 
 <section class="sticky top-[57px] z-10 mx-auto w-full max-w-2xl border-b backdrop-blur-sm">
 	<div class="flex w-full flex-col">
 		<div in:fade={{ delay: 0, duration: 300 }} class="my-2 flex items-center gap-2 md:mt-0">
-			<Icon icon="simple-icons:openai" class="h-7 w-7" />
-			<h1 class="text-2xl font-thin">n8n</h1>
+			<Icon icon="simple-icons:n8n" class="h-7 w-7" />
+			<h1 class="text-2xl font-thin">n8n agent</h1>
 		</div>
 	</div>
 
-	<form on:submit|preventDefault={generateImage} class="my-2 flex gap-2">
-		<input bind:value={prompt} placeholder="Enter" class="w-full rounded-lg border bg-card p-2" />
+	<form on:submit|preventDefault={askAgent} class="my-2 flex gap-2">
+		<input
+			bind:value={prompt}
+			placeholder="Ask the agent..."
+			class="w-full rounded-lg border bg-card p-2"
+		/>
 		<Button type="submit" variant="default" class="shrink-0">
 			{#if isLoading}
 				<Icon icon="eos-icons:bubble-loading" class="h-5 w-5" />
@@ -113,8 +110,8 @@
 			{/if}
 		</Button>
 
-		{#if imageUrl}
-			<Button variant="destructive" onclick={clearImage}>
+		{#if responseText}
+			<Button variant="destructive" onclick={clearResponse}>
 				<Icon icon="mdi:delete" class="h-4 w-4" />
 			</Button>
 		{/if}
@@ -122,20 +119,10 @@
 </section>
 <div class="p-5">
 	{#if isLoading}
-		<p class="animate-pulse text-sm text-muted-foreground">Generating image...</p>
-	{:else if !imageUrl}
-		<div class="animate-fade-in space-y-1 text-sm text-sm text-muted-foreground">
-			<p>
-				You're using a custom <code class="text-foreground">n8n</code> workflow.
-			</p>
-
-			<p>
-				This workflow generates a script for <a
-					class="text-foreground hover:underline"
-					href="https://instagram.com/sloththeories">@sloththeories</a
-				> instagram account.
-			</p>
-
+		<p class="animate-pulse text-sm text-muted-foreground">Asking agent...</p>
+	{:else if !responseText}
+		<div class="animate-fade-in space-y-1 text-sm text-muted-foreground">
+			<p>You're querying an agent hosted on n8n.</p>
 			<p>Try a prompt like:</p>
 			<ul class="list-inside list-disc pl-4">
 				{#each examplePrompts as example}
@@ -146,12 +133,14 @@
 	{/if}
 </div>
 
-{#if imageUrl}
-	<div class="py-2">
-		<img src={imageUrl} alt="AI Generated Image" class="max-w-full rounded-lg border" />
-		<Button class="" variant="secondary" on:click={copyImageUrl}>
+{#if responseText}
+	<div class="space-y-2 py-2">
+		<p class="whitespace-pre-wrap rounded-lg border bg-card p-4">
+			{responseText}
+		</p>
+		<Button class="" variant="secondary" on:click={copyResponse}>
 			<Icon icon="mdi-content-copy" class="mr-2 h-4 w-4" />
-			Copy Image URL
+			Copy Response
 		</Button>
 	</div>
 {/if}

@@ -35,7 +35,7 @@
 		{
 			title: 'agent',
 			href: '/ai/agent',
-			icon: 'material-symbols:add-photo-alternate-outline'
+			icon: 'mdi:robot-outline'
 		}
 	];
 
