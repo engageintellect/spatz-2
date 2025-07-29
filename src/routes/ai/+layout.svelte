@@ -28,8 +28,13 @@
 			icon: 'material-symbols:memory'
 		},
 		{
-			title: 'image-gen',
+			title: 'image',
 			href: '/ai/image-gen',
+			icon: 'material-symbols:add-photo-alternate-outline'
+		},
+		{
+			title: 'agent',
+			href: '/ai/agent',
 			icon: 'material-symbols:add-photo-alternate-outline'
 		}
 	];
