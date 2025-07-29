@@ -124,11 +124,11 @@
 		{/if}
 	</form>
 </section>
-<div class="py-0">
+<div class="p-5">
 	{#if isLoading}
-		<p class="animate-pulse pt-5 text-sm text-muted-foreground">Generating image...</p>
+		<p class="animate-pulse text-sm text-muted-foreground">Generating image...</p>
 	{:else if !imageUrl}
-		<div class="animate-fade-in space-y-1 pt-5 text-sm text-muted-foreground">
+		<div class="animate-fade-in space-y-1 text-sm text-sm text-muted-foreground">
 			<p>
 				You're using the <code class="text-foreground">dall-e-3</code> image-generation model.
 			</p>

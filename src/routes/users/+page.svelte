@@ -244,7 +244,7 @@
 							</div>
 
 							<div class="flex flex-col truncate">
-								<h1 class="truncate whitespace-nowrap text-sm">{user.username}</h1>
+								<h1 class="truncate whitespace-nowrap text-sm">{user.username.slice(0, 24)}</h1>
 								<h1 class="mt-1 truncate whitespace-nowrap text-[0.75rem] text-muted-foreground">
 									joined {timeSince(formatFriendlyDate(user.created))}
 								</h1>

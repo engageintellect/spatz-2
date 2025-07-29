@@ -43,15 +43,15 @@
 		</div>
 
 		<div class="animate-item">
+			<SignGuestbookButton />
+		</div>
+
+		<div class="animate-item">
 			<About />
 		</div>
 
 		<div class="animate-item">
 			<Stats {stars} {issues} {forks} />
-		</div>
-
-		<div class="animate-item">
-			<SignGuestbookButton />
 		</div>
 
 		<div

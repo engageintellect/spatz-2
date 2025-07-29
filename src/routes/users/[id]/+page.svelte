@@ -113,7 +113,7 @@
 
 			<div class="flex flex-col">
 				<div class="flex items-center gap-1">
-					<div class="truncate text-2xl">{data.userProfile.username}</div>
+					<div class="truncate text-xl">{data.userProfile.username.slice(0, 24)}</div>
 
 					{#if data.userProfile.verified === true}
 						<Icon icon="material-symbols:verified" class="h-5 w-5 text-info text-info" />
@@ -271,8 +271,9 @@
 		{/if}
 
 		{#if data.userPosts.length > 0}
-			<div class="animate-item mb-2 mt-10 text-xl font-thin text-muted-foreground">
-				{data.userProfile.username} has <span class="text-foreground">{data.userPosts.length}</span>
+			<div class="animate-item mb-2 mt-10 text-lg font-thin text-muted-foreground">
+				<span class="text-foreground">{data.userProfile.username}</span> has
+				<span class="text-foreground">{data.userPosts.length}</span>
 				posts:
 			</div>
 
@@ -301,8 +302,13 @@
 				{/each}
 			</div>
 		{:else}
-			<div class="animate-item mt-10 border-b pb-2 text-xl font-thin md:mt-20">
-				{data.userProfile.username} has no posts.
+			<div class="animate-item mt-10 border-b pb-2 text-lg font-thin md:mt-20">
+				<div class="flex items-center justify-start gap-2">
+					<div>
+						{data.userProfile.username.slice(0, 24)}
+					</div>
+					<div class="text-muted-foreground">has no posts.</div>
+				</div>
 			</div>
 
 			{#if data.userProfile.id === $currentUser.id}

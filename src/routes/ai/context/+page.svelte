@@ -148,7 +148,7 @@
 	<div class="-z-10 w-full py-5 md:p-5">
 		<div class="flex w-full flex-col gap-5">
 			{#if $messages.length < 1}
-				<div class="text-muted-foreground">
+				<div class="flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
 					<div>
 						This is a chatbot that uses the OpenAI API to generate responses. Ask me anything!
 					</div>
@@ -159,8 +159,11 @@
 					</div>
 
 					<div>
-						The model is currently set to <strong>{PUBLIC_OPENAI_MODEL}</strong>. You can change the
-						model by setting the <code>PUBLIC_OPENAI_MODEL</code> environment variable in your
+						The model is currently set to <strong class="pl-1 text-primary"
+							>"{PUBLIC_OPENAI_MODEL}"</strong
+						>. You can change the model by setting the
+						<code class="text-primary">PUBLIC_OPENAI_MODEL</code>
+						environment variable in your
 						<code>.env</code> file.
 					</div>
 				</div>
