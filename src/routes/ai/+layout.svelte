@@ -68,7 +68,8 @@
 				<li class="nav-item w-full">
 					<a href={navItem.href} class="">
 						<Button
-							class="flex w-full items-center justify-between"
+							size="sm"
+							class="flex w-full items-center justify-between px-2"
 							variant={`${$page.url.pathname === navItem.href ? 'default' : 'outline'}`}
 						>
 							<div class="flex w-full items-center justify-between">

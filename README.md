@@ -31,6 +31,7 @@ spatz-2 uses svelte-superforms, shadcn-svelte, stripe payments, and svelte-anima
 - GSAP Animations.
 - Command Pallette (CMD+j).
 - AI Chatbot with OpenAI.
+- n8n Agent Workflows.
 - Guestbook with Pocketbase.
 - Forms by svelte-superforms, with client/server validation via Zod.
 
@@ -117,6 +118,7 @@ pnpm i && pnpm run dev --host
 │   │   ├── /chat
 │   │   ├── /context
 │   │   ├── /image-gen
+│   │   └── /agent (n8n Workflow)
 │   │
 │   ├── /donate
 │   │   ├── /cancel (redirect when cancelling stripe payment)
@@ -132,6 +134,7 @@ pnpm i && pnpm run dev --host
 │   │   ├── /donate (for stripe payments)
 │   │   ├── /fortune (fetch random tech founder quote)
 │   │   ├── /image-gen (OpenAI DALL-E)
+│   │   ├── /agent (n8n Workflow)
 │   │   ├── /repo-data
 │   │
 │   │__ /auth (Pocketbase auth)

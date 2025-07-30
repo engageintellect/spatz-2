@@ -122,7 +122,8 @@
 		<p class="animate-pulse text-sm text-muted-foreground">Asking agent...</p>
 	{:else if !responseText}
 		<div class="animate-fade-in space-y-1 text-sm text-muted-foreground">
-			<p>You're querying an agent hosted on n8n.</p>
+			<p>You're querying an agent hosted on <span class="text-foreground">n8n</span>.</p>
+			<p>This agent is...</p>
 			<p>Try a prompt like:</p>
 			<ul class="list-inside list-disc pl-4">
 				{#each examplePrompts as example}
