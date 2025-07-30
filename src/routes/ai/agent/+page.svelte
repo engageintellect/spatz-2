@@ -162,9 +162,23 @@
 	{#if isLoading}
 		<p class="animate-pulse text-sm text-muted-foreground">Asking agent...</p>
 	{:else if !responseText}
-		<div class="animate-fade-in space-y-1 text-sm text-muted-foreground">
+		<div class="animate-fade-in flex flex-col gap-5 text-sm text-muted-foreground">
 			<p>You're querying an agent hosted on <span class="text-foreground">n8n</span>.</p>
-			<p>This agent is...</p>
+			<p>
+				This agent is designed to generate <span class="text-foreground">VEO3</span> prompts for our
+				<a class="text-foreground hover:underline" href="https://instagram.com/sloththeories"
+					>@sloththeories</a
+				>
+				instagram page. After the prompt is generated it's response is sent off to
+				<a href="https://openai.com" class="text-foreground">OpenAI</a> in order to generate a thumbnail
+				for our video/post.
+			</p>
+
+			<p>
+				This is used to show how n8n workflows can be integrated into an application, as well as
+				progamatically building upon their output.
+			</p>
+
 			<p>Try a prompt like:</p>
 			<ul class="list-inside list-disc pl-4">
 				{#each examplePrompts as example}
