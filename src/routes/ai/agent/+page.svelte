@@ -11,6 +11,10 @@
 	let responseText = '';
 	let isLoading = false;
 
+	// Thumbnail generation
+	let imageUrl = '';
+	let isImageLoading = false;
+
 	const examplePrompts = [
 		'A futuristic city at sunset',
 		'A cat wearing sunglasses on the beach',
@@ -49,6 +53,7 @@
 			if (data.data) {
 				responseText = typeof data.data === 'string' ? data.data : JSON.stringify(data.data);
 				agentResponse.set({ prompt, response: responseText });
+				generateThumbnail();
 			} else {
 				toast.set({
 					show: true,
@@ -66,6 +71,42 @@
 			});
 		} finally {
 			isLoading = false;
+		}
+	}
+
+	async function generateThumbnail() {
+		if (!responseText.trim()) return;
+
+		isImageLoading = true;
+		imageUrl = '';
+
+		try {
+			const res = await fetch('/api/image-gen', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ prompt: responseText })
+			});
+
+			const data = await res.json();
+			if (data.data) {
+				imageUrl = data.data;
+			} else {
+				toast.set({
+					show: true,
+					message: data.error || 'Image generation failed',
+					type: 'bg-destructive',
+					icon: 'mdi:alert-circle'
+				});
+			}
+		} catch (err) {
+			toast.set({
+				show: true,
+				message: 'Network or server error',
+				type: 'bg-destructive',
+				icon: 'mdi:cloud-off-outline'
+			});
+		} finally {
+			isImageLoading = false;
 		}
 	}
 
@@ -135,10 +176,20 @@
 </div>
 
 {#if responseText}
-	<div class="space-y-2 py-2">
-		<p class="whitespace-pre-wrap rounded-lg border bg-card p-4">
-			{responseText}
-		</p>
+	<div class="flex flex-col gap-2">
+		<div class="whitespace-pre-wrap rounded-lg border bg-card p-4">
+			<div>
+				{responseText}
+			</div>
+
+			<div class="">
+				{#if isImageLoading}
+					<p class="animate-pulse text-sm text-muted-foreground">Generating thumbnail image...</p>
+				{:else if imageUrl}
+					<img src={imageUrl} alt="Generated Thumbnail" class="max-w-full rounded-lg border" />
+				{/if}
+			</div>
+		</div>
 		<Button class="" variant="secondary" on:click={copyResponse}>
 			<Icon icon="mdi-content-copy" class="mr-2 h-4 w-4" />
 			Copy Response
