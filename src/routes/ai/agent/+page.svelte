@@ -163,15 +163,18 @@
 		<p class="animate-pulse text-sm text-muted-foreground">Asking agent...</p>
 	{:else if !responseText}
 		<div class="animate-fade-in flex flex-col gap-5 text-sm text-muted-foreground">
-			<p>You're querying an agent hosted on <span class="text-foreground">n8n</span>.</p>
+			<p>
+				You're querying an <a href="https://n8n.io" class="text-foreground underline">n8n</a> agent hosted
+				on the same VM as our PocketBase instance.
+			</p>
 			<p>
 				This agent is designed to generate <span class="text-foreground">VEO3</span> prompts for our
-				<a class="text-foreground hover:underline" href="https://instagram.com/sloththeories"
+				<a class="text-foreground underline" href="https://instagram.com/sloththeories"
 					>@sloththeories</a
 				>
 				instagram page. After the prompt is generated it's response is sent off to
-				<a href="https://openai.com" class="text-foreground">OpenAI</a> in order to generate a thumbnail
-				for our video/post.
+				<a href="https://openai.com" class="text-foreground underline">OpenAI</a> in order to generate
+				a thumbnail for our video/post.
 			</p>
 
 			<p>
