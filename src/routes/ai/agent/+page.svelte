@@ -15,13 +15,7 @@
 	let imageUrl = '';
 	let isImageLoading = false;
 
-	const examplePrompts = [
-		'A futuristic city at sunset',
-		'A cat wearing sunglasses on the beach',
-		'An astronaut relaxing in a field of flowers',
-		'A dragon made of clouds',
-		'A cyberpunk robot bartender'
-	];
+	const examplePrompts = ['sloth climbs a tree', 'sloth talks about UFOs'];
 
 	onMount(async () => {
 		const { prompt: savedPrompt, response: savedResponse } = get(agentResponse);
@@ -84,12 +78,18 @@
 			const res = await fetch('/api/image-gen', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ prompt: responseText })
+				body: JSON.stringify({
+					// 👇 add your pre‑prompt here (or leave undefined)
+					system:
+						'You are a creative, photorealistic thumbnail designer. Keep compositions clear, centered, legible, and high-contrast. Absolutely NO text.',
+
+					prompt: responseText
+				})
 			});
 
 			const data = await res.json();
 			if (data.data) {
-				imageUrl = data.data;
+				imageUrl = data.data; // still a plain URL/string
 			} else {
 				toast.set({
 					show: true,
