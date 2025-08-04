@@ -15,7 +15,12 @@
 	let imageUrl = '';
 	let isImageLoading = false;
 
-	const examplePrompts = ['sloth climbs a tree', 'sloth talks about UFOs'];
+	const examplePrompts = [
+		'sloth climbs a tree',
+		'sloth talks about UFOs',
+		'sloth builds a log cabin',
+		'sloth goes fishing in lake'
+	];
 
 	onMount(async () => {
 		const { prompt: savedPrompt, response: savedResponse } = get(agentResponse);
@@ -81,7 +86,7 @@
 				body: JSON.stringify({
 					// 👇 add your pre‑prompt here (or leave undefined)
 					system:
-						'You are a creative, photorealistic thumbnail designer. Keep compositions clear, centered, legible, and high-contrast. Absolutely NO text.',
+						'You are a creative, ultra photorealistic thumbnail designer. Keep compositions clear and centered. Absolutely NO text.',
 
 					prompt: responseText
 				})
@@ -129,7 +134,9 @@
 	}
 </script>
 
-<section class="sticky top-[57px] z-10 mx-auto w-full max-w-2xl border-b backdrop-blur-sm">
+<section
+	class="sticky top-[57px] z-10 mx-auto w-full max-w-2xl border-b bg-background/70 backdrop-blur-sm"
+>
 	<div class="flex w-full flex-col">
 		<div in:fade={{ delay: 0, duration: 300 }} class="my-2 flex items-center gap-2 md:mt-0">
 			<Icon icon="simple-icons:n8n" class="h-7 w-7" />
@@ -140,7 +147,7 @@
 	<form on:submit|preventDefault={askAgent} class="my-2 flex gap-2">
 		<input
 			bind:value={prompt}
-			placeholder="Ask the agent..."
+			placeholder="Enter your prompt..."
 			class="w-full rounded-lg border bg-card p-2"
 		/>
 		<Button type="submit" variant="default" class="shrink-0">
@@ -158,9 +165,12 @@
 		{/if}
 	</form>
 </section>
-<div class="p-5">
+<div class="w-full py-5 md:p-5">
 	{#if isLoading}
-		<p class="animate-pulse text-sm text-muted-foreground">Asking agent...</p>
+		<div class="flex items-center gap-3">
+			<p class="animate-pulse text-sm text-muted-foreground">Asking agent...</p>
+			<Icon icon="eos-icons:bubble-loading" class="h-3 w-3 animate-spin" />
+		</div>
 	{:else if !responseText}
 		<div class="animate-fade-in flex flex-col gap-5 text-sm text-muted-foreground">
 			<p>
@@ -182,6 +192,13 @@
 				progamatically building upon their output.
 			</p>
 
+			<div>
+				You can point this API to one of your own workflows in your personal instance of N8N by
+				assigning the <code class="text-primary"> 'N8N_AGENT_API' </code>
+				environment variable in your
+				<code>.env</code> file.
+			</div>
+
 			<p>Try a prompt like:</p>
 			<ul class="list-inside list-disc pl-4">
 				{#each examplePrompts as example}
@@ -195,16 +212,21 @@
 {#if responseText}
 	<div class="flex flex-col gap-2">
 		<div class="whitespace-pre-wrap rounded-lg border bg-card p-4">
-			<div>
-				{responseText}
-			</div>
-
 			<div class="">
 				{#if isImageLoading}
-					<p class="animate-pulse text-sm text-muted-foreground">Generating thumbnail image...</p>
+					<div class="flex items-center gap-3">
+						<p class="animate-pulse text-sm text-muted-foreground">Generating thumbnail image...</p>
+						<Icon icon="eos-icons:bubble-loading" class="h-3 w-3 animate-spin" />
+					</div>
 				{:else if imageUrl}
+					<div class="text-xl font-bold">Thumbnail</div>
 					<img src={imageUrl} alt="Generated Thumbnail" class="max-w-full rounded-lg border" />
 				{/if}
+			</div>
+			<div class="text-xl font-bold">VEO3 Prompt</div>
+
+			<div>
+				{responseText}
 			</div>
 		</div>
 		<Button class="" variant="secondary" on:click={copyResponse}>

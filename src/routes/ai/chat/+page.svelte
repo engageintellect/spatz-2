@@ -104,10 +104,10 @@
 	{/if}
 
 	<div class="sticky top-[57px] z-10 w-full border-b backdrop-blur-sm">
-		<form class="w-full bg-background py-2" on:submit={handleSubmit}>
+		<form class="w-full bg-background/70 py-2" on:submit={handleSubmit}>
 			<div class="flex w-full gap-2">
 				<input
-					placeholder="Enter your query"
+					placeholder="Enter your query..."
 					bind:value={$input}
 					class="w-full rounded-lg border bg-card p-2 focus-within:outline-none focus:outline-none"
 					bind:this={inputElement}
@@ -131,9 +131,9 @@
 	</div>
 
 	<div class="-z-10 w-full py-5 md:p-5">
-		<div class="flex w-full flex-col gap-5">
+		<div class="animate-fade-in flex w-full flex-col gap-5">
 			{#if $messages.length < 1}
-				<div class="flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
+				<div class="flex flex-col gap-5 text-sm leading-relaxed text-muted-foreground">
 					<div>
 						This is a chatbot that uses the OpenAI API to generate responses. Ask me anything!
 					</div>
@@ -206,3 +206,20 @@
 		<div bind:this={messagesEnd}></div>
 	</div>
 </section>
+
+<style>
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(6px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.animate-fade-in {
+		animation: fadeIn 0.4s ease-out both;
+	}
+</style>
