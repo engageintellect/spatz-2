@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2023 Hunter Johnston <https://github.com/engageintellect>
+Copyright (c) 2023 Engage Dev <https://github.com/engageintellect>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
