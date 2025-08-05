@@ -127,6 +127,47 @@
 		});
 	}
 
+	async function copyImage() {
+		if (!imageUrl) return;
+		try {
+			const response = await fetch(imageUrl);
+			const blob = await response.blob();
+			await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
+			toast.set({
+				show: true,
+				message: 'Image copied to clipboard',
+				type: 'bg-background',
+				icon: 'mdi:image'
+			});
+			setTimeout(() => toast.set({ show: false, message: '', type: '', icon: '' }), 2000);
+		} catch (err) {
+			toast.set({
+				show: true,
+				message: 'Failed to copy image',
+				type: 'bg-destructive',
+				icon: 'mdi:alert-circle'
+			});
+			setTimeout(() => toast.set({ show: false, message: '', type: '', icon: '' }), 2000);
+		}
+	}
+
+	function downloadImage() {
+		if (!imageUrl) return;
+		const link = document.createElement('a');
+		link.href = imageUrl;
+		link.download = `veo3-thumbnail-${Date.now()}.png`;
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+		toast.set({
+			show: true,
+			message: 'Image downloaded',
+			type: 'bg-background',
+			icon: 'mdi:download'
+		});
+		setTimeout(() => toast.set({ show: false, message: '', type: '', icon: '' }), 2000);
+	}
+
 	function clearResponse() {
 		agentResponse.reset();
 		prompt = '';
@@ -144,7 +185,13 @@
 		</div>
 	</div>
 
-	<form on:submit|preventDefault={askAgent} class="my-2 flex gap-2">
+	<form
+		onsubmit={(e) => {
+			e.preventDefault();
+			askAgent();
+		}}
+		class="my-2 flex gap-2"
+	>
 		<input
 			bind:value={prompt}
 			placeholder="Enter your prompt..."
@@ -210,29 +257,77 @@
 </div>
 
 {#if responseText}
-	<div class="flex flex-col gap-2">
-		<div class="whitespace-pre-wrap rounded-lg border bg-card p-4">
-			<div class="">
+	<!-- OpenAI-style chat bubble -->
+	<div class="group relative mb-6">
+		<div class="flex gap-4">
+			<!-- Avatar -->
+			<div
+				class="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-full bg-primary text-primary-foreground"
+			>
+				<Icon icon="simple-icons:n8n" class="h-4 w-4" />
+			</div>
+
+			<!-- Content -->
+			<div class="flex-1 space-y-4">
+				<!-- Image Section -->
 				{#if isImageLoading}
-					<div class="flex items-center gap-3">
-						<p class="animate-pulse text-sm text-muted-foreground">Generating thumbnail image...</p>
-						<Icon icon="eos-icons:bubble-loading" class="h-3 w-3 animate-spin" />
+					<div class="flex items-center gap-3 rounded-lg border bg-muted/50 p-4">
+						<Icon
+							icon="eos-icons:bubble-loading"
+							class="h-4 w-4 animate-spin text-muted-foreground"
+						/>
+						<p class="text-sm text-muted-foreground">Generating thumbnail image...</p>
 					</div>
 				{:else if imageUrl}
-					<div class="text-xl font-bold">Thumbnail</div>
-					<img src={imageUrl} alt="Generated Thumbnail" class="max-w-full rounded-lg border" />
+					<div class="space-y-3">
+						<div class="group/image relative">
+							<img
+								src={imageUrl}
+								alt="Generated Thumbnail"
+								class="max-w-full rounded-lg border shadow-sm transition-all hover:shadow-md"
+							/>
+							<!-- Image action buttons -->
+							<div
+								class="absolute right-2 top-2 flex gap-1 opacity-0 transition-opacity group-hover/image:opacity-100"
+							>
+								<button
+									onclick={copyImage}
+									class="flex h-8 w-8 items-center justify-center rounded-md bg-background/80 backdrop-blur-sm transition-colors hover:bg-background"
+									title="Copy image"
+								>
+									<Icon icon="mdi:content-copy" class="h-4 w-4" />
+								</button>
+								<button
+									onclick={downloadImage}
+									class="flex h-8 w-8 items-center justify-center rounded-md bg-background/80 backdrop-blur-sm transition-colors hover:bg-background"
+									title="Download image"
+								>
+									<Icon icon="mdi:download" class="h-4 w-4" />
+								</button>
+							</div>
+						</div>
+						<p class="text-sm font-medium text-muted-foreground">Generated Thumbnail</p>
+					</div>
 				{/if}
-			</div>
-			<div class="text-xl font-bold">VEO3 Prompt</div>
 
-			<div>
-				{responseText}
+				<!-- Text Response -->
+				<div class="space-y-2">
+					<div class="flex w-full items-center justify-between">
+						<div class="text-sm font-medium text-muted-foreground">VEO3 Prompt</div>
+						<button
+							onclick={copyResponse}
+							class="flex h-6 w-6 items-center justify-center rounded-md opacity-0 transition-colors group-hover:opacity-100 hover:bg-muted"
+							title="Copy response"
+						>
+							<Icon icon="mdi:content-copy" class="h-3 w-3" />
+						</button>
+					</div>
+					<div class="prose prose-sm max-w-none whitespace-pre-wrap text-foreground">
+						{responseText}
+					</div>
+				</div>
 			</div>
 		</div>
-		<Button class="" variant="secondary" on:click={copyResponse}>
-			<Icon icon="mdi-content-copy" class="mr-2 h-4 w-4" />
-			Copy Response
-		</Button>
 	</div>
 {/if}
 
