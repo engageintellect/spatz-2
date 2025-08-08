@@ -4,6 +4,7 @@
 	import { gsap } from 'gsap';
 	import Icon from '@iconify/svelte';
 	import WordsPullUp from '$lib/components/magic-ui/WordsPullUp.svelte';
+	import VideoText from '$lib/components/magic-ui/VideoText.svelte';
 
 	function scrollToAnchor() {
 		const element = document.getElementById('anchorLink');
@@ -97,7 +98,10 @@
 				<div
 					class="animate-title w-full text-7xl font-bold lowercase tracking-tight transition-transform duration-300 lg:text-9xl"
 				>
-					<WordsPullUp class="text-7xl lg:text-8xl" words="spatz 2" />
+					<div class="relative h-44 w-full overflow-hidden">
+						<VideoText src="https://cdn.magicui.design/ocean-small.webm" content="SPATZ2"
+						></VideoText>
+					</div>
 				</div>
 			</div>
 
