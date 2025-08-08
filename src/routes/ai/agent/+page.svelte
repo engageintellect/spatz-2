@@ -26,7 +26,7 @@
 	onMount(async () => {
 		const { prompt: savedPrompt, response: savedResponse } = get(agentResponse);
 		const { imageUrl: savedImageUrl } = get(agentImage);
-		
+
 		prompt = savedPrompt;
 		imageUrl = savedImageUrl;
 
@@ -236,9 +236,10 @@
 				<a class="text-foreground underline" href="https://instagram.com/sloththeories"
 					>@sloththeories</a
 				>
-				instagram page. After the prompt is generated it's response is sent off to
-				<a href="https://openai.com" class="text-foreground underline">OpenAI</a> in order to generate
-				a thumbnail for our video/post.
+				instagram page. After the prompt is generated it's then sent off to
+				<a href="https://openai.com" class="text-foreground underline">OpenAI's</a>
+				<span class="text-foreground underline">DALL-E</span> API in order to generate a thumbnail for
+				our video/post.
 			</p>
 
 			<p>
