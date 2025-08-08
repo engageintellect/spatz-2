@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { agentResponse } from '$lib/stores/agentResponse';
+	import { agentImage } from '$lib/stores/agentImage';
 	import { toast } from '$lib/stores/toast';
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -24,7 +25,10 @@
 
 	onMount(async () => {
 		const { prompt: savedPrompt, response: savedResponse } = get(agentResponse);
+		const { imageUrl: savedImageUrl } = get(agentImage);
+		
 		prompt = savedPrompt;
+		imageUrl = savedImageUrl;
 
 		if (savedResponse) {
 			try {
@@ -86,7 +90,7 @@
 				body: JSON.stringify({
 					// 👇 add your pre‑prompt here (or leave undefined)
 					system:
-						'You are a creative, ultra photorealistic thumbnail designer. Keep compositions clear and centered. Absolutely NO text.',
+						'You are a creative, ultra photorealistic thumbnail designer. Keep compositions clear and centered. CRITICAL: NEVER include any text, letters, words, numbers, or written characters of any kind in the image. The image must be purely visual with NO TEXT WHATSOEVER. Focus only on visual elements, objects, scenes, and compositions without any textual content.',
 
 					prompt: responseText
 				})
@@ -95,6 +99,7 @@
 			const data = await res.json();
 			if (data.data) {
 				imageUrl = data.data; // still a plain URL/string
+				agentImage.set({ prompt: responseText, imageUrl: data.data });
 			} else {
 				toast.set({
 					show: true,
@@ -170,8 +175,10 @@
 
 	function clearResponse() {
 		agentResponse.reset();
+		agentImage.reset();
 		prompt = '';
 		responseText = '';
+		imageUrl = '';
 	}
 </script>
 
@@ -287,19 +294,17 @@
 								class="max-w-full rounded-lg border shadow-sm transition-all hover:shadow-md"
 							/>
 							<!-- Image action buttons -->
-							<div
-								class="absolute right-2 top-2 flex gap-1 opacity-0 transition-opacity group-hover/image:opacity-100"
-							>
+							<div class="absolute right-2 top-2 flex gap-1">
 								<button
 									onclick={copyImage}
-									class="flex h-8 w-8 items-center justify-center rounded-md bg-background/80 backdrop-blur-sm transition-colors hover:bg-background"
+									class="flex h-7 w-7 items-center justify-center rounded-md bg-background/80 backdrop-blur-sm transition-colors hover:bg-background"
 									title="Copy image"
 								>
 									<Icon icon="mdi:content-copy" class="h-4 w-4" />
 								</button>
 								<button
 									onclick={downloadImage}
-									class="flex h-8 w-8 items-center justify-center rounded-md bg-background/80 backdrop-blur-sm transition-colors hover:bg-background"
+									class="flex h-7 w-7 items-center justify-center rounded-md bg-background/80 backdrop-blur-sm transition-colors hover:bg-background"
 									title="Download image"
 								>
 									<Icon icon="mdi:download" class="h-4 w-4" />
@@ -316,10 +321,10 @@
 						<div class="text-sm font-medium text-muted-foreground">VEO3 Prompt</div>
 						<button
 							onclick={copyResponse}
-							class="flex h-6 w-6 items-center justify-center rounded-md opacity-0 transition-colors group-hover:opacity-100 hover:bg-muted"
+							class="flex h-7 w-7 items-center justify-center rounded-md transition-colors hover:bg-muted"
 							title="Copy response"
 						>
-							<Icon icon="mdi:content-copy" class="h-3 w-3" />
+							<Icon icon="mdi:content-copy" class="h-4 w-4" />
 						</button>
 					</div>
 					<div class="prose prose-sm max-w-none whitespace-pre-wrap text-foreground">
