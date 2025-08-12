@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 
 	export let src: string;
 	export let className = '';
@@ -9,7 +9,7 @@
 	export let preload: 'auto' | 'metadata' | 'none' = 'auto';
 	export let fontSize: string | number = 16;
 	export let fontWeight: string | number = 'bold';
-	export let textAnchor = 'middle';
+	export let textAnchor = 'start'; // left align text inside SVG
 	export let dominantBaseline = 'middle';
 	export let fontFamily = 'sans-serif';
 	export let as: string = 'div'; // dynamic tag
@@ -24,7 +24,7 @@
 	function updateSvgMask() {
 		const responsiveFontSize = typeof fontSize === 'number' ? `${fontSize}vw` : fontSize;
 		svgMask = `<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'>
-      <text x='50%' y='50%' font-size='${responsiveFontSize}' font-weight='${fontWeight}'
+      <text x='0' y='50%' font-size='${responsiveFontSize}' font-weight='${fontWeight}'
         text-anchor='${textAnchor}' dominant-baseline='${dominantBaseline}' font-family='${fontFamily}'>
         ${dynamic_content}
       </text>
@@ -42,9 +42,10 @@
 </script>
 
 <svelte:window on:resize={updateSvgMask} />
+
 <svelte:element this={as} class={`relative h-full w-full ${className}`}>
 	<div
-		class="absolute inset-0 flex items-center justify-center"
+		class="absolute inset-0 flex items-center justify-start"
 		style="
       mask-image: {dataUrlMask};
       -webkit-mask-image: {dataUrlMask};
@@ -52,8 +53,8 @@
       -webkit-mask-size: contain;
       mask-repeat: no-repeat;
       -webkit-mask-repeat: no-repeat;
-      mask-position: center;
-      -webkit-mask-position: center;
+      mask-position: left center;
+      -webkit-mask-position: left center;
     "
 	>
 		<video
@@ -67,9 +68,6 @@
 			<source {src} />
 			Your browser does not support the video tag.
 		</video>
-		<!-- if you want to add YouTube Video prefer using Iframe  -->
-		<!-- Iframe Docs : https://www.w3schools.com/html/html_youtube.asp -->
-		<!-- <iframe {src} title="svelte" class="w-full h-full"> </iframe> -->
 	</div>
 
 	<span class="sr-only">{dynamic_content}</span>
