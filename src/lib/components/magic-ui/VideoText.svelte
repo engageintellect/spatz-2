@@ -7,7 +7,7 @@
 	export let muted = true;
 	export let loop = true;
 	export let preload: 'auto' | 'metadata' | 'none' = 'auto';
-	export let fontSize: string | number = 16;
+	export let fontSize: string | number = 20;
 	export let fontWeight: string | number = 'bold';
 	export let textAnchor = 'start'; // left align text inside SVG
 	export let dominantBaseline = 'middle';
@@ -24,7 +24,7 @@
 	function updateSvgMask() {
 		const responsiveFontSize = typeof fontSize === 'number' ? `${fontSize}vw` : fontSize;
 		svgMask = `<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'>
-      <text x='0' y='50%' font-size='${responsiveFontSize}' font-weight='${fontWeight}'
+      <text x='0' y='55%' font-size='${responsiveFontSize}' font-weight='${fontWeight}'
         text-anchor='${textAnchor}' dominant-baseline='${dominantBaseline}' font-family='${fontFamily}'>
         ${dynamic_content}
       </text>

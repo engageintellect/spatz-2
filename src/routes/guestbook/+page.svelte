@@ -107,9 +107,18 @@
 
 	onMount(async () => {
 		hidden = false;
-		await tick(); // Ensure the DOM is fully updated
-		window.addEventListener('scroll', handleScroll);
 		animateMainStagger();
+		// Trigger CSS animations
+		setTimeout(() => {
+			document.querySelector('.title-guest')?.classList.add('animate-in');
+			document.querySelector('.title-book')?.classList.add('animate-in');
+			document.querySelector('.text-3xl')?.classList.add('animate-in');
+		}, 50);
+
+		// Apply lazy loading to posts
+		document.querySelectorAll('.post-wrapper').forEach((el) => {
+			lazyLoad(el as HTMLElement);
+		});
 
 		if (typeof window !== 'undefined') {
 			const { gsap } = await import('gsap');
@@ -151,11 +160,6 @@
 					ease: 'power4.out'
 				}
 			);
-
-			// Apply lazy loading to posts
-			document.querySelectorAll('.post-wrapper').forEach((el) => {
-				lazyLoad(el as HTMLElement);
-			});
 
 			ScrollTrigger.refresh();
 

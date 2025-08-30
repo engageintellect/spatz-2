@@ -6,7 +6,7 @@
 	import { formatFloatToPrice } from '$lib/utils';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Icon from '@iconify/svelte';
-	import NumberTicker from '$lib/components/ui/NumberTicker.svelte';
+	import NumberTicker from '$lib/components/magic-ui/NumberTicker.svelte';
 	import { useSidebar } from '$lib/components/ui/sidebar/index.js'; // Adjust the path as needed
 	import { buttonVariants } from '$lib/components/ui/button/index';
 	import * as Tooltip from '$lib/components/ui/tooltip/index';

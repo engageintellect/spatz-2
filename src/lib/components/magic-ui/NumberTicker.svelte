@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { cubicOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
-	import { spring, tweened } from 'svelte/motion';
+	import { tweened } from 'svelte/motion';
 	import { cn } from '$lib/utils';
 
 	let {

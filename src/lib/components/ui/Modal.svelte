@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { gsap } from 'gsap';
+	import { fly, fade } from 'svelte/transition';
 	import Icon from '@iconify/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	interface Props {
@@ -9,33 +8,6 @@
 	}
 
 	let { imageSrc, onClose }: Props = $props();
-
-	let modalElement: any = $state();
-
-	function closeModal() {
-		gsap.to(modalElement, {
-			opacity: 0,
-			y: 0,
-			duration: 0.3,
-			ease: 'power2.inOut',
-			onComplete: onClose
-		});
-
-		gsap.from('.backdrop-out', {
-			duration: 3,
-			opacity: 0,
-			ease: 'power4.out',
-			delay: 0
-		});
-	}
-
-	onMount(() => {
-		gsap.fromTo(
-			modalElement,
-			{ opacity: 0, y: 300 },
-			{ opacity: 1, y: 0, duration: 0.3, ease: 'power2.inOut' }
-		);
-	});
 </script>
 
 <div
@@ -46,21 +18,24 @@
 >
 	<div
 		class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 p-5"
-		onclick={closeModal}
+		onclick={onClose}
 		role="button"
 		tabindex="0"
-		onkeydown={(e) => e.key === 'Enter' && closeModal()}
+		onkeydown={(e) => e.key === 'Enter' && onClose()}
+		in:fade={{ duration: 300 }}
+		out:fade={{ duration: 300 }}
 	>
 		<div
-			bind:this={modalElement}
 			class="relative z-50 max-h-full max-w-4xl overflow-auto rounded-lg"
+			in:fly={{ y: 300, duration: 300 }}
+			out:fly={{ y: 300, duration: 300 }}
 		>
 			<enhanced:img
 				src={imageSrc}
 				alt="Enlarged"
 				class="h-auto max-h-[70vh] max-w-full rounded-lg object-cover"
 			/>
-			<Button class="absolute right-2 top-2" on:click={closeModal}>
+			<Button class="absolute right-2 top-2" onclick={onClose}>
 				<div class="flex items-center gap-2">
 					<Icon icon="mdi:close" class="h-7 w-7" />
 				</div>

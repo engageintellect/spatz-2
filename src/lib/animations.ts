@@ -1,12 +1,17 @@
-import { gsap } from 'gsap';
-
+// Lightweight CSS-based animation helper
 export const animateMainStagger = () => {
-	gsap.from('.animate-item', {
-		opacity: 0,
-		y: 20,
-		duration: 0.25,
-		delay: 0.1,
-		stagger: 0.1,
-		ease: 'power4.out'
+	const items = document.querySelectorAll('.animate-item');
+	items.forEach((item, index) => {
+		const element = item as HTMLElement;
+		element.style.opacity = '0';
+		element.style.transform = 'translateY(20px)';
+		element.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+		element.style.transitionDelay = `${index * 0.1}s`;
+		
+		// Trigger animation
+		setTimeout(() => {
+			element.style.opacity = '1';
+			element.style.transform = 'translateY(0)';
+		}, 50);
 	});
 };
