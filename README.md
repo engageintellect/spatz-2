@@ -53,8 +53,8 @@ cd pb-spatz-2
 2. Download the latest release of Pocketbase, unzip it, and start the server.
 
 ```bash
-wget https://github.com/pocketbase/pocketbase/releases/download/v0.23.4/pocketbase_0.24.4_linux_amd64.zip
-unzip pocketbase_0.24.3_linux_amd64.zip
+wget https://github.com/pocketbase/pocketbase/releases/download/v0.29.3/pocketbase_0.29.3_linux_amd64.zip
+unzip pocketbase_0.29.3_linux_amd64.zip
 ./pocketbase serve --http="0.0.0.0:8090"
 ```
 
