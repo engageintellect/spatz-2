@@ -50,7 +50,7 @@
 	<div class="my-5 leading-relaxed text-muted-foreground">
 		<p>
 			spatz comes in two pieces, a web app (Sveltekit) and a backend (PocketBase). You can run the
-			client the using Vercel, Netflify, Docker, or however you usually run a Sveltekit app. The
+			client then using Vercel, Netflify, Docker, or however you usually run a Sveltekit app. The
 			backend can run on your own server or VPS as a single service, and reverse-proxied using
 			something like Nginx.
 		</p>
